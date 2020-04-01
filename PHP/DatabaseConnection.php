@@ -1,0 +1,12 @@
+<?php
+$dbServerName = "localhost";
+$dbUserName = "root";
+$dbPassword = "";
+$dbName = "cinecarnival";
+
+$conn = mysqli_connect($dbServerName, $dbUserName, $dbPassword, $dbName);
+
+if(mysqli_connect_errno()){
+  echo "Database Connection Error: ".mysqli_connect_error();
+}
+?>

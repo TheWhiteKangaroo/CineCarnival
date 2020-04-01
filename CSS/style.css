@@ -1,0 +1,260 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.mybox{
+    border: 2px rgb(0,125,255) solid;
+    width: 100%;
+    border-radius: 7px;
+}
+.container{
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+.welcome-box{
+    box-shadow: 5px 10px 10px grey;
+    height: 80px;
+    padding-top: 10px;
+    border-radius: 7px;
+    background-color: darkorange;
+}
+.resetPass-inputs{
+    border: 2px rgb(0,125,255) solid;
+    border-radius: 17px;
+    width: 300px;
+    height: 35px;
+    padding-left: 20px;
+    padding-bottom: 2px;
+}
+.resetPass-buttons{
+    border: 2px rgb(0,125,255) solid;
+    background: rgb(0,125,255);
+    border-radius: 15px;
+    width: 100px;
+    height: 30px;
+}
+.inputWithIcon input[type=text], .inputWithIcon input[type=email], .inputWithIcon input[type=number], .inputWithIcon input[type=password],.inputWithIcon textarea{
+    padding-left: 40px;
+}
+.inputWithIcon{
+    position: relative;
+}
+.inputWithIcon i{
+    position: absolute;
+    left: 0;
+    top: 8px;
+    padding-left: 13px;
+    padding-top: 2px;
+    color:rgb(0,125,255) ;
+    transition: 0.3s;
+
+}
+.inputWithIcon input[type=text] + i{
+    color: dodgerblue;
+}
+.poster{
+    width: 100%;
+    border: 2px rgb(0,125,255) solid;
+    border-radius: 7px;
+    height: 700px;
+    margin-top: 15px;
+}
+.header-section{
+    padding-bottom: 30px;
+    background-color: black;    
+    border-bottom: 1px rgb(0,125,255) solid;
+}
+.header-section a{
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: bolder;
+}
+.header-section a:hover{
+    color: rgb(0,125,255);
+}
+.header-section a:active{
+    color: rgb(0,125,255);
+}
+.search-button{
+    margin: 0;
+    padding: 0;
+    padding-left: 15px;
+    padding-right: 20px;
+    margin-left: 0px;
+    width: 65px;
+    height: 30px;
+    border: 1px rgb(0,125,255) solid;
+    border-radius: 15px;
+    background-color: rgb(0,125,255);
+    color: white;
+}
+.nav-area{
+    background-color: black;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    box-shadow: 5px 10px 10px grey;
+}
+.nav-area ul{
+    margin: 0;
+    padding: 0;
+    transition: 0.3s;
+}
+.nav-area li{
+    margin: 0;
+    padding-top: 20px;
+    display: inline; 
+}
+.nav-area li a{
+    color: white;
+    padding-bottom: 2px;
+}
+.nav-area li a:hover{
+    color: rgb(0,125,255);
+    transition: 0.3s;
+}
+.nav-area li a:active{
+    color: rgb(0,125,255);
+}
+.nav-area ul li:nth-child(1){float: left;}
+.nav-area ul li:nth-child(2){float: left;}
+.nav-area ul li:nth-child(3){float: right;}
+.nav-area ul li:nth-child(4){float: right;}
+.nav-area ul li:nth-child(5){float: right;}
+input,button,a, a:active, a:focus{
+    outline: none;
+}
+
+.my-footer{
+    border-bottom: 1px rgb(0,125,255) solid;
+    margin: 0 auto;
+    background-color: black;
+    margin-top: 20px;
+    padding-top: 20px;
+    text-align: center;
+    color: white;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+.my-footer li{
+    list-style-type: none;
+    opacity: 0.8;
+    font-size: 16px;
+    padding-right: 70px;
+
+}
+
+.my-footer li:nth-child(1){
+    font-weight: bold;
+    font-size: 20px;
+}
+.my-footer li:nth-child(2){
+    opacity: 1  ;
+}
+.my-footer li:nth-child(3){
+    color: rgb(0,125,255);
+}
+.my-footer-ending{
+    background-color: black;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 5px 10px 10px grey;
+    border: 1px black solid;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.my-footer-ending li{
+    list-style-type: none;
+    display: inline-flex;
+    align-items: flex-end;
+    opacity: 1;
+    padding: 0;
+    margin: 0;
+}
+.my-footer-ending a{
+    text-decoration: none;
+    font-size: 22px;
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    background-attachment: #2c3e50;
+    color: rgb(0,125,255);
+    transition: 0.5s;
+
+}
+.my-footer-ending a i{
+    transition: 0.5s all;
+}
+.my-footer-ending a:hover{
+    color: darkorange;
+    text-decoration: none;
+}
+.stores{
+    margin-right: 80px;
+}
+.stores button{
+    width: 25%;
+    height: 30px;
+    padding-left: 3px;
+    padding-right: 90px;
+    padding-top: 2px;
+    border-radius: 1px;
+    transition: 0.3s;
+}
+.stores a{
+    text-decoration: none;
+    color: white;
+    font-size: 22px;
+    transition: 0.3s;
+}
+.stores li:nth-child(1){
+    margin-right: 60px;
+}
+.developers-tag span{
+    margin: 0;
+    padding-top: 5px;
+    font-size: 16px;
+    font-weight: normal;
+    font-family: Opificio;
+    color: white;
+    opacity: 0.7;
+    text-align: center;
+    text-justify: auto;
+}
+.developers-tag span:hover{
+    color: darkorange;
+    opacity: 1;
+    transition: 0.5s;
+    font-size: 20px;
+}
+.developers-tag span:hover ::after{
+    transition: 0.5s;
+    color: darkorange;
+}
+
+
+.food-head{
+    background-color: rgb(0,125,255);
+    text-align: left;
+    color: white;
+    border: 1px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+.sign-in-title{
+    font-family: Showtime;
+}
+.registration-title{
+    font-family: Showtime;
+}
+.welcome-to-profile{
+    font-family: Nikodecs;
+    font-size: 26px;
+}
+
+
+@media screen and (max-width:768){
+    body{
+        background-color: green;
+    }
+}
