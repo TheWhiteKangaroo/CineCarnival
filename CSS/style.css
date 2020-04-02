@@ -256,10 +256,3 @@ input,button,a, a:active, a:focus{
     font-family: Nikodecs;
     font-size: 26px;
 }
-
-
-@media screen and (max-width:768){
-    body{
-        background-color: green;
-    }
-}

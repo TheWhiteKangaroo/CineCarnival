@@ -126,8 +126,8 @@
 
         <!--Main Body Section-->
         <div class="container">
-            <div class="row justify-content-between  mt-3">
-                <div class="col=6 col-md-4 form-group text-center text-decoration-none offset-4">
+            <div class="row mt-3">
+                <div class="col=6 col-md-4 form-group text-center text-decoration-none offset-4 col-s-3">
                     <form action="SignInPage.php" method="POST" class="sign-in-form">
                             <table>
                                 <tr>
