@@ -13,17 +13,7 @@ $resultTotalMovies = mysqli_fetch_assoc($resultTotalMovies);
 $tm = $resultTotalMovies['totalMovies'];
 $np = ceil($tm / $perPage);
 
-if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['upcomingBtn'])){
-    if(isset($_GET['upcomingBtn'])){
-        header("Location: index.php");
-    }
-}
 ?>
-
-
-
-
-
 
 
 
@@ -50,32 +40,74 @@ if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['upcomingBtn'])){
 
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
-    <style>
-        body {
-            background-color: #ffffff
-        }
 
-        #comments {
-            background-color: #ffffff;
-            padding: 10px;
-            width: 40%;
-        }
+    <script>
+        $(document).ready(function() {
+            var i = 9;
 
-        #btn_load,
-        .btnpg {
-            background-color: white;
-            color: black;
-            border: 2px solid #000000;
-            cursor: pointer;
-            padding: 16px 32px;
-        }
+            $("#nowShowingBtn").click(function() {
+                $("#movieSection").load("NextMovies.php", {
+                    NowShowingPage: 9
+                });
+            });    
 
-        #btn_load,
-        .btnpg:hover {
-            background-color: #000000;
-            color: white;
-        }
-    </style>
+            $("#ldMoreButton").click(function() {
+                i = i + 3;
+                document.getElementById('searchText').value = "";
+                $("#movieSection").load("NextMovies.php", {
+                    limitValue: i
+                });
+            });
+
+            $('#searchText').on('keyup', function() {
+                $('#movieSection').load('NextMovies.php', {
+                    searchedKeyWord: document.getElementById('searchText').value
+                });
+            });
+
+            $(document).on('change', '#actionCB', function() {
+                if (this.checked) {
+                    $('#movieSection').load('NextMovies.php', {
+                        actionCBValue: document.getElementById('actionCB').value
+                    });
+                }
+            });
+
+            $(document).on('change', '#comedyCB', function() {
+                if (this.checked) {
+                    $('#movieSection').load('NextMovies.php', {
+                        comedyCBValue: document.getElementById('comedyCB').value
+                    });
+                }
+            });
+            $(document).on('change', '#horrorCB', function() {
+                if (this.checked) {
+                    $('#movieSection').load('NextMovies.php', {
+                        horrorCBValue: document.getElementById('horrorCB').value
+                    });
+                }
+            });
+            $(document).on('change', '#dramaCB', function() {
+                if (this.checked) {
+                    $('#movieSection').load('NextMovies.php', {
+                        dramaCBValue: document.getElementById('dramaCB').value
+                    });
+                }
+            });
+
+        });
+    </script>
+
+ <script>
+    let btnNowShowing = document.querySelector('#nowShowingBtn');
+    let btnUpComing = document.querySelector('#upcomingBtn');
+    let btnExclusive = document.querySelector('#exclusiveBtn');
+    btnNowShowing.addEventListener('click', () => btnNowShowing.style.backgroundColor='#337ab7')
+    btnNowShowing.addEventListener('click', () => btnNowShowing.style.backgroundColor='')
+    btnNowShowing.addEventListener('click', () => btnNowShowing.style.backgroundColor='')
+ </script>
+
+
 </head>
 
 <body>
@@ -87,7 +119,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['upcomingBtn'])){
                     <a href="index.php"><img src="..\Images/CineCarnival.png" alt="No Image..."></a>
                 </div>
                 <div class="p-2 align-self-center d-sm-none d-md-block d-none d-sm-block mr-0 pr-0">
-                    <input class="search-box border-primary pt-1 pb-1 pr-5 pl-4 ml-3 mr-0 text-capitalize" style="border-radius: 25px; background:transparent; color: white;" type="text" placeholder="Search for movies...">
+                    <input class="search-box border-primary pt-1 pb-1 pr-5 pl-4 ml-3 mr-0 text-capitalize" id="searchText" style="border-radius: 25px; background:transparent; color: white;" name="searchBar" value="" type="text" placeholder="Search for movies...">
                 </div>
                 <div class="p-2 align-self-center  mr-auto d-sm-none d-md-block d-none d-sm-block ml-0 pl-0">
                     <button class="border-primary  search-button"><i class="fas fa-search"></i></button>
@@ -139,20 +171,20 @@ if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['upcomingBtn'])){
 
         <!--Main Body Section-->
         <div class="container-fluid">
-            <div class="row mt-5">
+            <div class="row mt-4">
                 <div class="col">
                     <form action="MoviesPage.php" method="GET">
                         <ul class="nav nav-tabs   movies-nav">
                             <li class="nav-item"><span style="font-weight:bold; font-size:26px; color:white; margin-right: 75px; margin-left:50px;">Movies</span></li>
                             <li class="nav-item">
-                                <button type="button" name="nowShowingBtn" class="border-0 pt-3 pb-2 mr-2">Now Showing</button>
+                                <button type="button" name="nowShowingBtn" id="nowShowingBtn" class="border-0 pt-3 pb-2 mr-2" onclick="this.style.color='white';this.style.backgroundColor = '#9400D3'">Now Showing</button>
                             </li>
                             <li class="nav-item">
 
-                                <button type="button" name="upcomingBtn" class="border-0 pt-3 pb-2 mr-2">Upcoming</button>
+                                <button type="button" name="upcomingBtn" id="upcomingBtn" class="border-0 pt-3 pb-2 mr-2 " onclick="this.style.color='#white';this.style.backgroundColor = '#9400D3'">Upcoming</button>
                             </li>
                             <li class="nav-item">
-                                <button type="button" name="exclusiveBtn" class="border-0 pt-3 pb-2 mr-2">Exclusive</button>
+                                <button type="button" name="exclusiveBtn" id="exclusiveBtn" class="border-0 pt-3 pb-2 mr-2" onclick="this.style.color='#000000';this.style.backgroundColor = '#9400D3'">Exclusive</button>
                             </li>
                         </ul>
                     </form>
@@ -161,117 +193,94 @@ if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['upcomingBtn'])){
         </div>
 
         <div class="container">
-
             <div class="row align-items-start justify-content-between">
                 <div class="col-2 pt-4 ">
                     <div mb-2>
-                        <form action="">
-                            <table>
-                                <tr>
-                                    <th colspan="2" style="text-align: left;border-bottom:1px black solid; font-size:20px; font-weight:bold;"> Genre : </th>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"></td>
-                                    <td><span style="margin-left: 15px;">Action</span></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"></td>
-                                    <td><span style="margin-left: 15px;">Comedy</span></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"></td>
-                                    <td><span style="margin-left: 15px;">Horror</span></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"></td>
-                                    <td> <span style="margin-left: 15px;">Drama</span></td>
-                                </tr>
-                            </table>
-                        </form>
+                    <!-- Default unchecked -->
+<div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+    <span class="ml-5" style="margin-left: 15px;">Action</span>
+</div>
+                        <div class="form-group">
+                            <h5 class="border-dark border-bottom pb-2">Genres : </h5>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" id="actionCB" name="actionCB" value="Action">
+                            <span class="ml-5" style="margin-left: 15px;">Action</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" id="comedyCB" name="comedyCB" value="Comedy">
+                            <span class="ml-5" style="margin-left: 15px;">Comedy</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" id="horrorCB" name="horrorCB" value="Horror">
+                            <span class="ml-5" style="margin-left: 15px;">Horror</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" id="dramaCB" name="dramaCB" value="Drama">
+                            <span class="ml-5" style="margin-left: 15px;">Drama</span>
+                        </div>
                     </div>
                     <div class="mt-4 mb-2">
-                        <form action="">
-                            <table>
-                                <tr>
-                                    <th colspan="2" style="text-align: left; margin-top: 20px; border-bottom:1px black solid; font-size:20px; font-weight:bold;">Language : </th>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"></td>
-                                    <td><span style="margin-left: 15px;">Bangla</span></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"></td>
-                                    <td><span style="margin-left: 15px;">English</span></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"></td>
-                                    <td><span style="margin-left: 15px;">Korean</span></td>
-                                </tr>
-                            </table>
-                        </form>
+                    <div class="form-group">
+                            <h5 class="border-dark border-bottom pb-2">Language : </h5>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" id="banglaCB" name="banglaCB" value="Bangla">
+                            <span class="ml-5" style="margin-left: 15px;">Bangla</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" id="englishCB" name="englishCB" value="English">
+                            <span class="ml-5" style="margin-left: 15px;">English</span>
+                        </div>
                     </div>
 
                     <div class="mt-4 mb-2">
-                        <form action="">
-                            <table>
-                                <tr>
-                                    <th colspan="2" style="text-align: left; margin-top: 20px; border-bottom:1px black solid; font-size:20px; font-weight:bold;">Format : </th>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"></td>
-                                    <td><span style="margin-left: 15px;">2D</span></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox"></td>
-                                    <td><span style="margin-left: 15px;">3D</span></td>
-                                </tr>
-                            </table>
-                        </form>
+                    <div class="form-group">
+                            <h5 class="border-dark border-bottom pb-2">Format : </h5>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" id="2dCB" name="2dCB" value="2D">
+                            <span class="ml-5" style="margin-left: 15px;">2D</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" id="3dCB" name="3dCB" value="3D">
+                            <span class="ml-5" style="margin-left: 15px;">3D</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-10">
-                    <div class="row justify-content-start d-flex mt-5 mb-2">
-                            <?php
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo "
+                    <div class="row justify-content-start d-flex mt-5 mb-2" id="movieSection">
+                        <?php
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "
                                         <div class=" . "col-4" . ">
                                         <div class=" . "card movieCard-box" . "style=" . "width: 18rem;" . ">
                                             <a href=" . "#" . "><img class=" . "card-img-top" . " src=" . "..\images/NoTimeToDie.jpg" . " alt=" . "Card image cap" . "></a>
                                             <div class=" . "card-body" . ">
                                                 <p class=" . "card-text" . ">
                                                     <span><b>" . $row['name'] . "</b></span><br>
-                                                    <span>" . $row['genre'] . "</span><br>
-                                                    <button class=" . "movieCard-buttons" . ">Showtime and Details</button>
+                                                        <span>" . $row['genre'] . "</span><br>
+                                                    <button class=" . "movieCard-buttons" . ">Showtime</button>
                                                 </p>
                                             </div>
                                             </div>
                                             <br>
                                       </div>
                                         ";
-                            }
-                            ?>
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="col-8">
-                    <div class="text-center mt-2 mb-2 ldMoreBtn">
-                        <button type="button" id="loadMoreBtn" name="loadMoreBtn">Show More</button>
+                    <div class="text-center mt-2 mb-2  ldMoreBtn">
+                        <button type="button" id="ldMoreButton" name="ldMoreButton" onclick="hideLoadButton()">Show More</button>
                     </div>
                 </div>
             </div>
         </div>
 
 
-        <script>
-            $(document).ready(function() {
-                var i = 9;
-                $('#loadMoreBtn').click(function() {
-                    i = i + 9;
-                    $('#moviesPanel').load('NextMovies.php', {
-                        limitValue: i
-                    });
-                });
-            });
-        </script>
 
     </div>
     </div>
@@ -315,11 +324,6 @@ if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['upcomingBtn'])){
     </div>
 
 
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="..\css/bootstrap.min.js"></script>
 </body>
 
 </html>

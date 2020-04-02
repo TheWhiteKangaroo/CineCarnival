@@ -1,64 +1,223 @@
 <?php
-
 include "DatabaseConnection.php";
-echo "Hellow World!";
-
+$result = $cbValue = $cbValue2 = $cbValue3 = $cbValue4 = "";
 if (isset($_POST['limitValue'])) {
   $lv = $_POST['limitValue'];
-  echo $lv;
   $sql = "SELECT * FROM movie LIMIT $lv";
   $result = mysqli_query($conn, $sql);
 }
+else if (isset($_POST['NowShowingPage'])) {
+  $pageCount = $_POST['NowShowingPage'];
+  echo $pageCount;
+  $sql = "SELECT * FROM movie LIMIT $pageCount";
+  $result = mysqli_query($conn, $sql);
+} 
+else if (isset($_POST['searchedKeyWord'])) {
+  $sk = $_POST['searchedKeyWord'];
+  if ($sk == null) {
+    $sql = "SELECT * FROM movie LIMIT 9";
+    $result = mysqli_query($conn, $sql);
+  } else {
+    $sql = "SELECT * from movie where name like '%$sk%'";
+    $result = mysqli_query($conn, $sql);
+  }
+} else if (isset($_POST['actionCBValue'])) {
+  $cbValue = $_POST['actionCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['comedyCBValue'])) {
+  $cbValue = $_POST['comedyCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['horrorCBValue'])) {
+  $cbValue = $_POST['horrorCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['dramaCBValue'])) {
+  $cbValue = $_POST['dramaCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['actionCBValue']) && isset($_POST['comedyCBValue'])) {
+  $cbValue = $_POST['actionCBValue'];
+  $cbValue2 = $_POST['comedyCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['actionCBValue']) && isset($_POST['horrorCBValue'])) {
+  $cbValue = $_POST['horrorCBValue'];
+  $cbValue2 = $_POST['horrorCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['actionCBValue']) && isset($_POST['dramaCBValue'])) {
+  $cbValue = $_POST['horrorCBValue'];
+  $cbValue2 = $_POST['dramaCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['comedyCBValue']) && isset($_POST['horrorCBValue'])) {
+  $cbValue = $_POST['comedyCBValue'];
+  $cbValue2 = $_POST['horrorCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['comedyCBValue']) && isset($_POST['dramaCBValue'])) {
+  $cbValue = $_POST['comedyCBValue'];
+  $cbValue2 = $_POST['dramaCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['horrorCBValue']) && isset($_POST['dramaCBValue'])) {
+  $cbValue = $_POST['horrorCBValue'];
+  $cbValue2 = $_POST['dramaCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['actionCBValue']) && isset($_POST['comedyCBValue']) && isset($_POST['horrorCBValue'])) {
+  $cbValue = $_POST['actionCBValue'];
+  $cbValue2 = $_POST['comedyCBValue'];
+  $cbValue3 = $_POST['horrorCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2' AND genre='$cbValue3';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['actionCBValue']) && isset($_POST['comedyCBValue']) && isset($_POST['dramaCBValue'])) {
+  $cbValue = $_POST['actionCBValue'];
+  $cbValue2 = $_POST['comedyCBValue'];
+  $cbValue3 = $_POST['dramaCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2' AND genre='$cbValue3';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['actionCBValue']) && isset($_POST['comedyCBValue']) && isset($_POST['horrorCBValue']) && isset($_POST['dramaCBValue'])) {
+  $cbValue = $_POST['actionCBValue'];
+  $cbValue2 = $_POST['comedyCBValue'];
+  $cbValue4 = $_POST['dramaCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2' AND genre='$cbValue3' AND genre='$cbValue4';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['actionCBValue'])) {
+  $cbValue = $_POST['actionCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['comedyCBValue'])) {
+  $cbValue = $_POST['comedyCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['horrorCBValue'])) {
+  $cbValue = $_POST['horrorCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['dramaCBValue'])) {
+  $cbValue = $_POST['dramaCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['actionCBValue']) && isset($_POST['comedyCBValue'])) {
+  $cbValue = $_POST['actionCBValue'];
+  $cbValue2 = $_POST['comedyCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['actionCBValue']) && isset($_POST['horrorCBValue'])) {
+  $cbValue = $_POST['horrorCBValue'];
+  $cbValue2 = $_POST['horrorCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['actionCBValue']) && isset($_POST['dramaCBValue'])) {
+  $cbValue = $_POST['horrorCBValue'];
+  $cbValue2 = $_POST['dramaCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['comedyCBValue']) && isset($_POST['horrorCBValue'])) {
+  $cbValue = $_POST['comedyCBValue'];
+  $cbValue2 = $_POST['horrorCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['comedyCBValue']) && isset($_POST['dramaCBValue'])) {
+  $cbValue = $_POST['comedyCBValue'];
+  $cbValue2 = $_POST['dramaCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['horrorCBValue']) && isset($_POST['dramaCBValue'])) {
+  $cbValue = $_POST['horrorCBValue'];
+  $cbValue2 = $_POST['dramaCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['actionCBValue']) && isset($_POST['comedyCBValue']) && isset($_POST['horrorCBValue'])) {
+  $cbValue = $_POST['actionCBValue'];
+  $cbValue2 = $_POST['comedyCBValue'];
+  $cbValue3 = $_POST['horrorCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2' AND genre='$cbValue3';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['actionCBValue']) && isset($_POST['comedyCBValue']) && isset($_POST['dramaCBValue'])) {
+  $cbValue = $_POST['actionCBValue'];
+  $cbValue2 = $_POST['comedyCBValue'];
+  $cbValue3 = $_POST['dramaCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2' AND genre='$cbValue3';";
+  $result = mysqli_query($conn, $sql);
+} else if (isset($_POST['actionCBValue']) && isset($_POST['comedyCBValue']) && isset($_POST['horrorCBValue']) && isset($_POST['dramaCBValue'])) {
+  $cbValue = $_POST['actionCBValue'];
+  $cbValue2 = $_POST['comedyCBValue'];
+  $cbValue4 = $_POST['dramaCBValue'];
+  echo $cbValue;
+  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2' AND genre='$cbValue3' AND genre='$cbValue4';";
+  $result = mysqli_query($conn, $sql);
+}
+
+
+
+
 
 ?>
-
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Home | CineCarnival</title>
-  <link rel="icon" type="image/png" href="..\Images/CineCarnival.png">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-  <link rel="stylesheet" href="file:///C:/Users/User/Downloads/fontawesome-free-5.13.0-web/fontawesome-free-5.13.0-web/css/all.css">
-  <link rel="stylesheet" href="..\CSS/style.css">
-  <link rel="stylesheet" href="..\css/bootstrap.min.css">
-
-
+  <title>Movies</title>
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+</head>
 
 <body>
-  <div class="row justify-content-between mt-5">
-  <div id="moviesPanel">
-    <?php
-    while ($row = mysqli_fetch_assoc($result)) {
-      echo "
+  <div class="col-12">
+    <div class="row justify-content-start mt-0 mb-0" id="movieSection">
+      <?php
+      while ($row = mysqli_fetch_assoc($result)) {
+
+        if (mysqli_num_rows($result)<1) {
+          echo "Empty Result!";
+        } else {
+          echo "
                                         <div class=" . "col-4" . ">
-                                        <div class=" . "card" . " style=" . "width: 18rem;" . ">
-                                        <div class=" . "card-body" . ">
-                                          <h5 class=" . "card-title" . ">" . $row['name'] . "</h5>
-                                          <p class=" . "card-text" . ">" . $row['genre'] . "</p>
-                                          <a href=" . "#" . "class=" . "btn btn-primary" . ">Go somewhere</a>
-                                        </div>
-                                      </div>
+                                        <div class=" . "card movieCard-box" . "style=" . "width: 18rem;" . ">
+                                            <a href=" . "#" . "><img class=" . "card-img-top" . " src=" . "..\images/NoTimeToDie.jpg" . " alt=" . "Card image cap" . "></a>
+                                            <div class=" . "card-body" . ">
+                                                <p class=" . "card-text" . ">
+                                                    <span><b>" . $row['name'] . "</b></span><br>
+                                                    <span>" . $row['genre'] . "</span><br>
+                                                    <button class=" . "movieCard-buttons" . ">Showtime</button>
+                                                </p>
+                                            </div>
+                                            </div>
+                                            <br>
                                       </div>
                                         ";
-    }
-    ?>
+        }
+      }
+      ?>
     </div>
-  </div>
-
-
-
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <script src="..\css/bootstrap.min.js"></script>
 </body>
 
 </html>
