@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="file:///C:/Users/User/Downloads/fontawesome-free-5.13.0-web/fontawesome-free-5.13.0-web/css/all.css">
-    <link rel="stylesheet" href="..\CSS/style.css">
+    <link rel="stylesheet" href="..\css/style.css">
     <link rel="stylesheet" href="..\css/bootstrap.min.css">
 </head>
 
@@ -50,7 +50,7 @@
                         <a href="index.php" class="nav-link"><i class="fas fa-home"></i> Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-tape"></i> Movies</a>
+                        <a href="MoviesPage.php" class="nav-link"><i class="fas fa-tape"></i> Movies</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link"><i class="fas fa-ticket-alt"></i> Showtime</a>
@@ -74,14 +74,7 @@
         </nav>
 
         <!--Main Body Section-->
-        <div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="..." alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
+       
        
 <!--Footer Section-->
         <div class="container">

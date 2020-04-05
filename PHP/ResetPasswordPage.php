@@ -40,6 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['changePasswordBtn'])) 
                 session_destroy();
                 if ($result == TRUE) {
                     $msg="Password reset successful!";
+                    session_destroy();
+                    header("Location: SignInPage.php");
                 } else {
                     $msg="Failed to reset password!";
                 }
@@ -69,12 +71,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['changePasswordBtn'])) 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home | CineCarnival</title>
+    <title>Reset Password | CineCarnival</title>
     <link rel="icon" type="image/png" href="..\Images/CineCarnival.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="file:///C:/Users/User/Downloads/fontawesome-free-5.13.0-web/fontawesome-free-5.13.0-web/css/all.css">
-    <link rel="stylesheet" href="..\CSS/style.css">
+    <link rel="stylesheet" href="..\css/style.css">
     <link rel="stylesheet" href="..\css/bootstrap.min.css">
 </head>
 

@@ -29,12 +29,12 @@ $np = ceil($tm / $perPage);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home | CineCarnival</title>
+    <title>Movies | CineCarnival</title>
     <link rel="icon" type="image/png" href="..\Images/CineCarnival.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="file:///C:/Users/User/Downloads/fontawesome-free-5.13.0-web/fontawesome-free-5.13.0-web/css/all.css">
-    <link rel="stylesheet" href="..\CSS/style.css">
+    <link rel="stylesheet" href="..\css/style.css">
     <link rel="stylesheet" href="..\css/bootstrap.min.css">
 
 
@@ -146,7 +146,7 @@ $np = ceil($tm / $perPage);
                         <a href="index.php" class="nav-link"><i class="fas fa-home"></i> Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-tape"></i> Movies</a>
+                        <a href="MoviesPage.php" class="nav-link"><i class="fas fa-tape"></i> Movies</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link"><i class="fas fa-ticket-alt"></i> Showtime</a>
@@ -171,11 +171,11 @@ $np = ceil($tm / $perPage);
 
         <!--Main Body Section-->
         <div class="container-fluid">
-            <div class="row mt-4">
-                <div class="col">
+            <div class="row mt-4 mb-2">
+                <div class="col pb-2">
                     <form action="MoviesPage.php" method="GET">
                         <ul class="nav nav-tabs   movies-nav">
-                            <li class="nav-item"><span style="font-weight:bold; font-size:26px; color:white; margin-right: 75px; margin-left:50px;">Movies</span></li>
+                            <li class="nav-item"><span>Movies</span></li>
                             <li class="nav-item">
                                 <button type="button" name="nowShowingBtn" id="nowShowingBtn" class="border-0 pt-3 pb-2 mr-2" onclick="this.style.color='white';this.style.backgroundColor = '#9400D3'">Now Showing</button>
                             </li>
@@ -197,10 +197,6 @@ $np = ceil($tm / $perPage);
                 <div class="col-2 pt-4 ">
                     <div mb-2>
                     <!-- Default unchecked -->
-<div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-    <span class="ml-5" style="margin-left: 15px;">Action</span>
-</div>
                         <div class="form-group">
                             <h5 class="border-dark border-bottom pb-2">Genres : </h5>
                         </div>
@@ -287,7 +283,7 @@ $np = ceil($tm / $perPage);
     </div>
 
     <!--Footer Section-->
-    <div class="container">
+    <div class="container-fluid">
         <footer>
             <div class="row my-footer">
                 <div class="col">
@@ -300,7 +296,7 @@ $np = ceil($tm / $perPage);
                     </ul>
                 </div>
             </div>
-            <div class="row justify-content-between my-footer-ending">
+            <div class="row justify-content-between my-footer-ending" style="border-radius: 0px;">
                 <div class="col=4">
                     <ul>
                         <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
