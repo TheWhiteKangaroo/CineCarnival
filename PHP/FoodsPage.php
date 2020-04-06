@@ -1,12 +1,3 @@
-<?php
-    include "DatabaseConnection.php";
-    $query = "SELECT DISTINCT title, message, links, pic, date_posted FROM notice WHERE date_posted= (SELECT MAX(date_posted) FROM notice)";
-    $result = mysqli_query($conn,$query);
-?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Notice | CineCarnival</title>
+    <title>Foods | CineCarnival</title>
     <link rel="icon" type="image/png" href="..\Images/CineCarnival.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
@@ -24,7 +15,7 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container">
         <!--Header Section-->
         <header>
            <div class="d-flex flex-row flex-nowrap sm-flex-wrap  header-section ">
@@ -48,7 +39,7 @@
     </div>
 
     <!--Nav Bar Section-->
-    <div class="container-fluid">
+    <div class="container">
         <nav class="navbar navbar-expand-sm text-uppercase nav-area">
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
                 <span class="navbar-toggler-icon"> <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i></span>
@@ -83,50 +74,96 @@
         </nav>
 
         <!--Main Body Section-->
+       
 
-        <div class="container-fluid m-0">
-            <div class="row m-0 justify-content-between">
-                <div class="col-3 m-0">
-                    <div class="mt-4 text-justify">
-                        <?php 
-                            while($row=mysqli_fetch_assoc($result)){
-                                echo "
-                                    <div class="."card text-justify".">
-                                        <div class="."card-header text-center".">
-                                            Notice
-                                            </div>
-                                                <div class="."card-body text-justify text-left".">
-                                                    <h5 class="."card-title".">".$row['title']."</h5>";
-                                                    if($row['pic']!=null || isset($row['pic']) || !empty($row['pic'])){
-                                                        echo "
-                                                            <img class="."card-img-top"." src="."..\images/NoTimeToDie.jpg"." alt="."No Image..."." style="."margin-bottom:10px; width:200px; height: 100px;".">
-                                                        ";
-                                                    }
-                                                    echo "
-                                                    <p class="."card-text text-justify".">".$row['message']."</p>";
-                                                    if($row['links']!=null || isset($row['links']) || !empty($row['links'])){
-                                                        echo "
-                                                            <a href=".$row['links'] ." class="."badge badge-secondary".">Click here</a>
-                                                        ";
-                                                    }
-                                                    echo "
-                                                        
-                                                </div>
-                                            <div class="."card-footer text-muted".">
-                                            <span>Posted on : ".$row['date_posted']."</span>
-                                        </div>
-                                     </div>
-                                ";
-                            }
-                        ?>
+        <div class="container">
+            <div class="row mt-4 text-left">
+                <div class="col-8 mb-4">
+                    <div class="foodsHeaderBox">
+                        <h1 style="border-bottom: 3px black dotted; margin-bottom:20px;">Welcome to <span>CineCarnival<span> foods corner.</h1><br>
+                        <span class="text-muted mb-5">The online ordering system is currently unavailable but you can check our food items with prices to shop at the cinema.</span>
+                    </div>
+
+                    <div class="card mb-3" style="max-width: 800px; padding-right: 60px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                            <img src="..\images/foods/Coke.jpg" class="card-img" alt="No Image...">
+                            </div>
+                            <div class="col-md-8">
+                            <div class="card-body mt-4 ml-5 myFoodsBox">
+                                <h4 class="card-title">Pop Corn Combo</h4>
+                                <p class="card-text" style="font-size: 18px;">Buy 1 large pop corn with 500 ml fountain coke.</p>
+                                <span class="badge badge-pill badge-primary" style="width: 100px; height:25px; font-size: 18px;">150 BDT</span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3" style="max-width: 800px; padding-right: 60px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                            <img src="..\images/foods/BurgerCombo1.jpg" class="card-img" alt="No Image...">
+                            </div>
+                            <div class="col-md-8">
+                            <div class="card-body mt-4 ml-5 myFoodsBox">
+                                <h4 class="card-title">Burger Combo</h4>
+                                <p class="card-text" style="font-size: 18px;">Buy 1 regular size burger with 500ml fountain coke.</p>
+                                <span class="badge badge-pill badge-primary" style="width: 100px; height:25px; font-size: 18px;">250 BDT</span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3" style="max-width: 800px; padding-right: 60px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                            <img src="..\images/foods/sandwich3.jpg" class="card-img" alt="No Image...">
+                            </div>
+                            <div class="col-md-8">
+                            <div class="card-body mt-4 ml-5 myFoodsBox">
+                                <h4 class="card-title">Sandwich</h4>
+                                <p class="card-text" style="font-size: 18px;">Buy combo of 2 sandwiches.</p>
+                                <span class="badge badge-pill badge-primary" style="width: 100px; height:25px; font-size: 18px;">180 BDT</span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3" style="max-width: 800px; padding-right: 60px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                            <img src="..\images/foods/PotetoSticks.jpg" class="card-img" alt="No Image...">
+                            </div>
+                            <div class="col-md-8">
+                            <div class="card-body mt-4 ml-5 myFoodsBox">
+                                <h4 class="card-title">French Fries</h4>
+                                <p class="card-text" style="font-size: 18px;">Buy french fries.</p>
+                                <span class="badge badge-pill badge-primary" style="width: 100px; height:25px; font-size: 18px;">120 BDT</span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3" style="max-width: 800px; padding-right: 60px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                            <img src="..\images/foods/Chocolate1.jpg" class="card-img" alt="No Image...">
+                            </div>
+                            <div class="col-md-8">
+                            <div class="card-body mt-4 ml-5 myFoodsBox">
+                                <h4 class="card-title">Candy</h4>
+                                <p class="card-text" style="font-size: 18px;">Buy  chocolates from large collections.</p>
+                                
+                            </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
        
-       
 <!--Footer Section-->
-        <div class="container-fluid">
+        <div class="container">
             <footer>
                <div class="row my-footer">
                    <div class="col">
@@ -161,7 +198,6 @@
             </footer>
         </div>
     </div>
-    
 
     
     
@@ -171,6 +207,7 @@
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <script src="..\css/bootstrap.min.js"></script>
 </body>
 
 </html>

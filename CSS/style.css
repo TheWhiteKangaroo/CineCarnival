@@ -10,12 +10,26 @@
     src: url(..\Fonts/Opificio-FontZillion/Fonts/opificio.ttf);
     font-family: Opificio;
 }
+@font-face{
+    src: url(..\Fonts/Candy\ Cane-FontZillion/Fonts/candcu_.ttf);
+    font-family: CandyCane;
+}
 
 body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.myNoticeCard{
-    
+.myFoodsBox h4{
+    font-family: CandyCane;
+}
+.foodsHeaderBox{
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-family: Candara;
+}
+.myCorporateBox{
+    width: 100%;
+    margin-top: 300px;
 }
 .mybox{
     border: 2px rgb(0,125,255) solid;
