@@ -154,16 +154,14 @@ $np = ceil($tm / $perPage);
                 </ul>
                 <ul class="navbar-nav ml-auto my-navbar">
                     <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-pizza-slice"></i></i> Foods</a>
+                        <a href="FoodsPage.php" class="nav-link"><i class="fas fa-pizza-slice"></i></i> Foods</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-handshake"></i> Corporates</a>
+                        <a href="CorporatesPage.php" class="nav-link"><i class="fas fa-handshake"></i> Corporates</a>
                     </li>
+                    
                     <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-receipt"></i> Facilities</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-gift"></i> Offers</a>
+                        <a href="OfferPage.php" class="nav-link"><i class="fas fa-gift"></i> Offers</a>
                     </li>
                 </ul>
             </div>
@@ -249,15 +247,15 @@ $np = ceil($tm / $perPage);
                     <div class="row justify-content-start d-flex mt-5 mb-2" id="movieSection">
                         <?php
                         while ($row = mysqli_fetch_assoc($result)) {
-                            echo "
+                            echo "  
                                         <div class=" . "col-4" . ">
                                         <div class=" . "card movieCard-box" . "style=" . "width: 18rem;" . ">
                                             <a href=" . "#" . "><img class=" . "card-img-top" . " src=" . "..\images/NoTimeToDie.jpg" . " alt=" . "Card image cap" . "></a>
                                             <div class=" . "card-body" . ">
                                                 <p class=" . "card-text" . ">
                                                     <span><b>" . $row['name'] . "</b></span><br>
-                                                        <span>" . $row['genre'] . "</span><br>
-                                                    <button class=" . "movieCard-buttons" . ">Showtime</button>
+                                                    <span>" . $row['genre'] . "</span><br>
+                                                    <button id="."movieDetailsBtn"." class=" . "movieCard-buttons" . ">Showtime</button>
                                                 </p>
                                             </div>
                                             </div>

@@ -10,26 +10,21 @@
     src: url(..\Fonts/Opificio-FontZillion/Fonts/opificio.ttf);
     font-family: Opificio;
 }
-@font-face{
-    src: url(..\Fonts/Candy\ Cane-FontZillion/Fonts/candcu_.ttf);
-    font-family: CandyCane;
-}
 
 body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.myFoodsBox h4{
-    font-family: CandyCane;
-}
-.foodsHeaderBox{
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    font-family: Candara;
-}
+
 .myCorporateBox{
     width: 100%;
-    margin-top: 300px;
+    margin-top: 150px;
+}
+.corporateHeaderBox{
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+    border: 2px rgb(0,125,255) dotted;
+    border-radius: 10px;
 }
 .mybox{
     border: 2px rgb(0,125,255) solid;
@@ -181,17 +176,20 @@ body{
     height: 700px;
     margin-top: 15px;
 }
+
 .header-section{
     padding-bottom: 30px;
     background-color: black;    
     border-bottom: 1px rgb(0,125,255) solid;
     outline: none;
+    height: 80px;
 }
 .header-section a{
     color: white;
     text-decoration: none;
     font-size: 17px;
     font-weight: bolder;
+    text-align: right;
 }
 .header-section a:hover{
     color: rgb(0,125,255);

@@ -19,15 +19,10 @@
         <!--Header Section-->
         <header>
            <div class="d-flex flex-row flex-nowrap sm-flex-wrap  header-section ">
-                <div class="p-2 mr-2">
+                <div class="p-2 mr-auto">
                     <a href="index.php"><img src="..\Images/CineCarnival.png" alt="No Image..."></a>
                 </div>
-                <div class="p-2 align-self-center d-sm-none d-md-block d-none d-sm-block mr-0 pr-0">
-                    <input class="search-box border-primary pt-1 pb-1 pr-5 pl-4 ml-3 mr-0 text-capitalize"   style="border-radius: 25px; background:transparent; color: white;" type="text" placeholder="Search for movies...">
-                </div>
-                <div class="p-2 align-self-center  mr-auto d-sm-none d-md-block d-none d-sm-block ml-0 pl-0">
-                    <button class="border-primary  search-button"><i class="fas fa-search"></i></button>
-                </div>
+               
                 <div class="p-2 align-self-center header-anchor">
                     <a href="SignInPage.php" style="text-decoration: none;"><i class="fas fa-user-alt"></i>  Sign In</a>
                 </div>
@@ -58,16 +53,14 @@
                 </ul>
                 <ul class="navbar-nav ml-auto my-navbar">
                     <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-pizza-slice"></i></i> Foods</a>
+                        <a href="FoodsPage.php" class="nav-link"><i class="fas fa-pizza-slice"></i></i> Foods</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-handshake"></i> Corporates</a>
+                        <a href="CorporatesPage.php" class="nav-link"><i class="fas fa-handshake"></i> Corporates</a>
                     </li>
+                    
                     <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-receipt"></i> Facilities</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-gift"></i> Offers</a>
+                        <a href="OfferPage.php" class="nav-link"><i class="fas fa-gift"></i> Offers</a>
                     </li>
                 </ul>
             </div>
@@ -80,11 +73,11 @@
             <div class="row mt-4 text-left">
                 <div class="col-8 mb-4">
                     <div class="foodsHeaderBox">
-                        <h1 style="border-bottom: 3px black dotted; margin-bottom:20px;">Welcome to <span>CineCarnival<span> foods corner.</h1><br>
+                        <h1 style="border-bottom: 3px black dotted; margin-bottom:30px; margin-top:50px;">Welcome to <span>CineCarnival<span> foods corner.</h1><br>
                         <span class="text-muted mb-5">The online ordering system is currently unavailable but you can check our food items with prices to shop at the cinema.</span>
                     </div>
 
-                    <div class="card mb-3" style="max-width: 800px; padding-right: 60px;">
+                    <div class="card mb-3 mt-5" style="max-width: 800px; padding-right: 60px;">
                         <div class="row no-gutters">
                             <div class="col-md-4">
                             <img src="..\images/foods/Coke.jpg" class="card-img" alt="No Image...">
