@@ -1,183 +1,57 @@
 <?php
 include "DatabaseConnection.php";
-$result = $cbValue = $cbValue2 = $cbValue3 = $cbValue4 = "";
+$resul=$sql=$showMoviePageResult = $cbValue = $cbValue2 = $cbValue3 = $cbValue4 ="";
+$actionCBQuery=$comedyCBQuery=$dramaCBQuery=$horrorCBQuery=" ";
+static $cbQuery=" ";
+$pageCount=9;
+
 if (isset($_POST['limitValue'])) {
   $lv = $_POST['limitValue'];
-  $sql = "SELECT * FROM movie LIMIT $lv";
+  $sql= "SELECT * FROM movie WHERE status='Now Showing' ";
   $result = mysqli_query($conn, $sql);
 }
 else if (isset($_POST['NowShowingPage'])) {
   $pageCount = $_POST['NowShowingPage'];
-  echo $pageCount;
-  $sql = "SELECT * FROM movie LIMIT $pageCount";
+  $sql= "SELECT * FROM movie WHERE status='Now Showing' ";
   $result = mysqli_query($conn, $sql);
 } 
-else if (isset($_POST['searchedKeyWord'])) {
+else if (isset($_POST['UpComingPage'])) {
+  $pageCount = $_POST['UpComingPage'];
+  $sql = "SELECT * FROM movie WHERE status='Coming Soon' ";
+  $result = mysqli_query($conn, $sql);
+}
+else if (isset($_POST['searchedKeyWord'])){
   $sk = $_POST['searchedKeyWord'];
   if ($sk == null) {
-    $sql = "SELECT * FROM movie LIMIT 9";
+    $sql = "SELECT * FROM movie ";
     $result = mysqli_query($conn, $sql);
   } else {
     $sql = "SELECT * from movie where name like '%$sk%'";
     $result = mysqli_query($conn, $sql);
   }
-} else if (isset($_POST['actionCBValue'])) {
-  $cbValue = $_POST['actionCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['comedyCBValue'])) {
-  $cbValue = $_POST['comedyCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['horrorCBValue'])) {
-  $cbValue = $_POST['horrorCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['dramaCBValue'])) {
-  $cbValue = $_POST['dramaCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['actionCBValue']) && isset($_POST['comedyCBValue'])) {
-  $cbValue = $_POST['actionCBValue'];
-  $cbValue2 = $_POST['comedyCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['actionCBValue']) && isset($_POST['horrorCBValue'])) {
-  $cbValue = $_POST['horrorCBValue'];
-  $cbValue2 = $_POST['horrorCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['actionCBValue']) && isset($_POST['dramaCBValue'])) {
-  $cbValue = $_POST['horrorCBValue'];
-  $cbValue2 = $_POST['dramaCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['comedyCBValue']) && isset($_POST['horrorCBValue'])) {
-  $cbValue = $_POST['comedyCBValue'];
-  $cbValue2 = $_POST['horrorCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['comedyCBValue']) && isset($_POST['dramaCBValue'])) {
-  $cbValue = $_POST['comedyCBValue'];
-  $cbValue2 = $_POST['dramaCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['horrorCBValue']) && isset($_POST['dramaCBValue'])) {
-  $cbValue = $_POST['horrorCBValue'];
-  $cbValue2 = $_POST['dramaCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['actionCBValue']) && isset($_POST['comedyCBValue']) && isset($_POST['horrorCBValue'])) {
-  $cbValue = $_POST['actionCBValue'];
-  $cbValue2 = $_POST['comedyCBValue'];
-  $cbValue3 = $_POST['horrorCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2' AND genre='$cbValue3';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['actionCBValue']) && isset($_POST['comedyCBValue']) && isset($_POST['dramaCBValue'])) {
-  $cbValue = $_POST['actionCBValue'];
-  $cbValue2 = $_POST['comedyCBValue'];
-  $cbValue3 = $_POST['dramaCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2' AND genre='$cbValue3';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['actionCBValue']) && isset($_POST['comedyCBValue']) && isset($_POST['horrorCBValue']) && isset($_POST['dramaCBValue'])) {
-  $cbValue = $_POST['actionCBValue'];
-  $cbValue2 = $_POST['comedyCBValue'];
-  $cbValue4 = $_POST['dramaCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2' AND genre='$cbValue3' AND genre='$cbValue4';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['actionCBValue'])) {
-  $cbValue = $_POST['actionCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['comedyCBValue'])) {
-  $cbValue = $_POST['comedyCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['horrorCBValue'])) {
-  $cbValue = $_POST['horrorCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['dramaCBValue'])) {
-  $cbValue = $_POST['dramaCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['actionCBValue']) && isset($_POST['comedyCBValue'])) {
-  $cbValue = $_POST['actionCBValue'];
-  $cbValue2 = $_POST['comedyCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['actionCBValue']) && isset($_POST['horrorCBValue'])) {
-  $cbValue = $_POST['horrorCBValue'];
-  $cbValue2 = $_POST['horrorCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['actionCBValue']) && isset($_POST['dramaCBValue'])) {
-  $cbValue = $_POST['horrorCBValue'];
-  $cbValue2 = $_POST['dramaCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['comedyCBValue']) && isset($_POST['horrorCBValue'])) {
-  $cbValue = $_POST['comedyCBValue'];
-  $cbValue2 = $_POST['horrorCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['comedyCBValue']) && isset($_POST['dramaCBValue'])) {
-  $cbValue = $_POST['comedyCBValue'];
-  $cbValue2 = $_POST['dramaCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['horrorCBValue']) && isset($_POST['dramaCBValue'])) {
-  $cbValue = $_POST['horrorCBValue'];
-  $cbValue2 = $_POST['dramaCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['actionCBValue']) && isset($_POST['comedyCBValue']) && isset($_POST['horrorCBValue'])) {
-  $cbValue = $_POST['actionCBValue'];
-  $cbValue2 = $_POST['comedyCBValue'];
-  $cbValue3 = $_POST['horrorCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2' AND genre='$cbValue3';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['actionCBValue']) && isset($_POST['comedyCBValue']) && isset($_POST['dramaCBValue'])) {
-  $cbValue = $_POST['actionCBValue'];
-  $cbValue2 = $_POST['comedyCBValue'];
-  $cbValue3 = $_POST['dramaCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2' AND genre='$cbValue3';";
-  $result = mysqli_query($conn, $sql);
-} else if (isset($_POST['actionCBValue']) && isset($_POST['comedyCBValue']) && isset($_POST['horrorCBValue']) && isset($_POST['dramaCBValue'])) {
-  $cbValue = $_POST['actionCBValue'];
-  $cbValue2 = $_POST['comedyCBValue'];
-  $cbValue4 = $_POST['dramaCBValue'];
-  echo $cbValue;
-  $sql = "SELECT * from movie where genre='$cbValue' AND genre='$cbValue2' AND genre='$cbValue3' AND genre='$cbValue4';";
-  $result = mysqli_query($conn, $sql);
+}
+else if(isset($_POST['loadMoviePage'])){
+    $movie_id = $_POST['loadMoviePage'];
+    $showMovieQuery = "SELECT * FROM movie WHERE mv_id= '$movie_id' ";
+    showMoviePage($showMovieQuery);
 }
 
-
+if (isset($_POST['actionCBValue'])) {
+  $cbValue = $_POST['actionCBValue'];
+  $sql.= " AND genre='$cbValue' ";
+}
+if (isset($_POST['comedyCBValue'])) {
+  $cbValue = $_POST['comedyCBValue'];
+  $sql.= " AND genre='$cbValue' ";
+}
+if (isset($_POST['horrorCBValue'])) {
+  $cbValue = $_POST['horrorCBValue'];
+  $sql.= "AND genre='$cbValue' ";
+}
+if (isset($_POST['dramaCBValue'])) {
+  $cbValue = $_POST['dramaCBValue'];
+  $sql.= "AND genre='$cbValue' ";
+}
 
 
 
@@ -198,7 +72,8 @@ else if (isset($_POST['searchedKeyWord'])) {
 
         if (mysqli_num_rows($result)<1) {
           echo "Empty Result!";
-        } else {
+        }
+        else {
           echo "
                                         <div class=" . "col-4" . ">
                                         <div class=" . "card movieCard-box" . "style=" . "width: 18rem;" . ">
@@ -217,7 +92,24 @@ else if (isset($_POST['searchedKeyWord'])) {
         }
       }
       ?>
+      <?php
+        function showMoviePage($query){
+          global $conn, $result;
+          $result =mysqli_query($conn,$query);
+          while($row=mysqli_fetch_assoc($result)){
+            echo "
+            <div class=" . "col-12" . ">
+              <div class="."mybox".">
+                <h1>".$row['name']."</h1>
+              <div>
+            </div>
+            ";
+          }
+        }
+      ?>
     </div>
+
+
 </body>
 
 </html>

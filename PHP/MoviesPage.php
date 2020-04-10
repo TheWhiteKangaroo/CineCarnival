@@ -3,7 +3,7 @@ include "DatabaseConnection.php";
 $movieName = $genre = $cast = "";
 $perPage = 9;
 
-$sql = "SELECT * FROM movie LIMIT $perPage";
+$sql = "SELECT * FROM movie WHERE status='Now Showing' LIMIT $perPage";
 $result = mysqli_query($conn, $sql);
 
 $totalMoviesQuery = "SELECT COUNT(*) as totalMovies FROM movie";
@@ -13,6 +13,14 @@ $resultTotalMovies = mysqli_fetch_assoc($resultTotalMovies);
 $tm = $resultTotalMovies['totalMovies'];
 $np = ceil($tm / $perPage);
 
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
+    echo $_GET['movieNumber'];
+    ?>
+    <script>
+    myFunction();
+    </script>
+<?php
+}
 ?>
 
 
@@ -40,16 +48,36 @@ $np = ceil($tm / $perPage);
 
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
+    
+    <script>
+        
+    </script>
 
     <script>
+    function myFunction(){
+        alert("Hi!");
+    }
+        function showTimeFunction(e){
+            $(document).ready(function(){
+                $("#movieSection").load("NextMovies.php", {
+                    loadMoviePage: e
+                });
+            });
+        }
         $(document).ready(function() {
             var i = 9;
-
+               
             $("#nowShowingBtn").click(function() {
                 $("#movieSection").load("NextMovies.php", {
                     NowShowingPage: 9
                 });
-            });    
+            });
+
+            $("#upcomingBtn").click(function() {
+                $("#movieSection").load("NextMovies.php", {
+                    UpComingPage: 9
+                });
+            });  
 
             $("#ldMoreButton").click(function() {
                 i = i + 3;
@@ -179,10 +207,7 @@ $np = ceil($tm / $perPage);
                             </li>
                             <li class="nav-item">
 
-                                <button type="button" name="upcomingBtn" id="upcomingBtn" class="border-0 pt-3 pb-2 mr-2 " onclick="this.style.color='#white';this.style.backgroundColor = '#9400D3'">Upcoming</button>
-                            </li>
-                            <li class="nav-item">
-                                <button type="button" name="exclusiveBtn" id="exclusiveBtn" class="border-0 pt-3 pb-2 mr-2" onclick="this.style.color='#000000';this.style.backgroundColor = '#9400D3'">Exclusive</button>
+                                <button type="button" name="upcomingBtn" id="upcomingBtn" class="border-0 pt-3 pb-2 mr-2 " onclick="this.style.color='#white';this.style.backgroundColor = '#9400D3'">Coming Soon</button>
                             </li>
                         </ul>
                     </form>
@@ -191,7 +216,7 @@ $np = ceil($tm / $perPage);
         </div>
 
         <div class="container">
-            <div class="row align-items-start justify-content-between">
+            <div class="row align-items-start justify-content-between" id="moviePageSection">
                 <div class="col-2 pt-4 ">
                     <div mb-2>
                     <!-- Default unchecked -->
@@ -245,25 +270,29 @@ $np = ceil($tm / $perPage);
                 </div>
                 <div class="col-10">
                     <div class="row justify-content-start d-flex mt-5 mb-2" id="movieSection">
+                    
                         <?php
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo "  
                                         <div class=" . "col-4" . ">
                                         <div class=" . "card movieCard-box" . "style=" . "width: 18rem;" . ">
+                                        <form action="."MoviesPage.php"." method="."GET".">
                                             <a href=" . "#" . "><img class=" . "card-img-top" . " src=" . "..\images/NoTimeToDie.jpg" . " alt=" . "Card image cap" . "></a>
                                             <div class=" . "card-body" . ">
                                                 <p class=" . "card-text" . ">
                                                     <span><b>" . $row['name'] . "</b></span><br>
                                                     <span>" . $row['genre'] . "</span><br>
-                                                    <button id="."movieDetailsBtn"." class=" . "movieCard-buttons" . ">Showtime</button>
+                                                    <button type="."submit"." name="."movieNumber"." value=".$row['mv_id']." id = ".$row['mv_id']." class=" . "movieCard-buttons".">Showtime</button>
                                                 </p>
                                             </div>
+                                            </form>
                                             </div>
                                             <br>
                                       </div>
                                         ";
                         }
                         ?>
+                    
                     </div>
                     
                 </div>
