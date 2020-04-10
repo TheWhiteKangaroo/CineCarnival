@@ -1,3 +1,13 @@
+<?php
+    include "DatabaseConnection.php";
+    $query = "SELECT DISTINCT title, message, links, pic, date_posted FROM notice WHERE date_posted= (SELECT MAX(date_posted) FROM notice)";
+    $result = mysqli_query($conn,$query);
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -150,6 +160,41 @@
                             </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="col-4 m-0">
+                    <div class="mt-5 text-justify">
+                        <?php 
+                            while($row=mysqli_fetch_assoc($result)){
+                                echo "
+                                    <div class="."card text-justify".">
+                                        <div class="."card-header text-center".">
+                                            Notice
+                                            </div>
+                                                <div class="."card-body text-justify text-left".">
+                                                    <h5 class="."card-title".">".$row['title']."</h5>";
+                                                    if($row['pic']!=null || isset($row['pic']) || !empty($row['pic'])){
+                                                        echo "
+                                                            <img class="."card-img-top"." src="."..\images/NoTimeToDie.jpg"." alt="."No Image..."." style="."margin-bottom:10px; width:200px; height: 100px;".">
+                                                        ";
+                                                    }
+                                                    echo "
+                                                    <p class="."card-text text-justify".">".$row['message']."</p>";
+                                                    if($row['links']!=null || isset($row['links']) || !empty($row['links'])){
+                                                        echo "
+                                                            <a href=".$row['links'] ." class="."badge badge-secondary".">Click here</a>
+                                                        ";
+                                                    }
+                                                    echo "
+                                                        
+                                                </div>
+                                            <div class="."card-footer text-muted".">
+                                            <span>Posted on : ".$row['date_posted']."</span>
+                                        </div>
+                                     </div>
+                                ";
+                            }
+                        ?>
                     </div>
                 </div>
             </div>

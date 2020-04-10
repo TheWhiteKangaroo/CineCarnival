@@ -7,17 +7,17 @@ $pageCount=9;
 
 if (isset($_POST['limitValue'])) {
   $lv = $_POST['limitValue'];
-  $sql= "SELECT * FROM movie WHERE status='Now Showing' ";
+  $sql= "SELECT * FROM movie WHERE status='Now Showing' LIMIT $lv";
   $result = mysqli_query($conn, $sql);
 }
 else if (isset($_POST['NowShowingPage'])) {
   $pageCount = $_POST['NowShowingPage'];
-  $sql= "SELECT * FROM movie WHERE status='Now Showing' ";
+  $sql= "SELECT * FROM movie WHERE status='Now Showing' LIMIT $pageCount";
   $result = mysqli_query($conn, $sql);
 } 
 else if (isset($_POST['UpComingPage'])) {
   $pageCount = $_POST['UpComingPage'];
-  $sql = "SELECT * FROM movie WHERE status='Coming Soon' ";
+  $sql = "SELECT * FROM movie WHERE status='Coming Soon' LIMIT $pageCount";
   $result = mysqli_query($conn, $sql);
 }
 else if (isset($_POST['searchedKeyWord'])){
@@ -26,14 +26,9 @@ else if (isset($_POST['searchedKeyWord'])){
     $sql = "SELECT * FROM movie ";
     $result = mysqli_query($conn, $sql);
   } else {
-    $sql = "SELECT * from movie where name like '%$sk%'";
+    $sql = "SELECT * from movie where name like '%$sk%' LIMIT $pageCount";
     $result = mysqli_query($conn, $sql);
   }
-}
-else if(isset($_POST['loadMoviePage'])){
-    $movie_id = $_POST['loadMoviePage'];
-    $showMovieQuery = "SELECT * FROM movie WHERE mv_id= '$movie_id' ";
-    showMoviePage($showMovieQuery);
 }
 
 if (isset($_POST['actionCBValue'])) {
@@ -73,18 +68,23 @@ if (isset($_POST['dramaCBValue'])) {
         if (mysqli_num_rows($result)<1) {
           echo "Empty Result!";
         }
+        else if($row==null || !isset($row) || $row==0){
+          echo "Oops, no movies currently to show!";
+      }
         else {
           echo "
                                         <div class=" . "col-4" . ">
                                         <div class=" . "card movieCard-box" . "style=" . "width: 18rem;" . ">
-                                            <a href=" . "#" . "><img class=" . "card-img-top" . " src=" . "..\images/NoTimeToDie.jpg" . " alt=" . "Card image cap" . "></a>
+                                        <form action="."Movies.php"." method="."GET".">
+                                            <img class=" . "card-img-top" . " src=" . "..\images/NoTimeToDie.jpg" . " alt=" . "Card image cap" . ">
                                             <div class=" . "card-body" . ">
                                                 <p class=" . "card-text" . ">
                                                     <span><b>" . $row['name'] . "</b></span><br>
                                                     <span>" . $row['genre'] . "</span><br>
-                                                    <button class=" . "movieCard-buttons" . ">Showtime</button>
+                                                    <button type="."submit"." name="."movieNumber"." value=".$row['mv_id']." id = ".$row['mv_id']." class=" . "movieCard-buttons".">Details</button>
                                                 </p>
                                             </div>
+                                            </form>
                                             </div>
                                             <br>
                                       </div>
@@ -92,24 +92,7 @@ if (isset($_POST['dramaCBValue'])) {
         }
       }
       ?>
-      <?php
-        function showMoviePage($query){
-          global $conn, $result;
-          $result =mysqli_query($conn,$query);
-          while($row=mysqli_fetch_assoc($result)){
-            echo "
-            <div class=" . "col-12" . ">
-              <div class="."mybox".">
-                <h1>".$row['name']."</h1>
-              <div>
-            </div>
-            ";
-          }
-        }
-      ?>
     </div>
-
-
 </body>
 
 </html>

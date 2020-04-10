@@ -12,15 +12,6 @@ $resultTotalMovies = mysqli_fetch_assoc($resultTotalMovies);
 
 $tm = $resultTotalMovies['totalMovies'];
 $np = ceil($tm / $perPage);
-
-if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
-    echo $_GET['movieNumber'];
-    ?>
-    <script>
-    myFunction();
-    </script>
-<?php
-}
 ?>
 
 
@@ -50,22 +41,20 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
 
     
     <script>
-        
+        function changeNowShowingBtnColor(){
+            document.getElementById('nowShowingBtn').style.backgroundColor="#9400D3";
+            document.getElementById('upcomingBtn').style.backgroundColor="BLACK";
+        }
+        function changeUpComingBtnColor(){
+            document.getElementById('nowShowingBtn').style.backgroundColor="BLACK";
+            document.getElementById('upcomingBtn').style.backgroundColor="#9400D3";
+        }
     </script>
 
     <script>
-    function myFunction(){
-        alert("Hi!");
-    }
-        function showTimeFunction(e){
-            $(document).ready(function(){
-                $("#movieSection").load("NextMovies.php", {
-                    loadMoviePage: e
-                });
-            });
-        }
         $(document).ready(function() {
             var i = 9;
+            
                
             $("#nowShowingBtn").click(function() {
                 $("#movieSection").load("NextMovies.php", {
@@ -125,17 +114,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
 
         });
     </script>
-
- <script>
-    let btnNowShowing = document.querySelector('#nowShowingBtn');
-    let btnUpComing = document.querySelector('#upcomingBtn');
-    let btnExclusive = document.querySelector('#exclusiveBtn');
-    btnNowShowing.addEventListener('click', () => btnNowShowing.style.backgroundColor='#337ab7')
-    btnNowShowing.addEventListener('click', () => btnNowShowing.style.backgroundColor='')
-    btnNowShowing.addEventListener('click', () => btnNowShowing.style.backgroundColor='')
- </script>
-
-
 </head>
 
 <body>
@@ -203,11 +181,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
                         <ul class="nav nav-tabs   movies-nav">
                             <li class="nav-item"><span>Movies</span></li>
                             <li class="nav-item">
-                                <button type="button" name="nowShowingBtn" id="nowShowingBtn" class="border-0 pt-3 pb-2 mr-2" onclick="this.style.color='white';this.style.backgroundColor = '#9400D3'">Now Showing</button>
+                                <button type="button" name="nowShowingBtn" id="nowShowingBtn" class="border-0 pt-3 pb-2 mr-2" onclick="changeNowShowingBtnColor()">Now Showing</button>
                             </li>
                             <li class="nav-item">
-
-                                <button type="button" name="upcomingBtn" id="upcomingBtn" class="border-0 pt-3 pb-2 mr-2 " onclick="this.style.color='#white';this.style.backgroundColor = '#9400D3'">Coming Soon</button>
+                                <button type="button" name="upcomingBtn" id="upcomingBtn" class="border-0 pt-3 pb-2 mr-2 " onclick="changeUpComingBtnColor()">Coming Soon</button>
                             </li>
                         </ul>
                     </form>
@@ -273,16 +250,19 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
                     
                         <?php
                         while ($row = mysqli_fetch_assoc($result)) {
-                            echo "  
+                            if($row==null || !isset($row)){
+                                echo "Oops, no movies currently to show!";
+                            }
+                            echo "
                                         <div class=" . "col-4" . ">
                                         <div class=" . "card movieCard-box" . "style=" . "width: 18rem;" . ">
-                                        <form action="."MoviesPage.php"." method="."GET".">
-                                            <a href=" . "#" . "><img class=" . "card-img-top" . " src=" . "..\images/NoTimeToDie.jpg" . " alt=" . "Card image cap" . "></a>
+                                        <form action="."Movies.php"." method="."GET".">
+                                            <img class=" . "card-img-top" . " src=" . "..\images/NoTimeToDie.jpg" . " alt=" . "Card image cap" . ">
                                             <div class=" . "card-body" . ">
                                                 <p class=" . "card-text" . ">
                                                     <span><b>" . $row['name'] . "</b></span><br>
                                                     <span>" . $row['genre'] . "</span><br>
-                                                    <button type="."submit"." name="."movieNumber"." value=".$row['mv_id']." id = ".$row['mv_id']." class=" . "movieCard-buttons".">Showtime</button>
+                                                    <button type="."submit"." name="."movieNumber"." value=".$row['mv_id']." id = ".$row['mv_id']." class=" . "movieCard-buttons".">Details</button>
                                                 </p>
                                             </div>
                                             </form>
@@ -298,7 +278,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
                 </div>
                 <div class="col-8">
                     <div class="text-center mt-2 mb-2  ldMoreBtn">
-                        <button type="button" id="ldMoreButton" name="ldMoreButton" onclick="hideLoadButton()">Show More</button>
+                        <button type="button" id="ldMoreButton" name="ldMoreButton">Show More</button>
                     </div>
                 </div>
             </div>
