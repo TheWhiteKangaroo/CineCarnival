@@ -150,7 +150,7 @@ body{
     width: 100px;
     height: 30px;
 }
-.inputWithIcon input[type=text], .inputWithIcon input[type=email], .inputWithIcon input[type=number], .inputWithIcon input[type=password],.inputWithIcon textarea{
+.inputWithIcon input[type=text], .inputWithIcon input[type=email], .inputWithIcon input[type=number], .inputWithIcon input[type=password],.inputWithIcon input[type=date],.inputWithIcon textarea{
     padding-left: 40px;
 }
 .inputWithIcon{
@@ -168,6 +168,21 @@ body{
 }
 .inputWithIcon input[type=text] + i{
     color: dodgerblue;
+}
+.showtime-datepicker{
+    background: transparent;
+    border: 1px #5cb85c solid;
+    border-radius: 5px;
+    width: 40%;
+    height: 40px;
+    margin-bottom: 3px;
+    padding:5px 10px;
+    color: white;
+    opacity: 0.9;
+}
+.showtime-datepicker:hover, .showtime-datepicker i:hover{
+    background-color: #5cb85c;
+    color: white;
 }
 .poster{
     width: 100%;

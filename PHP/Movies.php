@@ -146,7 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
                                 <div class="col-6" col-sm-12>
                                     <div class="mt-2 mb-5 text-right" style="margin-right:10px;">
                                     <form action="BuyTickets.php" method="POST">
-                                        <button type="submit" name="buyTicketBtn" class="btn btn-outline-success">Buy Ticket</button>
+                                        <button type="submit" name="buyTicketBtn" class="btn btn-outline-success font-weight-bold">Buy Ticket</button>
                                     </form>
                                     </div>
                                     
