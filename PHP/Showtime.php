@@ -103,11 +103,45 @@ $result2 = mysqli_query($conn, $query2);
         <!--Main Body Section-->
 
         <div class="container-fluid">
-            <div class="row mt-3">
+            <div class="row mt-4 justify-content-center">
                 <div class="col-3">
+                <?php
+                    include "DatabaseConnection.php";
+                    $query = "SELECT DISTINCT title, message, links, pic, date_posted FROM notice WHERE date_posted= (SELECT MAX(date_posted) FROM notice)";
+                    $result = mysqli_query($conn,$query);
+                    while($row=mysqli_fetch_assoc($result)){
+                        echo "
+                            <div class="."card text-justify".">
+                                <div class="."card-header text-center".">
+                                    Notice
+                                    </div>
+                                        <div class="."card-body text-justify text-left".">
+                                            <h5 class="."card-title".">".$row['title']."</h5>";
+                                            if($row['pic']!=null || isset($row['pic']) || !empty($row['pic'])){
+                                                echo "
+                                                    <img class="."card-img-top"." src="."..\images/NoTimeToDie.jpg"." alt="."No Image..."." style="."margin-bottom:10px; width:200px; height: 100px;".">
+                                                ";
+                                            }
+                                            echo "
+                                            <p class="."card-text text-justify".">".$row['message']."</p>";
+                                            if($row['links']!=null || isset($row['links']) || !empty($row['links'])){
+                                                echo "
+                                                    <a href=".$row['links'] ." class="."badge badge-secondary".">Click here</a>
+                                                ";
+                                            }
+                                            echo "
+                                                
+                                        </div>
+                                    <div class="."card-footer text-muted".">
+                                    <span>Posted on : ".$row['date_posted']."</span>
+                                </div>
+                             </div>
+                        ";
+                    }
+                ?>
 
                 </div>
-                <div class="col-6 col-sm-12">
+                <div class="col-7">
                     <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
                         <div class="card-header text-center font-weight-bold h3"><i class="fas fa-vr-cardboard"></i> Showtime</div>
                         <div class="card-body">
@@ -131,7 +165,7 @@ $result2 = mysqli_query($conn, $query2);
                                         <thead>
                                             <tr>
                                                 <th scope="col" style="width: 300px;">Movie</th>
-                                                <th scope="col">Shows</th>
+                                                <th scope="col" >Shows</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -189,9 +223,13 @@ $result2 = mysqli_query($conn, $query2);
                                     </table>
                                 </div>
                             </div>
-
                         </div>
                     </div>
+                    <div class="row">
+                                <div class="col">
+
+                                </div>
+                            </div>
                 </div>
             </div>
         </div>
