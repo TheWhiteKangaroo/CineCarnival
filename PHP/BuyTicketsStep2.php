@@ -26,10 +26,14 @@ if (isset($_POST['selectedMovieName'])) {
         <select name="showSelectDropDown" class="movieDropBtn" id="showSelectDropDown" onchange="getSelectedShow();">
             <option value="" disabled selected>Select a show</option>
             <?php
-            while ($row = mysqli_fetch_assoc($result1)) {
-                echo "
-                                    <option value=" . $row['s_id'] . ">" . $row['show_time']." - ".$row['theatre_name']. "</option>
-                                ";
+            if(mysqli_num_rows($result1) == 0){
+                echo "<option  disabled selected>Now Show Available</option>";
+            }else{
+                while ($row = mysqli_fetch_assoc($result1)) {
+                    echo "
+                                        <option value=" . $row['s_id'] . ">" . substr($row['show_time'],0,5) ."  ".$row['theatre_name']. "</option>
+                                    ";
+                }
             }
             ?>
         </select>

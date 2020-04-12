@@ -19,26 +19,33 @@ else{
 
 <!DOCTYPE html>
 <html>
-
+    <style>
+        .timeLabels{
+            border: 1px white solid;
+            border-top-right-radius: 7px;
+            border-bottom-left-radius: 7px;
+            height: 30px;
+        }
+    </style>
 <head>
     <title>Next page</title>
 </head>
 
 <body>
-    <div class="row" id="showtimeSection">
+    <div class="row" id="showtimeSection" style="width: 100%">
         <div class="col" style="width: 100%;">
             <table class="table table-striped table-dark" style="width: 100%;">
-                <thead>
-                    <tr>
-                        <th scope="col" style="width: 300px;">Movie</th>
+                <thead style="width: 100%">
+                    <tr style="width: 100%">
+                        <th scope="col" style="width: 200px;">Movie</th>
                         <th scope="col">Shows</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="width: 100%">
                     <?php
                     if (mysqli_num_rows($result) == 0) {
                         echo "
-                                                    <tr>
+                                                    <tr style="."width: 100%".">
                                                         <td colspan=" . "2" . "><span><i class=" . "fas fa-search" . "></i>Sorry, No Shows Found!</span></td>
                                                     </tr>
                                                 ";
@@ -48,7 +55,7 @@ else{
                         $movieName = $row['name'];
                         $showtime = "";
                     ?>
-                        <tr>
+                        <tr style="width: 100%">
                             <td><?php echo $movieName; ?></td>
                             <?php
                             $result4 = mysqli_query($conn, "SELECT show_time FROM shows WHERE movie_id='$row[mv_id]';");
@@ -62,21 +69,21 @@ else{
                                         } else {
                                             $showtime = substr($newRow['show_time'], 0, 5) . " AM";
                                         }
-                                        echo " <td><span class=" . "bg-success" . ">" . $showtime . "</span></td>";
+                                        echo " <td><span class=" . "timeLabels" ." style="."background-color:#5cb85c ;".">" . $showtime . "</span></td>";
                                     } else if ($lastRow['theatre_id'] == 2) {
                                         if (substr($newRow['show_time'], 0, 5) > 12) {
                                             $showtime = substr($newRow['show_time'], 0, 5) . " PM";
                                         } else {
                                             $showtime = substr($newRow['show_time'], 0, 5) . " AM";
                                         }
-                                        echo " <td><span class=" . "bg-primary" . ">" . $showtime . "</span></td>";
+                                        echo " <td><span class=" . "timeLabels" ." style="."background-color:#0275d8 ;".">" . $showtime . "</span></td>";
                                     } else if ($lastRow['theatre_id'] == 3) {
                                         if (substr($newRow['show_time'], 0, 5) > 12) {
                                             $showtime = substr($newRow['show_time'], 0, 5) . " PM";
                                         } else {
                                             $showtime = substr($newRow['show_time'], 0, 5) . " AM";
                                         }
-                                        echo " <td><span class=" . "bg-warning" . ">" . $showtime . "</span></td>";
+                                        echo " <td><span class=" . "timeLabels" ." style="."background-color:#f0ad4e ;".">" . $showtime . "</span></td>";
                                     }
                                 }
                             }

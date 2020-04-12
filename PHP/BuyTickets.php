@@ -25,13 +25,41 @@ $selectedShowTime = $selectedMovie = "";
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <style>
         .movieDropBtn {
-            width: 75%;
-            height: 35px;
-            text-align: right;
+            width: 100%;
+            height: 50px;
+            text-align: left;
             font-size: 18px;
             padding-right: 35px;
-            border: 2px dodgerblue solid;
-            border-radius: 5px;
+            border-right:none; 
+            border-left:none; 
+            border-top:none; 
+            border-bottom:2px dodgerblue solid; 
+            background: transparent;
+        }
+        #buyTicketTitle{
+            margin-top: 25;
+            margin-bottom: 25px;
+            background-color:  #393f4d   ;
+            height: 100px;
+            color: white;
+            font-size: 38px;
+            padding-top: 20px;
+            border-top-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+        }
+        #confirmBtn{
+            outline: none;
+            background-color: #feda6a;
+            width: 50%;
+            height:50px;
+            color: black;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 20px;
+            border-top-right-radius: 15px;
+            border-bottom-left-radius: 15px;
+            box-shadow: none;
+            border-style: none;
         }
     </style>
 
@@ -69,11 +97,9 @@ $selectedShowTime = $selectedMovie = "";
                     <a href="index.php"><img src="..\Images/CineCarnival.png" alt="No Image..."></a>
                 </div>
 
-                <div class="p-2 align-self-center header-anchor">
-                    <a href="SignInPage.php" style="text-decoration: none;"><i class="fas fa-user-alt"></i> Sign In</a>
-                </div>
+                
                 <div class="p-2 align-self-center">
-                    <a href="RegistrationPage.php" style="text-decoration: none;"><i class="fas fa-user-plus"></i> Sign Up</a>
+                    <a href="SignInPage.php" style="text-decoration: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
                 </div>
             </div>
         </header>
@@ -94,7 +120,7 @@ $selectedShowTime = $selectedMovie = "";
                         <a href="MoviesPage.php" class="nav-link"><i class="fas fa-tape"></i> Movies</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-ticket-alt"></i> Showtime</a>
+                        <a href="Showtime.php" class="nav-link"><i class="fas fa-ticket-alt"></i> Showtime</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto my-navbar">
@@ -113,24 +139,24 @@ $selectedShowTime = $selectedMovie = "";
 
         <!--Main Body Section-->
 
-        <div class="row justify-content-center"  style="background: transparent; height:500px;">
-            <div class="col-5">
+        <div class="row justify-content-center mt-4"  style="background: transparent; height:500px;">
+            <div class="col-6 col-sm-6">
                 <form>
-                    <div>
-                        <div id="buyTicketTitle">
-                            <h2>Buy Tickets</h2>
+                    <div class="">
+                        <div id="buyTicketTitle" class="text-center">
+                            <span>Buy Tickets</span>
                         </div>
                         <div>
-                            <div class="custom-control custom-radio custom-control-inline mt-3">
+                            <div class="text-left custom-control custom-radio custom-control-inline mt-3" style="width:50%; margin-left:25px; height:50px;">
                                 <input type="radio" class="custom-control-input" id="customRadio" name="dateOfPurchase" value="" checked>
-                                <label class="custom-control-label" for="customRadio">Today <br><?php echo "$currentDate"; ?></label>
+                                <label class="h5 custom-control-label" for="customRadio">Today <br><?php echo "$currentDate"; ?></label>
                             </div>
-                            <div class="custom-control custom-radio custom-control-inline">
+                            <div class="text-right custom-control custom-radio custom-control-inline">
                                 <input type="radio" class="custom-control-input" id="customRadio2" name="dateOfPurchase" value="">
-                                <label class="custom-control-label" for="customRadio2">Tomorrow <br><?php echo date('Y-m-d', strtotime($currentDate . ' + 1 days')); ?></label>
+                                <label class="h5 custom-control-label" for="customRadio2">Tomorrow <br><?php echo date('Y-m-d', strtotime($currentDate . ' + 1 days')); ?></label>
                             </div>
                         </div>
-                        <div>
+                        <div class="mt-3">
                             <select name="movieSelectDropDown" class="movieDropBtn" id="movieSelectDropDown">
                                 <option value="" disabled selected>Select a movie</option>
                                 <?php
@@ -148,12 +174,12 @@ $selectedShowTime = $selectedMovie = "";
                             </select>
                         </div>
 
-                        <div id="ticketingSection">
+                        <div id="ticketingSection" class="mt-3">
                             <select name="showSelectDropDown" class="movieDropBtn" id="showSelectDropDown">
                                 <option value="" disabled selected>Select a show</option>
                             </select>
                         </div>
-                        <div id="seatAndPaymentSection">
+                        <div id="seatAndPaymentSection" class="mt-3">
                             <div>
                                 <select name="seatSelectionDropDown" class="movieDropBtn" id="seatSelectionDropDown">
                                     <option value="" disabled selected>Select number of seats</option>
@@ -164,15 +190,13 @@ $selectedShowTime = $selectedMovie = "";
                                     <option value="5">5</option>
                                 </select>
                             </div>
+                            <div class="text-center">
+                            <button id="confirmBtn" type="button">Confirm</button>
                         </div>
-                        <div>
-                            <button type="button" class="btn btn-primary">Primary</button>
                         </div>
+                        
                     </div>
                 </form>
-            </div>
-            <div class="col-7">
-
             </div>
         </div>
     </div>
