@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(!isset($_SESSION['user_name']) || empty($_SESSION['user_name'])){
+    session_destroy();
+    header("Location: SignInPage.php");
+}
 include "DatabaseConnection.php";
 date_default_timezone_set("Asia/Dhaka");
 $currentDate = date("Y-m-d");

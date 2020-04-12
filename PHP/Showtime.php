@@ -37,7 +37,26 @@ $result2 = mysqli_query($conn, $query2);
     <link rel="stylesheet" href="..\css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
+    <style>
+        #buyTicketBtn{
+            width: 75%;
+            height: 50px;
+            margin-top: 20px;
+            outline: none;
+            border-style: none;
+            background-color:#005180;
+            color:white;
+            font-size: 20px;
+            text-align: left;
+            border-left-color: #008AFC;
+            border-left: 110px #008AFC solid;
+            border-left-style:ridge;
+            border-radius: 5px;
+        }
+    </style>
     <script>
+        document.getElementById('showDatePicker').value = new Date().toDateInputValue();
+
         function myFunction(e) {
             var x = document.getElementById(e).value;
             $(document).ready(function() {
@@ -48,13 +67,12 @@ $result2 = mysqli_query($conn, $query2);
         }
     </script>
     <style>
-        .timeLabels{
+        .timeLabels {
             border: 1px white solid;
             border-top-right-radius: 7px;
             border-bottom-left-radius: 7px;
             height: 30px;
         }
-        
     </style>
 </head>
 
@@ -112,37 +130,54 @@ $result2 = mysqli_query($conn, $query2);
         <!--Main Body Section-->
 
         <div class="container-fluid">
-            <div class="row mt-5 justify-content-around">
-                <div class="col-3">
-                    <div id="showCategoriesBox">
-                        <h1 class="text-center">Theatre and Pricing</h1>
-                        <p>There are three categories of hall or theatres in CineCarnival.</p>
-                        <span style="color: #f0ad4e; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>Regular Hall</label><br>
-                        <span style="color: #5cb85c; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>Premium Hall</label><br>
-                        <span style="color: #0275d8; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>VIP Hall</label><br>
-
-                        <p>Different categories of halls offer some unique theatre experience from each other. The ticket rates vary for different hall shows.</p>
-                        <p>The ticket rates are as following.</p>
-
-                        <span style="color: #f0ad4e; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>Regular Hall</label><label for=""> - 250 BDT</label><br>
-                        <span style="color: #5cb85c; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>Premium Hall</label><label for=""> - 450 BDT</label><br>
-                        <span style="color: #0275d8; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>VIP Hall</label><label for=""> - 600 BDT</label><br>
-                    </div>
-
-
+            <div class="row mt-5 justify-content-between">
+                <div class="col-2 mb-2">
+                    <?php
+                    $query = "SELECT DISTINCT title, message, links, pic, date_posted FROM notice WHERE date_posted= (SELECT MAX(date_posted) FROM notice)";
+                    $result = mysqli_query($conn, $query);
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "
+                                    <div class=" . "card text-justify" . ">
+                                        <div class=" . "card-header text-center" . ">
+                                            Notice
+                                            </div>
+                                                <div class=" . "card-body text-justify text-left" . ">
+                                                    <h5 class=" . "card-title" . ">" . $row['title'] . "</h5>";
+                        if ($row['pic'] != null || isset($row['pic']) || !empty($row['pic'])) {
+                            echo "
+                                                            <img class=" . "card-img-top" . " src=" . "..\images/NoTimeToDie.jpg" . " alt=" . "No Image..." . " style=" . "margin-bottom:10px; width:200px; height: 100px;" . ">
+                                                        ";
+                        }
+                        echo "
+                                                    <p class=" . "card-text text-justify" . ">" . $row['message'] . "</p>";
+                        if ($row['links'] != null || isset($row['links']) || !empty($row['links'])) {
+                            echo "
+                                                            <a href=" . $row['links'] . " class=" . "badge badge-secondary" . ">Click here</a>
+                                                        ";
+                        }
+                        echo "
+                                                        
+                                                </div>
+                                            <div class=" . "card-footer text-muted" . ">
+                                            <span>Posted on : " . $row['date_posted'] . "</span>
+                                        </div>
+                                     </div>
+                                ";
+                    }
+                    ?>
                 </div>
-                <div class="col-8">
+                <div class="col-6">
                     <div class="card text-white bg-dark mb-3" style="max-width: 100%; border-radius:10px;">
                         <div class="card-header text-center font-weight-bold h1"><i class="fas fa-vr-cardboard"></i> Showtime</div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="inputWithIcon text-left">
-                                        <input type="date" max="<?php echo date('Y-m-d', strtotime($currentDate . ' + 1 days')); ?>" min="<?php echo $currentDate;?>" class="showtime-datepicker" id="showDatePicker" onchange="myFunction(this.id)"><i class="fas fa-calendar-alt"></i>
+                                        <input type="date" max="<?php echo date('Y-m-d', strtotime($currentDate . ' + 1 days')); ?>" min="<?php echo $currentDate; ?>" class="showtime-datepicker" id="showDatePicker" onchange="myFunction(this.id)"><i class="fas fa-calendar-alt"></i>
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div class="text-right font-weight-normal" >
+                                    <div class="text-right font-weight-normal">
                                         <span style="color: #f0ad4e; font-size:16px; text-align:right;"><i class="fas fa-circle"></i> <span style="color: White;">Regular</span></span>
                                         <span style="color: #5cb85c; font-size:16px; text-align:right;"><i class="fas fa-circle"></i> <span style="color: White;">Premium</span></span>
                                         <span style="color: #0275d8; font-size:16px; text-align:right;"><i class="fas fa-circle"></i> <span style="color: White;">VIP</span></span>
@@ -155,7 +190,7 @@ $result2 = mysqli_query($conn, $query2);
                                         <thead style="width: 100%">
                                             <tr style="width: 100%">
                                                 <th scope="col" style="width: 200px;">Movie</th>
-                                                <th scope="col" >Shows</th>
+                                                <th scope="col">Shows</th>
                                             </tr>
                                         </thead>
                                         <tbody style="width: 100%">
@@ -186,21 +221,21 @@ $result2 = mysqli_query($conn, $query2);
                                                                 } else {
                                                                     $showtime = substr($newRow['show_time'], 0, 5) . " AM";
                                                                 }
-                                                                echo " <td><label class=" . "timeLabels" . " style="."background-color:#5cb85c ;".">" . $showtime . "</label></td>";
+                                                                echo " <td><label class=" . "timeLabels" . " style=" . "background-color:#5cb85c ;" . ">" . $showtime . "</label></td>";
                                                             } else if ($lastRow['theatre_id'] == 2) {
                                                                 if (substr($newRow['show_time'], 0, 5) > 12) {
                                                                     $showtime = substr($newRow['show_time'], 0, 5) . " PM";
                                                                 } else {
                                                                     $showtime = substr($newRow['show_time'], 0, 5) . " AM";
                                                                 }
-                                                                echo " <td><label class=" . "timeLabels" . " style="."background-color:#0275d8 ;".">" . $showtime . "</label></td>";
+                                                                echo " <td><label class=" . "timeLabels" . " style=" . "background-color:#0275d8 ;" . ">" . $showtime . "</label></td>";
                                                             } else if ($lastRow['theatre_id'] == 3) {
                                                                 if (substr($newRow['show_time'], 0, 5) > 12) {
                                                                     $showtime = substr($newRow['show_time'], 0, 5) . " PM";
                                                                 } else {
                                                                     $showtime = substr($newRow['show_time'], 0, 5) . " AM";
                                                                 }
-                                                                echo " <td><label class=" . "timeLabels bg-warning" . " style="."background-color:#f0ad4e ;".">" . $showtime . "</label></td>";
+                                                                echo " <td><label class=" . "timeLabels bg-warning" . " style=" . "background-color:#f0ad4e ;" . ">" . $showtime . "</label></td>";
                                                             }
                                                         }
                                                     }
@@ -215,14 +250,43 @@ $result2 = mysqli_query($conn, $query2);
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                                <div class="col">
-
-                                </div>
+                </div>
+                <div class="col-3">
+                    <div class="row justify-content-around" id="showCategoriesBox">
+                        <div class="row text-center">
+                            <div class="col">
+                                <h1>Theatre and Pricing</h1>
                             </div>
+                        </div>
+                        <div class="col mt-5">
+                            <p>There are three categories of hall or theatres in CineCarnival.</p>
+                            <span style="color: #f0ad4e; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>Regular Hall</label><br>
+                            <span style="color: #5cb85c; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>Premium Hall</label><br>
+                            <span style="color: #0275d8; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>VIP Hall</label><br>
+                        
+
+                        
+                            <p>Different categories of halls offer some unique theatre experience from each other. The ticket rates vary for different hall shows.</p>
+                            <p>The ticket rates are as following.</p>
+
+                            <span style="color: #f0ad4e; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>Regular Hall</label><label for=""> - 250 BDT</label><br>
+                            <span style="color: #5cb85c; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>Premium Hall</label><label for=""> - 450 BDT</label><br>
+                            <span style="color: #0275d8; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>VIP Hall</label><label for=""> - 600 BDT</label><br>
+                            </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col">
+                        <a href="BuyTickets.php"><button id="buyTicketBtn">Buy Tickets</button></a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
+
+
         </div>
+
 
         <!--Footer Section-->
         <div class="container-fluid">
