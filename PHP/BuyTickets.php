@@ -1,9 +1,15 @@
 <?php
 session_start();
-if(!isset($_SESSION['user_name']) || empty($_SESSION['user_name'])){
-    session_destroy();
-    header("Location: SignInPage.php");
-}
+//if(!isset($_SESSION['user_name']) || empty($_SESSION['user_name'])){
+//  session_destroy();
+// header("Location: SignInPage.php");
+//}
+$_SESSION['selectedMovie'] = "";
+$_SESSION['selectedShow'] = "";
+$_SESSION['selectedDate'] = "";
+$_SESSION['selectedSeatCount'] = "";
+
+$selectedDate = $selectedSeatCount = "";
 include "DatabaseConnection.php";
 date_default_timezone_set("Asia/Dhaka");
 $currentDate = date("Y-m-d");
@@ -35,16 +41,17 @@ $selectedShowTime = $selectedMovie = "";
             text-align: left;
             font-size: 18px;
             padding-right: 35px;
-            border-right:none; 
-            border-left:none; 
-            border-top:none; 
-            border-bottom:2px dodgerblue solid; 
+            border-right: none;
+            border-left: none;
+            border-top: none;
+            border-bottom: 2px dodgerblue solid;
             background: transparent;
         }
-        #buyTicketTitle{
+
+        #buyTicketTitle {
             margin-top: 25;
             margin-bottom: 25px;
-            background-color:  #393f4d   ;
+            background-color: #393f4d;
             height: 100px;
             color: white;
             font-size: 38px;
@@ -52,11 +59,12 @@ $selectedShowTime = $selectedMovie = "";
             border-top-left-radius: 25px;
             border-bottom-right-radius: 25px;
         }
-        #confirmBtn{
+
+        #confirmBtn {
             outline: none;
             background-color: #feda6a;
             width: 50%;
-            height:50px;
+            height: 50px;
             color: black;
             text-align: center;
             margin-top: 30px;
@@ -69,25 +77,75 @@ $selectedShowTime = $selectedMovie = "";
     </style>
 
     <script>
+        var movieName, showID = selectedDate = "";
+        selectedDate = "Today";
+
+        function getSelectedDate() {
+            selectedDateArray = document.getElementsByName("dateOfPurchase");
+            if (selectedDateArray[0].checked) {
+                selectedDate = selectedDateArray[0].value;
+            } else if (selectedDateArray[1].checked) {
+                selectedDate = selectedDateArray[1].value;
+            }
+
+            elements = document.getElementsByTagName("select")
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].selectedIndex = 0;
+            }
+
+            $(document).ready(function() {
+                $('#movieNameDropDownSection').load('BuyTicketsStep4.php', {
+                    selectedDate: selectedDate
+                });
+            });
+        }
+
+
         $(document).ready(function() {
+
+
             $(document).on('change', '#movieSelectDropDown', function() {
                 var x = document.getElementById('movieSelectDropDown');
-                var movieName = x.options[x.selectedIndex].text;
+                movieName = x.options[x.selectedIndex].text;
+                document.cookie = "movieName=" + movieName
                 $('#ticketingSection').load('BuyTicketsStep2.php', {
                     selectedMovieName: movieName
                 });
             });
             $(document).on('change', '#showSelectDropDown', function() {
                 var x = document.getElementById('showSelectDropDown');
-                var showID = x.value;
+                showID = x.value;
                 $('#seatAndPaymentSection').load('BuyTicketsStep3.php', {
-                    selectedShowID: showID
+                    selectedShowID: showID,
+                    selectedMovie: movieName,
+                    selectedDate: selectedDate
                 });
             });
         });
     </script>
-
-
+    <script>
+        function showBkashForm(){
+            document.getElementById('bkashForm').style.display="block";
+            document.getElementById('sCardForm').style.display="none";
+            document.getElementById('dCardForm').style.display="none";
+            document.getElementById('selectPayMethod').style.display="none";
+        }
+        function showStandardCharteredForm(){
+            document.getElementById('sCardForm').style.display="block";
+            document.getElementById('bkashForm').style.display="none";
+            document.getElementById('dCardForm').style.display="none";
+            document.getElementById('selectPayMethod').style.display="none";
+        }
+        function showDBBLForm(){
+            document.getElementById('sCardForm').style.display="none";
+            document.getElementById('bkashForm').style.display="none";
+            document.getElementById('dCardForm').style.display="block";
+            document.getElementById('selectPayMethod').style.display="none";
+        }
+        function showPaymentPage(){
+            document.getElementById('paymentPageSection').style.display="block";
+        }
+    </script>
 </head>
 
 <body>
@@ -102,7 +160,7 @@ $selectedShowTime = $selectedMovie = "";
                     <a href="index.php"><img src="..\Images/CineCarnival.png" alt="No Image..."></a>
                 </div>
 
-                
+
                 <div class="p-2 align-self-center">
                     <a href="SignInPage.php" style="text-decoration: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
                 </div>
@@ -144,62 +202,254 @@ $selectedShowTime = $selectedMovie = "";
 
         <!--Main Body Section-->
 
-        <div class="row justify-content-center mt-4"  style="background: transparent; height:500px;">
+        <div class="row mt-3 justify-content-around" style="display: none;" id="paymentPageSection">
+            <div class="col-4">
+                <div id="billContainer">
+                    <div id="billBox">
+                        <h2>Purchase Order</h2>
+                    </div>
+                    <div id="myBill">
+                        <table>
+                            <tr>
+                                <td><span>Customer</span></td>
+                                <td>:</td>
+                                <td><span>Shohag</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>Mail</span></td>
+                                <td>:</td>
+                                <td><span>shohag@gmail.com</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>Movie</span></td>
+                                <td>:</td>
+                                <td><span>No Time To Die</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>Showtime</span></td>
+                                <td>:</td>
+                                <td><span>12:30 PM Hall-5 3D</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>Date</span></td>
+                                <td>:</td>
+                                <td><span>2020-05-14</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>No. of seats</span></td>
+                                <td>:</td>
+                                <td><span>2</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>Price</span></td>
+                                <td>:</td>
+                                <td><span>1200 BDT</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>Discount</span></td>
+                                <td>:</td>
+                                <td><span>0 BDT</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>Total Price</span></td>
+                                <td>:</td>
+                                <td><span>1200 BDT</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-7">
+                <div class="paymentBox" style="margin: 0; padding:0;">
+                    <div class="paymentMethodsHeader" style="margin: 0; padding:0;">
+                        <button class="paymentBtn" style="border-bottom-left-radius: 25px; margin:0; padding:0;" onclick="showBkashForm();">Bkash</button>
+                        <button class="paymentBtn" style=" margin:0; padding:0;" onclick="showStandardCharteredForm();">Standard Chartered</button>
+                        <button class="paymentBtn" style="border-top-right-radius: 25px;  margin:0; padding:0;" onclick="showDBBLForm();">DBBL</button>
+                    </div>
+                    <div class="text-center mt-2">
+                        <div id="selectPayMethod">
+                            <h1>Select Payment Method.</h1>
+                        </div>
+                        <form action="" id="bkashForm" style="display: none;">
+                            <table style="width:100%;">
+                            <tr align="center">
+                                <td>
+                                    <span style="font-size: 46px; font-weight:bold;">bKash</span>
+                                </td>
+                            </tr>
+                                <tr>
+                                   <td>
+                                    <div class="inuptWithIcon mt-3 mb-1">
+                                        <input type="number" class="resetPass-inputs" value="" placeholder="Enter bKash account number." required>
+                                    </div>
+                                   </td>
+                                </tr>
+                                <tr>
+                                   <td>
+                                   <div class="inuptWithIcon mt-1 mb-1">
+                                        <input type="number" class="resetPass-inputs" value="" placeholder="Enter pin number." required>
+                                    </div>
+                                   </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="inuptWithIcon mt-1 mb-4">
+                                        <input type="number" class="resetPass-inputs" value="" placeholder="Enter amount." required>
+                                    </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       <div>
+                                           <button id="payBtn">Pay</button>
+                                       </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                        <form action="" id="sCardForm" style="display: none;">
+                        <table style="width:100%;">
+                            <tr align="center">
+                                <td>
+                                    <span style="font-size: 46px; font-weight:bold;">Standard Chartered</span>
+                                </td>
+                            </tr>
+                                <tr>
+                                   <td>
+                                    <div class="inuptWithIcon mt-3 mb-1">
+                                        <input type="number" class="resetPass-inputs" value="" placeholder="Enter card number." required>
+                                    </div>
+                                   </td>
+                                </tr>
+                                <tr>
+                                   <td>
+                                   <div class="inuptWithIcon mt-1 mb-1">
+                                        <input type="text" class="resetPass-inputs" value="" placeholder="Enter account holder name." required>
+                                    </div>
+                                   </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <div class="inuptWithIcon mt-1 mb-1">
+                                        <input type="number" class="resetPass-inputs" value="" placeholder="Enter pin number." required>
+                                    </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="inuptWithIcon mt-1 mb-1">
+                                        <input type="number" class="resetPass-inputs" value="" placeholder="Enter amount." required>
+                                    </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       <div>
+                                           <button id="payBtn">Pay</button>
+                                       </div>
+                                    </td>
+                                </tr>
+                            </table>   
+                        </form>
+                        <form action="" id="dCardForm" style="display: none;">
+                        <table style="width:100%;">
+                            <tr align="center">
+                                <td>
+                                    <span style="font-size: 46px; font-weight:bold;">DBBL</span>
+                                </td>
+                            </tr>
+                                <tr>
+                                   <td>
+                                    <div class="inuptWithIcon mt-3 mb-1">
+                                        <input type="number" class="resetPass-inputs" value="" placeholder="Enter card number." required>
+                                    </div>
+                                   </td>
+                                </tr>
+                                <tr>
+                                   <td>
+                                   <div class="inuptWithIcon mt-1 mb-1">
+                                        <input type="text" class="resetPass-inputs" value="" placeholder="Enter account holder name." required>
+                                    </div>
+                                   </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="inuptWithIcon mt-1 mb-1">
+                                        <input type="date" class="resetPass-inputs" value="" placeholder="Enter expiry date." required>
+                                    </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="inuptWithIcon mt-1 mb-1">
+                                        <input type="number" class="resetPass-inputs" value="" placeholder="Enter pin number." required>
+                                    </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="inuptWithIcon mt-1 mb-4">
+                                        <input type="number" class="resetPass-inputs" value="" placeholder="Enter amount." required>
+                                    </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       <div>
+                                           <button id="payBtn">Pay</button>
+                                       </div>
+                                    </td>
+                                </tr>
+                            </table>  
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row justify-content-center mt-4" style="background: transparent; height:500px;" id="chooseTicketSection">
             <div class="col-6 col-sm-6">
                 <form>
                     <div class="">
                         <div id="buyTicketTitle" class="text-center">
                             <span>Buy Tickets</span>
                         </div>
-                        <div>
-                            <div class="text-left custom-control custom-radio custom-control-inline mt-3" style="width:50%; margin-left:25px; height:50px;">
-                                <input type="radio" class="custom-control-input" id="customRadio" name="dateOfPurchase" value="" checked>
-                                <label class="h5 custom-control-label" for="customRadio">Today <br><?php echo "$currentDate"; ?></label>
-                            </div>
-                            <div class="text-right custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="customRadio2" name="dateOfPurchase" value="">
-                                <label class="h5 custom-control-label" for="customRadio2">Tomorrow <br><?php echo date('Y-m-d', strtotime($currentDate . ' + 1 days')); ?></label>
-                            </div>
-                        </div>
-                        <div class="mt-3">
-                            <select name="movieSelectDropDown" class="movieDropBtn" id="movieSelectDropDown">
-                                <option value="" disabled selected>Select a movie</option>
-                                <?php
-                                $query = "SELECT DISTINCT m.name FROM movie as m left join shows as s on s.movie_id=m.mv_id; ";
 
-                                $result = mysqli_query($conn, $query);
-                                ?>
-                                <?php
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    echo "
-                                <option value=" . $row['name'] . ">" . $row['name'] . "</option>
-                                ";
-                                }
-                                ?>
+                        <div class="text-left custom-control custom-radio custom-control-inline mt-3" style="width:50%; margin-left:25px; height:50px;">
+                            <input type="radio" class="custom-control-input" id="customRadio" name="dateOfPurchase" value="Today" onclick="getSelectedDate();">
+                            <label class="h5 custom-control-label" for="customRadio">Today <br><?php echo "$currentDate"; ?></label>
+                        </div>
+                        <div class="text-right custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="customRadio2" name="dateOfPurchase" value="Tomorrow" onclick="getSelectedDate();">
+                            <label class="h5 custom-control-label" for="customRadio2">Tomorrow <br><?php echo date('Y-m-d', strtotime($currentDate . ' + 1 days')); ?></label>
+                        </div>
+
+                        <div class="mt-3" id="movieNameDropDownSection">
+                            <select name="movieSelectDropDown" class="movieDropBtn" id="movieSelectDropDown">
+                                <option value="" disabled selected>Select a movie.</option>
                             </select>
                         </div>
 
                         <div id="ticketingSection" class="mt-3">
                             <select name="showSelectDropDown" class="movieDropBtn" id="showSelectDropDown">
-                                <option value="" disabled selected>Select a show</option>
+                                <option value="" disabled selected>Select a show.</option>
                             </select>
                         </div>
                         <div id="seatAndPaymentSection" class="mt-3">
                             <div>
                                 <select name="seatSelectionDropDown" class="movieDropBtn" id="seatSelectionDropDown">
-                                    <option value="" disabled selected>Select number of seats</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                    <option value="" disabled selected>Select number of seats.</option>
                                 </select>
                             </div>
-                            <div class="text-center">
-                            <button id="confirmBtn" type="button">Confirm</button>
+                            <div class="text-center" id="proceedDiv" style="display:none;">
+                                <button id="confirmBtn" type="button" onclick="showPaymentPage();">Proceed</button>
+                            </div>
                         </div>
-                        </div>
-                        
+
                     </div>
                 </form>
             </div>

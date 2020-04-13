@@ -1,14 +1,3 @@
-<?php
-    include "DatabaseConnection.php";
-    $perPage = 10;
-    $query = "SELECT * FROM offer GROUP BY date_inserted DESC HAVING MAX(date_inserted)  LIMIT 10 ;";
-    $result = mysqli_query($conn,$query);
-?>
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Offers | CineCarnival</title>
+    <title>Home | CineCarnival</title>
     <link rel="icon" type="image/png" href="..\Images/CineCarnival.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
@@ -69,7 +58,6 @@
                     <li class="nav-item">
                         <a href="CorporatesPage.php" class="nav-link"><i class="fas fa-handshake"></i> Corporates</a>
                     </li>
-                    
                     <li class="nav-item">
                         <a href="OfferPage.php" class="nav-link"><i class="fas fa-gift"></i> Offers</a>
                     </li>
@@ -79,34 +67,6 @@
 
         <!--Main Body Section-->
        
-        <div class="container">
-            <div class="row mt-4">
-                <div class="col">
-                    <h1 style="border-bottom: 2px Dodgerblue Solid;">Offers</h1>
-                </div>
-            </div>
-            <div class="row mt-5 mb-3 justify-content-start">
-                
-                    <?php
-                        while($row=mysqli_fetch_assoc($result)){
-                            echo "
-                            <div class="."col-4".">
-                                <div class="."card m-0".">
-                                    <img class="."card-img-top"." src="."..\images/NoTimeToDie.jpg"." alt="."Card image cap".">
-                                        <div class="."card-body m-0".">
-                                        <h5 class="."card-title".">".$row['title']."</h5>
-                                        </div>
-                                        <div class="."card-footer".">
-                                        <small class="."text-muted"."> Valid till : ".$row['date_valid']."</small>
-                                    </div>
-                                 </div><br>
-                                </div>
-                            ";
-                            
-                        }
-                    ?>
-            </div>
-        </div>
        
 <!--Footer Section-->
         <div class="container">

@@ -1,6 +1,9 @@
 <?php
 session_start();
 include "DatabaseConnection.php";
+if(!isset($_SESSION['userName'])){
+    header("Locations: SignInPage.php");
+}
 $userName = $_SESSION['userName'];
 $userType = $_SESSION['userType'];
 $gender = $firstName = $lastName = $mail = $phone = $address = $password = $newPassword = $newPasswordToDB = $confirmPassword = $status = $points = $joiningDate = $msg = "";
@@ -276,7 +279,7 @@ if(isset($_POST['updatePassBtn'])){
                         <a href="MoviesPage.php" class="nav-link"><i class="fas fa-tape"></i> Movies</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-ticket-alt"></i> Showtime</a>
+                        <a href="Showtime.php" class="nav-link"><i class="fas fa-ticket-alt"></i> Showtime</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto my-navbar">

@@ -1,6 +1,8 @@
 <?php
     include "DatabaseConnection.php";
     session_start();
+    session_destroy();
+    session_start();
     $userName = $mail=$password=$passwordInDB=$userType="";
     $msg="";
     if($_SERVER["REQUEST_METHOD"]=="POST"){
@@ -99,7 +101,7 @@
                         <a href="MoviesPage.php" class="nav-link"><i class="fas fa-tape"></i> Movies</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-ticket-alt"></i> Showtime</a>
+                        <a href="Showtime.php" class="nav-link"><i class="fas fa-ticket-alt"></i> Showtime</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto my-navbar">
@@ -119,10 +121,10 @@
 
         <!--Main Body Section-->
         <div class="container">
-            <div class="row" style="height: 350px; margin-top:150px;">
-                <div class="col=6 col-md-4 form-group text-center text-decoration-none offset-4 col-s-3">
-                    <form action="SignInPage.php" method="POST" class="sign-in-form">
-                            <table>
+            <div class="row justify-content-center" style="height: 350px; margin-top:70px;">
+                <div class="col=6 text-center text-decoration-none">
+                    <form action="SignInPage.php" method="POST">
+                            <table style="width:100%;">
                                 <tr>
                                     <th colspan="2" class="sign-in-title">
                                         <div class="form-group text-center mb-0 mt-3">
@@ -133,13 +135,13 @@
                                 <tr>
                                     <td>
                                         <div class="input-group mt-5 mb-1 inputWithIcon">
-                                            <input class="resetPass-inputs" style="width:200px; height:35px;" type="text" name="userName" value="<?php echo "$userName"; ?>" placeholder="User Name/Mail" maxlength="30" minlength="3" required>
+                                            <input class="resetPass-inputs" style="width:250px; height:35px;" type="text" name="userName" value="<?php echo "$userName"; ?>" placeholder="User Name/Mail" maxlength="30" minlength="3" required>
                                             <i class="fas fa-user"></i>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="input-group mt-5 mb-1 inputWithIcon">
-                                            <input class="resetPass-inputs" style="width:200px; height:35px;"  type="password" name="userPassword" value="" placeholder="Password"  maxlength="20" required>
+                                            <input class="resetPass-inputs" style="width:250px; height:35px;"  type="password" name="userPassword" value="" placeholder="Password"  maxlength="20" required>
                                             <i class="fas fa-lock"></i>
                                         </div>
                                     </td>
@@ -147,7 +149,7 @@
                                 <tr>
                                     <td colspan="2">
                                         <div class="input-group">
-                                            <input class="mb-1 font-weight-bold resetPass-buttons" style="color: white; width:400px; height:35px" type="submit" name="signInBtn" value="Sign In">
+                                            <input class="mb-1 font-weight-bold resetPass-buttons" style="color: white; width:500px; height:35px" type="submit" name="signInBtn" value="Sign In">
                                         </div>
                                     </td>
                                 </tr>

@@ -118,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchAccountBtn'])) {
                         <a href="MoviesPage.php" class="nav-link"><i class="fas fa-tape"></i> Movies</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-ticket-alt"></i> Showtime</a>
+                        <a href="Showtime.php" class="nav-link"><i class="fas fa-ticket-alt"></i> Showtime</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto my-navbar">
