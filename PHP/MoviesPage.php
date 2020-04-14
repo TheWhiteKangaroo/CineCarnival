@@ -105,6 +105,13 @@ $np = ceil($tm / $perPage);
             });
 
             $('#searchText').on('keyup', function() {
+                var stringValue =  document.getElementById('searchText').value;
+                if(stringValue==""){
+                    var btnVal = document.getElementById('ldMoreButton').style.display="block";
+                }
+                else{
+                    var btnVal = document.getElementById('ldMoreButton').style.display="none";
+                }
                 $('#movieSection').load('NextMovies.php', {
                     searchedKeyWord: document.getElementById('searchText').value,
                     selectedStatus : getStatus()

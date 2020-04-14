@@ -130,8 +130,8 @@ $result2 = mysqli_query($conn, $query2);
         <!--Main Body Section-->
 
         <div class="container-fluid">
-            <div class="row mt-5 justify-content-around">
-                <div class="col-3 mb-2">
+            <div class="row mt-5 justify-content-center">
+                <div class="col-2 mb-2">
                     <?php
                     $query = "SELECT DISTINCT title, message, links, pic, date_posted FROM notice WHERE date_posted= (SELECT MAX(date_posted) FROM notice)";
                     $result = mysqli_query($conn, $query);
@@ -262,7 +262,7 @@ $result2 = mysqli_query($conn, $query2);
                             <p>There are three categories of hall or theatres in CineCarnival.</p>
                             <span style="color: #f0ad4e; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>Regular Hall</label><br>
                             <span style="color: #5cb85c; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>Premium Hall</label><br>
-                            <span style="color: #0275d8; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>VIP Hall</label><br>
+                            <span style="color: #0275d8; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>VIP Hall</label><br><br><br>
                         
 
                         

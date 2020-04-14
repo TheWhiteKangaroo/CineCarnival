@@ -26,7 +26,13 @@ if (isset($_POST['limitValue'])) {
   if ($sk == null) {
     $sql = "SELECT name,mv_id,genre FROM movie WHERE status='$selectedStatus' ORDER BY mv_id DESC LIMIT $pageCount";
     $result = mysqli_query($conn, $sql);
-  } else {
+    
+    echo "<script>
+          var x = document.getElementById('btnLoadDiv');
+          showLoadButton(x);
+          </script>";
+    
+  }else {
     echo "<script>
     var x = document.getElementById('btnLoadDiv');
     hideLoadButton(x);
@@ -37,7 +43,6 @@ if (isset($_POST['limitValue'])) {
 } else if (isset($_POST['genre']) || isset($_POST['language']) || isset($_POST['format'])) {
   $selectedStatus=$_POST['selectedStatus'];
   $sql = "SELECT mv_id,name, genre, cover_pic FROM movie WHERE status='$selectedStatus'";
-  echo $selectedStatus;
   if (isset($_POST['genre'])) {
     $genre = implode(", ", $_POST['genre']);
     $sql .= "AND genre='$genre' ";
@@ -50,15 +55,10 @@ if (isset($_POST['limitValue'])) {
     $format = implode(", ", $_POST['format']);
     $sql .= "AND format='$format' ";
   }
-
-  echo $genre . "<br>";
-  echo $language . "<br>";
-  echo $format . "<br>";
   if($genre==null && $format==null && $language==null){
     $sql = "SELECT mv_id,name, genre, cover_pic FROM movie WHERE status='$selectedStatus' ";
   } 
   $sql .= " ORDER BY mv_id DESC LIMIT $pageCount";
-  echo $sql;
   $result = mysqli_query($conn, $sql);
 }
 else{
@@ -108,8 +108,8 @@ else{
           </script>";
           }
           echo "<script>
-          var x = document.getElementById('btnLoadDiv');
-          showLoadButton(x);
+          var y = document.getElementById('btnLoadDiv');
+          showLoadButton(y);
           </script>";
           while ($row = mysqli_fetch_assoc($result)) {
             echo "

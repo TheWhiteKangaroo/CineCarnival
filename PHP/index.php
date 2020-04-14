@@ -1,8 +1,8 @@
 <?php
 session_start();
 include "DatabaseConnection.php";
-$userName="";
-if(isset($_SESSION['userName'])){
+$userName = "";
+if (isset($_SESSION['userName'])) {
     $userName = $_SESSION['userName'];
 }
 
@@ -27,9 +27,9 @@ if(isset($_SESSION['userName'])){
         .nowShowingTile {
             width: 100%;
             height: 65px;
-            background-color: #1d1e22;
+            background-color: #2c3e50;
             color: white;
-            margin: 0;
+            margin-top: 10px;
             padding-top: 10px;
             padding-left: 50px;
             border-top-left-radius: 20px;
@@ -60,18 +60,7 @@ if(isset($_SESSION['userName'])){
             color: black;
         }
 
-        .TrendingListBox {
-            background-color: #1d1e22;
-            width: 100%;
-            color: white;
-            font-size: 20px;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            height: 65px;
-            text-align: center;
-            padding-top: 15px;
 
-        }
 
         .TrendingListContainer {
             width: 85%;
@@ -79,24 +68,24 @@ if(isset($_SESSION['userName'])){
             border-style: inherit;
             border-left: 5px #1d1e22 solid;
             border-right: 5px #1d1e22 solid;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
-            border-bottom: 20px #1d1e22 solid;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            border-bottom: 5px #1d1e22 solid;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
         }
     </style>
     <script type="text/javascript">
-        function showProfileDiv(){
-            
+        function showProfileDiv() {
+
         }
     </script>
     <?php
-        if(isset($userName) && $userName!=null){
-            echo '<script type="text/javascript">
+    if (isset($userName) && $userName != null) {
+        echo '<script type="text/javascript">
             showProfileDiv();
-       </script>'; 
-        }
+       </script>';
+    }
     ?>
 </head>
 
@@ -108,9 +97,9 @@ if(isset($_SESSION['userName'])){
                 <div class="p-2 mr-auto">
                     <a href="index.php"><img src="..\Images/CineCarnival.png" alt="No Image..."></a>
                 </div>
-                
+
                 <div class="p-2 align-self-center header-anchor" id="ProfileDiv">
-                    <a href="ProfilePage.php" style="text-decoration: none;" ><i class="fas fa-user-alt"></i> <?php echo $userName; ?></a>
+                    <a href="ProfilePage.php" style="text-decoration: none;"><i class="fas fa-user-alt"></i> <?php echo $userName; ?></a>
                 </div>
                 <div class="p-2 align-self-center header-anchor" id="SignInDiv">
                     <a href="SignInPage.php" style="text-decoration: none;"><i class="fas fa-user-alt"></i> Sign In</a>
@@ -156,25 +145,24 @@ if(isset($_SESSION['userName'])){
 
         <!--Main Body Section-->
 
-
         <div class="container-fluid">
-            <div class="row mt-4 p-0">
-                <div class="col-3 m-0 p-0">
+            <div class="row mt-3 justify-content-around">
+                <div class="col-3">
                     <div class="row">
                         <div class="col">
-                            <div class="TrendingListContainer">
-                                <div class="TrendingListBox">
-                                    <h4><i class="fas fa-chart-line"></i> Trending Movies</h4>
+                            <div class="pollContainer">
+                                <div class="TrendingListTitle">
+                                    <span style="font-size: 24px; color:white;"><i class="fas fa-chart-line"></i> Trending Movies</span>
                                 </div>
-                                <div>
+                                <div class="TrendingBox">
                                     <?php
                                     $query = "SELECT name FROM movie LIMIT 5;";
                                     $result = mysqli_query($conn, $query);
                                     while ($row = mysqli_fetch_assoc($result)) {
                                     ?>
-                                        <div class="card" style="width: auto;">
-                                            <div class="card-body">
-                                                <a href="#" style="text-decoration: none; color:dodgerblue;"><?php echo $row['name']; ?></a>
+                                        <div class="card" style="width: auto; height: 40px;  padding-bottom:10px;">
+                                            <div class="card-body m-0 p-0">
+                                                <a href="#" style="text-decoration: none; color:#173e43;"><?php echo $row['name']; ?></a>
                                             </div>
                                         </div>
                                     <?php
@@ -185,16 +173,21 @@ if(isset($_SESSION['userName'])){
 
                         </div>
                     </div>
-                    <div class="row m-0 p-0 justify-content-between" style="width: 85%;">
+
+
+
+
+
+                    <div class="row m-0 p-0 justify-content-between" style="width: 100%;">
                         <div class="col m-0 p-0">
                             <div class="mt-4 text-justify">
                                 <?php
-                                   $query = "SELECT DISTINCT title, message, links, pic, date_posted FROM notice WHERE date_posted= (SELECT MAX(date_posted) FROM notice)";
-                                   $result = mysqli_query($conn,$query);
+                                $query = "SELECT DISTINCT title, message, links, pic, date_posted FROM notice WHERE date_posted= (SELECT MAX(date_posted) FROM notice)";
+                                $result = mysqli_query($conn, $query);
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     echo "
                                     <div class=" . "card text-justify" . ">
-                                        <div class=" . "card-header bg-dark text-center".">
+                                        <div class=" . "card-header bg-dark text-center" . ">
                                             Notice
                                             </div>
                                                 <div class=" . "card-body text-justify text-left" . ">
@@ -223,115 +216,157 @@ if(isset($_SESSION['userName'])){
                                 ?>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-9 m-0 p-0">
-                    <div class="nowShowingTile">
-                        <a href="MoviesPage.php">Now Showing</a>
-                    </div>
-                    <div class="row justify-content-start">
-                        <?php
-                        $query = "SELECT name, cover_pic,mv_id FROM movie WHERE status='Now Showing' ORDER BY mv_id DESC LIMIT 4;";
-                        $result = mysqli_query($conn, $query);
-                        if (mysqli_num_rows($result) == 0) {
-                        } else {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                        ?>
 
-                                <div class="col-3">
-                                    <div class="movieReelPanel" style="margin-top: 10px;">
-                                        
+                    </div>
+
+
+                    
+                    <div class="row">
+                        <div class="col">
+                            <div class="pollContainer">
+                                <div class="pollTitle">
+                                    <span style="font-size: 24px; color:white;"><i class="fas fa-poll"></i> Poll Title</span>
+                                </div>
+                                <div class="pollContentArea">
+                                    <div class="custom-control custom-radio mb-2">
+                                        <input type="radio" class="custom-control-input" id="customControlValidation1" name="radio-stacked" required>
+                                        <label class="custom-control-label" for="customControlValidation1">PollContent-1</label>
+                                    </div>
+                                    <div class="custom-control custom-radio mb-2">
+                                        <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
+                                        <label class="custom-control-label" for="customControlValidation2">PollContent-2</label>
+                                    </div>
+                                    <div class="custom-control custom-radio mb-2">
+                                        <input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" required>
+                                        <label class="custom-control-label" for="customControlValidation3">PollContent-3</label>
+                                    </div>
+                                    <div class="custom-control custom-radio mb-2">
+                                        <input type="radio" class="custom-control-input" id="customControlValidation4" name="radio-stacked" required>
+                                        <label class="custom-control-label" for="customControlValidation4">PollContent-4</label>
+                                    </div>
+                                    <button type="button" class="btn btn-success" style="border-top-left-radius: 10px; border-bottom-right-radius: 10px; width:auto; margin-top:10px;">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+                <div class="col-7">
+
+                    <div>
+                        <div class="nowShowingTile">
+                            <a href="MoviesPage.php">Now Showing</a>
+                        </div>
+                        <div class="row justify-content-start">
+                            <?php
+                            $query = "SELECT name, cover_pic,mv_id FROM movie WHERE status='Now Showing' ORDER BY mv_id DESC LIMIT 4;";
+                            $result = mysqli_query($conn, $query);
+                            if (mysqli_num_rows($result) == 0) {
+                            } else {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+
+                                    <div class="col-3">
+                                        <div class="movieReelPanel" style="margin-top: 3px;">
                                             <form action="Movies.php" method="GET">
                                                 <img src="..\images/NoTimeToDie.jpg" alt="No Cover" style="width:100%; height:250px; border-top-right-radius:10px; border-top-left-radius:10px; margin:0; padding:0;"><br>
-                                                <button type="submit" name="movieNumber" value=" <?php echo $row['mv_id']; ?>  id = " <?php echo $row['mv_id']; ?>  class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
+                                                <button type="submit" name="movieNumber" value=" <?php echo $row['mv_id']; ?>  id = " <?php echo $row['mv_id']; ?> class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
                                             </form>
-                                        
+
+                                        </div>
                                     </div>
-                                </div>
 
-                        <?php
+                            <?php
+                                }
                             }
-                        }
-                        ?>
-                    </div>
+                            ?>
+                        </div>
 
-                    <div class="nowShowingTile mt-5" style="background-color: #393f4d;">
-                        <a href="MoviesPage.php">Up Coming</a>
-                    </div>
-                    <div class="row mt-3 justify-content-start">
-                        <?php
-                        $query = "SELECT name, cover_pic,mv_id FROM movie WHERE status='Coming Soon' ORDER BY mv_id DESC LIMIT 4;";
-                        $result = mysqli_query($conn, $query);
-                        if (mysqli_num_rows($result) == 0) {
-                        } else {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                        ?>
+                        <div class="nowShowingTile mt-5" style="background-color: #2c3e50;">
+                            <a href="MoviesPage.php">Up Coming</a>
+                        </div>
+                        <div class="row justify-content-between">
+                            <?php
+                            $query = "SELECT name, cover_pic,mv_id FROM movie WHERE status='Coming Soon' ORDER BY mv_id DESC LIMIT 4;";
+                            $result = mysqli_query($conn, $query);
+                            if (mysqli_num_rows($result) == 0) {
+                            } else {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
 
-                                <div class="col-3">
-                                    <div class="movieReelPanel">
-                                    <form action="Movies.php" method="GET">
+                                    <div class="col-3">
+                                        <div class="movieReelPanel" style="margin-top: 3px;">
+                                            <form action="Movies.php" method="GET">
                                                 <img src="..\images/NoTimeToDie.jpg" alt="No Cover" style="width:100%; height:250px; border-top-right-radius:10px; border-top-left-radius:10px; margin:0; padding:0;"><br>
-                                                <button type="submit" name="movieNumber" value=" <?php echo $row['mv_id']; ?>  id = " <?php echo $row['mv_id']; ?>  class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
+                                                <button type="submit" name="movieNumber" value=" <?php echo $row['mv_id']; ?>  id = " <?php echo $row['mv_id']; ?> class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
                                             </form>
                                         </div>
-                                    
-                                </div>
 
-                        <?php
+                                    </div>
+
+                            <?php
+                                }
                             }
-                        }
-                        ?>
+                            ?>
+                        </div>
                     </div>
 
+
                 </div>
+
             </div>
 
+
+
+
+            <!--Footer Section-->
+            <div class="container-fluid">
+                <footer>
+                    <div class="row my-footer">
+                        <div class="col">
+                            <ul>
+                                <li>Contact Us</li>
+                                <li><img src="..\Images/CineCarnival.png" alt=""></li>
+                                <li>info@cinecarnival.com</li>
+                                <li>+8801745-987565</li>
+                                <li>Dhanmondi, Dhaka</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row justify-content-between my-footer-ending">
+                        <div class="col=4">
+                            <ul>
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="col=4 developers-tag">
+                            <span>Developed by : Group-5</span>
+                        </div>
+                        <div class="col=4 stores">
+                            <ul>
+                                <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
+                                <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
 
 
-        <!--Footer Section-->
-        <div class="container-fluid">
-            <footer>
-                <div class="row my-footer">
-                    <div class="col">
-                        <ul>
-                            <li>Contact Us</li>
-                            <li><img src="..\Images/CineCarnival.png" alt=""></li>
-                            <li>info@cinecarnival.com</li>
-                            <li>+8801745-987565</li>
-                            <li>Dhanmondi, Dhaka</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row justify-content-between my-footer-ending">
-                    <div class="col=4">
-                        <ul>
-                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="col=4 developers-tag">
-                        <span>Developed by : Group-5</span>
-                    </div>
-                    <div class="col=4 stores">
-                        <ul>
-                            <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
-                            <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </footer>
-        </div>
-    </div>
 
-
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="..\css/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="..\css/bootstrap.min.js"></script>
 </body>
 
 </html>
