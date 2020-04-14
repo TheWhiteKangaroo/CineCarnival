@@ -545,10 +545,11 @@ a:focus {
 
 #billContainer {
     width: 100%;
-    border: 3px #393f4d solid;
+    border: 1px #393f4d solid;
     height: auto;
     border-top-right-radius: 25px;
     border-bottom-left-radius: 25px;
+    box-shadow: 5px 10px 10px gray;
 }
 
 #billBox {
@@ -560,11 +561,6 @@ a:focus {
     border-bottom-left-radius: 25px;
     text-align: center;
     padding-top: 15px;
-}
-
-#myBill {
-    margin-bottom: 20px;
-    margin-top: 20px;
 }
 
 .paymentBox {}
@@ -579,15 +575,21 @@ a:focus {
     font-size: 20px;
     margin: 0;
     padding: 0;
+    box-shadow: 5px 10px 10px gray;
+}
+
+.paymentBtn:active {
+    outline: none;
 }
 
 #payBtn {
     background-color: #feda6a;
     height: 35px;
-    width: 150px;
+    width: 33%;
     font-size: 20px;
     border-top-left-radius: 15px;
     border-bottom-right-radius: 15px;
     outline: none;
     border-style: none;
+    box-shadow: 5px 10px 10px gray;
 }

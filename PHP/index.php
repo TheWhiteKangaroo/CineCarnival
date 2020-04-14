@@ -65,8 +65,8 @@ if(isset($_SESSION['userName'])){
             width: 100%;
             color: white;
             font-size: 20px;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
             height: 65px;
             text-align: center;
             padding-top: 15px;
@@ -77,8 +77,8 @@ if(isset($_SESSION['userName'])){
             width: 85%;
             height: auto;
             border-style: inherit;
-            border-left: 1px #1d1e22 solid;
-            border-right: 1px #1d1e22 solid;
+            border-left: 5px #1d1e22 solid;
+            border-right: 5px #1d1e22 solid;
             border-top-left-radius: 15px;
             border-top-right-radius: 15px;
             border-bottom: 20px #1d1e22 solid;
@@ -164,7 +164,7 @@ if(isset($_SESSION['userName'])){
                         <div class="col">
                             <div class="TrendingListContainer">
                                 <div class="TrendingListBox">
-                                    <h4><i class="fas fa-chart-line"></i> Trending Movies</h>
+                                    <h4><i class="fas fa-chart-line"></i> Trending Movies</h4>
                                 </div>
                                 <div>
                                     <?php

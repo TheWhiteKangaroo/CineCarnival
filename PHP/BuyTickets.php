@@ -74,6 +74,21 @@ $selectedShowTime = $selectedMovie = "";
             box-shadow: none;
             border-style: none;
         }
+
+        .myBill{
+            margin-left: 10px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .myBill td {
+            border-bottom: 1px solid #ddd;
+            height: 35px;
+            padding-left: 25px;  
+        }
+        .myBill tr:hover {
+            background-color: #f5f5f5;
+            }
     </style>
 
     <script>
@@ -121,29 +136,43 @@ $selectedShowTime = $selectedMovie = "";
                     selectedDate: selectedDate
                 });
             });
+
+               
+            $("#confirmBtn").click(function() {
+                $("#billZone").load("PaymentPage.php", {
+                    $msg:selectedDate
+                });
+            });
         });
     </script>
     <script>
-        function showBkashForm(){
-            document.getElementById('bkashForm').style.display="block";
-            document.getElementById('sCardForm').style.display="none";
-            document.getElementById('dCardForm').style.display="none";
-            document.getElementById('selectPayMethod').style.display="none";
+        function showBkashForm() {
+            document.getElementById('bkashForm').style.display = "block";
+            document.getElementById('sCardForm').style.display = "none";
+            document.getElementById('dCardForm').style.display = "none";
+            document.getElementById('selectPayMethod').style.display = "none";
         }
-        function showStandardCharteredForm(){
-            document.getElementById('sCardForm').style.display="block";
-            document.getElementById('bkashForm').style.display="none";
-            document.getElementById('dCardForm').style.display="none";
-            document.getElementById('selectPayMethod').style.display="none";
+
+        function showStandardCharteredForm() {
+            document.getElementById('sCardForm').style.display = "block";
+            document.getElementById('bkashForm').style.display = "none";
+            document.getElementById('dCardForm').style.display = "none";
+            document.getElementById('selectPayMethod').style.display = "none";
         }
-        function showDBBLForm(){
-            document.getElementById('sCardForm').style.display="none";
-            document.getElementById('bkashForm').style.display="none";
-            document.getElementById('dCardForm').style.display="block";
-            document.getElementById('selectPayMethod').style.display="none";
+
+        function showDBBLForm() {
+            document.getElementById('sCardForm').style.display = "none";
+            document.getElementById('bkashForm').style.display = "none";
+            document.getElementById('dCardForm').style.display = "block";
+            document.getElementById('selectPayMethod').style.display = "none";
         }
-        function showPaymentPage(){
-            document.getElementById('paymentPageSection').style.display="block";
+
+        function showPaymentPage() {
+            document.getElementById('chooseTicketSection').style.display = "none";
+            document.getElementById('billContainer').style.display = "block";
+            document.getElementById('paymentArea').style.display = "block";
+            
+
         }
     </script>
 </head>
@@ -202,14 +231,15 @@ $selectedShowTime = $selectedMovie = "";
 
         <!--Main Body Section-->
 
-        <div class="row mt-3 justify-content-around" style="display: none;" id="paymentPageSection">
+
+        <div class="row mt-3 justify-content-around" id="billZone">
             <div class="col-4">
-                <div id="billContainer">
+            <div id="billContainer" style="display: none;">
                     <div id="billBox">
-                        <h2>Purchase Order</h2>
+                        <h2>Purchase Order 1</h2>
                     </div>
-                    <div id="myBill">
-                        <table>
+                    <div>
+                        <table class="myBill">
                             <tr>
                                 <td><span>Customer</span></td>
                                 <td>:</td>
@@ -258,151 +288,152 @@ $selectedShowTime = $selectedMovie = "";
                         </table>
                     </div>
                 </div>
-
             </div>
             <div class="col-7">
-                <div class="paymentBox" style="margin: 0; padding:0;">
+            <div class="paymentBox" id="paymentArea" style="display: none;">
                     <div class="paymentMethodsHeader" style="margin: 0; padding:0;">
                         <button class="paymentBtn" style="border-bottom-left-radius: 25px; margin:0; padding:0;" onclick="showBkashForm();">Bkash</button>
                         <button class="paymentBtn" style=" margin:0; padding:0;" onclick="showStandardCharteredForm();">Standard Chartered</button>
                         <button class="paymentBtn" style="border-top-right-radius: 25px;  margin:0; padding:0;" onclick="showDBBLForm();">DBBL</button>
                     </div>
                     <div class="text-center mt-2">
-                        <div id="selectPayMethod">
+                        <div id="selectPayMethod" style="border-bottom: 1px #feda6a solid;">
                             <h1>Select Payment Method.</h1>
                         </div>
                         <form action="" id="bkashForm" style="display: none;">
                             <table style="width:100%;">
-                            <tr align="center">
-                                <td>
-                                    <span style="font-size: 46px; font-weight:bold;">bKash</span>
-                                </td>
-                            </tr>
-                                <tr>
-                                   <td>
-                                    <div class="inuptWithIcon mt-3 mb-1">
-                                        <input type="number" class="resetPass-inputs" value="" placeholder="Enter bKash account number." required>
-                                    </div>
-                                   </td>
-                                </tr>
-                                <tr>
-                                   <td>
-                                   <div class="inuptWithIcon mt-1 mb-1">
-                                        <input type="number" class="resetPass-inputs" value="" placeholder="Enter pin number." required>
-                                    </div>
-                                   </td>
-                                </tr>
-                                <tr>
+                                <tr align="center">
                                     <td>
-                                        <div class="inuptWithIcon mt-1 mb-4">
-                                        <input type="number" class="resetPass-inputs" value="" placeholder="Enter amount." required>
-                                    </div>
+                                        <label style="font-size: 46px; font-weight:bold; border-bottom: 1px #feda6a solid;">bKash</label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                       <div>
-                                           <button id="payBtn">Pay</button>
-                                       </div>
+                                        <div class="inuptWithIcon mt-3 mb-1">
+                                            <input type="number" class="resetPass-inputs" value="" placeholder="Enter bKash account number." required>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="inuptWithIcon mt-1 mb-1">
+                                            <input type="number" class="resetPass-inputs" value="" placeholder="Enter pin number." required>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="inuptWithIcon mt-1 mb-4">
+                                            <input type="number" class="resetPass-inputs" value="" placeholder="Enter amount." required>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <button id="payBtn">Pay</button>
+                                        </div>
                                     </td>
                                 </tr>
                             </table>
                         </form>
                         <form action="" id="sCardForm" style="display: none;">
-                        <table style="width:100%;">
-                            <tr align="center">
-                                <td>
-                                    <span style="font-size: 46px; font-weight:bold;">Standard Chartered</span>
-                                </td>
-                            </tr>
-                                <tr>
-                                   <td>
-                                    <div class="inuptWithIcon mt-3 mb-1">
-                                        <input type="number" class="resetPass-inputs" value="" placeholder="Enter card number." required>
-                                    </div>
-                                   </td>
+                            <table style="width:100%;">
+                                <tr align="center">
+                                    <td>
+                                        <span style="font-size: 46px; font-weight:bold; border-bottom: 1px #feda6a solid;">Standard Chartered</span>
+                                    </td>
                                 </tr>
-                                <tr>
-                                   <td>
-                                   <div class="inuptWithIcon mt-1 mb-1">
-                                        <input type="text" class="resetPass-inputs" value="" placeholder="Enter account holder name." required>
-                                    </div>
-                                   </td>
-                                </tr>
-                                
                                 <tr>
                                     <td>
-                                        <div class="inuptWithIcon mt-1 mb-1">
-                                        <input type="number" class="resetPass-inputs" value="" placeholder="Enter pin number." required>
-                                    </div>
+                                        <div class="inuptWithIcon mt-3 mb-1">
+                                            <input type="number" class="resetPass-inputs" value="" placeholder="Enter card number." required>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="inuptWithIcon mt-1 mb-1">
-                                        <input type="number" class="resetPass-inputs" value="" placeholder="Enter amount." required>
-                                    </div>
+                                            <input type="text" class="resetPass-inputs" value="" placeholder="Enter account holder name." required>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="inuptWithIcon mt-1 mb-1">
+                                            <input type="date" class="resetPass-inputs" value="" placeholder="Enter expiry date." required>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="inuptWithIcon mt-1 mb-1">
+                                            <input type="number" class="resetPass-inputs" value="" placeholder="Enter pin number." required>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                       <div>
-                                           <button id="payBtn">Pay</button>
-                                       </div>
+                                        <div class="inuptWithIcon mt-1 mb-1">
+                                            <input type="number" class="resetPass-inputs" value="" placeholder="Enter amount." required>
+                                        </div>
                                     </td>
                                 </tr>
-                            </table>   
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <button id="payBtn">Pay</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
                         </form>
                         <form action="" id="dCardForm" style="display: none;">
-                        <table style="width:100%;">
-                            <tr align="center">
-                                <td>
-                                    <span style="font-size: 46px; font-weight:bold;">DBBL</span>
-                                </td>
-                            </tr>
-                                <tr>
-                                   <td>
-                                    <div class="inuptWithIcon mt-3 mb-1">
-                                        <input type="number" class="resetPass-inputs" value="" placeholder="Enter card number." required>
-                                    </div>
-                                   </td>
-                                </tr>
-                                <tr>
-                                   <td>
-                                   <div class="inuptWithIcon mt-1 mb-1">
-                                        <input type="text" class="resetPass-inputs" value="" placeholder="Enter account holder name." required>
-                                    </div>
-                                   </td>
+                            <table style="width:100%;">
+                                <tr align="center">
+                                    <td>
+                                        <span style="font-size: 46px; font-weight:bold; border-bottom: 1px #feda6a solid;">DBBL</span>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div class="inuptWithIcon mt-1 mb-1">
-                                        <input type="date" class="resetPass-inputs" value="" placeholder="Enter expiry date." required>
-                                    </div>
+                                        <div class="inuptWithIcon mt-3 mb-1">
+                                            <input type="number" class="resetPass-inputs" value="" placeholder="Enter card number." required>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="inuptWithIcon mt-1 mb-1">
-                                        <input type="number" class="resetPass-inputs" value="" placeholder="Enter pin number." required>
-                                    </div>
+                                            <input type="text" class="resetPass-inputs" value="" placeholder="Enter account holder name." required>
+                                        </div>
+                                    </td>
+                                </tr>
+                               
+                                <tr>
+                                    <td>
+                                        <div class="inuptWithIcon mt-1 mb-1">
+                                            <input type="number" class="resetPass-inputs" value="" placeholder="Enter pin number." required>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="inuptWithIcon mt-1 mb-4">
-                                        <input type="number" class="resetPass-inputs" value="" placeholder="Enter amount." required>
-                                    </div>
+                                            <input type="number" class="resetPass-inputs" value="" placeholder="Enter amount." required>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                       <div>
-                                           <button id="payBtn">Pay</button>
-                                       </div>
+                                        <div>
+                                            <button id="payBtn">Pay</button>
+                                        </div>
                                     </td>
                                 </tr>
-                            </table>  
+                            </table>
                         </form>
                     </div>
                 </div>
@@ -410,6 +441,7 @@ $selectedShowTime = $selectedMovie = "";
         </div>
 
 
+        
 
         <div class="row justify-content-center mt-4" style="background: transparent; height:500px;" id="chooseTicketSection">
             <div class="col-6 col-sm-6">
@@ -446,7 +478,7 @@ $selectedShowTime = $selectedMovie = "";
                                 </select>
                             </div>
                             <div class="text-center" id="proceedDiv" style="display:none;">
-                                <button id="confirmBtn" type="button" onclick="showPaymentPage();">Proceed</button>
+                                <button id="confirmBtn" type="button">Proceed</button>
                             </div>
                         </div>
 

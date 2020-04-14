@@ -130,15 +130,15 @@ $result2 = mysqli_query($conn, $query2);
         <!--Main Body Section-->
 
         <div class="container-fluid">
-            <div class="row mt-5 justify-content-between">
-                <div class="col-2 mb-2">
+            <div class="row mt-5 justify-content-around">
+                <div class="col-3 mb-2">
                     <?php
                     $query = "SELECT DISTINCT title, message, links, pic, date_posted FROM notice WHERE date_posted= (SELECT MAX(date_posted) FROM notice)";
                     $result = mysqli_query($conn, $query);
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo "
                                     <div class=" . "card text-justify" . ">
-                                        <div class=" . "card-header text-center" . ">
+                                        <div class=" . "card-header text-center".">
                                             Notice
                                             </div>
                                                 <div class=" . "card-body text-justify text-left" . ">
