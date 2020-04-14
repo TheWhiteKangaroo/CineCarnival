@@ -53,10 +53,16 @@ else if($selectedDate=="Tomorrow"){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment</title>
 
+    
     <script>
         function checkDBBLForm(){
-            var cardNumber = document.getElementById('dbblHolderName').value;
-            var 
+            var printMe = document.getElementById('myBill');
+            var wme = window.open("","","width=900, height=700");
+            wme.document.write(printMe.outerHTML);
+            wme.document.close();
+            wme.focus();
+            wme.print();
+//            wme.close();
         }
     </script>
 </head>
@@ -69,7 +75,7 @@ else if($selectedDate=="Tomorrow"){
                         <h2>Purchase Order</h2>
                     </div>
                     <div>
-                        <table class="myBill">
+                        <table class="myBill" id="myBill">
                             <tr>
                                 <td><span>Customer</span></td>
                                 <td>:</td>
@@ -101,7 +107,7 @@ else if($selectedDate=="Tomorrow"){
                                 <td><span><?php echo $selectedDate; ?></span></td>
                             </tr>
                             <tr>
-                                <td><span>Show Type</span></td>
+                                <td><span>Theatre Type</span></td>
                                 <td>:</td>
                                 <td><span><?php echo $theatreType; ?></span></td>
                             </tr>
@@ -132,7 +138,7 @@ else if($selectedDate=="Tomorrow"){
             <div class="col-7">
             <div class="paymentBox" id="paymentArea" style="display: block;">
                     <div class="paymentMethodsHeader" style="margin: 0; padding:0;">
-                        <button class="paymentBtn" style="border-bottom-left-radius: 25px; margin:0; padding:0;" onclick="showBkashForm();">Bkash</button>
+                        <button class="paymentBtn" style="border-bottom-left-radius: 25px; margin:0; padding:0;" onclick="showBkashForm();">bKash</button>
                         <button class="paymentBtn" style=" margin:0; padding:0;" onclick="showStandardCharteredForm();">Standard Chartered</button>
                         <button class="paymentBtn" style="border-top-right-radius: 25px;  margin:0; padding:0;" onclick="showDBBLForm();">DBBL</button>
                     </div>
@@ -144,7 +150,7 @@ else if($selectedDate=="Tomorrow"){
                             <table style="width:100%;">
                                 <tr align="center">
                                     <td>
-                                        <label style="font-size: 46px; font-weight:bold; border-bottom: 1px #feda6a solid;">bKash</label>
+                                        <label style="font-size: 46px; font-weight:bold; border-bottom: 2px #feda6a solid;">bKash</label>
                                     </td>
                                 </tr>
                                 <tr>
