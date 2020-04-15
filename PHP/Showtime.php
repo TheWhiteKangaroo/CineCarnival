@@ -1,4 +1,11 @@
 <?php
+session_start();
+$userName = "";
+if (isset($_SESSION['user_name'])) {
+    $userName = $_SESSION['user_name'];
+} else {
+    $userName = "";
+}
 include "DatabaseConnection.php";
 $perTable = 15;
 
@@ -55,6 +62,27 @@ $result2 = mysqli_query($conn, $query2);
         }
     </style>
     <script>
+        
+        function showProfileSection() {
+            var userName = <?php echo json_encode($userName); ?>;
+            if(userName.length >=2) {
+                document.getElementById("ProfileDiv").style.display = "block";
+                document.getElementById("SignOutDiv").style.display = "block";
+                document.getElementById("SignUpDiv").style.display = "none";
+                document.getElementById("SignInDiv").style.display = "none";
+            }
+            else {
+                document.getElementById("ProfileDiv").style.display = "none";
+                document.getElementById("SignOutDiv").style.display = "none";
+                document.getElementById("SignUpDiv").style.display = "block";
+                document.getElementById("SignInDiv").style.display = "block";                
+            }
+
+        }
+    </script>
+    <script>
+
+
         document.getElementById('showDatePicker').value = new Date().toDateInputValue();
 
         function myFunction(e) {
@@ -76,7 +104,7 @@ $result2 = mysqli_query($conn, $query2);
     </style>
 </head>
 
-<body>
+<body onload="showProfileSection();">
     <div class="container-fluid">
         <!--Header Section-->
         <header>
@@ -84,12 +112,17 @@ $result2 = mysqli_query($conn, $query2);
                 <div class="p-2 mr-auto">
                     <a href="index.php"><img src="..\Images/CineCarnival.png" alt="No Image..."></a>
                 </div>
-
-                <div class="p-2 align-self-center header-anchor">
+                <div class="p-2 align-self-center header-anchor" id="ProfileDiv" style="display: none;">
+                    <a href="ProfilePage.php" style="text-decoration: none;"><i class="fas fa-user-alt"></i><?php echo $userName; ?></a>
+                </div>
+                <div class="p-2 align-self-center header-anchor" id="SignInDiv" style="display: none;">
                     <a href="SignInPage.php" style="text-decoration: none;"><i class="fas fa-user-alt"></i> Sign In</a>
                 </div>
-                <div class="p-2 align-self-center">
+                <div class="p-2 align-self-center" id="SignUpDiv" style="display: none;">
                     <a href="RegistrationPage.php" style="text-decoration: none;"><i class="fas fa-user-plus"></i> Sign Up</a>
+                </div>
+                <div class="p-2 align-self-center" id="SignOutDiv" style="display: none;">
+                    <a href="SignInPage.php" style="text-decoration: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
                 </div>
             </div>
         </header>
@@ -145,7 +178,7 @@ $result2 = mysqli_query($conn, $query2);
                                                     <h5 class=" . "card-title" . ">" . $row['title'] . "</h5>";
                         if ($row['pic'] != null || isset($row['pic']) || !empty($row['pic'])) {
                             echo "
-                                                            <img class=" . "card-img-top" . " src=" . "..\images/NoTimeToDie.jpg" . " alt=" . "No Image..." . " style=" . "margin-bottom:10px; width:200px; height: 100px;" . ">
+                                                            <img class=" . "card-img-top" . " src=" .$row['pic'] . " alt=" . "No Image..." . " style=" . "margin-bottom:10px; width:200px; height: 100px;" . ">
                                                         ";
                         }
                         echo "
@@ -210,7 +243,7 @@ $result2 = mysqli_query($conn, $query2);
                                                 <tr>
                                                     <td><?php echo $movieName; ?></td>
                                                     <?php
-                                                    $result4 = mysqli_query($conn, "SELECT show_time FROM shows WHERE movie_id='$row[mv_id]';");
+                                                    $result4 = mysqli_query($conn, "SELECT DISTINCT show_time FROM shows WHERE movie_id='$row[mv_id]';");
                                                     while ($newRow = mysqli_fetch_assoc($result4)) {
                                                         $tempTime = $newRow['show_time'];
                                                         $result5 = mysqli_query($conn, "SELECT theatre_id,show_type FROM shows WHERE movie_id='$row[mv_id]' AND show_time='$tempTime';");

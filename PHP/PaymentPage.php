@@ -1,4 +1,18 @@
 <?php
+session_start();
+include "DatabaseConnection.php";
+$userName = $mail="";
+$fullName= "";
+if(isset($_SESSION['user_name'])){
+    $userName = $_SESSION['user_name'];
+    $query = "SELECT first_name, last_name, mail FROM customer WHERE user_name='$userName' OR mail='$userName';";
+    $result  = mysqli_query($conn,$query);
+    while($row=mysqli_fetch_assoc($result)){
+        $fullName = $row['first_name']." ".$row['last_name'];
+        $mail = $row['mail'];
+    }
+}
+
 $selectedMovie="";
 $selectedDate="";
 $selectedShowTime="";
@@ -28,13 +42,13 @@ if(isset($_POST['selectedMovie']) && isset($_POST['selectedDate']) && isset($_PO
 //echo "$selectedMovie". "--" .$selectedDate."--".$selectedShowTime."--".$selectedTheatreName;
 
 if($theatreType=="VIP"){
-    $price = $selectedSeatCount*700;
+    $price = $selectedSeatCount*600;
 }
 else if($theatreType=="PREMIUM"){
-    $price = $selectedSeatCount*500;
+    $price = $selectedSeatCount*450;
 }
 else if($theatreType=="REGULAR"){
-    $price = $selectedSeatCount*300;
+    $price = $selectedSeatCount*250;
 }
 $totalPrice = $price;
 if($selectedDate=="Today"){
@@ -68,24 +82,20 @@ else if($selectedDate=="Tomorrow"){
 </head>
 <body>
     
-<div class="row mt-3 justify-content-around" id="billZone" style="width: 100%; margin-left:10px; margin-bottom: 10px;">
+<div class="row mt-3 mb-5 justify-content-around" id="billZone" style="width: 100%; margin-left:10px; margin-bottom: 10px;">
             <div class="col-4">
             <div id="billContainer" style="display: block;">
                     <div id="billBox">
-                        <h2>Purchase Order</h2>
+                        <h2 style="padding-bottom: 10px;"><i class="fas fa-receipt"></i> Purchase Order</h2>
                     </div>
                     <div>
                         <table class="myBill" id="myBill">
                             <tr>
                                 <td><span>Customer</span></td>
                                 <td>:</td>
-                                <td><span>Shohag</span></td>
+                                <td><span><?php echo $fullName;?></span></td>
                             </tr>
-                            <tr>
-                                <td><span>Mail</span></td>
-                                <td>:</td>
-                                <td><span>shohag@gmail.com</span></td>
-                            </tr>
+                           
                             <tr>
                                 <td><span>Movie</span></td>
                                 <td>:</td>
@@ -138,9 +148,9 @@ else if($selectedDate=="Tomorrow"){
             <div class="col-7">
             <div class="paymentBox" id="paymentArea" style="display: block;">
                     <div class="paymentMethodsHeader" style="margin: 0; padding:0;">
-                        <button class="paymentBtn" style="border-bottom-left-radius: 25px; margin:0; padding:0;" onclick="showBkashForm();">bKash</button>
-                        <button class="paymentBtn" style=" margin:0; padding:0;" onclick="showStandardCharteredForm();">Standard Chartered</button>
-                        <button class="paymentBtn" style="border-top-right-radius: 25px;  margin:0; padding:0;" onclick="showDBBLForm();">DBBL</button>
+                        <button class="paymentBtn" style="border-bottom-left-radius: 25px; margin:0; padding:0;" onclick="showBkashForm();"><i class="fas fa-coins"></i> bKash</button>
+                        <button class="paymentBtn" style=" margin:0; padding:0;" onclick="showStandardCharteredForm();"><i class="fas fa-money-check"></i> Standard Chartered</button>
+                        <button class="paymentBtn" style="border-top-right-radius: 25px;  margin:0; padding:0;" onclick="showDBBLForm();"><i class="far fa-credit-card"></i> DBBL</button>
                     </div>
                     <div class="text-center mt-2">
                         <div id="selectPayMethod" style="border-bottom: 2px #feda6a solid;">
@@ -177,7 +187,7 @@ else if($selectedDate=="Tomorrow"){
                                 <tr>
                                     <td>
                                         <div>
-                                            <button id="payBtn">Pay</button>
+                                            <button id="payBtn"><i class="fas fa-coins"></i> Pay</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -230,7 +240,7 @@ else if($selectedDate=="Tomorrow"){
                                 <tr>
                                     <td>
                                         <div>
-                                            <button id="payBtn">Pay</button>
+                                            <button type="button" id="payBtn"><i class="fas fa-credit-card"></i> Pay</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -275,7 +285,7 @@ else if($selectedDate=="Tomorrow"){
                                 <tr>
                                     <td>
                                         <div>
-                                            <button type="submit" name="dbblBtn" id="payBtn" onclick="checkDBBLForm();">Pay</button>
+                                            <button type="submit" name="dbblBtn" id="payBtn" onclick="checkDBBLForm();"><i class="fas fa-money-bill-wave"></i></i> Pay</button>
                                         </div>
                                     </td>
                                 </tr>

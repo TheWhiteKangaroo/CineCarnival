@@ -1,6 +1,5 @@
 <?php
-session_start();
-echo $_SESSION['selectedMovie'];
+
 include "DatabaseConnection.php";
 $query1 = $result1 = "";
 if (isset($_POST['selectedMovieName'])) {

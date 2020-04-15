@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include "DatabaseConnection.php";
     $gender = $firstName = $lastName = $userName = $mail = $phone = $address = $password =$confirmPassword = $agreePolicy= $userNameInDB=$mailInDB=$passwordToDB="";
     $msg="";
@@ -136,10 +137,8 @@
                                     mysqli_query($conn,$query);
                                     mysqli_close($conn);
                                     $msg="Registration Complete!";
-                                        echo '<script language="javascript">';
-                                        echo 'alert("Registration Successful!")';
-                                        echo '</script>';
-                                        header("refresh: 0;");
+                                    $_SESSION['msg']="Registration was successful!\nWant to sign in?";
+                                    header("Location: SignInPage.php");
                                 }
                                 else{
                                     $msg="Passwords don't match!";

@@ -12,6 +12,59 @@
     <link rel="stylesheet" href="file:///C:/Users/User/Downloads/fontawesome-free-5.13.0-web/fontawesome-free-5.13.0-web/css/all.css">
     <link rel="stylesheet" href="..\css/style.css">
     <link rel="stylesheet" href="..\css/bootstrap.min.css">
+
+
+    <style>
+    #starRatingDiv{
+        width: 50%;
+        height: 300px;
+        margin-top: 20px;
+    }
+    #starRatingDiv span{
+        font-size: 22px;
+    }
+    .rating-wrapper {
+        width: auto;
+        height: 75px;
+        border: 1px  #28a745 solid;
+        border-radius: 5px;
+        direction: rtl;
+        margin: 0;
+        padding: 0;
+    }
+    .rating-wrapper input{
+        display: none;
+    }
+    .rating-wrapper label{
+        display: inline-block;
+        width: 35px;
+        position: relative;
+        cursor: pointer
+    }
+    .rating-wrapper label::before{
+        content: "\2605";
+        position: absolute;
+        font-size: 35px;
+        display: inline-block;
+        top: 0;
+        left: 0;
+    }
+    .rating-wrapper label::after{
+        content: "\2605";
+        position: absolute;
+        font-size: 35px;
+        display: inline-block;
+        top: 0;
+        left: 0;
+        color:  #28a745;   
+        opacity: 0;
+    }
+    .rating-wrapper label:hover::after,
+    .rating-wrapper label:hover ~ label::after,
+    .rating-wrapper input:checked ~ label::after{
+        opacity: 1;
+    }
+    </style>
 </head>
 
 <body>
@@ -66,38 +119,20 @@
         </nav>
 
         <!--Main Body Section-->
-        <div class="mybox">
-
-            
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="..\images/NoTimeToDie.jpg" alt="First slide"  style="height: 500px;">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="..\images/NoTimeToDie.jpg" alt="Second slide" style="height: 500px;">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="..\images/NoTimeToDie.jpg" alt="Third slide" style="height: 500px;">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-
+    <div class="container" >
+        <div id="starRatingDiv">
+                <span>Rate the movie</span>
+                <div class="rating-wrapper">
+                    <input type="radio" name="rating" id="star-1"><label for="star-1"></label>
+                    <input type="radio" name="rating" id="star-2"><label for="star-2"></label>
+                    <input type="radio" name="rating" id="star-3"><label for="star-3"></label>
+                    <input type="radio" name="rating" id="star-4"><label for="star-4"></label>
+                    <input type="radio" name="rating" id="star-5"><label for="star-5"></label>
+                </div>
         </div>
-
+        
+    </div>
+             
        
 <!--Footer Section-->
         <div class="container">

@@ -58,7 +58,7 @@ else{
                         <tr style="width: 100%">
                             <td><?php echo $movieName; ?></td>
                             <?php
-                            $result4 = mysqli_query($conn, "SELECT show_time FROM shows WHERE movie_id='$row[mv_id]';");
+                            $result4 = mysqli_query($conn, "SELECT DISTINCT show_time FROM shows WHERE movie_id='$row[mv_id]';");
                             while ($newRow = mysqli_fetch_assoc($result4)) {
                                 $tempTime = $newRow['show_time'];
                                 $result5 = mysqli_query($conn, "SELECT theatre_id,show_type FROM shows WHERE movie_id='$row[mv_id]' AND show_time='$tempTime';");

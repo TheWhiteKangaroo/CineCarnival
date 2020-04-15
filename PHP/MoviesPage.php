@@ -1,4 +1,11 @@
 <?php
+session_start();
+$userName = "";
+if (isset($_SESSION['user_name'])) {
+    $userName = $_SESSION['user_name'];
+} else {
+    $userName = "";
+}
 include "DatabaseConnection.php";
 $movieName = $genre = $cast = "";
 $perPage = 9;
@@ -39,36 +46,55 @@ $np = ceil($tm / $perPage);
 
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
-    
+
     <script>
+        function showProfileSection() {
+            var userName = <?php echo json_encode($userName); ?>;
+            if (userName.length >= 2) {
+                document.getElementById("ProfileDiv").style.display = "block";
+                document.getElementById("SignOutDiv").style.display = "block";
+                document.getElementById("SignUpDiv").style.display = "none";
+                document.getElementById("SignInDiv").style.display = "none";
+            } else {
+                document.getElementById("ProfileDiv").style.display = "none";
+                document.getElementById("SignOutDiv").style.display = "none";
+                document.getElementById("SignUpDiv").style.display = "block";
+                document.getElementById("SignInDiv").style.display = "block";
+            }
+
+        }
+
         var status = "Now Showing";
-        function changeNowShowingBtnColor(){
-            document.getElementById('nowShowingBtn').style.backgroundColor="#9400D3";
-            document.getElementById('upcomingBtn').style.backgroundColor="BLACK";
-            document.getElementById('actionCB').checked=false;
-            document.getElementById('comedyCB').checked=false;
-            document.getElementById('dramaCB').checked=false;
-            document.getElementById('horrorCB').checked=false;
-            document.getElementById('banglaCB').checked=false;
-            document.getElementById('englishCB').checked=false;
-            document.getElementById('2dCB').checked=false;
-            document.getElementById('3dCB').checked=false;
+
+        function changeNowShowingBtnColor() {
+            document.getElementById('nowShowingBtn').style.backgroundColor = "#9400D3";
+            document.getElementById('upcomingBtn').style.backgroundColor = "BLACK";
+            document.getElementById('actionCB').checked = false;
+            document.getElementById('comedyCB').checked = false;
+            document.getElementById('dramaCB').checked = false;
+            document.getElementById('horrorCB').checked = false;
+            document.getElementById('banglaCB').checked = false;
+            document.getElementById('englishCB').checked = false;
+            document.getElementById('2dCB').checked = false;
+            document.getElementById('3dCB').checked = false;
             status = "Now Showing";
         }
-        function changeUpComingBtnColor(){
-            document.getElementById('nowShowingBtn').style.backgroundColor="BLACK";
-            document.getElementById('upcomingBtn').style.backgroundColor="#9400D3";
-            document.getElementById('actionCB').checked=false;
-            document.getElementById('comedyCB').checked=false;
-            document.getElementById('dramaCB').checked=false;
-            document.getElementById('horrorCB').checked=false;
-            document.getElementById('banglaCB').checked=false;
-            document.getElementById('englishCB').checked=false;
-            document.getElementById('2dCB').checked=false;
-            document.getElementById('3dCB').checked=false;
+
+        function changeUpComingBtnColor() {
+            document.getElementById('nowShowingBtn').style.backgroundColor = "BLACK";
+            document.getElementById('upcomingBtn').style.backgroundColor = "#9400D3";
+            document.getElementById('actionCB').checked = false;
+            document.getElementById('comedyCB').checked = false;
+            document.getElementById('dramaCB').checked = false;
+            document.getElementById('horrorCB').checked = false;
+            document.getElementById('banglaCB').checked = false;
+            document.getElementById('englishCB').checked = false;
+            document.getElementById('2dCB').checked = false;
+            document.getElementById('3dCB').checked = false;
             status = "Coming Soon";
         }
-        function getStatus(){
+
+        function getStatus() {
             return status;
         }
     </script>
@@ -76,219 +102,211 @@ $np = ceil($tm / $perPage);
     <script>
         $(document).ready(function() {
             var i = 9;
-            var genre="";
+            var genre = "";
             var language = "";
             var format = "";
-            
-               
+
+
             $("#nowShowingBtn").click(function() {
                 $("#movieSection").load("NextMovies.php", {
                     NowShowingPage: 9,
-                    selectedStatus : getStatus()
+                    selectedStatus: getStatus()
                 });
             });
 
             $("#upcomingBtn").click(function() {
                 $("#movieSection").load("NextMovies.php", {
                     UpComingPage: 9,
-                    selectedStatus : getStatus()
+                    selectedStatus: getStatus()
                 });
-            });  
+            });
 
             $("#ldMoreButton").click(function() {
                 i = i + 3;
                 document.getElementById('searchText').value = "";
                 $("#movieSection").load("NextMovies.php", {
                     limitValue: i,
-                    selectedStatus : getStatus()
+                    selectedStatus: getStatus()
                 });
             });
 
             $('#searchText').on('keyup', function() {
-                var stringValue =  document.getElementById('searchText').value;
-                if(stringValue==""){
-                    var btnVal = document.getElementById('ldMoreButton').style.display="block";
-                }
-                else{
-                    var btnVal = document.getElementById('ldMoreButton').style.display="none";
+                var stringValue = document.getElementById('searchText').value;
+                if (stringValue == "") {
+                    var btnVal = document.getElementById('ldMoreButton').style.display = "block";
+                } else {
+                    var btnVal = document.getElementById('ldMoreButton').style.display = "none";
                 }
                 $('#movieSection').load('NextMovies.php', {
                     searchedKeyWord: document.getElementById('searchText').value,
-                    selectedStatus : getStatus()
+                    selectedStatus: getStatus()
                 });
             });
 
-            $(document).on('change','#actionCB',function(){
-                if(this.checked){
+            $(document).on('change', '#actionCB', function() {
+                if (this.checked) {
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
-                    genre : genre,
-                    language : language,
-                    format : format,
-                    selectedStatus : getStatus()
-                });
-                }
-                else{
+                        genre: genre,
+                        language: language,
+                        format: format,
+                        selectedStatus: getStatus()
+                    });
+                } else {
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
-                    genre : genre,
-                    language : language,
-                    format : format,
-                    selectedStatus : getStatus()
-                });
-                }
-            });
-            $(document).on('change','#comedyCB',function(){
-                if(this.checked){
-                    filterMovies();
-                    $('#movieSection').load('NextMovies.php', {
-                    genre : genre,
-                    language : language,
-                    format : format,
-                    selectedStatus : getStatus()
-                });
-                }
-                else{
-                    filterMovies();
-                    $('#movieSection').load('NextMovies.php', {
-                    genre : genre,
-                    language : language,
-                    format : format,
-                    selectedStatus : getStatus()
-                });
+                        genre: genre,
+                        language: language,
+                        format: format,
+                        selectedStatus: getStatus()
+                    });
                 }
             });
-            $(document).on('change','#horrorCB',function(){
-                if(this.checked){
+            $(document).on('change', '#comedyCB', function() {
+                if (this.checked) {
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
-                    genre : genre,
-                    language : language,
-                    format : format,
-                    selectedStatus : getStatus()
-                });
-                }
-                else{
+                        genre: genre,
+                        language: language,
+                        format: format,
+                        selectedStatus: getStatus()
+                    });
+                } else {
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
-                    genre : genre,
-                    language : language,
-                    format : format,
-                    selectedStatus : getStatus()
-                });
-                }
-            });
-            $(document).on('change','#dramaCB',function(){
-                if(this.checked){
-                    filterMovies();
-                    $('#movieSection').load('NextMovies.php', {
-                    genre : genre,
-                    language : language,
-                    format : format,
-                    selectedStatus : getStatus()
-                });
-                }
-                else{
-                    filterMovies();
-                    $('#movieSection').load('NextMovies.php', {
-                    genre : genre,
-                    language : language,
-                    format : format,
-                    selectedStatus : getStatus()
-                });
+                        genre: genre,
+                        language: language,
+                        format: format,
+                        selectedStatus: getStatus()
+                    });
                 }
             });
-            $(document).on('change','#banglaCB',function(){
-                if(this.checked){
+            $(document).on('change', '#horrorCB', function() {
+                if (this.checked) {
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
-                    genre : genre,
-                    language : language,
-                    format : format,
-                    selectedStatus : getStatus()
-                });
-                }
-                else{
+                        genre: genre,
+                        language: language,
+                        format: format,
+                        selectedStatus: getStatus()
+                    });
+                } else {
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
-                    genre : genre,
-                    language : language,
-                    format : format,
-                    selectedStatus : getStatus()
-                });
-                }
-            });
-            $(document).on('change','#englishCB',function(){
-                if(this.checked){
-                    filterMovies();
-                    $('#movieSection').load('NextMovies.php', {
-                    genre : genre,
-                    language : language,
-                    format : format,
-                    selectedStatus : getStatus()
-                });
-                }
-                else{
-                    filterMovies();
-                    $('#movieSection').load('NextMovies.php', {
-                    genre : genre,
-                    language : language,
-                    format : format,
-                    selectedStatus : getStatus()
-                });
+                        genre: genre,
+                        language: language,
+                        format: format,
+                        selectedStatus: getStatus()
+                    });
                 }
             });
-            $(document).on('change','#2dCB',function(){
-                if(this.checked){
+            $(document).on('change', '#dramaCB', function() {
+                if (this.checked) {
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
-                    genre : genre,
-                    language : language,
-                    format : format,
-                    selectedStatus : getStatus()
-                });
-                }
-                else{
+                        genre: genre,
+                        language: language,
+                        format: format,
+                        selectedStatus: getStatus()
+                    });
+                } else {
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
-                    genre : genre,
-                    language : language,
-                    format : format,
-                    selectedStatus : getStatus()
-                });
+                        genre: genre,
+                        language: language,
+                        format: format,
+                        selectedStatus: getStatus()
+                    });
                 }
             });
-            $(document).on('change','#3dCB',function(){
-                if(this.checked){
+            $(document).on('change', '#banglaCB', function() {
+                if (this.checked) {
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
-                    genre : genre,
-                    language : language,
-                    format : format,
-                    selectedStatus : getStatus()
-                });
+                        genre: genre,
+                        language: language,
+                        format: format,
+                        selectedStatus: getStatus()
+                    });
+                } else {
+                    filterMovies();
+                    $('#movieSection').load('NextMovies.php', {
+                        genre: genre,
+                        language: language,
+                        format: format,
+                        selectedStatus: getStatus()
+                    });
                 }
-                else{
+            });
+            $(document).on('change', '#englishCB', function() {
+                if (this.checked) {
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
-                    genre : genre,
-                    language : language,
-                    format : format,
-                    selectedStatus : getStatus()
-                });
+                        genre: genre,
+                        language: language,
+                        format: format,
+                        selectedStatus: getStatus()
+                    });
+                } else {
+                    filterMovies();
+                    $('#movieSection').load('NextMovies.php', {
+                        genre: genre,
+                        language: language,
+                        format: format,
+                        selectedStatus: getStatus()
+                    });
+                }
+            });
+            $(document).on('change', '#2dCB', function() {
+                if (this.checked) {
+                    filterMovies();
+                    $('#movieSection').load('NextMovies.php', {
+                        genre: genre,
+                        language: language,
+                        format: format,
+                        selectedStatus: getStatus()
+                    });
+                } else {
+                    filterMovies();
+                    $('#movieSection').load('NextMovies.php', {
+                        genre: genre,
+                        language: language,
+                        format: format,
+                        selectedStatus: getStatus()
+                    });
+                }
+            });
+            $(document).on('change', '#3dCB', function() {
+                if (this.checked) {
+                    filterMovies();
+                    $('#movieSection').load('NextMovies.php', {
+                        genre: genre,
+                        language: language,
+                        format: format,
+                        selectedStatus: getStatus()
+                    });
+                } else {
+                    filterMovies();
+                    $('#movieSection').load('NextMovies.php', {
+                        genre: genre,
+                        language: language,
+                        format: format,
+                        selectedStatus: getStatus()
+                    });
                 }
             });
 
 
-            function filterMovies(){
+            function filterMovies() {
                 var action = 'fetch_data';
                 genre = get_filter('genre');
                 language = get_filter('language');
                 format = get_filter('format');
             }
-            function get_filter(className){
-                var filterData=[];
-                $('.'+className+':checked').each(function(){
+
+            function get_filter(className) {
+                var filterData = [];
+                $('.' + className + ':checked').each(function() {
                     filterData.push($(this).val());
                 });
                 return filterData;
@@ -298,25 +316,26 @@ $np = ceil($tm / $perPage);
     </script>
 </head>
 
-<body>
+<body onload="showProfileSection();">
     <div class="container-fluid">
         <!--Header Section-->
         <header>
             <div class="d-flex flex-row flex-nowrap sm-flex-wrap  header-section ">
-                <div class="p-2 mr-2">
+                <div class="p-2 mr-auto">
                     <a href="index.php"><img src="..\Images/CineCarnival.png" alt="No Image..."></a>
                 </div>
-                <div class="p-2 align-self-center d-sm-none d-md-block d-none d-sm-block mr-0 pr-0">
-                    <input class="search-box border-primary pt-1 pb-1 pr-5 pl-4 ml-3 mr-0 text-capitalize" id="searchText" style="border-radius: 25px; background:transparent; color: white;" name="searchBar" value="" type="text" placeholder="Search for movies...">
+               
+                <div class="p-2 align-self-center header-anchor" id="ProfileDiv" style="display: none;">
+                    <a href="ProfilePage.php" style="text-decoration: none;"><i class="fas fa-user-alt"></i><?php echo $userName; ?></a>
                 </div>
-                <div class="p-2 align-self-center  mr-auto d-sm-none d-md-block d-none d-sm-block ml-0 pl-0">
-                    <button class="border-primary  search-button"><i class="fas fa-search"></i></button>
-                </div>
-                <div class="p-2 align-self-center header-anchor">
+                <div class="p-2 align-self-center header-anchor" id="SignInDiv" style="display: none;">
                     <a href="SignInPage.php" style="text-decoration: none;"><i class="fas fa-user-alt"></i> Sign In</a>
                 </div>
-                <div class="p-2 align-self-center">
+                <div class="p-2 align-self-center" id="SignUpDiv" style="display: none;">
                     <a href="RegistrationPage.php" style="text-decoration: none;"><i class="fas fa-user-plus"></i> Sign Up</a>
+                </div>
+                <div class="p-2 align-self-center" id="SignOutDiv" style="display: none;">
+                    <a href="SignInPage.php" style="text-decoration: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
                 </div>
             </div>
         </header>
@@ -347,7 +366,7 @@ $np = ceil($tm / $perPage);
                     <li class="nav-item">
                         <a href="CorporatesPage.php" class="nav-link"><i class="fas fa-handshake"></i> Corporates</a>
                     </li>
-                    
+
                     <li class="nav-item">
                         <a href="OfferPage.php" class="nav-link"><i class="fas fa-gift"></i> Offers</a>
                     </li>
@@ -374,11 +393,16 @@ $np = ceil($tm / $perPage);
             </div>
         </div>
 
-        <div class="container">
-            <div class="row align-items-start justify-content-between" id="moviePageSection">
+        <div class="container-fluid">
+            <div class="row align-items-start justify-content-center" id="moviePageSection">
                 <div class="col-2 pt-4 ">
+                    <div class="inputWithIcon mb-4 mt-4">
+                        <input class="resetPass-inputs" id="searchText" type="text" placeholder="Search for movies..." maxlength="30" minlength="2" style="color: black; width:100%;">
+                        <i class="fas fa-search"></i>
+                    </div>
+
                     <div mb-2>
-                    <!-- Default unchecked -->
+                        <!-- Default unchecked -->
                         <div class="form-group">
                             <h5 class="border-dark border-bottom pb-2">Genres : </h5>
                         </div>
@@ -400,7 +424,7 @@ $np = ceil($tm / $perPage);
                         </div>
                     </div>
                     <div class="mt-4 mb-2">
-                    <div class="form-group">
+                        <div class="form-group">
                             <h5 class="border-dark border-bottom pb-2">Language : </h5>
                         </div>
                         <div class="form-group">
@@ -414,7 +438,7 @@ $np = ceil($tm / $perPage);
                     </div>
 
                     <div class="mt-4 mb-2">
-                    <div class="form-group">
+                        <div class="form-group">
                             <h5 class="border-dark border-bottom pb-2">Format : </h5>
                         </div>
                         <div class="form-group">
@@ -427,24 +451,24 @@ $np = ceil($tm / $perPage);
                         </div>
                     </div>
                 </div>
-                <div class="col-10">
+                <div class="col-6">
                     <div class="row justify-content-start d-flex mt-5 mb-2" id="movieSection">
-                    
+
                         <?php
                         while ($row = mysqli_fetch_assoc($result)) {
-                            if($row==null || !isset($row)){
+                            if ($row == null || !isset($row)) {
                                 echo "Oops, no movies currently to show!";
                             }
                             echo "
                                         <div class=" . "col-4" . ">
                                         <div class=" . "card movieCard-box" . "style=" . "width: 18rem;" . ">
-                                        <form action="."Movies.php"." method="."GET".">
+                                        <form action=" . "Movies.php" . " method=" . "GET" . ">
                                             <img class=" . "card-img-top" . " src=" . "..\images/NoTimeToDie.jpg" . " alt=" . "Card image cap" . ">
                                             <div class=" . "card-body" . ">
                                                 <p class=" . "card-text" . ">
                                                     <span><b>" . $row['name'] . "</b></span><br>
                                                     <span>" . $row['genre'] . "</span><br>
-                                                    <button type="."submit"." name="."movieNumber"." value=".$row['mv_id']." id = ".$row['mv_id']." class=" . "movieCard-buttons".">Details</button>
+                                                    <button type=" . "submit" . " name=" . "movieNumber" . " value=" . $row['mv_id'] . " id = " . $row['mv_id'] . " class=" . "movieCard-buttons" . ">Details</button>
                                                 </p>
                                             </div>
                                             </form>
@@ -454,9 +478,9 @@ $np = ceil($tm / $perPage);
                                         ";
                         }
                         ?>
-                    
+
                     </div>
-                    
+
                 </div>
                 <div class="col-8">
                     <div class="text-center mt-2 mb-2  ldMoreBtn" id="btnLoadDiv">

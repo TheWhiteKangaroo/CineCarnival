@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include "DatabaseConnection.php";
 $perSeatPrice = $showType = $theatreType = $theatreID = $showTime = $showDate =$theatreName= $availableSeats = "";
 $selectedMovieName="";

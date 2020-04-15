@@ -1,11 +1,15 @@
 <?php
 session_start();
 include "DatabaseConnection.php";
-if(!isset($_SESSION['userName'])){
+$userName = $userType="";
+if(!isset($_SESSION['user_name'])){
     header("Locations: SignInPage.php");
 }
-$userName = $_SESSION['userName'];
-$userType = $_SESSION['userType'];
+else{
+    $userName = $_SESSION['user_name'];
+    $userType = $_SESSION['user_type'];    
+}
+
 $gender = $firstName = $lastName = $mail = $phone = $address = $password = $newPassword = $newPasswordToDB = $confirmPassword = $status = $points = $joiningDate = $msg = "";
 $currentDateTime=date("Y/m/d");
 $alphabetCheck="/^[A-Za-z]+$/";
@@ -87,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateInfoBtn'])) {
 }
 
 if(isset($_POST['updateMailBtn'])){
-    $userName = $_SESSION['userName'];
+    $userName = $_SESSION['user_name'];
     $mailInDB="";
     if (!empty($_POST['mail'])) {
         $mail = mysqli_real_escape_string($conn, $_POST['mail']);
@@ -303,7 +307,7 @@ if(isset($_POST['updatePassBtn'])){
             <div class="row mt-4  text-light welcome-box">
                 <div class="col text-center">
                     <div class="welcome-to-profile">
-                        <label for="" style="font-size: 40px;">Welcome, <?php echo "$firstName"; ?>!</label>
+                        <label for="" style="font-size: 40px;">Welcome, <?php echo "$firstName"." ".$lastName; ?>!</label>
                     </div>
                 </div>
             </div>
@@ -321,7 +325,7 @@ if(isset($_POST['updatePassBtn'])){
                 <div class="col-6">
                     <div id="profileFormSection" style="display: block;">
                         <form action="ProfilePage.php" method="POST">
-                            <table style="width: 100%;">
+                            <table style="width: 60%; margin-left:200px;">
                                 <tr>
                                     <th colspan="2">
                                         <div class="form-group text-center mt-5 mb-0">

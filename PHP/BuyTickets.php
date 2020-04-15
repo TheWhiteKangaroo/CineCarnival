@@ -1,14 +1,13 @@
 <?php
 session_start();
-//if(!isset($_SESSION['user_name']) || empty($_SESSION['user_name'])){
-//  session_destroy();
-// header("Location: SignInPage.php");
-//}
-$_SESSION['selectedMovie'] = "";
-$_SESSION['selectedShow'] = "";
-$_SESSION['selectedDate'] = "";
-$_SESSION['selectedSeatCount'] = "";
-
+$userName = "";
+if(!isset($_SESSION['user_name'])){
+    $_SESSION['msg']="First sign in to buy tickets!";
+    header("Location: SignInPage.php");
+}
+else{
+    $userName = $_SESSION['user_name'];
+}
 $selectedDate = $selectedSeatCount = "";
 include "DatabaseConnection.php";
 date_default_timezone_set("Asia/Dhaka");
@@ -76,12 +75,17 @@ $selectedShowTime = $selectedMovie = "";
         }
 
         .myBill{
+            width: fit-content;
             margin-left: 10px;
             margin-top: 10px;
             margin-bottom: 15px;
             font-size: 18px;
         }
+        .myBill tr{
+            width: fit-content;
+        }
         .myBill td {
+            width: fit-content;
             border-bottom: 1px solid #ddd;
             height: 35px;
             padding-left: 25px;  
@@ -97,6 +101,7 @@ $selectedShowTime = $selectedMovie = "";
 
         function getSelectedDate() {
             selectedDateArray = document.getElementsByName("dateOfPurchase");
+            document.getElementById('confirmBtn').style.display="none";
             if (selectedDateArray[0].checked) {
                 selectedDate = selectedDateArray[0].value;
             } else if (selectedDateArray[1].checked) {
@@ -120,6 +125,7 @@ $selectedShowTime = $selectedMovie = "";
 
 
             $(document).on('change', '#movieSelectDropDown', function() {
+                document.getElementById('confirmBtn').style.display="none";
                 var x = document.getElementById('movieSelectDropDown');
                 movieName = x.options[x.selectedIndex].text;
                 document.cookie = "movieName=" + movieName
@@ -128,6 +134,7 @@ $selectedShowTime = $selectedMovie = "";
                 });
             });
             $(document).on('change', '#showSelectDropDown', function() {
+                document.getElementById('confirmBtn').style.display="none";
                 var x = document.getElementById('showSelectDropDown');
                 showID = x.value;
                 $('#seatAndPaymentSection').load('BuyTicketsStep3.php', {
@@ -190,9 +197,6 @@ $selectedShowTime = $selectedMovie = "";
                 </div>
 
 
-                <div class="p-2 align-self-center">
-                    <a href="SignInPage.php" style="text-decoration: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
-                </div>
             </div>
         </header>
     </div>

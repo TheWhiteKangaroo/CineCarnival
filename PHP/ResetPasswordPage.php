@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(!isset($_SESSION['verification']) ){
+    session_destroy();
+    header("Location: ForgotPasswordPage.php");
+}
 include "DatabaseConnection.php";
 $msg="";
 $currentDateTime = date("Y/m/d");
@@ -37,10 +41,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['changePasswordBtn'])) 
 
                 $query = "UPDATE customer SET password='$newPasswordToDB' WHERE mail='$user';";
                 $result = mysqli_query($conn, $query);
-                session_destroy();
+                
                 if ($result == TRUE) {
                     $msg="Password reset successful!";
-                    session_destroy();
+                    echo "<script>showMessage();</script>";
+                    $_SESSION['msg']="Password Reset Successful!";
                     header("Location: SignInPage.php");
                 } else {
                     $msg="Failed to reset password!";
@@ -78,6 +83,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['changePasswordBtn'])) 
     <link rel="stylesheet" href="file:///C:/Users/User/Downloads/fontawesome-free-5.13.0-web/fontawesome-free-5.13.0-web/css/all.css">
     <link rel="stylesheet" href="..\css/style.css">
     <link rel="stylesheet" href="..\css/bootstrap.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+    <script>
+        function showMessage(){
+            Swal.fire({
+            title: 'Password Reset Successful!',
+            showClass: {
+                popup: 'animated fadeInDown faster'
+            },
+            hideClass: {
+                popup: 'animated fadeOutUp faster'
+            }
+            })
+        }
+    </script>
 </head>
 
 <body>

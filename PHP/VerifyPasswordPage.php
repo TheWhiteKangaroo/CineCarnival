@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(!isset($_SESSION['verificationCode'])){
+    session_destroy();
+    header("Location: ForgotPasswordPage.php");
+}
 include "DatabaseConnection.php";
 $mail = $_SESSION['mail'];
 $verificationCode = $_SESSION['verificationCode'];
@@ -15,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verificationCodeBtn'])
             if ($vCode == $_SESSION['verificationCode']) {
                 $msg="Verified Verification Code!";
                 $_SESSION['verification'] = "verified";
+                echo "<script>showMessage();</script>";
                 header("Location: ResetPasswordPage.php");
             } else {
                 $msg="Verification Code did not match!";
@@ -47,6 +52,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verificationCodeBtn'])
     <link rel="stylesheet" href="file:///C:/Users/User/Downloads/fontawesome-free-5.13.0-web/fontawesome-free-5.13.0-web/css/all.css">
     <link rel="stylesheet" href="..\css/style.css">
     <link rel="stylesheet" href="..\css/bootstrap.min.css">
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+    <script>
+        function showMessage(){
+            Swal.fire({
+            title: 'Yup, You verified identity!',
+            showClass: {
+                popup: 'animated fadeInDown faster'
+            },
+            hideClass: {
+                popup: 'animated fadeOutUp faster'
+            }
+            })
+        }
+    </script>
 </head>
 
 <body>

@@ -1,12 +1,15 @@
 <?php
 session_start();
-include "DatabaseConnection.php";
 $userName = "";
-if (isset($_SESSION['userName'])) {
-    $userName = $_SESSION['userName'];
+if (isset($_SESSION['user_name'])) {
+    $userName = $_SESSION['user_name'];
+} else {
+    $userName = "";
 }
+include "DatabaseConnection.php";
 
 ?>
+
 
 
 <!DOCTYPE html>
@@ -23,6 +26,42 @@ if (isset($_SESSION['userName'])) {
     <link rel="stylesheet" href="file:///C:/Users/User/Downloads/fontawesome-free-5.13.0-web/fontawesome-free-5.13.0-web/css/all.css">
     <link rel="stylesheet" href="..\css/style.css">
     <link rel="stylesheet" href="..\css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+    <script>
+        function contentSubmission(e) {
+            var x = e;
+            var y = document.getElementById('pollTitleText').innerText;
+            var z = document.getElementById('pollIDText').innerText;
+
+            $(document).ready(function() {
+                $(".pollContainer").load("PollSubmission.php", {
+                    content: x,
+                    pollTitle: y,
+                    pollID: z
+                });
+            });
+        }
+
+        function showProfileSection() {
+            var userName = <?php echo json_encode($userName); ?>;
+            if(userName.length <=2) {
+                document.getElementById("ProfileDiv").style.display = "none";
+                document.getElementById("SignOutDiv").style.display = "none";
+                document.getElementById("SignUpDiv").style.display = "block";
+                document.getElementById("SignInDiv").style.display = "block";
+            }
+            else {
+                document.getElementById("ProfileDiv").style.display = "block";
+                document.getElementById("SignOutDiv").style.display = "block";
+                document.getElementById("SignUpDiv").style.display = "none";
+                document.getElementById("SignInDiv").style.display = "none";
+            }
+
+        }
+    </script>
+
+
     <style>
         .nowShowingTile {
             width: 100%;
@@ -47,8 +86,7 @@ if (isset($_SESSION['userName'])) {
             width: 100%;
             border: 1px black solid;
             text-align: center;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
+
             margin-top: 10px;
             border-bottom: 0;
             box-shadow: 5px 10px 10px gray;
@@ -63,33 +101,19 @@ if (isset($_SESSION['userName'])) {
 
 
         .TrendingListContainer {
-            width: 85%;
+            width: 100%;
             height: auto;
-            border-style: inherit;
-            border-left: 5px #1d1e22 solid;
-            border-right: 5px #1d1e22 solid;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
-            border-bottom: 5px #1d1e22 solid;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
+            border: 1px #2c3e50 solid;
+            border-top-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
     </style>
-    <script type="text/javascript">
-        function showProfileDiv() {
-
-        }
-    </script>
-    <?php
-    if (isset($userName) && $userName != null) {
-        echo '<script type="text/javascript">
-            showProfileDiv();
-       </script>';
-    }
-    ?>
+   
 </head>
 
-<body>
+<body onload="showProfileSection();">
     <div class="container-fluid">
         <!--Header Section-->
         <header>
@@ -98,15 +122,24 @@ if (isset($_SESSION['userName'])) {
                     <a href="index.php"><img src="..\Images/CineCarnival.png" alt="No Image..."></a>
                 </div>
 
-                <div class="p-2 align-self-center header-anchor" id="ProfileDiv">
-                    <a href="ProfilePage.php" style="text-decoration: none;"><i class="fas fa-user-alt"></i> <?php echo $userName; ?></a>
+                <div class="p-2 align-self-center header-anchor" id="ProfileDiv" style="display: none;">
+                    <a href="ProfilePage.php" style="text-decoration: none;"><i class="fas fa-user-alt"></i><?php echo $userName; ?></a>
                 </div>
-                <div class="p-2 align-self-center header-anchor" id="SignInDiv">
+                <div class="p-2 align-self-center header-anchor" id="SignInDiv" style="display: none;">
                     <a href="SignInPage.php" style="text-decoration: none;"><i class="fas fa-user-alt"></i> Sign In</a>
                 </div>
-                <div class="p-2 align-self-center" id="SignUpDiv">
+
+
+                <div class="p-2 align-self-center" id="SignUpDiv" style="display: none;">
                     <a href="RegistrationPage.php" style="text-decoration: none;"><i class="fas fa-user-plus"></i> Sign Up</a>
                 </div>
+
+                
+                <div class="p-2 align-self-center" id="SignOutDiv" style="display: none;">
+                    <a href="SignInPage.php" style="text-decoration: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                </div>
+
+
             </div>
         </header>
     </div>
@@ -146,23 +179,23 @@ if (isset($_SESSION['userName'])) {
         <!--Main Body Section-->
 
         <div class="container-fluid">
-            <div class="row mt-3 justify-content-around">
-                <div class="col-3">
+            <div class="row mt-3 justify-content-center">
+                <div class="col-2">
                     <div class="row">
                         <div class="col">
-                            <div class="pollContainer">
+                            <div class="TrendingListContainer">
                                 <div class="TrendingListTitle">
-                                    <span style="font-size: 24px; color:white;"><i class="fas fa-chart-line"></i> Trending Movies</span>
+                                    <span style="font-size: 18px; color:white;"><i class="fas fa-chart-line"></i> Trending Movies</span>
                                 </div>
                                 <div class="TrendingBox">
                                     <?php
-                                    $query = "SELECT name FROM movie LIMIT 5;";
+                                    $query = "SELECT name FROM movie LIMIT 6;";
                                     $result = mysqli_query($conn, $query);
                                     while ($row = mysqli_fetch_assoc($result)) {
                                     ?>
-                                        <div class="card" style="width: auto; height: 40px;  padding-bottom:10px;">
-                                            <div class="card-body m-0 p-0">
-                                                <a href="#" style="text-decoration: none; color:#173e43;"><?php echo $row['name']; ?></a>
+                                        <div class="card" style="width: auto; height: 40px; padding-top:10px;">
+                                            <div class="card-body m-0 p-0 h6">
+                                                <a href="#" style="text-decoration: none; ;color:#173e43;"><?php echo $row['name']; ?></a>
                                             </div>
                                         </div>
                                     <?php
@@ -178,74 +211,53 @@ if (isset($_SESSION['userName'])) {
 
 
 
-                    <div class="row m-0 p-0 justify-content-between" style="width: 100%;">
-                        <div class="col m-0 p-0">
-                            <div class="mt-4 text-justify">
-                                <?php
-                                $query = "SELECT DISTINCT title, message, links, pic, date_posted FROM notice WHERE date_posted= (SELECT MAX(date_posted) FROM notice)";
-                                $result = mysqli_query($conn, $query);
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    echo "
-                                    <div class=" . "card text-justify" . ">
-                                        <div class=" . "card-header bg-dark text-center" . ">
-                                            Notice
-                                            </div>
-                                                <div class=" . "card-body text-justify text-left" . ">
-                                                    <h5 class=" . "card-title" . ">" . $row['title'] . "</h5>";
-                                    if ($row['pic'] != null || isset($row['pic']) || !empty($row['pic'])) {
-                                        echo "
-                                                            <img class=" . "card-img-top" . " src=" . "..\images/NoTimeToDie.jpg" . " alt=" . "No Image..." . " style=" . "margin-bottom:10px; width:200px; height: 100px;" . ">
-                                                        ";
-                                    }
-                                    echo "
-                                                    <p class=" . "card-text text-justify" . ">" . $row['message'] . "</p>";
-                                    if ($row['links'] != null || isset($row['links']) || !empty($row['links'])) {
-                                        echo "
-                                                            <a href=" . $row['links'] . " class=" . "badge badge-secondary" . ">Click here</a>
-                                                        ";
-                                    }
-                                    echo "
-                                                        
-                                                </div>
-                                            <div class=" . "card-footer text-muted" . ">
-                                            <span>Posted on : " . $row['date_posted'] . "</span>
-                                        </div>
-                                     </div>
-                                ";
-                                }
-                                ?>
-                            </div>
-                        </div>
-
-                    </div>
 
 
-                    
                     <div class="row">
                         <div class="col">
                             <div class="pollContainer">
-                                <div class="pollTitle">
-                                    <span style="font-size: 24px; color:white;"><i class="fas fa-poll"></i> Poll Title</span>
-                                </div>
-                                <div class="pollContentArea">
-                                    <div class="custom-control custom-radio mb-2">
-                                        <input type="radio" class="custom-control-input" id="customControlValidation1" name="radio-stacked" required>
-                                        <label class="custom-control-label" for="customControlValidation1">PollContent-1</label>
+                                <?php
+                                $query = "SELECT * FROM poll WHERE p_id='1';";
+                                $result = mysqli_query($conn, $query);
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+
+
+
+
+
+                                    <div class="pollTitle">
+                                        <label id="pollIDText" style="font-size: 18px; color:white; margin-top:15px; margin-bottom:5px; display:none;"><i class="fas fa-poll"></i> <?php echo $row['p_id']; ?> </label>
+                                        <label id="pollTitleText" style="font-size: 18px; color:white; margin-top:15px; margin-bottom:5px;"><i class="fas fa-poll"></i> <?php echo $row['poll_title']; ?> </label>
                                     </div>
-                                    <div class="custom-control custom-radio mb-2">
-                                        <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
-                                        <label class="custom-control-label" for="customControlValidation2">PollContent-2</label>
+                                    <div class="pollContentArea">
+                                        <div class="custom-control custom-radio mb-2 text-left h6">
+                                            <input type="radio" class="custom-control-input" id="customControlValidation1" name="radio-stacked" onclick="contentSubmission('1');">
+                                            <label class="custom-control-label" for="customControlValidation1"><?php echo $row['content1']; ?></label>
+                                        </div>
+                                        <div class="custom-control custom-radio mb-2 text-left h6">
+                                            <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" onclick="contentSubmission('2');">
+                                            <label class="custom-control-label" for="customControlValidation2"><?php echo $row['content2']; ?></label>
+                                        </div>
+                                        <div class="custom-control custom-radio mb-2 text-left h6">
+                                            <input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" onclick="contentSubmission('3');">
+                                            <label class="custom-control-label" for="customControlValidation3"><?php echo $row['content3']; ?></label>
+                                        </div>
+                                        <div class="custom-control custom-radio mb-2 text-left h6">
+                                            <input type="radio" class="custom-control-input" id="customControlValidation4" name="radio-stacked" onclick="contentSubmission('4');">
+                                            <label class="custom-control-label" for="customControlValidation4"><?php echo $row['content4']; ?></label>
+                                        </div>
                                     </div>
-                                    <div class="custom-control custom-radio mb-2">
-                                        <input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" required>
-                                        <label class="custom-control-label" for="customControlValidation3">PollContent-3</label>
-                                    </div>
-                                    <div class="custom-control custom-radio mb-2">
-                                        <input type="radio" class="custom-control-input" id="customControlValidation4" name="radio-stacked" required>
-                                        <label class="custom-control-label" for="customControlValidation4">PollContent-4</label>
-                                    </div>
-                                    <button type="button" class="btn btn-success" style="border-top-left-radius: 10px; border-bottom-right-radius: 10px; width:auto; margin-top:10px;">Submit</button>
-                                </div>
+
+
+
+
+
+                                <?php
+
+                                }
+                                ?>
+
                             </div>
                         </div>
                     </div>
@@ -256,7 +268,7 @@ if (isset($_SESSION['userName'])) {
 
 
 
-                <div class="col-7">
+                <div class="col-6">
 
                     <div>
                         <div class="nowShowingTile">
@@ -274,7 +286,7 @@ if (isset($_SESSION['userName'])) {
                                     <div class="col-3">
                                         <div class="movieReelPanel" style="margin-top: 3px;">
                                             <form action="Movies.php" method="GET">
-                                                <img src="..\images/NoTimeToDie.jpg" alt="No Cover" style="width:100%; height:250px; border-top-right-radius:10px; border-top-left-radius:10px; margin:0; padding:0;"><br>
+                                                <img src="..\images/NoTimeToDie.jpg" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
                                                 <button type="submit" name="movieNumber" value=" <?php echo $row['mv_id']; ?>  id = " <?php echo $row['mv_id']; ?> class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
                                             </form>
 
@@ -302,7 +314,7 @@ if (isset($_SESSION['userName'])) {
                                     <div class="col-3">
                                         <div class="movieReelPanel" style="margin-top: 3px;">
                                             <form action="Movies.php" method="GET">
-                                                <img src="..\images/NoTimeToDie.jpg" alt="No Cover" style="width:100%; height:250px; border-top-right-radius:10px; border-top-left-radius:10px; margin:0; padding:0;"><br>
+                                                <img src="..\images/NoTimeToDie.jpg" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
                                                 <button type="submit" name="movieNumber" value=" <?php echo $row['mv_id']; ?>  id = " <?php echo $row['mv_id']; ?> class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
                                             </form>
                                         </div>
@@ -319,6 +331,57 @@ if (isset($_SESSION['userName'])) {
 
                 </div>
 
+                <div class="col-2">
+
+
+
+                            
+                    <div class="row m-0 p-0 justify-content-between" style="width: 100%;">
+                        <div class="col m-0 p-0">
+                            <div class="mt-4 text-justify">
+                                <?php
+                                $query = "SELECT DISTINCT title, message, links, pic, date_posted FROM notice WHERE date_posted= (SELECT MAX(date_posted) FROM notice)";
+                                $result = mysqli_query($conn, $query);
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "
+                                    <div class=" . "card text-justify" . ">
+                                        <div class=" . "card-header bg-dark text-center" . ">
+                                            Notice
+                                            </div>
+                                                <div class=" . "card-body text-justify text-left" . ">
+                                                    <h5 class=" . "card-title" . ">" . $row['title'] . "</h5>";
+                                    if ($row['pic'] != null || isset($row['pic']) || !empty($row['pic'])) {
+                                        echo "
+                                                            <img class=" . "card-img-top" . " src=" . $row['pic'] . " alt=" . "No Image..." . " style=" . "margin-bottom:10px; width:200px; height: 100px;" . ">
+                                                        ";
+                                    }
+                                    echo "
+                                                    <p class=" . "card-text text-justify" . ">" . $row['message'] . "</p>";
+                                    if ($row['links'] != null || isset($row['links']) || !empty($row['links'])) {
+                                        echo "
+                                                            <a href=" . $row['links'] . " class=" . "badge badge-secondary" . ">Click here</a>
+                                                        ";
+                                    }
+                                    echo "
+                                                        
+                                                </div>
+                                            <div class=" . "card-footer text-muted" . ">
+                                            <span>Posted on : " . $row['date_posted'] . "</span>
+                                        </div>
+                                     </div>
+                                ";
+                                }
+                                ?>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+            
             </div>
 
 
@@ -363,10 +426,7 @@ if (isset($_SESSION['userName'])) {
 
 
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="..\css/bootstrap.min.js"></script>
+
 </body>
 
 </html>

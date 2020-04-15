@@ -1,3 +1,15 @@
+<?php
+session_start();
+$userName = "";
+if (isset($_SESSION['user_name'])) {
+    $userName = $_SESSION['user_name'];
+} else {
+    $userName = "";
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,9 +24,28 @@
     <link rel="stylesheet" href="file:///C:/Users/User/Downloads/fontawesome-free-5.13.0-web/fontawesome-free-5.13.0-web/css/all.css">
     <link rel="stylesheet" href="..\css/style.css">
     <link rel="stylesheet" href="..\css/bootstrap.min.css">
+
+    <script>
+         function showProfileSection() {
+            var userName = <?php echo json_encode($userName); ?>;
+            if(userName.length >=2) {
+                document.getElementById("ProfileDiv").style.display = "block";
+                document.getElementById("SignOutDiv").style.display = "block";
+                document.getElementById("SignUpDiv").style.display = "none";
+                document.getElementById("SignInDiv").style.display = "none";
+            }
+            else {
+                document.getElementById("ProfileDiv").style.display = "none";
+                document.getElementById("SignOutDiv").style.display = "none";
+                document.getElementById("SignUpDiv").style.display = "block";
+                document.getElementById("SignInDiv").style.display = "block";                
+            }
+
+        }
+    </script>
 </head>
 
-<body>
+<body onload="showProfileSection();">
     <div class="container">
         <!--Header Section-->
         <header>
@@ -23,12 +54,19 @@
                     <a href="index.php"><img src="..\images/CineCarnival.png" alt="No Image..."></a>
                 </div>
 
-                    <div class="p-2 align-self-center ">
-                        <a href="SignInPage.php" style="text-decoration: none;"><i class="fas fa-user-alt"></i> Sign In</a>
-                    </div>
-                    <div class="p-2 align-self-center">
-                        <a href="RegistrationPage.php" style="text-decoration: none;"><i class="fas fa-user-plus"></i> Sign Up</a>
-                    </div>
+                   
+                <div class="p-2 align-self-center header-anchor" id="ProfileDiv" style="display: none;">
+                    <a href="ProfilePage.php" style="text-decoration: none;"><i class="fas fa-user-alt"></i><?php echo $userName; ?></a>
+                </div>
+                <div class="p-2 align-self-center header-anchor" id="SignInDiv" style="display: none;">
+                    <a href="SignInPage.php" style="text-decoration: none;"><i class="fas fa-user-alt"></i> Sign In</a>
+                </div>
+                <div class="p-2 align-self-center" id="SignUpDiv" style="display: none;">
+                    <a href="RegistrationPage.php" style="text-decoration: none;"><i class="fas fa-user-plus"></i> Sign Up</a>
+                </div>
+                <div class="p-2 align-self-center" id="SignOutDiv" style="display: none;">
+                    <a href="SignInPage.php" style="text-decoration: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                </div>
             </div>
         </header>
     </div>

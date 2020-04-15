@@ -1,10 +1,14 @@
 <?php
     include "DatabaseConnection.php";
+    $msg="";
     session_start();
+    if(isset($_SESSION['msg'])){
+        $msg = $_SESSION['msg'];
+    }
     session_destroy();
     session_start();
     $userName = $mail=$password=$passwordInDB=$userType="";
-    $msg="";
+    
     if($_SERVER["REQUEST_METHOD"]=="POST"){
         if(!empty($_POST['userName']) ){
             $userName=mysqli_real_escape_string($conn,$_POST['userName']);
@@ -38,8 +42,8 @@
                     }
                     if(password_verify($password,$passwordInDB)){
                         if($userType==3){
-                            $_SESSION['userName']=$row['user_name'];
-                            $_SESSION['userType']=$row['user_type'];
+                            $_SESSION['user_name']=$row['user_name'];
+                            $_SESSION['user_type']=$row['user_type'];
                             header("Location: ProfilePage.php");
                         }
                     }
@@ -170,7 +174,7 @@
                                 <tr>
                                     <td colspan="2">
                                         <div>
-                                            <span style="color: red; font-size: 16px; font-weight: bolder;">*<?php echo "$msg";?></span>
+                                            <span style="color: #d9534f; font-size: 16px; font-weight: bolder;">*<?php echo "$msg";?></span>
                                         </div>
                                     </td>
                                 </tr>
