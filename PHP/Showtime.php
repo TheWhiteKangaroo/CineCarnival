@@ -307,7 +307,7 @@ $result2 = mysqli_query($conn, $query2);
                             <span style="color: #0275d8; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>VIP Hall</label><label for=""> - 600 BDT</label><br><br><br>
                             <p>
                             <p></p>
-                            <span style="color: #f0ad4e; font-size:16px; text-align:left;"><i class="fas fa-star-of-life"></i> <label for="" style="color: black;"> Each customer is allowed to purchase a total of maxmimum 5 tickets for a day for all movies.</label></span> <br><br>
+                            <span style="color: #f0ad4e; font-size:16px; text-align:left;"><i class="fas fa-star-of-life"></i> <label for="" style="color: black;"> Each customer is allowed to purchase max. 5 tickets for a day for all movies.</label></span> <br><br>
                             <label for="">Customers can purchase online with 3 E-commerce methods :</label><br>
                             <span style="color: #f0ad4e; font-size:16px; text-align:right;"><i class="fas fa-star-of-life"></i></span> <label for="">bKash</label><br>
                             <span style="color: #f0ad4e; font-size:16px; text-align:right;"><i class="fas fa-star-of-life"></i></span> <label for="">Standard Chartered Bank Ltd.</label><br>
