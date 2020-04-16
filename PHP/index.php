@@ -65,21 +65,22 @@ include "DatabaseConnection.php";
     <style>
         .nowShowingTile {
             width: 100%;
-            height: 65px;
+            height: 60px;
             background-color: #2c3e50;
             color: white;
             margin-top: 10px;
             padding-top: 10px;
             padding-left: 50px;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
 
         }
 
         .nowShowingTile a {
             text-decoration: none;
             color: white;
-            font-size: 28px;
+            font-size: 22px;
+            text-align: left;
         }
 
         .movieCardsShowReel {
@@ -103,9 +104,10 @@ include "DatabaseConnection.php";
         .TrendingListContainer {
             width: 100%;
             height: auto;
+            min-height: 100px;
             border: 1px #2c3e50 solid;
-            border-top-left-radius: 25px;
-            border-bottom-right-radius: 25px;
+            border-top-left-radius: 17px;
+            border-bottom-right-radius: 15px;
             margin-top: 10px;
             margin-bottom: 10px;
         }
@@ -189,13 +191,15 @@ include "DatabaseConnection.php";
                                 </div>
                                 <div class="TrendingBox">
                                     <?php
-                                    $query = "SELECT name FROM movie LIMIT 6;";
+                                    $query = "SELECT name,mv_id FROM movie LIMIT 6;";
                                     $result = mysqli_query($conn, $query);
                                     while ($row = mysqli_fetch_assoc($result)) {
                                     ?>
                                         <div class="card" style="width: auto; height: 40px; padding-top:10px;">
                                             <div class="card-body m-0 p-0 h6">
-                                                <a href="#" style="text-decoration: none; ;color:#173e43;"><?php echo $row['name']; ?></a>
+                                                <form action="Movies.php" method="GET">
+                                                    <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="btn btn-link text-dark text-decoration-none font-weight-normal"><?php echo $row['name'];?></button>
+                                                </form>
                                             </div>
                                         </div>
                                     <?php
@@ -271,8 +275,8 @@ include "DatabaseConnection.php";
                 <div class="col-6">
 
                     <div>
-                        <div class="nowShowingTile">
-                            <a href="MoviesPage.php">Now Showing</a>
+                        <div class="nowShowingTile pl-3">
+                            <a href="MoviesPage.php"><i class="fas fa-tape"></i> Now Showing</a>
                         </div>
                         <div class="row justify-content-start">
                             <?php
@@ -284,7 +288,7 @@ include "DatabaseConnection.php";
                             ?>
 
                                     <div class="col-3">
-                                        <div class="movieReelPanel" style="margin-top: 3px;">
+                                        <div class="movieReelPanel" style="margin-top: 2px;">
                                             <form action="Movies.php" method="GET">
                                                 <img src="..\images/NoTimeToDie.jpg" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
                                                 <button type="submit" name="movieNumber" value=" <?php echo $row['mv_id']; ?>  id = " <?php echo $row['mv_id']; ?> class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
@@ -299,8 +303,8 @@ include "DatabaseConnection.php";
                             ?>
                         </div>
 
-                        <div class="nowShowingTile mt-5" style="background-color: #2c3e50;">
-                            <a href="MoviesPage.php">Up Coming</a>
+                        <div class="nowShowingTile mt-5 pl-3" style="background-color: #2c3e50;">
+                            <a href="MoviesPage.php"><i class="fas fa-tape"></i> Up Coming</a>
                         </div>
                         <div class="row justify-content-between">
                             <?php
@@ -312,7 +316,7 @@ include "DatabaseConnection.php";
                             ?>
 
                                     <div class="col-3">
-                                        <div class="movieReelPanel" style="margin-top: 3px;">
+                                        <div class="movieReelPanel" style="margin-top: 2px;">
                                             <form action="Movies.php" method="GET">
                                                 <img src="..\images/NoTimeToDie.jpg" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
                                                 <button type="submit" name="movieNumber" value=" <?php echo $row['mv_id']; ?>  id = " <?php echo $row['mv_id']; ?> class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>

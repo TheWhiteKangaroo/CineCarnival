@@ -210,10 +210,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
                             <div class="card bg-dark text-white mb-3">
                                 <img class="card-img inner-image" src="..\images/NoTimeToDie.jpg" alt="Card image" style="width: 100%; height:500px;filter: blur(30px);-webkit-filter: blur(8px);">
                                 <div class="card-img-overlay">
-                                    <h3 class="card-title"><?php echo $row['name']; ?></h3>
-                                    <span class="card-text"><i class="fas fa-users"></i> <?php echo $row['cast']; ?></span><br>
-                                    <span class="card-text"><i class="fas fa-tape"></i> <?php echo $row['genre']; ?></span><br>
-                                    <span class="card-text"><i class="far fa-clock"></i> <?php echo substr($row['runtime'], 3, 5) . " hrs"; ?></span>
+                                    <h2 class="card-title"><?php echo $row['name']; ?></h2>
+                                    <span class="card-text h5 font-weight-normal"><i class="fas fa-users"></i> <?php echo $row['cast']; ?></span><br>
+                                    <span class="card-text h5 font-weight-normal"><i class="fas fa-tape"></i> <?php echo $row['genre']; ?></span><br>
+                                    <span class="card-text h5 font-weight-normal"><i class="far fa-clock"></i> <?php echo substr($row['runtime'], 3, 5) . " hrs"; ?></span>
                                 </div>
                             </div>
 
@@ -225,7 +225,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
                                                 <div style=" margin-right:10px; margin-top:0px; padding:5px;">
                                                     <span style="font-size:22px; margin-bottom:20px;">Trailer   :</span>
                                                     <div class="mt-4">
-                                                        <iframe width="410" height="250" src="https://www.youtube.com/embed/BIhNsAtPbPI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:10px;"></iframe>
+                                                        <iframe width="410" height="250" src="https://www.youtube.com/embed/BIhNsAtPbPI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:5px;"></iframe>
                                                     </div>
                                                     
                                                 </div>
@@ -259,7 +259,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <div style="border: 1px grey solid; border-radius:10px; margin-right:10px;">
+                                            <div style="border: 1px grey solid; border-radius:5px; margin-right:10px;">
                                                 <table class="table table-striped">
                                                     <tbody>
                                                         <tr>

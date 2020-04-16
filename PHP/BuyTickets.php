@@ -144,12 +144,7 @@ $selectedShowTime = $selectedMovie = "";
                 });
             });
 
-               
-            $("#confirmBtn").click(function() {
-                $("#billZone").load("PaymentPage.php", {
-                    $msg:selectedDate
-                });
-            });
+           
         });
     </script>
     <script>

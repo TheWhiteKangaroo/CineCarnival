@@ -43,6 +43,7 @@ echo $availableSeats."<br>";
 <html>
 
 <head>
+
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
@@ -80,8 +81,8 @@ echo $availableSeats."<br>";
 
         function showConfirmPage(){
             document.getElementById('chooseTicketSection').style.display="none";
-            document.getElementById('billContainer').style.display="block";
-            document.getElementById('paymentArea').style.display="block";
+            document.getElementById('billContainer').style.display="none";
+            document.getElementById('paymentArea').style.display="none";
              $(document).ready(function() {
             
                 $("#billZone").load("PaymentPage.php", {

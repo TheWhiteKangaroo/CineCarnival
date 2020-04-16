@@ -480,12 +480,13 @@ $np = ceil($tm / $perPage);
                         ?>
 
                     </div>
+                    <div class=" text-center mt-2 mb-2  ldMoreBtn" id="btnLoadDiv">
+                        <button type="button" id="ldMoreButton" name="ldMoreButton">Show More</button>
+                    </div>
 
                 </div>
                 <div class="col-8">
-                    <div class="text-center mt-2 mb-2  ldMoreBtn" id="btnLoadDiv">
-                        <button type="button" id="ldMoreButton" name="ldMoreButton">Show More</button>
-                    </div>
+                    
                 </div>
             </div>
         </div>

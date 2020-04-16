@@ -9,6 +9,12 @@ else{
     $userName = $_SESSION['user_name'];
     $userType = $_SESSION['user_type'];    
 }
+$userID = "";
+$query  = "SELECT c_id FROM customer WHERE user_name='$userName' OR mail='$userName';";
+$result = mysqli_query($conn,$query);
+while($row=mysqli_fetch_assoc($result)){
+    $userID = $row['c_id'];
+}
 
 $gender = $firstName = $lastName = $mail = $phone = $address = $password = $newPassword = $newPasswordToDB = $confirmPassword = $status = $points = $joiningDate = $msg = "";
 $currentDateTime=date("Y/m/d");
@@ -435,16 +441,19 @@ if(isset($_POST['updatePassBtn'])){
                                     <th>Date</th>
                                     <th>Showtime</th>
                                     <th>Price</th>
+                                    <th>Payment Method</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 <?php
                                 $x = 0;
-                                $query = "SELECT * FROM ticket;";
+                                $query = "SELECT * FROM ticket WHERE c_id='$userID';";
                                 $result1 = mysqli_query($conn, $query);
+                                
                                 while ($row = mysqli_fetch_assoc($result1)) {
-                                    $query = "SELECT m.name,t.theatre_name,s.show_date,s.show_time FROM shows as s left join movie as m on s.movie_id=m.mv_id left join theatre as t on s.theatre_id=t.theatre_id;";
+                                    $showID=$row['show_id'];
+                                    $query = "SELECT m.name,t.theatre_name,s.show_date,s.show_time FROM shows as s left join movie as m on s.movie_id=m.mv_id left join theatre as t on s.theatre_id=t.theatre_id WHERE s.s_id='$showID';";
                                     $result2 = mysqli_query($conn, $query);
                                     while ($row2 = mysqli_fetch_assoc($result2)) {
                                         $x++;
@@ -455,6 +464,7 @@ if(isset($_POST['updatePassBtn'])){
                                             <td><?php echo $row2['show_date']; ?></td>
                                             <td><?php echo substr($row2['show_time'],0,5)  . " -" . $row2['theatre_name']; ?></td>
                                             <td><?php echo $row['price']; ?></td>
+                                            <td><?php echo $row['payment_method']; ?></td>
                                         </tr>
                                 <?php
                                     }
