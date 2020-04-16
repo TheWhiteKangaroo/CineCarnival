@@ -36,7 +36,8 @@ body {
     height: 500px;
     border-radius: 0px;
 }
-.pollContainer{
+
+.pollContainer {
     width: 100%;
     height: auto;
     border: 2px #2c3e50 solid;
@@ -46,7 +47,7 @@ body {
     margin-bottom: 10px;
 }
 
-.pollTitle{
+.pollTitle {
     width: 100%;
     color: white;
     text-align: center;
@@ -56,11 +57,13 @@ body {
     min-height: 65px;
     border-top-left-radius: 20px;
 }
-.pollTitle span{
+
+.pollTitle span {
     font-size: 24px;
     color: white;
 }
-.pollContentArea{
+
+.pollContentArea {
     width: 100%;
     text-align: center;
     margin-top: 15px;
@@ -69,7 +72,7 @@ body {
     font-size: 18px;
 }
 
-.TrendingBox{
+.TrendingBox {
     width: 100%;
     text-align: left;
     margin-top: 0px;
@@ -77,6 +80,7 @@ body {
     color: #173e43;
     font-size: 18px;
 }
+
 .TrendingListTitle {
     width: 100%;
     color: white;
@@ -613,7 +617,6 @@ a:focus {
     padding-top: 15px;
 }
 
-
 .paymentBtn {
     width: 32%;
     height: 75px;
@@ -625,10 +628,19 @@ a:focus {
     margin: 0;
     padding: 0;
     box-shadow: 5px 10px 10px gray;
+    transition: transform .2s;
 }
 
-.paymentBtn:active {
+.paymentBtn:focus {
     outline: none;
+    background-color: #feda6a;
+    color: black;
+}
+
+.paymentBtn:hover {
+    transform: scale(1.1);
+    background-color: #feda6a;
+    color: black;
 }
 
 #payBtn {
@@ -641,4 +653,8 @@ a:focus {
     outline: none;
     border-style: none;
     box-shadow: 5px 10px 10px gray;
+}
+
+#payBtn:hover {
+    transform: scale(1.1);
 }
