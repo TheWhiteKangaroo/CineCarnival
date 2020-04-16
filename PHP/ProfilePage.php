@@ -328,10 +328,10 @@ if(isset($_POST['updatePassBtn'])){
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-6">
+                <div class="col-10">
                     <div id="profileFormSection" style="display: block;">
                         <form action="ProfilePage.php" method="POST">
-                            <table style="width: 60%; margin-left:200px;">
+                            <table style="width: 50%; margin-left:300px;">
                                 <tr>
                                     <th colspan="2">
                                         <div class="form-group text-center mt-5 mb-0">
@@ -440,6 +440,7 @@ if(isset($_POST['updatePassBtn'])){
                                     <th>Movie</th>
                                     <th>Date</th>
                                     <th>Showtime</th>
+                                    <th>Seats</th>
                                     <th>Price</th>
                                     <th>Payment Method</th>
                                 </tr>
@@ -463,6 +464,7 @@ if(isset($_POST['updatePassBtn'])){
                                             <td><?php echo $row2['name']; ?></td>
                                             <td><?php echo $row2['show_date']; ?></td>
                                             <td><?php echo substr($row2['show_time'],0,5)  . " -" . $row2['theatre_name']; ?></td>
+                                            <td><?php echo $row['seat_number']; ?></td>
                                             <td><?php echo $row['price']; ?></td>
                                             <td><?php echo $row['payment_method']; ?></td>
                                         </tr>

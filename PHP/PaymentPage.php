@@ -179,7 +179,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['dbblBtn'])){
                 var cardNumber = document.getElementById('bKashAccountNumber').value;
                 if(amount!=null && amount!="undefined" && amount!="" && holderName!=null && holderName!="undefined" && holderName!="" && cardNumber!=null && cardNumber!="undefined" && cardNumber!=""){
                     if(amount!=totalPrice || amount!=Math.ceil(totalPrice) || amount!=Math.floor(totalPrice)){
-                        alert("Enter correct amount!");
+                        Swal.fire('Please enter correct amount!');
                     }
                     else{
                         document.getElementById('paymentArea').style.display="none";
@@ -327,7 +327,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['dbblBtn'])){
                             <tr>
                                 <td>
                                     <div class="inuptWithIcon mt-1 mb-1">
-                                        <input type="number" class="resetPass-inputs" id="bKashPin" value="" placeholder="Enter pin number." required>
+                                        <input type="password" class="resetPass-inputs" id="bKashPin" value="" placeholder="Enter pin number." required>
                                     </div>
                                 </td>
                             </tr>
@@ -380,7 +380,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['dbblBtn'])){
                             <tr>
                                 <td>
                                     <div class="inuptWithIcon mt-1 mb-1">
-                                        <input type="number" class="resetPass-inputs" id="SCBPinNumber" value="" placeholder="Enter pin number." required>
+                                        <input type="password" class="resetPass-inputs" id="SCBPinNumber" value="" placeholder="Enter pin number." required>
                                     </div>
                                 </td>
                             </tr>
@@ -425,7 +425,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['dbblBtn'])){
                             <tr>
                                 <td>
                                     <div class="inuptWithIcon mt-1 mb-1">
-                                        <input type="number" class="resetPass-inputs" value="" id="dbblPin" placeholder="Enter pin number.">
+                                        <input type="password" class="resetPass-inputs" value="" id="dbblPin" placeholder="Enter pin number.">
                                     </div>
                                 </td>
                             </tr>

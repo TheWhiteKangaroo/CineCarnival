@@ -1,5 +1,6 @@
 <?php 
 include "DatabaseConnection.php";
+date_default_timezone_set("Asia/Dhaka");
 $userName = $mail = "";
 $fullName = "";
 $selectedMovie = "";
@@ -16,7 +17,7 @@ $totalPrice = "";
 $discount = "";
 $paymentType ="";
 $userID="";
-$sellingSeatNumber = "";
+$sellingSeatNumber = $soldSeatCount=$availableSeats="";
 
 
     if(isset($_POST['showID']) && isset($_POST['userID'])){
@@ -36,7 +37,8 @@ $sellingSeatNumber = "";
     }
 
 
-$currentDate = $currentDateTime="";
+$currentDate =date("Y-m-d");
+ $currentDateTime="";
 $currentDateTime=date('Y-m-d H:i:s');
 $query = "SELECT first_name, last_name FROM customer WHERE c_id='$userID';";
 $result=mysqli_query($conn,$query);
@@ -44,19 +46,31 @@ while($row=mysqli_fetch_assoc($result)){
     $userName = $row['first_name']." ".$row['last_name'];
 }
 
-$query = "SELECT DISTINCT sold_seat FROM theatre WHERE theatre_name='$selectedTheatreName' AND s_id='$showID';";
+$query = "SELECT DISTINCT sold_seat,available_seat FROM theatre WHERE theatre_name='$selectedTheatreName' AND s_id='$showID';";
+
 $result=mysqli_query($conn,$query);
 while($row=mysqli_fetch_assoc($result)){
-    $sellingSeatNumber= $row['sold_seat']+1;
-}
-$seatString="";
-for($i=0; $i<$selectedSeatCount; $i++){
-    $seatString = $sellingSeatNumber.", ";
-    $sellingSeatNumber++;
+    $sellingSeatNumber= $row['sold_seat'];
+    $availableSeats = $row['available_seat'];
+    $soldSeatCount = $row['sold_seat'];
 }
 
-    $sql = "INSERT INTO `ticket`(`ticket_id`, `c_id`, `show_id`, `price`, `discount`, `sold_date_time`, `seat_number`,`payment_method`) VALUES ('0','$userID','$showID','$totalPrice','$discount','$currentDateTime','$sellingSeatNumber','$seatString','$paymentType')";
-    mysqli_query($conn, $sql);
+$sellingSeatNumber++;
+$seatString="";
+
+for($i=0; $i<$selectedSeatCount; $i++){
+    $seatString .= "HC-".($sellingSeatNumber).", ";
+    $sellingSeatNumber++;
+}
+$seatString=rtrim($seatString, ",");
+$soldSeatCount = $soldSeatCount+$selectedSeatCount;
+$availableSeats = $availableSeats-$selectedSeatCount;
+
+$sql = "INSERT INTO `ticket`(`ticket_id`, `c_id`, `show_id`, `price`, `discount`, `sold_date_time`, `seat_number`,`seat_count`,`payment_method`) VALUES ('0','$userID','$showID','$totalPrice','$discount','$currentDate','$seatString','$selectedSeatCount','$paymentType')";
+mysqli_query($conn, $sql);
+
+$sql = "UPDATE theatre SET available_seat='$availableSeats', sold_seat='$soldSeatCount' WHERE theatre_name='$selectedTheatreName' AND s_id='$showID';";
+mysqli_query($conn, $sql);
     
 ?>
 
@@ -129,6 +143,11 @@ for($i=0; $i<$selectedSeatCount; $i++){
                             <td><span><?php echo $selectedSeatCount; ?></span></td>
                         </tr>
                         <tr>
+                            <td><span>Seat No.</span></td>
+                            <td>:</td>
+                            <td><span><?php echo $seatString; ?></span></td>
+                        </tr>
+                        <tr>
                             <td><span>Price</span></td>
                             <td>:</td>
                             <td><span><?php echo $price . " BDT"; ?></span></td>
@@ -145,14 +164,13 @@ for($i=0; $i<$selectedSeatCount; $i++){
                         </tr>
                     </table>
                 </div>
-                <div class="text-center">
+            </div>
+            <div class="text-center mt-5">
                     <button type="button" class="btn btn-warning" onclick="printBill();"><i class="fas fa-print"></i> Print</button>
                 </div>
                 <div class="text-center">
                     <a href="ProfilePage.php">Click to check purchase history.</a>
                 </div>
-            </div>
-    
     </div>
 </body>
 </html>

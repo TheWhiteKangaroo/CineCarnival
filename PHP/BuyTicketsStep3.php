@@ -1,9 +1,13 @@
 <?php
-
+date_default_timezone_set("Asia/Dhaka");
+$currentDate=$NextDay="";
+$currentDate =date("Y-m-d");
+$NextDay = date('Y-m-d', strtotime($currentDate . ' + 1 days'));
 include "DatabaseConnection.php";
-$perSeatPrice = $showType = $theatreType = $theatreID = $showTime = $showDate =$theatreName= $availableSeats = "";
+$perSeatPrice = $showType = $theatreType = $theatreID = $showTime = $showDate =$theatreName= $availableSeats =$soldSeats=$totalSeats= "";
 $selectedMovieName="";
 $selectedDate=$selectedShowID="";
+$purchaseCount="";
 if (isset($_POST['selectedShowID']) && isset($_POST['selectedMovie']) && isset($_POST['selectedDate'])) {
     $selectedShowID = $_POST['selectedShowID'];
     $selectedDate = $_POST['selectedDate'];
@@ -22,21 +26,18 @@ if (isset($_POST['selectedShowID']) && isset($_POST['selectedMovie']) && isset($
     $result = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_assoc($result)) {
         $availableSeats = $row['available_seat'];
+        $total_seats=$row['available_seat'];
         $theatreType = $row['theatre_type'];
         $theatreName = $row['theatre_name'];
     }
+    $query = "SELECT SUM(seat_count) AS purchaseCount FROM ticket WHERE c_id='20' AND sold_date_time='$currentDate' OR sold_date_time='$NextDay';";
+    $result = mysqli_query($conn,$query);
+    while($row=mysqli_fetch_assoc($result)){
+        $purchaseCount = $row['purchaseCount'];
+    }
+    //echo "Purchase count : ".$purchaseCount."<br>".$currentDate."<br>".$NextDay;
 }
 
-/*
-echo "Data : "."<br>";
-echo $selectedDate."<br>";
-echo $selectedMovieName."<br>";
-echo $showTime."<br>";
-echo $showType."<br>";
-echo $theatreName."<br>";
-echo $showDate."<br>";
-echo $availableSeats."<br>";
-*/
 ?>
 
 <!DOCTYPE html>
@@ -47,6 +48,7 @@ echo $availableSeats."<br>";
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
+        var purchaseCount = '<?php echo $purchaseCount; ?>';
         var selectedMovie = '<?php echo $selectedMovieName; ?>';
         var selectedDate = '<?php echo $selectedDate; ?>';
         var selectedShowTime = '<?php echo $showTime; ?>';
@@ -59,7 +61,7 @@ echo $availableSeats."<br>";
         function checkAvailableSeat() {
             var x = document.getElementById('seatSelectionDropDown');
              selectedSeatCount = parseInt(x.options[x.selectedIndex].text);
-              savailableSeatCount = '<?php echo $availableSeats; ?>';
+              availableSeatCount = '<?php echo $availableSeats; ?>';
             
             if (selectedSeatCount > availableSeatCount) {  
                 Swal.fire({
@@ -75,7 +77,22 @@ echo $availableSeats."<br>";
 
             }
             else if (selectedSeatCount < availableSeatCount) {
-                document.getElementById('proceedDiv').style.display="block";
+                if(purchaseCount >= 5){
+                    Swal.fire({
+                    title: 'Your ticket purchase reached max. limit for a day.',
+                    showClass: {
+                        popup: 'animated fadeInDown faster'
+                    },
+                    hideClass: {
+                        popup: 'animated fadeOutUp faster'
+                    }
+                    })
+                    document.getElementById('proceedDiv').style.display="none";    
+                }
+                else if(purchaseCount<5){
+                    document.getElementById('proceedDiv').style.display="block";
+                }
+                
             }
         }
 

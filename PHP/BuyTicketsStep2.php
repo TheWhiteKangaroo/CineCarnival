@@ -10,7 +10,7 @@ if (isset($_POST['selectedMovieName'])) {
     while ($row = mysqli_fetch_assoc($result1)) {
         $movieID = $row['mv_id'];
     }
-    $query1 = "select s.show_time,s.s_id,s.show_type, t.theatre_id,t.theatre_name, m.name FROM shows as s LEFT join theatre as t on t.theatre_id=s.theatre_id LEFT JOIN movie as m on m.mv_id=s.movie_id WHERE movie_id='$movieID'";
+    $query1 = "select s.show_time,s.s_id,s.show_type, t.theatre_id,t.theatre_name, m.name FROM shows as s LEFT join theatre as t on t.theatre_id=s.theatre_id LEFT JOIN movie as m on m.mv_id=s.movie_id WHERE m.status='Now Showing' AND m.mv_id='$movieID' AND t.total_seat <> t.sold_seat";
     $result1 = mysqli_query($conn, $query1);
 }
 ?>
