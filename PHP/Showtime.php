@@ -246,29 +246,29 @@ $result2 = mysqli_query($conn, $query2);
                                                     $result4 = mysqli_query($conn, "SELECT DISTINCT show_time FROM shows WHERE movie_id='$row[mv_id]';");
                                                     while ($newRow = mysqli_fetch_assoc($result4)) {
                                                         $tempTime = $newRow['show_time'];
-                                                        $result5 = mysqli_query($conn, "SELECT theatre_id,show_type FROM shows WHERE movie_id='$row[mv_id]' AND show_time='$tempTime';");
+                                                        $result5 = mysqli_query($conn, "SELECT s.theatre_id,s.show_type, t.theatre_type FROM shows AS s LEFT JOIN theatre AS t ON s.theatre_id=t.theatre_id WHERE movie_id='$row[mv_id]' AND show_time='$tempTime';");
                                                         while ($lastRow = mysqli_fetch_assoc($result5)) {
-                                                            if ($lastRow['theatre_id'] == 1) {
+                                                            if ($lastRow['theatre_type'] == "REGULAR") {
+                                                                if (substr($newRow['show_time'], 0, 5) > 12) {
+                                                                    $showtime = substr($newRow['show_time'], 0, 5) . " PM";
+                                                                } else {
+                                                                    $showtime = substr($newRow['show_time'], 0, 5) . " AM";
+                                                                }
+                                                                echo " <td><label class=" . "timeLabels" . " style=" . "background-color:#f0ad4e;" . ">" . $showtime . "</label></td>";
+                                                            } else if ($lastRow['theatre_type'] == "PREMIUM") {
                                                                 if (substr($newRow['show_time'], 0, 5) > 12) {
                                                                     $showtime = substr($newRow['show_time'], 0, 5) . " PM";
                                                                 } else {
                                                                     $showtime = substr($newRow['show_time'], 0, 5) . " AM";
                                                                 }
                                                                 echo " <td><label class=" . "timeLabels" . " style=" . "background-color:#5cb85c ;" . ">" . $showtime . "</label></td>";
-                                                            } else if ($lastRow['theatre_id'] == 2) {
+                                                            } else if ($lastRow['theatre_type'] == "VIP") {
                                                                 if (substr($newRow['show_time'], 0, 5) > 12) {
                                                                     $showtime = substr($newRow['show_time'], 0, 5) . " PM";
                                                                 } else {
                                                                     $showtime = substr($newRow['show_time'], 0, 5) . " AM";
                                                                 }
-                                                                echo " <td><label class=" . "timeLabels" . " style=" . "background-color:#0275d8 ;" . ">" . $showtime . "</label></td>";
-                                                            } else if ($lastRow['theatre_id'] == 3) {
-                                                                if (substr($newRow['show_time'], 0, 5) > 12) {
-                                                                    $showtime = substr($newRow['show_time'], 0, 5) . " PM";
-                                                                } else {
-                                                                    $showtime = substr($newRow['show_time'], 0, 5) . " AM";
-                                                                }
-                                                                echo " <td><label class=" . "timeLabels bg-warning" . " style=" . "background-color:#f0ad4e ;" . ">" . $showtime . "</label></td>";
+                                                                echo " <td><label class=" . "timeLabels bg-warning" . " style=" . "background-color:#0275d8 ;" . ">" . $showtime . "</label></td>";
                                                             }
                                                         }
                                                     }
@@ -304,7 +304,15 @@ $result2 = mysqli_query($conn, $query2);
 
                             <span style="color: #f0ad4e; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>Regular Hall</label><label for=""> - 250 BDT</label><br>
                             <span style="color: #5cb85c; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>Premium Hall</label><label for=""> - 450 BDT</label><br>
-                            <span style="color: #0275d8; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>VIP Hall</label><label for=""> - 600 BDT</label><br>
+                            <span style="color: #0275d8; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>VIP Hall</label><label for=""> - 600 BDT</label><br><br><br>
+                            <p>
+                            <p></p>
+                            <span style="color: #f0ad4e; font-size:16px; text-align:left;"><i class="fas fa-star-of-life"></i> <label for="" style="color: black;"> Each customer is allowed to purchase max. 5 tickets for a day for all movies.</label></span> <br><br>
+                            <label for="">Customers can purchase online with 3 E-commerce methods :</label><br>
+                            <span style="color: #f0ad4e; font-size:16px; text-align:right;"><i class="fas fa-star-of-life"></i></span> <label for="">bKash</label><br>
+                            <span style="color: #f0ad4e; font-size:16px; text-align:right;"><i class="fas fa-star-of-life"></i></span> <label for="">Standard Chartered Bank Ltd.</label><br>
+                            <span style="color: #f0ad4e; font-size:16px; text-align:right;"><i class="fas fa-star-of-life"></i></span> <label for="">Dutch Bangla Bank Ltd. </label><br>
+                            </p>
                             </div>
                     </div>
                     <div class="row text-center">

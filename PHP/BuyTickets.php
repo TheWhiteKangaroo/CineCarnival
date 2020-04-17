@@ -113,6 +113,18 @@ $selectedShowTime = $selectedMovie = "";
                 elements[i].selectedIndex = 0;
             }
 
+            var select = document.getElementById("showSelectDropDown");
+            var length = select.options.length;
+            for (i = length-1; i > 0; i--) {
+            select.options[i] = null;
+            }
+
+            var select = document.getElementById("seatSelectionDropDown");
+            var length = select.options.length;
+            for (i = length-1; i > 0; i--) {
+            select.options[i] = null;
+            }
+
             $(document).ready(function() {
                 $('#movieNameDropDownSection').load('BuyTicketsStep4.php', {
                     selectedDate: selectedDate
