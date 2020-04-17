@@ -20,7 +20,7 @@ body {
 .myCorporateBox {
     width: 100%;
     margin-top: 150px;
-    border:1px #173e43 solid;
+    border-bottom:2px #feda6a solid;
 }
 
 .corporateHeaderBox {
@@ -80,8 +80,9 @@ body {
     text-align: left;
     margin-top: 0px;
     margin-bottom: 20px;
-    color: #173e43;
     font-size: 18px;
+    background-color: white;
+    color: black;
 }
 
 .TrendingListTitle {

@@ -109,7 +109,7 @@ mysqli_query($conn, $sql);
                         <tr>
                             <td><span>Customer</span></td>
                             <td>:</td>
-                            <td><span><?php echo $userName; ?></span></td>
+                            <td><span class="text-capitalize"><?php echo $userName; ?></span></td>
                         </tr>
 
                         <tr>

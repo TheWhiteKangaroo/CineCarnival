@@ -132,7 +132,7 @@ include "DatabaseConnection.php";
     <div class="container-fluid">
         <!--Header Section-->
         <header>
-            <div class="d-flex flex-row flex-nowrap sm-flex-wrap  header-section mt-5" style="height: 120px; padding-top:25px;">
+            <div class="d-flex flex-row flex-nowrap sm-flex-wrap  header-section" style="height: 120px; padding-top:25px; margin-top:120px;">
                 <div class="p-2 mr-auto">
                     <a href="index.php"><img src="..\Images/CineCarnival.png" alt="No Image..."></a>
                 </div>
@@ -209,9 +209,9 @@ include "DatabaseConnection.php";
                                     while ($row = mysqli_fetch_assoc($result)) {
                                     ?>
                                         
-                                            <div class="trendingCard">
+                                            <div class="trendingCard bg-light mb-2">
                                                 <form action="Movies.php" method="GET">
-                                                    <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="btn btn-link text-light text-decoration-none font-weight-normal"><?php echo $row['name'];?></button>
+                                                    <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="btn btn-link text-dark text-decoration-none font-weight-normal"><?php echo $row['name'];?></button>
                                                 </form>
                                             </div>
                                         
@@ -303,7 +303,7 @@ include "DatabaseConnection.php";
                                     <div class="col-3">
                                         <div class="movieReelPanel" style="margin-top: 2px;">
                                             <form action="Movies.php" method="GET">
-                                                <img src="..\images/NoTimeToDie.jpg" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
+                                                <img src="<?php echo $row['cover_pic']?>" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
                                                 <button type="submit" name="movieNumber" value=" <?php echo $row['mv_id']; ?>  id = " <?php echo $row['mv_id']; ?> class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
                                             </form>
 
@@ -331,7 +331,7 @@ include "DatabaseConnection.php";
                                     <div class="col-3">
                                         <div class="movieReelPanel" style="margin-top: 2px;">
                                             <form action="Movies.php" method="GET">
-                                                <img src="..\images/NoTimeToDie.jpg" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
+                                                <img src="<?php echo $row['cover_pic']?>" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
                                                 <button type="submit" name="movieNumber" value=" <?php echo $row['mv_id']; ?>  id = " <?php echo $row['mv_id']; ?> class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
                                             </form>
                                         </div>
@@ -355,7 +355,7 @@ include "DatabaseConnection.php";
                             
                     <div class="row m-0 p-0 justify-content-between" style="width: 100%;">
                         <div class="col m-0 p-0">
-                            <div class="mt-4 text-justify">
+                            <div class="mt-2 text-justify">
                                 <?php
                                 $query = "SELECT DISTINCT title, message, links, pic, date_posted FROM notice WHERE date_posted= (SELECT MAX(date_posted) FROM notice)";
                                 $result = mysqli_query($conn, $query);

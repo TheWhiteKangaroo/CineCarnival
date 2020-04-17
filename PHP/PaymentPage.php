@@ -247,13 +247,13 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['dbblBtn'])){
                         <tr>
                             <td><span>Customer</span></td>
                             <td>:</td>
-                            <td><span><?php echo $fullName; ?></span></td>
+                            <td><span class="text-capitalize"><?php echo $fullName; ?></span></td>
                         </tr>
 
                         <tr>
                             <td><span>Movie</span></td>
                             <td>:</td>
-                            <td><span><?php echo $selectedMovie; ?></span></td>
+                            <td><span class="text-capitalize"><?php echo $selectedMovie; ?></span></td>
                         </tr>
                         <tr>
                             <td><span>Showtime</span></td>

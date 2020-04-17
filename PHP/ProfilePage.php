@@ -326,7 +326,7 @@ if(isset($_POST['updatePassBtn'])){
                 <div class="col-10">
                     <div id="profileFormSection" style="display: block;">
                         <form action="ProfilePage.php" method="POST">
-                            <table style="width: 50%; margin-left:300px;">
+                            <table style="width: 40%; margin-left:500px;">
                                 <tr>
                                     <th colspan="2">
                                         <div class="form-group text-center mt-5 mb-0">

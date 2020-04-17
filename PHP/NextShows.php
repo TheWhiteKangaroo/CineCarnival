@@ -61,29 +61,29 @@ else{
                             $result4 = mysqli_query($conn, "SELECT DISTINCT show_time FROM shows WHERE movie_id='$row[mv_id]';");
                             while ($newRow = mysqli_fetch_assoc($result4)) {
                                 $tempTime = $newRow['show_time'];
-                                $result5 = mysqli_query($conn, "SELECT theatre_id,show_type FROM shows WHERE movie_id='$row[mv_id]' AND show_time='$tempTime';");
+                                $result5 = mysqli_query($conn, "SELECT t.theatre_type,s.theatre_id,s.show_type FROM shows AS s LEFT JOIN theatre AS t ON s.theatre_id=t.theatre_id WHERE movie_id='$row[mv_id]' AND show_time='$tempTime';");
                                 while ($lastRow = mysqli_fetch_assoc($result5)) {
-                                    if ($lastRow['theatre_id'] == 1) {
+                                    if ($lastRow['theatre_type'] == "REGULAR") {
                                         if (substr($newRow['show_time'], 0, 5) > 12) {
                                             $showtime = substr($newRow['show_time'], 0, 5) . " PM";
                                         } else {
                                             $showtime = substr($newRow['show_time'], 0, 5) . " AM";
                                         }
-                                        echo " <td><span class=" . "timeLabels" ." style="."background-color:#5cb85c ;".">" . $showtime . "</span></td>";
-                                    } else if ($lastRow['theatre_id'] == 2) {
+                                        echo " <td><span class=" . "timeLabels" ." style="."background-color:#f0ad4e;".">" . $showtime . "</span></td>";
+                                    } else if ($lastRow['theatre_type'] == "PREMIUM") {
                                         if (substr($newRow['show_time'], 0, 5) > 12) {
                                             $showtime = substr($newRow['show_time'], 0, 5) . " PM";
                                         } else {
                                             $showtime = substr($newRow['show_time'], 0, 5) . " AM";
                                         }
-                                        echo " <td><span class=" . "timeLabels" ." style="."background-color:#0275d8 ;".">" . $showtime . "</span></td>";
-                                    } else if ($lastRow['theatre_id'] == 3) {
+                                        echo " <td><span class=" . "timeLabels" ." style="."background-color:#5cb85c;".">" . $showtime . "</span></td>";
+                                    } else if ($lastRow['theatre_type'] == "VIP") {
                                         if (substr($newRow['show_time'], 0, 5) > 12) {
                                             $showtime = substr($newRow['show_time'], 0, 5) . " PM";
                                         } else {
                                             $showtime = substr($newRow['show_time'], 0, 5) . " AM";
                                         }
-                                        echo " <td><span class=" . "timeLabels" ." style="."background-color:#f0ad4e ;".">" . $showtime . "</span></td>";
+                                        echo " <td><span class=" . "timeLabels" ." style="."background-color:#0275d8;".">" . $showtime . "</span></td>";
                                     }
                                 }
                             }
