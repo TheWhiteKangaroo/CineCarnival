@@ -1,6 +1,6 @@
 <?php
 session_start();
-$userName = "";
+$userName = $movie_id=$trailer_link=$cover_pic="";
 if (isset($_SESSION['user_name'])) {
     $userName = $_SESSION['user_name'];
 } else {
@@ -12,6 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
     $movie_id = $_GET['movieNumber'];
     $query = "SELECT * FROM movie WHERE mv_id='$movie_id';";
     $result = mysqli_query($conn, $query);
+
+   
 }
 
 ?>
@@ -208,12 +210,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
 
                         <div class="card border-primary mb-1" style="max-width: 100%; min-height:1000px;">
                             <div class="card bg-dark text-white mb-3">
-                                <img class="card-img inner-image" src="..\images/NoTimeToDie.jpg" alt="Card image" style="width: 100%; height:500px;filter: blur(30px);-webkit-filter: blur(8px);">
+                                <img class="card-img inner-image" src="<?php echo $row['cover_pic'];?>" alt="Card image" style="width: 100%; height:500px;filter: blur(30px);-webkit-filter: blur(8px);">
                                 <div class="card-img-overlay">
-                                    <h2 class="card-title"><?php echo $row['name']; ?></h2>
-                                    <span class="card-text h5 font-weight-normal"><i class="fas fa-users"></i> <?php echo $row['cast']; ?></span><br>
-                                    <span class="card-text h5 font-weight-normal"><i class="fas fa-tape"></i> <?php echo $row['genre']; ?></span><br>
-                                    <span class="card-text h5 font-weight-normal"><i class="far fa-clock"></i> <?php echo substr($row['runtime'], 3, 5) . " hrs"; ?></span>
+                                    <h2 class="card-title text-light"><?php echo $row['name']; ?></h2>
+                                    <span class="card-text h5 text-light font-weight-normal"><i class="fas fa-users"></i> <?php echo $row['cast']; ?></span><br>
+                                    <span class="card-text h5 text-light font-weight-normal"><i class="fas fa-tape"></i> <?php echo $row['genre']; ?></span><br>
+                                    <span class="card-text h5 text-light font-weight-normal"><i class="far fa-clock"></i> <?php echo substr($row['runtime'], 3, 5) . " hrs"; ?></span>
                                 </div>
                             </div>
 
@@ -225,7 +227,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
                                                 <div style=" margin-right:10px; margin-top:0px; padding:5px;">
                                                     <span style="font-size:22px; margin-bottom:20px;">Trailer   :</span>
                                                     <div class="mt-4">
-                                                        <iframe width="410" height="250" src="https://www.youtube.com/embed/BIhNsAtPbPI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:5px;"></iframe>
+                                                        <iframe width="410" height="250" src="<?php echo $row['trailer_link'];?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:5px;"></iframe>
                                                     </div>
                                                     
                                                 </div>

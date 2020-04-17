@@ -107,7 +107,7 @@ if (isset($_SESSION['user_name'])) {
         <div class="container">
             <div class="row corporateHeaderBox">
                 <div class="col">
-                    <h1 style="margin:0; padding:0;border-bottom: 2px rgb(0,125,255) dotted; color: DarkOrange;"><i class="fas fa-handshake"></i> Our Partners</h1>
+                    <h1 style="margin:0; padding:0;color: DarkOrange;"><i class="fas fa-handshake"></i> Our Partners</h1>
                     <div class="row">
                         <div class="col-6 mt-5">
 

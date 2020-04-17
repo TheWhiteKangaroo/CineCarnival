@@ -34,7 +34,7 @@ if (isset($_POST['content'])) {
         <label style="font-size: 18px; color:white; margin-top:15px; margin-bottom:5px;"><i class="fas fa-poll"></i> <?php echo $pollTitle; ?> </label>
     </div>
     <div class="pollContentArea">
-        <h5><i class="far fa-grin"></i> <?php echo " ".$msg;?></h5>
+        <h5 class="text-light"><i class="far fa-grin"></i> <?php echo " ".$msg;?></h5>
     </div>
 </body>
 

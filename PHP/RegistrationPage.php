@@ -71,13 +71,8 @@
         }
 
         $gmailPattern="/^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$/";
-        if(!preg_match($alphabetCheck,$firstName)){
-            $msg="Use alphabets only for First Name!";
-        }
-        else if(!preg_match($alphabetCheck,$lastName)){
-            $msg="Use alphabets only for Last Name!";
-        }
-        else if(!preg_match($alphanumericCheck,$userName) && preg_match($numericCheck,$userName)){
+        
+         if(!preg_match($alphanumericCheck,$userName) && preg_match($numericCheck,$userName)){
             $msg="Use alphanumeric with @ at the front only for User Name!";
         }
         else if(!preg_match($userNameCheck,$userName)){
@@ -264,14 +259,14 @@
                                 <tr>
                                     <td>
                                         <div class="form-group inputWithIcon">
-                                            <input class="form-control border border-primary" type="text" name="firstName" value="<?php echo "$firstName"; ?>" placeholder="First Name*" maxlength="30" minlength="3" required>
+                                            <input class="form-control border text-capitalize border-primary" type="text" name="firstName" value="<?php echo "$firstName"; ?>" placeholder="First Name*" maxlength="30" minlength="3" required>
                                             <i class="fas fa-user"></i>
 
                                         </div>
                                     </td>
                                     <td>
                                         <div class="form-group inputWithIcon">
-                                            <input class="form-control border border-primary" type="text" name="lastName" value="<?php echo "$lastName"; ?>" placeholder="Last Name*" maxlength="30" minlength="3" required>
+                                            <input class="form-control border text-capitalize border-primary" type="text" name="lastName" value="<?php echo "$lastName"; ?>" placeholder="Last Name*" maxlength="30" minlength="3" required>
                                             <i class="fas fa-user"></i>
                                         </div>
                                     </td>
@@ -279,7 +274,7 @@
                                 <tr>
                                     <td colspan="2">
                                         <div class="form-group inputWithIcon">
-                                            <input class="form-control border border-primary" type="text" name="userName" value="<?php echo "$userName"; ?>" placeholder="@User Name*" minlength="3" maxlength="30" required>
+                                            <input class="form-control border text-capitalize border-primary" type="text" name="userName" value="<?php echo "$userName"; ?>" placeholder="@User Name*" minlength="3" maxlength="30" required>
                                             <i class="fas fa-user-circle"></i>
                                         </div>
                                     </td>
@@ -287,7 +282,7 @@
                                 <tr>
                                     <td colspan="2">
                                         <div class="form-group inputWithIcon">
-                                            <input class="form-control border border-primary" type="email" name="mail" value="<?php echo "$mail"; ?>" placeholder="Mail*" minlength="13" maxlength="50" required>
+                                            <input class="form-control border  border-primary" type="email" name="mail" value="<?php echo "$mail"; ?>" placeholder="Mail*" minlength="13" maxlength="50" required>
                                             <i class="fas fa-envelope"></i>
                                         </div>
                                     </td>
@@ -303,7 +298,7 @@
                                 <tr>
                                     <td colspan="2">
                                         <div class="form-group inputWithIcon">
-                                            <textarea name="address" class="form-control border border-primary" cols="30" rows="3" minlength="3" maxlength="20" placeholder="Address"><?php echo "$address"; ?></textarea>
+                                            <textarea name="address" class="form-control text-capitalize border border-primary" cols="30" rows="3" minlength="3" maxlength="100" placeholder="Address"><?php echo "$address"; ?></textarea>
                                             <i class="fas fa-map-marker-alt"></i>
                                         </div>
                                     </td>

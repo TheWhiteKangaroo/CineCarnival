@@ -21,10 +21,11 @@ include "DatabaseConnection.php";
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home | CineCarnival</title>
     <link rel="icon" type="image/png" href="..\Images/CineCarnival.png">
+    <link rel="stylesheet" href="..\css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="file:///C:/Users/User/Downloads/fontawesome-free-5.13.0-web/fontawesome-free-5.13.0-web/css/all.css">
-    <link rel="stylesheet" href="..\css/style.css">
+    
     <link rel="stylesheet" href="..\css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
@@ -63,6 +64,18 @@ include "DatabaseConnection.php";
 
 
     <style>
+    body{
+        background-image: url('curtain.jpg');
+    }
+    .trendingCard{
+    width: 100%;
+    height: 40px;
+    color: white;
+    border-bottom: 1px black solid;
+    }
+    .trendingCard button{
+        color: white;
+    }
         .nowShowingTile {
             width: 100%;
             height: 60px;
@@ -119,7 +132,7 @@ include "DatabaseConnection.php";
     <div class="container-fluid">
         <!--Header Section-->
         <header>
-            <div class="d-flex flex-row flex-nowrap sm-flex-wrap  header-section ">
+            <div class="d-flex flex-row flex-nowrap sm-flex-wrap  header-section mt-5" style="height: 120px; padding-top:25px;">
                 <div class="p-2 mr-auto">
                     <a href="index.php"><img src="..\Images/CineCarnival.png" alt="No Image..."></a>
                 </div>
@@ -195,13 +208,13 @@ include "DatabaseConnection.php";
                                     $result = mysqli_query($conn, $query);
                                     while ($row = mysqli_fetch_assoc($result)) {
                                     ?>
-                                        <div class="card" style="width: auto; height: 40px; padding-top:10px;">
-                                            <div class="card-body m-0 p-0 h6">
+                                        
+                                            <div class="trendingCard">
                                                 <form action="Movies.php" method="GET">
-                                                    <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="btn btn-link text-dark text-decoration-none font-weight-normal"><?php echo $row['name'];?></button>
+                                                    <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="btn btn-link text-light text-decoration-none font-weight-normal"><?php echo $row['name'];?></button>
                                                 </form>
                                             </div>
-                                        </div>
+                                        
                                     <?php
                                     }
                                     ?>
@@ -237,19 +250,19 @@ include "DatabaseConnection.php";
                                     <div class="pollContentArea">
                                         <div class="custom-control custom-radio mb-2 text-left h6">
                                             <input type="radio" class="custom-control-input" id="customControlValidation1" name="radio-stacked" onclick="contentSubmission('1');">
-                                            <label class="custom-control-label" for="customControlValidation1"><?php echo $row['content1']; ?></label>
+                                            <label class="custom-control-label text-light" for="customControlValidation1"><?php echo $row['content1']; ?></label>
                                         </div>
                                         <div class="custom-control custom-radio mb-2 text-left h6">
                                             <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" onclick="contentSubmission('2');">
-                                            <label class="custom-control-label" for="customControlValidation2"><?php echo $row['content2']; ?></label>
+                                            <label class="custom-control-label text-light" for="customControlValidation2"><?php echo $row['content2']; ?></label>
                                         </div>
                                         <div class="custom-control custom-radio mb-2 text-left h6">
                                             <input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" onclick="contentSubmission('3');">
-                                            <label class="custom-control-label" for="customControlValidation3"><?php echo $row['content3']; ?></label>
+                                            <label class="custom-control-label text-light" for="customControlValidation3"><?php echo $row['content3']; ?></label>
                                         </div>
                                         <div class="custom-control custom-radio mb-2 text-left h6">
                                             <input type="radio" class="custom-control-input" id="customControlValidation4" name="radio-stacked" onclick="contentSubmission('4');">
-                                            <label class="custom-control-label" for="customControlValidation4"><?php echo $row['content4']; ?></label>
+                                            <label class="custom-control-label text-light" for="customControlValidation4"><?php echo $row['content4']; ?></label>
                                         </div>
                                     </div>
 

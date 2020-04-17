@@ -8,7 +8,7 @@ if (isset($_SESSION['user_name'])) {
 }
 include "DatabaseConnection.php";
 $movieName = $genre = $cast = "";
-$perPage = 9;
+$perPage = 6;
 
 $sql = "SELECT * FROM movie WHERE status='Now Showing' ORDER BY mv_id DESC LIMIT $perPage";
 $result = mysqli_query($conn, $sql);
@@ -49,6 +49,7 @@ $np = ceil($tm / $perPage);
 
     <script>
         function showProfileSection() {
+            changeNowShowingBtnColor();
             var userName = <?php echo json_encode($userName); ?>;
             if (userName.length >= 2) {
                 document.getElementById("ProfileDiv").style.display = "block";
@@ -101,7 +102,7 @@ $np = ceil($tm / $perPage);
 
     <script>
         $(document).ready(function() {
-            var i = 9;
+            var i = 6;
             var genre = "";
             var language = "";
             var format = "";
@@ -109,14 +110,14 @@ $np = ceil($tm / $perPage);
 
             $("#nowShowingBtn").click(function() {
                 $("#movieSection").load("NextMovies.php", {
-                    NowShowingPage: 9,
+                    NowShowingPage: 6,
                     selectedStatus: getStatus()
                 });
             });
 
             $("#upcomingBtn").click(function() {
                 $("#movieSection").load("NextMovies.php", {
-                    UpComingPage: 9,
+                    UpComingPage: 6,
                     selectedStatus: getStatus()
                 });
             });
@@ -314,6 +315,14 @@ $np = ceil($tm / $perPage);
 
         });
     </script>
+
+    <style>
+        .card-img-top{
+            width: 100%;
+            height: 18vw;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body onload="showProfileSection();">
@@ -415,12 +424,12 @@ $np = ceil($tm / $perPage);
                             <span class="ml-5" style="margin-left: 15px;">Comedy</span>
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" id="horrorCB" class="genre" name="horrorCB" value="Horror">
-                            <span class="ml-5" style="margin-left: 15px;">Horror</span>
+                            <input type="checkbox" id="horrorCB" class="genre" name="horrorCB" value="Sci-Fi">
+                            <span class="ml-5" style="margin-left: 15px;">Sci-Fi</span>
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" id="dramaCB" class="genre" name="dramaCB" value="Drama">
-                            <span class="ml-5" style="margin-left: 15px;">Drama</span>
+                            <input type="checkbox" id="dramaCB" class="genre" name="dramaCB" value="Thriller">
+                            <span class="ml-5" style="margin-left: 15px;">Thriller</span>
                         </div>
                     </div>
                     <div class="mt-4 mb-2">
@@ -456,14 +465,12 @@ $np = ceil($tm / $perPage);
 
                         <?php
                         while ($row = mysqli_fetch_assoc($result)) {
-                            if ($row == null || !isset($row)) {
-                                echo "Oops, no movies currently to show!";
-                            }
                             echo "
                                         <div class=" . "col-4" . ">
                                         <div class=" . "card movieCard-box" . "style=" . "width: 18rem;" . ">
                                         <form action=" . "Movies.php" . " method=" . "GET" . ">
-                                            <img class=" . "card-img-top" . " src=" . "..\images/NoTimeToDie.jpg" . " alt=" . "Card image cap" . ">
+                                            <img class=" . "card-img-top" . " src=".$row['cover_pic']." alt=" . "Card image cap" . " style="."max-width:18rem;".">
+                                            
                                             <div class=" . "card-body" . ">
                                                 <p class=" . "card-text" . ">
                                                     <span><b>" . $row['name'] . "</b></span><br>

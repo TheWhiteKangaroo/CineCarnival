@@ -20,14 +20,14 @@ body {
 .myCorporateBox {
     width: 100%;
     margin-top: 150px;
+    border:1px #173e43 solid;
 }
 
 .corporateHeaderBox {
     width: 100%;
     text-align: center;
     margin-top: 40px;
-    border: 2px rgb(0, 125, 255) dotted;
-    border-radius: 10px;
+    
 }
 
 .mybox {
@@ -71,7 +71,8 @@ body {
     color: #173e43;
     font-size: 18px;
     height: auto;
-    min-height: 100px;;
+    min-height: 100px;
+    color: white;
 }
 
 .TrendingBox {
@@ -174,7 +175,7 @@ body {
     padding-top: 15px;
     font-size: 18px;
     border-bottom: 20px black solid;
-    box-shadow: 5px 10px 10px gray;
+    box-shadow: 5px 10px 10px black;
 }
 
 .movies-nav span {
@@ -290,7 +291,6 @@ body {
     background-color: black;
     border-bottom: 1px rgb(0, 125, 255) solid;
     outline: none;
-    height: 80px;
 }
 
 .header-section a {
@@ -354,7 +354,7 @@ body {
     background-color: black;
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
-    box-shadow: 5px 10px 10px grey;
+    box-shadow: 5px 10px 10px black;
 }
 
 .nav-area ul {
@@ -447,7 +447,7 @@ a:focus {
     background-color: black;
     padding-top: 20px;
     margin-bottom: 20px;
-    box-shadow: 5px 10px 10px grey;
+    box-shadow: 5px 10px 10px black;
     border: 1px black solid;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -587,7 +587,7 @@ a:focus {
     height: 100px;
     outline: none;
     border-style: none;
-    box-shadow: 5px 10px 10px gray;
+    box-shadow: 5px 10px 10px grey;
     font-size: 24px;
     transition: transform .2s;
 }

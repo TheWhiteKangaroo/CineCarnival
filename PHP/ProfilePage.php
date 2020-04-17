@@ -66,13 +66,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateInfoBtn'])) {
         $msg = "Phone Number cannot be empty!";
     }
 
-    if(!preg_match($alphabetCheck,$firstName)){
-        $msg="Use alphabets only for First Name!";
-    }
-    else if(!preg_match($alphabetCheck,$lastName)){
-        $msg="Use alphabets only for Last Name!";
-    }
-    else if(preg_match($numericCheck,$address)){
+    
+    if(preg_match($numericCheck,$address)){
         $msg="Invalid Address!";
     }
     else if((strlen((string)$phone))<=10 || (strlen((string)$phone))>=13 || $phone<=0){
@@ -313,7 +308,7 @@ if(isset($_POST['updatePassBtn'])){
             <div class="row mt-4  text-light welcome-box">
                 <div class="col text-center">
                     <div class="welcome-to-profile">
-                        <label for="" style="font-size: 40px;">Welcome, <?php echo "$firstName"." ".$lastName; ?>!</label>
+                        <label class="text-capitalize" for="" style="font-size: 40px;">Welcome, <?php echo "$firstName"." ".$lastName; ?>!</label>
                     </div>
                 </div>
             </div>
@@ -361,13 +356,13 @@ if(isset($_POST['updatePassBtn'])){
                                 <tr>
                                     <td>
                                         <div class="form-group inputWithIcon" id="fNameDiv">
-                                            <input class="form-control border border-primary" type="text" name="firstName" value="<?php echo "$firstName"; ?>" placeholder="First Name" required>
+                                            <input class="form-control border text-capitalize border-primary" type="text" name="firstName" value="<?php echo "$firstName"; ?>" placeholder="First Name" required>
                                             <i class="fas fa-user"></i>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="form-group inputWithIcon" id="lNameDiv">
-                                            <input class="form-control border border-primary" type="text" name="lastName" value="<?php echo "$lastName"; ?>" placeholder="Last Name" required>
+                                            <input class="form-control border text-capitalize border-primary" type="text" name="lastName" value="<?php echo "$lastName"; ?>" placeholder="Last Name" required>
                                             <i class="fas fa-user"></i>
                                         </div>
                                     </td>
@@ -391,7 +386,7 @@ if(isset($_POST['updatePassBtn'])){
                                 <tr>
                                     <td colspan="2">
                                         <div class="form-group inputWithIcon" id="addressDiv">
-                                            <textarea name="address" class="form-control border border-primary" cols="30" rows="3" placeholder="Address"><?php echo "$address"; ?></textarea>
+                                            <textarea name="address" class="form-control text-capitalize border border-primary" cols="30" rows="3" placeholder="Address"><?php echo "$address"; ?></textarea>
                                             <i class="fas fa-map-marker-alt"></i>
                                         </div>
                                     </td>
