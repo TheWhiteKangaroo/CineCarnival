@@ -27,7 +27,6 @@ body {
     width: 100%;
     text-align: center;
     margin-top: 40px;
-
 }
 
 .mybox {
@@ -563,8 +562,8 @@ a:focus {
 
 #showCategoriesBox {
     width: 100%;
-    padding-left: 15px;
-    padding-right: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
     border: 1px dodgerblue solid;
     border-radius: 5px;
 }
@@ -663,4 +662,3 @@ a:focus {
 .payBtn:hover {
     transform: scale(1.1);
 }
-

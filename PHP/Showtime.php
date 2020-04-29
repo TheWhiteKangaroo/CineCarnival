@@ -162,9 +162,9 @@ $result2 = mysqli_query($conn, $query2);
 
         <!--Main Body Section-->
 
-        <div class="container-fluid">
-            <div class="row mt-5 justify-content-center">
-                <div class="col-2 mb-2">
+        <div class="container-fluid m-0 p-0">
+            <div class="row m-0 p-0 mt-5  justify-content-between">
+                <div class="col-3 m-0 p-0 mb-2">
                     <?php
                     $query = "SELECT DISTINCT title, message, links, pic, date_posted FROM notice WHERE date_posted= (SELECT MAX(date_posted) FROM notice)";
                     $result = mysqli_query($conn, $query);
@@ -199,8 +199,8 @@ $result2 = mysqli_query($conn, $query2);
                     }
                     ?>
                 </div>
-                <div class="col-6">
-                    <div class="card text-white bg-dark mb-3" style="max-width: 100%; border-radius:10px;">
+                <div class="col-6 m-0 p-0">
+                    <div class="card text-white bg-dark mb-3" style="max-width: 100%; border-radius:7px;">
                         <div class="card-header text-center font-weight-bold h1"><i class="fas fa-vr-cardboard"></i> Showtime</div>
                         <div class="card-body">
                             <div class="row">
@@ -284,9 +284,9 @@ $result2 = mysqli_query($conn, $query2);
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="row justify-content-around" id="showCategoriesBox">
-                        <div class="row text-center">
+                <div class="col-3 m-0 p-0" style="margin-left: 10px;">
+                    <div class="row justify-content-around m-0 p-0" id="showCategoriesBox">
+                        <div class="row text-center m-0 p-0">
                             <div class="col">
                                 <h1>Theatre and Pricing</h1>
                             </div>
