@@ -105,10 +105,10 @@ if (isset($_SESSION['user_name'])) {
 
         <!--Main Body Section-->
         <div class="container">
-            <div class="row corporateHeaderBox">
+            <div class="row corporateHeaderBox m-0 p-0 mt-3">
                 <div class="col">
                     <h1 style="margin:0; padding:0;color: DarkOrange;"><i class="fas fa-handshake"></i> Our Partners</h1>
-                    <div class="row">
+                    <div class="row" style="border: 2px lightgrey solid; border-radius:7px; margin-top:5px;">
                         <div class="col-6 mt-5">
 
                             <div class="card mb-3" style="max-width: 540px;">

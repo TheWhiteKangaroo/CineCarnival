@@ -20,14 +20,14 @@ body {
 .myCorporateBox {
     width: 100%;
     margin-top: 150px;
-    border-bottom:2px #feda6a solid;
+    border-bottom: 2px #feda6a solid;
 }
 
 .corporateHeaderBox {
     width: 100%;
     text-align: center;
     margin-top: 40px;
-    
+
 }
 
 .mybox {
@@ -163,7 +163,8 @@ body {
 }
 
 .ldMoreBtn button:hover::after,
-.ldMoreBtn :active, .ldMoreBtn:focus {
+.ldMoreBtn :active,
+.ldMoreBtn:focus {
     outline: none;
 }
 
@@ -355,7 +356,7 @@ body {
     background-color: black;
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
-    box-shadow: 5px 10px 10px black;
+    box-shadow: 5px 10px 10px grey;
 }
 
 .nav-area ul {
@@ -662,3 +663,4 @@ a:focus {
 .payBtn:hover {
     transform: scale(1.1);
 }
+

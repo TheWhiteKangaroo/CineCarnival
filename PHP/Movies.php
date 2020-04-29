@@ -1,6 +1,6 @@
 <?php
 session_start();
-$userName = $movie_id=$trailer_link=$cover_pic="";
+$userName = $movie_id=$trailer_link=$cover_pic=$movie_id=$movie_name="";
 if (isset($_SESSION['user_name'])) {
     $userName = $_SESSION['user_name'];
 } else {
@@ -10,10 +10,14 @@ include "DatabaseConnection.php";
 $query = $result = "";
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
     $movie_id = $_GET['movieNumber'];
+
     $query = "SELECT * FROM movie WHERE mv_id='$movie_id';";
     $result = mysqli_query($conn, $query);
-
-   
+    while($row=mysqli_fetch_assoc($result)){
+        $movie_id = $row['mv_id'];
+        $movie_name= $row['name'];
+    }
+    $result = mysqli_query($conn, $query);
 }
 
 ?>
@@ -44,12 +48,31 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
     <link rel="stylesheet" href="file:///C:/Users/User/Downloads/fontawesome-free-5.13.0-web/fontawesome-free-5.13.0-web/css/all.css">
     <link rel="stylesheet" href="..\css/style.css">
     <link rel="stylesheet" href="..\css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script>
         $.sweetModal({
             title: 'Will YouTube Ever Run Out Of Video IDs?',
             content: 'https://www.youtube.com/watch?v=gocwRvLhDf8',
             theme: $.sweetModal.THEME_DARK
         });
+    </script>
+
+    <script>
+        function contentSubmission(e) {
+            var rating = e;
+            var movieID = <?php echo json_encode($movie_id); ?>;
+            var userName=""; 
+            userName = <?php echo json_encode($userName); ?>;
+        
+            $(document).ready(function() {
+                $(".rating-wrapper").load("PollSubmission.php", {
+                    rating: rating,
+                    movieID: movieID,
+                    userName: userName
+                });
+            });
+        }
     </script>
     
     <script>
@@ -71,6 +94,21 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
         }
     </script>
     <style>
+        .showtimeBtn{
+            width: 60%;
+            height: 50px;
+            margin-bottom: 10px;
+            outline: none;
+            border-style: none;
+            background-color:#005180;
+            color:white;
+            font-size: 20px;
+            text-align: left;
+            border-left-color: #008AFC;
+            border-left: 110px #008AFC solid;
+            border-left-style:ridge;
+            border-radius: 5px;
+        }
         #starRatingDiv {
             width: 50%;
             height: 300px;
@@ -140,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
             padding-top: 2px;
         }
     </style>
-    <div class="container-fluid">
+    <div class="container">
         <!--Header Section-->
         <header>
             <div class="d-flex flex-row flex-nowrap sm-flex-wrap  header-section ">
@@ -166,7 +204,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
     </div>
 
     <!--Nav Bar Section-->
-    <div class="container-fluid">
+    <div class="container">
         <nav class="navbar navbar-expand-sm text-uppercase nav-area">
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
                 <span class="navbar-toggler-icon"> <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i></span>
@@ -199,9 +237,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
 
         <!--Main Body Section-->
 
-        <div class="container-fluid">
-            <div class="row justify-content-center mt-3">
-                <div class="col-8">
+        <div class="container">
+            <div class="row justify-content-center mt-4">
+                <div class="col">
                     <?php
                     date_default_timezone_set("Asia/Dhaka");
                     while ($row = mysqli_fetch_assoc($result)) {
@@ -243,16 +281,16 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
                                             <div id="starRatingDiv">
                                                 <span>Rate the movie :</span>
                                                 <div class="rating-wrapper">
-                                                    <input type="radio" name="rating" id="star-1"><label for="star-1"></label>
-                                                    <input type="radio" name="rating" id="star-2"><label for="star-2"></label>
-                                                    <input type="radio" name="rating" id="star-3"><label for="star-3"></label>
-                                                    <input type="radio" name="rating" id="star-4"><label for="star-4"></label>
-                                                    <input type="radio" name="rating" id="star-5"><label for="star-5"></label>
+                                                    <input type="radio" name="rating" id="star-1" onclick="contentSubmission('5');"><label for="star-1"></label>
+                                                    <input type="radio" name="rating" id="star-2" onclick="contentSubmission('4');"><label for="star-2" ></label>
+                                                    <input type="radio" name="rating" id="star-3" onclick="contentSubmission('3');"><label for="star-3"></label>
+                                                    <input type="radio" name="rating" id="star-4" onclick="contentSubmission('2');"><label for="star-4" ></label>
+                                                    <input type="radio" name="rating" id="star-5" onclick="contentSubmission('1');"><label for="star-5" ></label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-3 mt-4">
-                                            <div class="mt-4 mb-0 text-right" style="margin-right:10px;">
+                                            <div class="mt-4 mb-0 text-right" style="margin-right:15px;">
                                                 <form action="BuyTickets.php" method="POST">
                                                     <button type="submit" name="buyTicketBtn" class="btn btn-outline-success font-weight-bold">Buy Ticket</button>
                                                 </form>
@@ -291,6 +329,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
                                                     </tbody>
                                                 </table>
                                             </div>
+
+                                            <div class="mt-5 text-center">
+                                                <a href="Showtime.php"><button class="showtimeBtn">Check Shows</button></a>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -310,7 +352,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
 
 
             <!--Footer Section-->
-            <div class="container-fluid">
+            <div class="container">
                 <footer>
                     <div class="row my-footer">
                         <div class="col">
@@ -347,7 +389,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
         </div>
 
 
-
+    </div>
 </body>
 
 </html>

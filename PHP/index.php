@@ -25,7 +25,7 @@ include "DatabaseConnection.php";
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="file:///C:/Users/User/Downloads/fontawesome-free-5.13.0-web/fontawesome-free-5.13.0-web/css/all.css">
-    
+
     <link rel="stylesheet" href="..\css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
@@ -46,13 +46,12 @@ include "DatabaseConnection.php";
 
         function showProfileSection() {
             var userName = <?php echo json_encode($userName); ?>;
-            if(userName.length <=2) {
+            if (userName.length <= 2) {
                 document.getElementById("ProfileDiv").style.display = "none";
                 document.getElementById("SignOutDiv").style.display = "none";
                 document.getElementById("SignUpDiv").style.display = "block";
                 document.getElementById("SignInDiv").style.display = "block";
-            }
-            else {
+            } else {
                 document.getElementById("ProfileDiv").style.display = "block";
                 document.getElementById("SignOutDiv").style.display = "block";
                 document.getElementById("SignUpDiv").style.display = "none";
@@ -64,18 +63,21 @@ include "DatabaseConnection.php";
 
 
     <style>
-    body{
-        background-image: url('curtain.jpg');
-    }
-    .trendingCard{
-    width: 100%;
-    height: 40px;
-    color: white;
-    border-bottom: 1px black solid;
-    }
-    .trendingCard button{
-        color: white;
-    }
+        body {
+            background-image: url('curtain.jpg');
+        }
+
+        .trendingCard {
+            width: 100%;
+            height: 40px;
+            color: white;
+            border-bottom: 1px black solid;
+        }
+
+        .trendingCard button {
+            color: white;
+        }
+
         .nowShowingTile {
             width: 100%;
             height: 60px;
@@ -123,9 +125,10 @@ include "DatabaseConnection.php";
             border-bottom-right-radius: 15px;
             margin-top: 10px;
             margin-bottom: 10px;
+
         }
     </style>
-   
+
 </head>
 
 <body onload="showProfileSection();">
@@ -149,7 +152,7 @@ include "DatabaseConnection.php";
                     <a href="RegistrationPage.php" style="text-decoration: none;"><i class="fas fa-user-plus"></i> Sign Up</a>
                 </div>
 
-                
+
                 <div class="p-2 align-self-center" id="SignOutDiv" style="display: none;">
                     <a href="SignInPage.php" style="text-decoration: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
                 </div>
@@ -204,17 +207,38 @@ include "DatabaseConnection.php";
                                 </div>
                                 <div class="TrendingBox">
                                     <?php
-                                    $query = "SELECT name,mv_id FROM movie LIMIT 6;";
-                                    $result = mysqli_query($conn, $query);
+                                    $trendingList = array();
+                                    $sql  = "SELECT DISTINCT movie_id FROM rating ORDER BY rating DESC LIMIT 4";
+                                    $result = mysqli_query($conn, $sql);
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        array_push($trendingList, $row['movie_id']);
+                                    }
+                                    if($trendingList==null){
+                                        ?>
+                                        <div class="trendingCard bg-light text-center text-success mb-2 pt-2">
+                                            <h6><i class="fas fa-search"></i> No trending movies found!</h6>
+                                        </div>
+                                        <?php
+                                    }
+                                    else{
+                                        $query = "SELECT name,mv_id FROM movie WHERE mv_id='$trendingList[0]' ";
+                                        for ($i = 1; $i < count($trendingList); $i++) {
+                                            $val = $trendingList[$i];
+                                            $query .= " OR mv_id=$val";
+                                        }
+                                        $query .= " LIMIT 6;";
+                                        //echo $query;
+                                        $result = mysqli_query($conn, $query);   
+                                    }
                                     while ($row = mysqli_fetch_assoc($result)) {
                                     ?>
-                                        
-                                            <div class="trendingCard bg-light mb-2">
-                                                <form action="Movies.php" method="GET">
-                                                    <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="btn btn-link text-dark text-decoration-none font-weight-normal"><?php echo $row['name'];?></button>
-                                                </form>
-                                            </div>
-                                        
+
+                                        <div class="trendingCard bg-light mb-2">
+                                            <form action="Movies.php" method="GET">
+                                                <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="btn btn-link text-dark text-decoration-none font-weight-normal"><?php echo $row['name']; ?></button>
+                                            </form>
+                                        </div>
+
                                     <?php
                                     }
                                     ?>
@@ -303,8 +327,8 @@ include "DatabaseConnection.php";
                                     <div class="col-3">
                                         <div class="movieReelPanel" style="margin-top: 2px;">
                                             <form action="Movies.php" method="GET">
-                                                <img src="<?php echo $row['cover_pic']?>" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
-                                                <button type="submit" name="movieNumber" value=" <?php echo $row['mv_id']; ?>  id = " <?php echo $row['mv_id']; ?> class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
+                                                <img src="<?php echo $row['cover_pic'] ?>" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
+                                                <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
                                             </form>
 
                                         </div>
@@ -331,8 +355,8 @@ include "DatabaseConnection.php";
                                     <div class="col-3">
                                         <div class="movieReelPanel" style="margin-top: 2px;">
                                             <form action="Movies.php" method="GET">
-                                                <img src="<?php echo $row['cover_pic']?>" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
-                                                <button type="submit" name="movieNumber" value=" <?php echo $row['mv_id']; ?>  id = " <?php echo $row['mv_id']; ?> class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
+                                                <img src="<?php echo $row['cover_pic'] ?>" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
+                                                <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
                                             </form>
                                         </div>
 
@@ -352,7 +376,7 @@ include "DatabaseConnection.php";
 
 
 
-                            
+
                     <div class="row m-0 p-0 justify-content-between" style="width: 100%;">
                         <div class="col m-0 p-0">
                             <div class="mt-2 text-justify">
@@ -398,7 +422,7 @@ include "DatabaseConnection.php";
 
 
                 </div>
-            
+
             </div>
 
 

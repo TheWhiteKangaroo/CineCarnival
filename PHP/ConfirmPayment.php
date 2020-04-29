@@ -14,11 +14,13 @@ $selectedSeatCount = "";
 $theatreType = "";
 $price = "";
 $totalPrice = "";
-$discount = "";
+$discount = 0;
 $paymentType ="";
 $userID="";
+$points="";
+$pointsInDB="";
 $sellingSeatNumber = $soldSeatCount=$availableSeats="";
-
+$discountPercentage=0;
 
     if(isset($_POST['showID']) && isset($_POST['userID'])){
         $userID = $_POST['userID'];
@@ -34,16 +36,20 @@ $sellingSeatNumber = $soldSeatCount=$availableSeats="";
         $selectedShowType =$_POST['selectedShowType'];
         $selectedTheatreName =$_POST['selectedTheatreName'];
         $theatreType =$_POST['selectedTheatreType'];
+        $points = $_POST['points'];
+        $discount = $_POST['discount'];
+        $discountPercentage = $_POST['discountPercentage'];
     }
 
 
 $currentDate =date("Y-m-d");
- $currentDateTime="";
+$currentDateTime="";
 $currentDateTime=date('Y-m-d H:i:s');
-$query = "SELECT first_name, last_name FROM customer WHERE c_id='$userID';";
+$query = "SELECT first_name, last_name,points FROM customer WHERE c_id='$userID';";
 $result=mysqli_query($conn,$query);
 while($row=mysqli_fetch_assoc($result)){
     $userName = $row['first_name']." ".$row['last_name'];
+    $pointsInDB=$row['points'];
 }
 
 $query = "SELECT DISTINCT sold_seat,available_seat FROM theatre WHERE theatre_name='$selectedTheatreName' AND s_id='$showID';";
@@ -62,7 +68,7 @@ for($i=0; $i<$selectedSeatCount; $i++){
     $seatString .= "HC-".($sellingSeatNumber).", ";
     $sellingSeatNumber++;
 }
-$seatString=rtrim($seatString, ",");
+$seatString=substr_replace($seatString ,"",-1);
 $soldSeatCount = $soldSeatCount+$selectedSeatCount;
 $availableSeats = $availableSeats-$selectedSeatCount;
 
@@ -71,7 +77,37 @@ mysqli_query($conn, $sql);
 
 $sql = "UPDATE theatre SET available_seat='$availableSeats', sold_seat='$soldSeatCount' WHERE theatre_name='$selectedTheatreName' AND s_id='$showID';";
 mysqli_query($conn, $sql);
-    
+
+$status="";
+$points = $points+$pointsInDB;
+
+if($points>=1000){
+    $status = "Sapphire";
+}
+else if($points>=750 && $points<=999){
+    $status = "Diamond";
+}
+else if($points>=500 && $points<=750){
+    $status = "Perl";
+}
+else{
+    $status="Regular";
+}
+
+if($discountPercentage == 50 ){
+    $points=$points-350;
+}
+else if($discountPercentage == 35 ){
+    $points=$points-250;
+}
+else if($discountPercentage == 25 ){
+    $points=$points-200;
+}
+
+$sql = "UPDATE customer SET status='$status' , points='$points' WHERE c_id='$userID';";
+//echo $sql;
+mysqli_query($conn,$sql);
+
 ?>
 
 <html lang="en">
@@ -99,8 +135,8 @@ mysqli_query($conn, $sql);
         <script>
             Swal.fire('Payment Successful!');
         </script>    
-            <span class="text-center mb-2" style="font-size: 40px;"><i class="fas fa-check-circle"></i> Payment successful!</span>
-            <div id="billContainer" style="display: block; padding-bottom:10px;" >
+            <span class="text-center text-success mb-4" style="font-size: 40px;"><i class="fas fa-check-circle"></i> Payment successful!</span>
+            <div id="billContainer" style="display: block;margin-top:30px; padding-bottom:10px;" >
                 <div id="billBox">
                     <h2 style="padding-bottom: 10px;"><i class="fas fa-receipt"></i> Purchase Order</h2>
                 </div>
@@ -145,17 +181,17 @@ mysqli_query($conn, $sql);
                         <tr>
                             <td><span>Seat No.</span></td>
                             <td>:</td>
-                            <td><span><?php echo $seatString; ?></span></td>
+                            <td><span><?php echo rtrim($seatString,','); ?></span></td>
                         </tr>
                         <tr>
                             <td><span>Price</span></td>
                             <td>:</td>
-                            <td><span><?php echo $price . " BDT"; ?></span></td>
+                            <td><span><?php echo ($discount+$totalPrice) . " BDT"; ?></span></td>
                         </tr>
                         <tr>
                             <td><span>Discount</span></td>
                             <td>:</td>
-                            <td><span>0 BDT</span></td>
+                            <td><span><?php echo $discount." BDT";?></span></td>
                         </tr>
                         <tr>
                             <td><span>Total Price</span></td>

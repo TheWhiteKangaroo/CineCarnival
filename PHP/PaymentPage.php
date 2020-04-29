@@ -14,23 +14,24 @@ $selectedSeatCount = "";
 $theatreType = "";
 $price = "";
 $totalPrice = "";
-$discount = "";
+$discount = 0;
+$discountPercentage = 0;
+$points="";
+$status="";
 $currentDate = $currentDateTime="";
 $currentDateTime=date('Y-m-d H:i:s');
 
 if (isset($_SESSION['user_name'])) {
     $userName = $_SESSION['user_name'];
-    $query = "SELECT first_name, last_name,c_id, mail FROM customer WHERE user_name='$userName' OR mail='$userName';";
+    $query = "SELECT first_name, last_name,c_id,status,mail FROM customer WHERE user_name='$userName' OR mail='$userName';";
     $result  = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_assoc($result)) {
         $fullName = $row['first_name'] . " " . $row['last_name'];
         $mail = $row['mail'];
         $userID = $row['c_id'];
+        $status = $row['status'];
     }
 }
-
-
-
 
 if (isset($_POST['selectedMovie']) && isset($_POST['selectedDate']) && isset($_POST['selectedShowTime']) && isset($_POST['selectedShowType']) && isset($_POST['selectedTheatreName']) && isset($_POST['availableSeatCount']) && isset($_POST['selectedSeatCount']) && isset($_POST['showID']) && isset($_POST['theatreType'])) {
     $selectedMovie = $_POST['selectedMovie'];
@@ -47,12 +48,33 @@ if (isset($_POST['selectedMovie']) && isset($_POST['selectedDate']) && isset($_P
 
 if ($theatreType == "VIP") {
     $price = $selectedSeatCount * 600;
+    $points=$selectedSeatCount*75;
 } else if ($theatreType == "PREMIUM") {
     $price = $selectedSeatCount * 450;
+    $points=$selectedSeatCount*50;
 } else if ($theatreType == "REGULAR") {
     $price = $selectedSeatCount * 250;
+    $points=$selectedSeatCount*25;
 }
+
 $totalPrice = $price;
+
+if($status=="Sapphire"){
+    $discount=$totalPrice*0.50;
+    $discountPercentage = 50;
+    $totalPrice = $totalPrice - $discount;
+}
+else if($status=="Diamond"){
+    $discount=$totalPrice*0.35;
+    $discountPercentage = 35;
+    $totalPrice = $totalPrice - $discount;
+}
+else if($status=="Perl"){
+    $discount=$totalPrice*0.25;
+    $discountPercentage = 25;
+    $totalPrice = $totalPrice - $discount;
+}
+
 if ($selectedDate == "Today") {
     $selectedDate = date("Y-m-d");
 } else if ($selectedDate == "Tomorrow") {
@@ -92,7 +114,10 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['dbblBtn'])){
             var selectedTheatreName = <?php echo json_encode($selectedTheatreName); ?>;
             var selectedShowTime = <?php echo json_encode($selectedShowTime); ?>;
             var selectedShowType = <?php echo json_encode($selectedShowType); ?>;
-
+            var points = <?php echo json_encode($points); ?>;
+            var discount = <?php echo json_encode($discount); ?>;
+            var discountPercentage = <?php echo json_encode($discountPercentage); ?>;
+            
             var paymentType="";
             if(e=="dbblPayBtn"){
                 paymentType = "DBBL Payment ";
@@ -109,7 +134,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['dbblBtn'])){
                         document.getElementById('billContainer').style.display="none";
                         
                         $(document).ready(function() {  
-                            $("#confirmZone").load("ConfirmPayment.php", {
+                            $("#confirmZone").load("ConfirmPayment.php",{
                                 showID :showID,
                                 userID :userID,
                                 userName:userName,
@@ -122,7 +147,10 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['dbblBtn'])){
                                 selectedShowTime: selectedShowTime,
                                 selectedShowType : selectedShowType,
                                 selectedTheatreName: selectedTheatreName,
-                                selectedTheatreType:selectedTheatreType
+                                selectedTheatreType:selectedTheatreType,
+                                points: points,
+                                discount:discount,
+                                discountPercentage:discountPercentage
                             });
                         
                         });
@@ -162,7 +190,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['dbblBtn'])){
                                 selectedShowTime: selectedShowTime,
                                 selectedShowType : selectedShowType,
                                 selectedTheatreName: selectedTheatreName,
-                                selectedTheatreType:selectedTheatreType
+                                selectedTheatreType:selectedTheatreType,
+                                points:points,
+                                discountPercentage:discountPercentage
                             });
                         
                         });
@@ -199,7 +229,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['dbblBtn'])){
                                 selectedShowTime: selectedShowTime,
                                 selectedShowType : selectedShowType,
                                 selectedTheatreName: selectedTheatreName,
-                                selectedTheatreType:selectedTheatreType
+                                selectedTheatreType:selectedTheatreType,
+                                points:points,
+                                discountPercentage:discountPercentage
                             });
                         
                         });
@@ -236,7 +268,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['dbblBtn'])){
             
     </div>
 
-    <div class="row mt-3 mb-5 justify-content-around" id="billZone" style="width: 100%; margin-left:10px; margin-bottom: 10px;">
+    <div class="row mt-3 mb-5 no-gutters justify-content-around" id="billZone" style="width: 100%; margin-left:10px; margin-bottom: 10px;">
         <div class="col-4">
             <div id="billContainer" style="display: block;">
                 <div id="billBox">
@@ -288,7 +320,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['dbblBtn'])){
                         <tr>
                             <td><span>Discount</span></td>
                             <td>:</td>
-                            <td><span>0 BDT</span></td>
+                            <td><span><?php echo $discount." BDT";?></span></td>
                         </tr>
                         <tr>
                             <td><span>Total Price</span></td>

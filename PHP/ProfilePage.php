@@ -436,6 +436,7 @@ if(isset($_POST['updatePassBtn'])){
                                     <th>Date</th>
                                     <th>Showtime</th>
                                     <th>Seats</th>
+                                    <th>Discount</th>
                                     <th>Price</th>
                                     <th>Payment Method</th>
                                 </tr>
@@ -459,8 +460,9 @@ if(isset($_POST['updatePassBtn'])){
                                             <td><?php echo $row2['name']; ?></td>
                                             <td><?php echo $row2['show_date']; ?></td>
                                             <td><?php echo substr($row2['show_time'],0,5)  . " -" . $row2['theatre_name']; ?></td>
-                                            <td><?php echo $row['seat_number']; ?></td>
-                                            <td><?php echo $row['price']; ?></td>
+                                            <td><?php echo rtrim($row['seat_number'], ','); ?></td>
+                                            <td><?php echo $row['discount']." BDT"; ?></td>
+                                            <td><?php echo $row['price']." BDT"; ?></td>
                                             <td><?php echo $row['payment_method']; ?></td>
                                         </tr>
                                 <?php
