@@ -1,11 +1,10 @@
 <?php
 session_start();
 $userName = "";
-if(!isset($_SESSION['user_name'])){
-    $_SESSION['msg']="First sign in to buy tickets!";
+if (!isset($_SESSION['user_name'])) {
+    $_SESSION['msg'] = "First sign in to buy tickets!";
     header("Location: SignInPage.php");
-}
-else{
+} else {
     $userName = $_SESSION['user_name'];
 }
 $selectedDate = $selectedSeatCount = "";
@@ -74,25 +73,28 @@ $selectedShowTime = $selectedMovie = "";
             border-style: none;
         }
 
-        .myBill{
+        .myBill {
             width: fit-content;
             margin-left: 10px;
             margin-top: 10px;
             margin-bottom: 15px;
             font-size: 18px;
         }
-        .myBill tr{
+
+        .myBill tr {
             width: fit-content;
         }
+
         .myBill td {
             width: fit-content;
             border-bottom: 1px solid #ddd;
             height: 35px;
-            padding-left: 25px;  
+            padding-left: 25px;
         }
+
         .myBill tr:hover {
             background-color: #f5f5f5;
-            }
+        }
     </style>
 
     <script>
@@ -101,7 +103,7 @@ $selectedShowTime = $selectedMovie = "";
 
         function getSelectedDate() {
             selectedDateArray = document.getElementsByName("dateOfPurchase");
-            document.getElementById('confirmBtn').style.display="none";
+            document.getElementById('confirmBtn').style.display = "none";
             if (selectedDateArray[0].checked) {
                 selectedDate = selectedDateArray[0].value;
             } else if (selectedDateArray[1].checked) {
@@ -115,14 +117,14 @@ $selectedShowTime = $selectedMovie = "";
 
             var select = document.getElementById("showSelectDropDown");
             var length = select.options.length;
-            for (i = length-1; i > 0; i--) {
-            select.options[i] = null;
+            for (i = length - 1; i > 0; i--) {
+                select.options[i] = null;
             }
 
             var select = document.getElementById("seatSelectionDropDown");
             var length = select.options.length;
-            for (i = length-1; i > 0; i--) {
-            select.options[i] = null;
+            for (i = length - 1; i > 0; i--) {
+                select.options[i] = null;
             }
 
             $(document).ready(function() {
@@ -137,7 +139,7 @@ $selectedShowTime = $selectedMovie = "";
 
 
             $(document).on('change', '#movieSelectDropDown', function() {
-                document.getElementById('confirmBtn').style.display="none";
+                document.getElementById('confirmBtn').style.display = "none";
                 var x = document.getElementById('movieSelectDropDown');
                 movieName = x.options[x.selectedIndex].text;
                 document.cookie = "movieName=" + movieName
@@ -146,7 +148,7 @@ $selectedShowTime = $selectedMovie = "";
                 });
             });
             $(document).on('change', '#showSelectDropDown', function() {
-                document.getElementById('confirmBtn').style.display="none";
+                document.getElementById('confirmBtn').style.display = "none";
                 var x = document.getElementById('showSelectDropDown');
                 showID = x.value;
                 $('#seatAndPaymentSection').load('BuyTicketsStep3.php', {
@@ -156,7 +158,7 @@ $selectedShowTime = $selectedMovie = "";
                 });
             });
 
-           
+
         });
     </script>
     <script>
@@ -185,7 +187,7 @@ $selectedShowTime = $selectedMovie = "";
             document.getElementById('chooseTicketSection').style.display = "none";
             document.getElementById('billContainer').style.display = "block";
             document.getElementById('paymentArea').style.display = "block";
-            
+
 
         }
     </script>
@@ -245,7 +247,7 @@ $selectedShowTime = $selectedMovie = "";
 
         <div class="row mt-3 justify-content-around" id="billZone">
             <div class="col-4">
-            <div id="billContainer" style="display: none;">
+                <div id="billContainer" style="display: none;">
                     <div id="billBox">
                         <h2>Purchase Order 1</h2>
                     </div>
@@ -301,7 +303,7 @@ $selectedShowTime = $selectedMovie = "";
                 </div>
             </div>
             <div class="col-7">
-            <div class="paymentBox" id="paymentArea" style="display: none;">
+                <div class="paymentBox" id="paymentArea" style="display: none;">
                     <div class="paymentMethodsHeader" style="margin: 0; padding:0;">
                         <button class="paymentBtn" style="border-bottom-left-radius: 25px; margin:0; padding:0;" onclick="showBkashForm();">Bkash</button>
                         <button class="paymentBtn" style=" margin:0; padding:0;" onclick="showStandardCharteredForm();">Standard Chartered</button>
@@ -422,7 +424,7 @@ $selectedShowTime = $selectedMovie = "";
                                         </div>
                                     </td>
                                 </tr>
-                               
+
                                 <tr>
                                     <td>
                                         <div class="inuptWithIcon mt-1 mb-1">
@@ -452,10 +454,10 @@ $selectedShowTime = $selectedMovie = "";
         </div>
 
 
-        
+
 
         <div class="row justify-content-center mt-4" style="background: transparent; height:500px;" id="chooseTicketSection">
-            <div class="col-6 col-sm-6">
+            <div class="col-12 col-lg-6 col-md-8">
                 <form>
                     <div class="">
                         <div id="buyTicketTitle" class="text-center">
@@ -516,7 +518,7 @@ $selectedShowTime = $selectedMovie = "";
                 </div>
             </div>
             <div class="row justify-content-between my-footer-ending">
-                <div class="col=4">
+                <div class="col-4">
                     <ul>
                         <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                         <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -524,10 +526,10 @@ $selectedShowTime = $selectedMovie = "";
                         <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                     </ul>
                 </div>
-                <div class="col=4 developers-tag">
+                <div class="col-3 developers-tag">
                     <span>Developed by : Group-5</span>
                 </div>
-                <div class="col=4 stores">
+                <div class="col-3 stores">
                     <ul>
                         <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
                         <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>

@@ -124,12 +124,12 @@ if (isset($_SESSION['user_name'])) {
                     <h1 style="border-bottom: 2px Dodgerblue Solid;">Offers</h1>
                 </div>
             </div>
-            <div class="row mt-5 mb-3 justify-content-start">
+            <div class="row mt-3 mb-3 justify-content-start">
                 
                     <?php
                         while($row=mysqli_fetch_assoc($result)){
                             echo "
-                            <div class="."col-3".">
+                            <div class="."col-4".">
                                 <div class="."card m-0"." style="."max-width:18rem;".">
                                     <img class="."card-img-top"." src=".$row['pic']." alt="."Card image cap".">
                                         <div class="."card-body m-0".">
@@ -163,7 +163,7 @@ if (isset($_SESSION['user_name'])) {
                    </div>
                </div>
                <div class="row justify-content-between my-footer-ending">
-                   <div class="col=4">
+                   <div class="col-4">
                        <ul>
                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -171,10 +171,10 @@ if (isset($_SESSION['user_name'])) {
                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                        </ul>
                    </div>
-                   <div class="col=4 developers-tag">
+                   <div class="col-3 developers-tag">
                     <span>Developed by : Group-5</span>
                    </div>
-                   <div class="col=4 stores">
+                   <div class="col-3 stores">
                         <ul>    
                             <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
                            <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>

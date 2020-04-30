@@ -265,7 +265,7 @@ body {
     border: 1px #5cb85c solid;
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    width: 60%;
+    width: 100%;
     height: 40px;
     margin-bottom: 3px;
     padding: 5px 10px;
@@ -484,7 +484,7 @@ a:focus {
 }
 
 .stores {
-    margin-right: 80px;
+    margin-right: 0px;
 }
 
 .stores button {
@@ -530,7 +530,7 @@ a:focus {
     color: darkorange;
     opacity: 1;
     transition: 0.5s;
-    font-size: 20px;
+    font-size: 18fpx;
 }
 
 .developers-tag span:hover ::after {
@@ -564,17 +564,17 @@ a:focus {
     width: 100%;
     padding-left: 0px;
     padding-right: 0px;
-    border: 1px dodgerblue solid;
+    border: 1px dodgerblue double;
     border-radius: 5px;
 }
 
 #purchaseHistorySection {
     width: 100%;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 #purchaseHistoryTable {
-    margin-top: 70px;
+    margin-top: 35px;
     width: 100%;
     height: 250px;
     border: 1px darkgrey solid;

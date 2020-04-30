@@ -66,10 +66,7 @@ $np = ceil($tm / $perPage);
         }
 
         var status = "Now Showing";
-
-        function changeNowShowingBtnColor() {
-            document.getElementById('nowShowingBtn').style.backgroundColor = "#9400D3";
-            document.getElementById('upcomingBtn').style.backgroundColor = "BLACK";
+        function clearFilters(){
             document.getElementById('actionCB').checked = false;
             document.getElementById('comedyCB').checked = false;
             document.getElementById('dramaCB').checked = false;
@@ -78,20 +75,19 @@ $np = ceil($tm / $perPage);
             document.getElementById('englishCB').checked = false;
             document.getElementById('2dCB').checked = false;
             document.getElementById('3dCB').checked = false;
+        }
+
+        function changeNowShowingBtnColor() {
+            document.getElementById('nowShowingBtn').style.backgroundColor = "#9400D3";
+            document.getElementById('upcomingBtn').style.backgroundColor = "BLACK";
+            clearFilters();
             status = "Now Showing";
         }
 
         function changeUpComingBtnColor() {
             document.getElementById('nowShowingBtn').style.backgroundColor = "BLACK";
             document.getElementById('upcomingBtn').style.backgroundColor = "#9400D3";
-            document.getElementById('actionCB').checked = false;
-            document.getElementById('comedyCB').checked = false;
-            document.getElementById('dramaCB').checked = false;
-            document.getElementById('horrorCB').checked = false;
-            document.getElementById('banglaCB').checked = false;
-            document.getElementById('englishCB').checked = false;
-            document.getElementById('2dCB').checked = false;
-            document.getElementById('3dCB').checked = false;
+            clearFilters();
             status = "Coming Soon";
         }
 
@@ -124,6 +120,7 @@ $np = ceil($tm / $perPage);
 
             $("#ldMoreButton").click(function() {
                 i = i + 3;
+                clearFilters();
                 document.getElementById('searchText').value = "";
                 $("#movieSection").load("NextMovies.php", {
                     limitValue: i,
@@ -385,7 +382,7 @@ $np = ceil($tm / $perPage);
 
         <!--Main Body Section-->
         <div class="container-fluid">
-            <div class="row mt-4 mb-2">
+            <div class="row mt-4 mb-0">
                 <div class="col pb-2">
                     <form action="MoviesPage.php" method="GET">
                         <ul class="nav nav-tabs   movies-nav">
@@ -403,9 +400,9 @@ $np = ceil($tm / $perPage);
         </div>
 
         <div class="container-fluid">
-            <div class="row align-items-start justify-content-center" id="moviePageSection">
-                <div class="col-2 pt-4 ">
-                    <div class="inputWithIcon mb-4 mt-4">
+            <div class="row align-items-start justify-content-between ml-4" id="moviePageSection">
+                <div class="col-7 col-lg-3 col-md-3 col-sm-5 pt-4">
+                    <div class="inputWithIcon mb-4 mt-1">
                         <input class="resetPass-inputs" id="searchText" type="text" placeholder="Search for movies..." maxlength="30" minlength="2" style="color: black; width:100%;">
                         <i class="fas fa-search"></i>
                     </div>
@@ -460,8 +457,8 @@ $np = ceil($tm / $perPage);
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="row justify-content-start d-flex mt-5 mb-2" id="movieSection">
+                <div class="col-12 col-lg-9 col-md-9 col-sm-12">
+                    <div class="row justify-content-start d-flex mt-4 mb-2" id="movieSection">
 
                         <?php
                         while ($row = mysqli_fetch_assoc($result)) {
@@ -519,7 +516,7 @@ $np = ceil($tm / $perPage);
                 </div>
             </div>
             <div class="row justify-content-between my-footer-ending" style="border-radius: 0px;">
-                <div class="col=4">
+                <div class="col-4">
                     <ul>
                         <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                         <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -527,10 +524,10 @@ $np = ceil($tm / $perPage);
                         <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                     </ul>
                 </div>
-                <div class="col=4 developers-tag">
+                <div class="col-3 developers-tag">
                     <span>Developed by : Group-5</span>
                 </div>
-                <div class="col=4 stores">
+                <div class="col-3 stores">
                     <ul>
                         <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
                         <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>

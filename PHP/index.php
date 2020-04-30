@@ -63,19 +63,33 @@ include "DatabaseConnection.php";
 
 
     <style>
-        body {
-            background-image: url('curtain.jpg');
+        #buyTicketBtn{
+            width: 75%;
+            height: 50px;
+            margin-top: 20px;
+            outline: none;
+            border-style: none;
+            background-color:#005180;
+            color:white;
+            font-size: 18px;
+            text-align: left;
+            border-left-color: #008AFC;
+            border-left: 110px #008AFC solid;
+            border-left-style:ridge;
+            border-radius: 5px;
         }
-
         .trendingCard {
             width: 100%;
-            height: 40px;
-            color: white;
+            height: auto;
+            color: black;
             border-bottom: 1px black solid;
         }
 
         .trendingCard button {
-            color: white;
+            color: black;
+            background-color: white;
+            width: 100%;
+            text-align: left;
         }
 
         .nowShowingTile {
@@ -127,6 +141,11 @@ include "DatabaseConnection.php";
             margin-bottom: 10px;
 
         }
+        .card-img-top{
+            width: auto;
+            height: 18vw;
+            object-fit: cover;
+        }
     </style>
 
 </head>
@@ -135,7 +154,7 @@ include "DatabaseConnection.php";
     <div class="container-fluid">
         <!--Header Section-->
         <header>
-            <div class="d-flex flex-row flex-nowrap sm-flex-wrap  header-section" style="height: 120px; padding-top:25px; margin-top:120px;">
+            <div class="d-flex flex-row flex-nowrap sm-flex-wrap  header-section" style="height: 120px; padding-top:25px;">
                 <div class="p-2 mr-auto">
                     <a href="index.php"><img src="..\Images/CineCarnival.png" alt="No Image..."></a>
                 </div>
@@ -197,8 +216,8 @@ include "DatabaseConnection.php";
         <!--Main Body Section-->
 
         <div class="container-fluid">
-            <div class="row mt-3 justify-content-center">
-                <div class="col-2">
+            <div class="row mt-3  justify-content-between ">
+                <div class="col-12 col-sm-8 col-xl-3 col-lg-3 col-md-4 order-lg-1 order-xl-1 order-lg-1 order-md-2 order-2" >
                     <div class="row">
                         <div class="col">
                             <div class="TrendingListContainer">
@@ -272,21 +291,21 @@ include "DatabaseConnection.php";
                                         <label id="pollTitleText" style="font-size: 18px; color:white; margin-top:15px; margin-bottom:5px;"><i class="fas fa-poll"></i> <?php echo $row['poll_title']; ?> </label>
                                     </div>
                                     <div class="pollContentArea">
-                                        <div class="custom-control custom-radio mb-2 text-left h6">
+                                        <div class="custom-control custom-radio mb-2 ml-3  text-left h6">
                                             <input type="radio" class="custom-control-input" id="customControlValidation1" name="radio-stacked" onclick="contentSubmission('1');">
-                                            <label class="custom-control-label text-light" for="customControlValidation1"><?php echo $row['content1']; ?></label>
+                                            <label class="custom-control-label text-dark" for="customControlValidation1"><?php echo $row['content1']; ?></label>
                                         </div>
-                                        <div class="custom-control custom-radio mb-2 text-left h6">
+                                        <div class="custom-control custom-radio mb-2  ml-3  text-left h6">
                                             <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" onclick="contentSubmission('2');">
-                                            <label class="custom-control-label text-light" for="customControlValidation2"><?php echo $row['content2']; ?></label>
+                                            <label class="custom-control-label text-dark" for="customControlValidation2"><?php echo $row['content2']; ?></label>
                                         </div>
-                                        <div class="custom-control custom-radio mb-2 text-left h6">
+                                        <div class="custom-control custom-radio mb-2 ml-3 text-left h6">
                                             <input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" onclick="contentSubmission('3');">
-                                            <label class="custom-control-label text-light" for="customControlValidation3"><?php echo $row['content3']; ?></label>
+                                            <label class="custom-control-label text-dark" for="customControlValidation3"><?php echo $row['content3']; ?></label>
                                         </div>
-                                        <div class="custom-control custom-radio mb-2 text-left h6">
+                                        <div class="custom-control custom-radio mb-2 ml-3  text-left h6">
                                             <input type="radio" class="custom-control-input" id="customControlValidation4" name="radio-stacked" onclick="contentSubmission('4');">
-                                            <label class="custom-control-label text-light" for="customControlValidation4"><?php echo $row['content4']; ?></label>
+                                            <label class="custom-control-label text-dark" for="customControlValidation4"><?php echo $row['content4']; ?></label>
                                         </div>
                                     </div>
 
@@ -303,19 +322,25 @@ include "DatabaseConnection.php";
                         </div>
                     </div>
 
+                    <div class="row text-center justify-content-center">
+                        <div class="col  text-center">
+                        <a href="BuyTickets.php"><button id="buyTicketBtn">Buy Tickets</button></a>
+                        </div>
+                    </div>
+
 
                 </div>
 
 
 
 
-                <div class="col-6">
+                <div class="col-12 col-xl-6 col-lg-9 col-md-12 order-lg-2 order-xl-2 order-md-1 m-0 p-0  order-1">
 
                     <div>
                         <div class="nowShowingTile pl-3">
                             <a href="MoviesPage.php"><i class="fas fa-tape"></i> Now Showing</a>
                         </div>
-                        <div class="row justify-content-start">
+                        <div class="row justify-content-between ">
                             <?php
                             $query = "SELECT name, cover_pic,mv_id FROM movie WHERE status='Now Showing' ORDER BY mv_id DESC LIMIT 4;";
                             $result = mysqli_query($conn, $query);
@@ -324,14 +349,13 @@ include "DatabaseConnection.php";
                                 while ($row = mysqli_fetch_assoc($result)) {
                             ?>
 
-                                    <div class="col-3">
-                                        <div class="movieReelPanel" style="margin-top: 2px;">
+                                    <div class="col-5 col-sm-3  movieReelPanel" style="margin-top: 2px;"> 
                                             <form action="Movies.php" method="GET">
                                                 <img src="<?php echo $row['cover_pic'] ?>" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
                                                 <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
                                             </form>
 
-                                        </div>
+                                        
                                     </div>
 
                             <?php
@@ -352,7 +376,7 @@ include "DatabaseConnection.php";
                                 while ($row = mysqli_fetch_assoc($result)) {
                             ?>
 
-                                    <div class="col-3">
+                                    <div class="col-5 col-sm-3">
                                         <div class="movieReelPanel" style="margin-top: 2px;">
                                             <form action="Movies.php" method="GET">
                                                 <img src="<?php echo $row['cover_pic'] ?>" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
@@ -372,21 +396,17 @@ include "DatabaseConnection.php";
 
                 </div>
 
-                <div class="col-2">
-
-
-
-
-                    <div class="row m-0 p-0 justify-content-between" style="width: 100%;">
+                <div class="col-12 col-sm-8 col-xl-3 col-lg-9 col-md-8 order-lg-3 order-xl-3 order-md-3  offset-md-0 offset-xl-0 offset-lg-3 order-3">
+                    <div class="row justify-content-between m-0 p-0" style="width: 100%;">
                         <div class="col m-0 p-0">
-                            <div class="mt-2 text-justify">
+                            <div class="mt-2 text-justify m-0 p-0">
                                 <?php
                                 $query = "SELECT DISTINCT title, message, links, pic, date_posted FROM notice WHERE date_posted= (SELECT MAX(date_posted) FROM notice)";
                                 $result = mysqli_query($conn, $query);
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     echo "
-                                    <div class=" . "card text-justify" . ">
-                                        <div class=" . "card-header bg-dark text-center" . ">
+                                    <div class=" . "card text-justify m-0 p-0" . ">
+                                        <div class=" . "card-header bg-dark text-center m-0 p-0" . ">
                                             Notice
                                             </div>
                                                 <div class=" . "card-body text-justify text-left" . ">
@@ -443,7 +463,7 @@ include "DatabaseConnection.php";
                         </div>
                     </div>
                     <div class="row justify-content-between my-footer-ending">
-                        <div class="col=4">
+                        <div class="col-4">
                             <ul>
                                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -451,10 +471,10 @@ include "DatabaseConnection.php";
                                 <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                             </ul>
                         </div>
-                        <div class="col=4 developers-tag">
+                        <div class="col-3 developers-tag">
                             <span>Developed by : Group-5</span>
                         </div>
-                        <div class="col=4 stores">
+                        <div class="col-3 stores">
                             <ul>
                                 <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
                                 <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>

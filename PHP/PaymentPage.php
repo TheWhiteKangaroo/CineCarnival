@@ -16,10 +16,10 @@ $price = "";
 $totalPrice = "";
 $discount = 0;
 $discountPercentage = 0;
-$points="";
-$status="";
-$currentDate = $currentDateTime="";
-$currentDateTime=date('Y-m-d H:i:s');
+$points = "";
+$status = "";
+$currentDate = $currentDateTime = "";
+$currentDateTime = date('Y-m-d H:i:s');
 
 if (isset($_SESSION['user_name'])) {
     $userName = $_SESSION['user_name'];
@@ -48,29 +48,27 @@ if (isset($_POST['selectedMovie']) && isset($_POST['selectedDate']) && isset($_P
 
 if ($theatreType == "VIP") {
     $price = $selectedSeatCount * 600;
-    $points=$selectedSeatCount*75;
+    $points = $selectedSeatCount * 75;
 } else if ($theatreType == "PREMIUM") {
     $price = $selectedSeatCount * 450;
-    $points=$selectedSeatCount*50;
+    $points = $selectedSeatCount * 50;
 } else if ($theatreType == "REGULAR") {
     $price = $selectedSeatCount * 250;
-    $points=$selectedSeatCount*25;
+    $points = $selectedSeatCount * 25;
 }
 
 $totalPrice = $price;
 
-if($status=="Sapphire"){
-    $discount=$totalPrice*0.50;
+if ($status == "Sapphire") {
+    $discount = $totalPrice * 0.50;
     $discountPercentage = 50;
     $totalPrice = $totalPrice - $discount;
-}
-else if($status=="Diamond"){
-    $discount=$totalPrice*0.35;
+} else if ($status == "Diamond") {
+    $discount = $totalPrice * 0.35;
     $discountPercentage = 35;
     $totalPrice = $totalPrice - $discount;
-}
-else if($status=="Perl"){
-    $discount=$totalPrice*0.25;
+} else if ($status == "Perl") {
+    $discount = $totalPrice * 0.25;
     $discountPercentage = 25;
     $totalPrice = $totalPrice - $discount;
 }
@@ -96,12 +94,12 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['dbblBtn'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment</title>
-    
+
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
-        function confirmMyPayment(e){
-            
+        function confirmMyPayment(e) {
+
             var showID = <?php echo json_encode($showID); ?>;
             var userName = <?php echo json_encode($fullName); ?>;
             var userID = <?php echo json_encode($userID); ?>;
@@ -117,127 +115,119 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['dbblBtn'])){
             var points = <?php echo json_encode($points); ?>;
             var discount = <?php echo json_encode($discount); ?>;
             var discountPercentage = <?php echo json_encode($discountPercentage); ?>;
-            
-            var paymentType="";
-            if(e=="dbblPayBtn"){
+
+            var paymentType = "";
+            if (e == "dbblPayBtn") {
                 paymentType = "DBBL Payment ";
                 var amount = document.getElementById('dbblAmount').value;
                 var holderName = document.getElementById('dbblHolderName').value;
                 var pin = document.getElementById('dbblPin').value;
                 var cardNumber = document.getElementById('dbblCardNumber').value;
-                if(amount!=null && amount!='undefined' && amount!="" && holderName!=null && holderName!='undefined' && holderName!="" && pin!=null && pin!='undefined' && pin!="" && cardNumber!=null && cardNumber!='undefined' && cardNumber!=""){
-                    if(amount!=totalPrice || amount!=Math.ceil(totalPrice) || amount!=Math.floor(totalPrice)){
+                if (amount != null && amount != 'undefined' && amount != "" && holderName != null && holderName != 'undefined' && holderName != "" && pin != null && pin != 'undefined' && pin != "" && cardNumber != null && cardNumber != 'undefined' && cardNumber != "") {
+                    if (amount != totalPrice || amount != Math.ceil(totalPrice) || amount != Math.floor(totalPrice)) {
                         Swal.fire('Please enter correct amount!');
-                    }
-                    else{
-                        document.getElementById('paymentArea').style.display="none";
-                        document.getElementById('billContainer').style.display="none";
-                        
-                        $(document).ready(function() {  
-                            $("#confirmZone").load("ConfirmPayment.php",{
-                                showID :showID,
-                                userID :userID,
-                                userName:userName,
-                                totalPrice:totalPrice,
-                                discount:discount,
-                                seatCount:seatCount,
-                                selectedDate:selectedDate,
+                    } else {
+                        document.getElementById('paymentArea').style.display = "none";
+                        document.getElementById('billContainer').style.display = "none";
+
+                        $(document).ready(function() {
+                            $("#confirmZone").load("ConfirmPayment.php", {
+                                showID: showID,
+                                userID: userID,
+                                userName: userName,
+                                totalPrice: totalPrice,
+                                discount: discount,
+                                seatCount: seatCount,
+                                selectedDate: selectedDate,
                                 selectedMovie: selectedMovie,
-                                paymentType:paymentType,
+                                paymentType: paymentType,
                                 selectedShowTime: selectedShowTime,
-                                selectedShowType : selectedShowType,
+                                selectedShowType: selectedShowType,
                                 selectedTheatreName: selectedTheatreName,
-                                selectedTheatreType:selectedTheatreType,
+                                selectedTheatreType: selectedTheatreType,
                                 points: points,
-                                discount:discount,
-                                discountPercentage:discountPercentage
+                                discount: discount,
+                                discountPercentage: discountPercentage
                             });
-                        
+
                         });
                     }
-                }
-                else{
+                } else {
                     Swal.fire('Please fill up all the field!');
                 }
-                
-            }
-            else if(e=="SCPayBtn"){
+
+            } else if (e == "SCPayBtn") {
                 paymentType = "SCB Payment ";
                 var amount = document.getElementById('SCBAmount').value;
                 var holderName = document.getElementById('SCBHolderName').value;
                 var pin = document.getElementById('SCBPinNumber').value;
                 var cardNumber = document.getElementById('SCBCardNumber').value;
                 var expiryDate = document.getElementById('SCBExpiryDate').value;
-                if(amount!=null && amount!='undefined' && amount!="" && holderName!=null && holderName!='undefined' && holderName!="" && pin!=null && pin!='undefined' && pin!="" && cardNumber!=null && cardNumber!='undefined' && cardNumber!="" && expiryDate!=null && expiryDate!='undefined' && expiryDate!=""){
-                    if(amount!=totalPrice || amount!=Math.ceil(totalPrice) || amount!=Math.floor(totalPrice)){
+                if (amount != null && amount != 'undefined' && amount != "" && holderName != null && holderName != 'undefined' && holderName != "" && pin != null && pin != 'undefined' && pin != "" && cardNumber != null && cardNumber != 'undefined' && cardNumber != "" && expiryDate != null && expiryDate != 'undefined' && expiryDate != "") {
+                    if (amount != totalPrice || amount != Math.ceil(totalPrice) || amount != Math.floor(totalPrice)) {
                         Swal.fire('Please enter correct amount!');
-                    }
-                    else{
-                        document.getElementById('paymentArea').style.display="none";
-                        document.getElementById('billContainer').style.display="none";
-                        
-                        $(document).ready(function() {  
-                            $("#confirmZone").load("ConfirmPayment.php",{
-                                showID :showID,
-                                userID :userID,
-                                userName:userName,
-                                totalPrice:totalPrice,
-                                discount:discount,
-                                seatCount:seatCount,
-                                selectedDate:selectedDate,
+                    } else {
+                        document.getElementById('paymentArea').style.display = "none";
+                        document.getElementById('billContainer').style.display = "none";
+
+                        $(document).ready(function() {
+                            $("#confirmZone").load("ConfirmPayment.php", {
+                                showID: showID,
+                                userID: userID,
+                                userName: userName,
+                                totalPrice: totalPrice,
+                                discount: discount,
+                                seatCount: seatCount,
+                                selectedDate: selectedDate,
                                 selectedMovie: selectedMovie,
-                                paymentType:paymentType,
+                                paymentType: paymentType,
                                 selectedShowTime: selectedShowTime,
-                                selectedShowType : selectedShowType,
+                                selectedShowType: selectedShowType,
                                 selectedTheatreName: selectedTheatreName,
-                                selectedTheatreType:selectedTheatreType,
-                                points:points,
-                                discountPercentage:discountPercentage
+                                selectedTheatreType: selectedTheatreType,
+                                points: points,
+                                discountPercentage: discountPercentage
                             });
-                        
+
                         });
                     }
-                }
-                else{
+                } else {
                     Swal.fire('Please fill up all the field!');
                 }
-            }
-            else if(e=="bKashPayBtn"){
-                paymentType = "bKash Payment";              
+            } else if (e == "bKashPayBtn") {
+                paymentType = "bKash Payment";
                 var amount = document.getElementById('bKashAmount').value;
                 var holderName = document.getElementById('bKashPin').value;
                 var cardNumber = document.getElementById('bKashAccountNumber').value;
-                if(amount!=null && amount!="undefined" && amount!="" && holderName!=null && holderName!="undefined" && holderName!="" && cardNumber!=null && cardNumber!="undefined" && cardNumber!=""){
-                    if(amount!=totalPrice || amount!=Math.ceil(totalPrice) || amount!=Math.floor(totalPrice)){
+                if (amount != null && amount != "undefined" && amount != "" && holderName != null && holderName != "undefined" && holderName != "" && cardNumber != null && cardNumber != "undefined" && cardNumber != "") {
+                    if (amount != totalPrice || amount != Math.ceil(totalPrice) || amount != Math.floor(totalPrice)) {
                         Swal.fire('Please enter correct amount!');
-                    }
-                    else{
-                        document.getElementById('paymentArea').style.display="none";
-                        document.getElementById('billContainer').style.display="none";
-                        
-                        $(document).ready(function() {  
+                    } else {
+                        document.getElementById('paymentArea').style.display = "none";
+                        document.getElementById('billContainer').style.display = "none";
+
+                        $(document).ready(function() {
                             $("#confirmZone").load("ConfirmPayment.php", {
-                                showID :showID,
-                                userID :userID,
-                                userName:userName,
-                                totalPrice:totalPrice,
-                                discount:discount,
-                                seatCount:seatCount,
-                                selectedDate:selectedDate,
+                                showID: showID,
+                                userID: userID,
+                                userName: userName,
+                                totalPrice: totalPrice,
+                                discount: discount,
+                                seatCount: seatCount,
+                                selectedDate: selectedDate,
                                 selectedMovie: selectedMovie,
-                                paymentType:paymentType,
+                                paymentType: paymentType,
                                 selectedShowTime: selectedShowTime,
-                                selectedShowType : selectedShowType,
+                                selectedShowType: selectedShowType,
                                 selectedTheatreName: selectedTheatreName,
-                                selectedTheatreType:selectedTheatreType,
-                                points:points,
-                                discountPercentage:discountPercentage
+                                selectedTheatreType: selectedTheatreType,
+                                points: points,
+                                discountPercentage: discountPercentage
                             });
-                        
+
                         });
                     }
-                }
-                else{
+                } else {
                     Swal.fire('Please fill up all the field!');
                 }
             }
@@ -245,31 +235,31 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['dbblBtn'])){
     </script>
     <style>
         .payBtn {
-    background-color: #feda6a;
-    height: 50px;
-    width: 33%;
-    font-size: 22px;
-    border-top-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    outline: none;
-    border-style: none;
-    box-shadow: 5px 10px 10px gray;
-}
+            background-color: #feda6a;
+            height: 50px;
+            width: 33%;
+            font-size: 22px;
+            border-top-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            outline: none;
+            border-style: none;
+            box-shadow: 5px 10px 10px gray;
+        }
 
-.payBtn:hover {
-    transform: scale(1.1);
-}
+        .payBtn:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 
 <body>
 
     <div class="row" id="confirmZone">
-            
+
     </div>
 
-    <div class="row mt-3 mb-5 no-gutters justify-content-around" id="billZone" style="width: 100%; margin-left:10px; margin-bottom: 10px;">
-        <div class="col-4">
+    <div class="row mt-3 mb-5  justify-content-center" id="billZone" style="width: 100%; margin-left:10px; margin-bottom: 10px;">
+        <div class="col-10 col-md-8 col-xl-4 col-lg-7">
             <div id="billContainer" style="display: block;">
                 <div id="billBox">
                     <h2 style="padding-bottom: 10px;"><i class="fas fa-receipt"></i> Purchase Order</h2>
@@ -320,7 +310,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['dbblBtn'])){
                         <tr>
                             <td><span>Discount</span></td>
                             <td>:</td>
-                            <td><span><?php echo $discount." BDT";?></span></td>
+                            <td><span><?php echo $discount . " BDT"; ?></span></td>
                         </tr>
                         <tr>
                             <td><span>Total Price</span></td>
@@ -330,8 +320,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['dbblBtn'])){
                     </table>
                 </div>
             </div>
+
         </div>
-        <div class="col-7">
+        <div class="col-12 col-xl-8 col-md-12">
             <div class="paymentBox" id="paymentArea" style="display: block;">
                 <div class="paymentMethodsHeader" style="margin: 0; padding:0;">
                     <button class="paymentBtn" style="border-bottom-left-radius: 25px; margin:0; padding:0;" onclick="showBkashForm();"><i class="fas fa-coins"></i> bKash</button>

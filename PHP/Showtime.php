@@ -53,7 +53,7 @@ $result2 = mysqli_query($conn, $query2);
             border-style: none;
             background-color:#005180;
             color:white;
-            font-size: 20px;
+            font-size: 18px;
             text-align: left;
             border-left-color: #008AFC;
             border-left: 110px #008AFC solid;
@@ -163,8 +163,8 @@ $result2 = mysqli_query($conn, $query2);
         <!--Main Body Section-->
 
         <div class="container-fluid m-0 p-0">
-            <div class="row m-0 p-0 mt-5  justify-content-between">
-                <div class="col-3 m-0 p-0 mb-2">
+            <div class="row m-0 p-0 mt-4  justify-content-between">
+                <div class="col-12 col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12  order-md-2 order-lg-2 order-xl-1  mb-2">
                     <?php
                     $query = "SELECT DISTINCT title, message, links, pic, date_posted FROM notice WHERE date_posted= (SELECT MAX(date_posted) FROM notice)";
                     $result = mysqli_query($conn, $query);
@@ -199,17 +199,17 @@ $result2 = mysqli_query($conn, $query2);
                     }
                     ?>
                 </div>
-                <div class="col-6 m-0 p-0">
+                <div class="col-12 col-xl-6 col-lg-12 col-md-12 col-sm-12 order-md-1 order-lg-1 order-xl-2 order-2 ">
                     <div class="card text-white bg-dark mb-3" style="max-width: 100%; border-radius:7px;">
                         <div class="card-header text-center font-weight-bold h1"><i class="fas fa-vr-cardboard"></i> Showtime</div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
+                            <div class="row justify-content-between">
+                                <div class="col-5 col-sm-6 col-md-4 col-lg-4 col-xl-5">
                                     <div class="inputWithIcon text-left">
                                         <input type="date" max="<?php echo date('Y-m-d', strtotime($currentDate . ' + 1 days')); ?>" min="<?php echo $currentDate; ?>" class="showtime-datepicker" id="showDatePicker" onchange="myFunction(this.id)"><i class="fas fa-calendar-alt"></i>
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-7 col-sm-6 col-md-6 col-lg-6">
                                     <div class="text-right font-weight-normal">
                                         <span style="color: #f0ad4e; font-size:16px; text-align:right;"><i class="fas fa-circle"></i> <span style="color: White;">Regular</span></span>
                                         <span style="color: #5cb85c; font-size:16px; text-align:right;"><i class="fas fa-circle"></i> <span style="color: White;">Premium</span></span>
@@ -284,14 +284,14 @@ $result2 = mysqli_query($conn, $query2);
                         </div>
                     </div>
                 </div>
-                <div class="col-3 m-0 p-0" style="margin-left: 10px;">
-                    <div class="row justify-content-around m-0 p-0" id="showCategoriesBox">
-                        <div class="row text-center m-0 p-0">
-                            <div class="col">
+                <div class="col-12 col-xl-3 col-lg-6 col-md-6 col-sm-12 col-xs-12 order-md-3 order-lg-3 order-3 order-xl-3 m-0 p-0" style="margin-left: 10px;">
+                    <div class="row justify-content-start m-0 p-0" id="showCategoriesBox">
+                        <div class="row text-center ml-4 mt-3 m-0 p-0" style="width: 85%;">
+                            <div class="col text-center" style="border: 5px dodgerblue double; border-top-right-radius:15px; border-bottom-left-radius:15px;">
                                 <h1>Theatre and Pricing</h1>
                             </div>
                         </div>
-                        <div class="col mt-5">
+                        <div class="col-12 col-sm-12 mt-5">
                             <p>There are three categories of hall or theatres in CineCarnival.</p>
                             <span style="color: #f0ad4e; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>Regular Hall</label><br>
                             <span style="color: #5cb85c; font-size:16px; text-align:right;"><i class="fas fa-circle"></i></span> <label>Premium Hall</label><br>
@@ -315,8 +315,8 @@ $result2 = mysqli_query($conn, $query2);
                             </p>
                             </div>
                     </div>
-                    <div class="row text-center">
-                        <div class="col">
+                    <div class="row text-center justify-content-center">
+                        <div class="col  text-center">
                         <a href="BuyTickets.php"><button id="buyTicketBtn">Buy Tickets</button></a>
                         </div>
                     </div>
@@ -344,7 +344,7 @@ $result2 = mysqli_query($conn, $query2);
                     </div>
                 </div>
                 <div class="row justify-content-between my-footer-ending">
-                    <div class="col=4">
+                    <div class="col-4">
                         <ul>
                             <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -352,10 +352,10 @@ $result2 = mysqli_query($conn, $query2);
                             <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                         </ul>
                     </div>
-                    <div class="col=4 developers-tag">
+                    <div class="col-3 developers-tag">
                         <span>Developed by : Group-5</span>
                     </div>
-                    <div class="col=4 stores">
+                    <div class="col-3 stores">
                         <ul>
                             <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
                             <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
@@ -368,7 +368,7 @@ $result2 = mysqli_query($conn, $query2);
 
 
 
-
+    
 </body>
 
 </html>

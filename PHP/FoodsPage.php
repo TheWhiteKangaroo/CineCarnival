@@ -58,7 +58,6 @@ if (isset($_SESSION['user_name'])) {
                 <div class="p-2 mr-auto">
                     <a href="index.php"><img src="..\Images/CineCarnival.png" alt="No Image..."></a>
                 </div>
-               
                 <div class="p-2 align-self-center header-anchor" id="ProfileDiv" style="display: none;">
                     <a href="ProfilePage.php" style="text-decoration: none;"><i class="fas fa-user-alt"></i><?php echo $userName; ?></a>
                 </div>
@@ -113,7 +112,7 @@ if (isset($_SESSION['user_name'])) {
 
         <div class="container">
             <div class="row mt-4 text-left">
-                <div class="col-8 mb-4">
+                <div class="col-12 col-md-8 mb-4">
                     <div class="foodsHeaderBox">
                         <h1 style="border-bottom: 3px black dotted; margin-bottom:30px; margin-top:50px;">Welcome to <span>CineCarnival<span> foods corner.</h1><br>
                         <span class="text-muted mb-5">The online ordering system is currently unavailable but you can check our food items with prices to shop at the cinema.</span>
@@ -194,7 +193,7 @@ if (isset($_SESSION['user_name'])) {
                         </div>
                     </div>
                 </div>
-                <div class="col-4 m-0">
+                <div class="col-12 col-md-4 m-0">
                     <div class="mt-5 text-justify">
                         <?php 
                             while($row=mysqli_fetch_assoc($result)){
@@ -247,7 +246,7 @@ if (isset($_SESSION['user_name'])) {
                    </div>
                </div>
                <div class="row justify-content-between my-footer-ending">
-                   <div class="col=4">
+                   <div class="col-4">
                        <ul>
                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -255,10 +254,10 @@ if (isset($_SESSION['user_name'])) {
                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                        </ul>
                    </div>
-                   <div class="col=4 developers-tag">
+                   <div class="col-3 developers-tag">
                     <span>Developed by : Group-5</span>
                    </div>
-                   <div class="col=4 stores">
+                   <div class="col-3 stores">
                         <ul>    
                             <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
                            <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>

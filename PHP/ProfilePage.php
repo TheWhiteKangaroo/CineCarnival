@@ -308,25 +308,27 @@ if(isset($_POST['updatePassBtn'])){
             <div class="row mt-4  text-light welcome-box">
                 <div class="col text-center">
                     <div class="welcome-to-profile">
-                        <label class="text-capitalize" for="" style="font-size: 40px;">Welcome, <?php echo "$firstName"." ".$lastName; ?>!</label>
+                        <label class="text-capitalize" for="" style="font-size: 40px;"><h4 class="display-6">Welcome, <?php echo "$firstName"." ".$lastName; ?>!</h4> </label>
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center mt-3">
-                <div class="col-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <button class="profileBtn" style="border-top-right-radius: 20px; border-bottom-left-radius: 20px;" onclick="showProfileSection();hidePurchaseSection();"><i class="fas fa-edit"></i> Edit Profile</button>
 
                 </div>
-                <div class="col-4">
+                <div class="col-12 col-sm-6 col-lg-4">
                     <button class="profileBtn" style="background-color:#feda6a;color:black;border-bottom-left-radius: 20px; border-top-right-radius: 20px;" onclick="showPurchaseSection();hideProfileSection();"><i class="fas fa-history"></i> Purchase History</button>
 
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-10">
-                    <div id="profileFormSection" style="display: block;">
+                <div class="col-12">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-8 col-lg-6">
+                        <div id="profileFormSection" style="display: block;">
                         <form action="ProfilePage.php" method="POST">
-                            <table style="width: 40%; margin-left:500px;">
+                            <table style="width:100%;">
                                 <tr>
                                     <th colspan="2">
                                         <div class="form-group text-center mt-5 mb-0">
@@ -426,6 +428,8 @@ if(isset($_POST['updatePassBtn'])){
                             </table>
                         </form>
                     </div>
+                        </div>
+                    </div>
                     <div id="purchaseHistorySection" style="display:none;">
                         <h4 class="text-center font-weight-bold"><i class="fas fa-history"></i> Purchase History</h4>
                         <table class="table" id="purchaseHistoryTable">
@@ -496,7 +500,7 @@ if(isset($_POST['updatePassBtn'])){
                 </div>
             </div>
             <div class="row justify-content-between my-footer-ending">
-                <div class="col=4">
+                <div class="col-4">
                     <ul>
                         <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                         <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -504,10 +508,10 @@ if(isset($_POST['updatePassBtn'])){
                         <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                     </ul>
                 </div>
-                <div class="col=4 developers-tag">
+                <div class="col-3 developers-tag">
                     <span>Developed by : Group-5</span>
                 </div>
-                <div class="col=4 stores">
+                <div class="col-3 stores">
                     <ul>
                         <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
                         <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
