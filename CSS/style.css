@@ -564,7 +564,7 @@ a:focus {
     width: 100%;
     padding-left: 0px;
     padding-right: 0px;
-    border: 1px dodgerblue double;
+    border: 3px dodgerblue solid;
     border-radius: 5px;
 }
 

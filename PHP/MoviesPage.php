@@ -400,8 +400,8 @@ $np = ceil($tm / $perPage);
         </div>
 
         <div class="container-fluid">
-            <div class="row align-items-start justify-content-between ml-4" id="moviePageSection">
-                <div class="col-7 col-lg-3 col-md-3 col-sm-5 pt-4">
+            <div class="row align-items-start justify-content-around ml-4" id="moviePageSection">
+                <div class="col-8 col-lg-3 col-xl-3 col-md-3 col-sm-6 pt-4">
                     <div class="inputWithIcon mb-4 mt-1">
                         <input class="resetPass-inputs" id="searchText" type="text" placeholder="Search for movies..." maxlength="30" minlength="2" style="color: black; width:100%;">
                         <i class="fas fa-search"></i>
@@ -457,7 +457,7 @@ $np = ceil($tm / $perPage);
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-9 col-md-9 col-sm-12">
+                <div class="col-12 col-lg-9 col-xl-8 col-md-9 col-sm-12">
                     <div class="row justify-content-start d-flex mt-4 mb-2" id="movieSection">
 
                         <?php

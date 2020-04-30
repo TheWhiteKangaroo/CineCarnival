@@ -1,27 +1,26 @@
 <?php
 session_start();
 include "DatabaseConnection.php";
-$userName = $userType="";
-if(!isset($_SESSION['user_name'])){
+$userName = $userType = "";
+if (!isset($_SESSION['user_name'])) {
     header("Locations: SignInPage.php");
-}
-else{
+} else {
     $userName = $_SESSION['user_name'];
-    $userType = $_SESSION['user_type'];    
+    $userType = $_SESSION['user_type'];
 }
 $userID = "";
 $query  = "SELECT c_id FROM customer WHERE user_name='$userName' OR mail='$userName';";
-$result = mysqli_query($conn,$query);
-while($row=mysqli_fetch_assoc($result)){
+$result = mysqli_query($conn, $query);
+while ($row = mysqli_fetch_assoc($result)) {
     $userID = $row['c_id'];
 }
 
 $gender = $firstName = $lastName = $mail = $phone = $address = $password = $newPassword = $newPasswordToDB = $confirmPassword = $status = $points = $joiningDate = $msg = "";
-$currentDateTime=date("Y/m/d");
-$alphabetCheck="/^[A-Za-z]+$/";
-$alphanumericCheck="/^[a-zA-Z0-9]*$/";
-$numericCheck="/^[0-9]*$/";
-$userNameCheck="/@(a+b)*/";
+$currentDateTime = date("Y/m/d");
+$alphabetCheck = "/^[A-Za-z]+$/";
+$alphanumericCheck = "/^[a-zA-Z0-9]*$/";
+$numericCheck = "/^[0-9]*$/";
+$userNameCheck = "/@(a+b)*/";
 
 $query = "SELECT * FROM customer WHERE user_name='$userName' OR mail='$userName';";
 $result = mysqli_query($conn, $query);
@@ -56,9 +55,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateInfoBtn'])) {
     } else {
         $msg = "Last Name cannot be empty!";
     }
-   
-    if(!empty($_POST['address'])){
-        $address = mysqli_real_escape_string($conn,$_POST['address']);
+
+    if (!empty($_POST['address'])) {
+        $address = mysqli_real_escape_string($conn, $_POST['address']);
     }
     if (!empty($_POST['phone'])) {
         $phone = mysqli_real_escape_string($conn, $_POST['phone']);
@@ -66,102 +65,88 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateInfoBtn'])) {
         $msg = "Phone Number cannot be empty!";
     }
 
-    
-    if(preg_match($numericCheck,$address)){
-        $msg="Invalid Address!";
-    }
-    else if((strlen((string)$phone))<=10 || (strlen((string)$phone))>=13 || $phone<=0){
-        $msg="Invalid digits for phone number!";
-    }
-    else if (isset($gender) && isset($firstName) && isset($lastName) && isset($phone)) {
-        if(!isset($address)){
-            $address=" ";
+
+    if (preg_match($numericCheck, $address)) {
+        $msg = "Invalid Address!";
+    } else if ((strlen((string) $phone)) <= 10 || (strlen((string) $phone)) >= 13 || $phone <= 0) {
+        $msg = "Invalid digits for phone number!";
+    } else if (isset($gender) && isset($firstName) && isset($lastName) && isset($phone)) {
+        if (!isset($address)) {
+            $address = " ";
         }
         $query = "UPDATE customer SET gender='$gender', first_name='$firstName', last_name='$lastName', phone='$phone', address='$address' WHERE user_name='$userName' OR mail='$userName';";
-        $result = mysqli_query($conn,$query);
-        if($result){
-            $msg="Info Updated!";
+        $result = mysqli_query($conn, $query);
+        if ($result) {
+            $msg = "Info Updated!";
+        } else {
+            $msg = "Failed to update mail!";
         }
-        else{
-            $msg="Failed to update mail!";
-        }
-    }
-    else{
+    } else {
         $msg = "Please Fillup All Required Fields!";
     }
 }
 
-if(isset($_POST['updateMailBtn'])){
+if (isset($_POST['updateMailBtn'])) {
     $userName = $_SESSION['user_name'];
-    $mailInDB="";
+    $mailInDB = "";
     if (!empty($_POST['mail'])) {
         $mail = mysqli_real_escape_string($conn, $_POST['mail']);
-        $gmailPattern="/^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$/";
-        if(!preg_match($gmailPattern,$mail)){
-            $msg="Use only Gmail acccount for registration.";
-        }
-        else{
-            $query="SELECT mail from customer WHERE mail='$userName' OR user_name='$userName';";
-            $result = mysqli_query($conn,$query);
-            while($row=mysqli_fetch_assoc($result) ){
+        $gmailPattern = "/^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$/";
+        if (!preg_match($gmailPattern, $mail)) {
+            $msg = "Use only Gmail acccount for registration.";
+        } else {
+            $query = "SELECT mail from customer WHERE mail='$userName' OR user_name='$userName';";
+            $result = mysqli_query($conn, $query);
+            while ($row = mysqli_fetch_assoc($result)) {
                 $mailInDB =  $row['mail'];
             }
-            if($mail==$mailInDB){
-                $msg="Mail already exitst!";
-            }
-            else{
+            if ($mail == $mailInDB) {
+                $msg = "Mail already exitst!";
+            } else {
                 $query = "UPDATE customer SET mail='$mail' WHERE user_name='$userName' OR mail='$userName';";
-                $result=mysqli_query($conn,$query);
+                $result = mysqli_query($conn, $query);
                 $query = "UPDATE login SET mail='$mail' WHERE user_name='$userName' OR mail='$userName';";
-                $result1=mysqli_query($conn,$query);
-                if($result && $result1){
-                    $msg="Updated Mail!";
+                $result1 = mysqli_query($conn, $query);
+                if ($result && $result1) {
+                    $msg = "Updated Mail!";
+                } else {
+                    $msg = "Failed to update mail!";
                 }
-                else{
-                    $msg="Failed to update mail!";
-                }   
             }
-            
         }
-    }
-    else {
+    } else {
         $msg = "Mail cannot be empty!";
     }
 }
 
-if(isset($_POST['updatePassBtn'])){
+if (isset($_POST['updatePassBtn'])) {
     if (!empty($_POST['newPassword'])) {
         $newPassword = mysqli_real_escape_string($conn, $_POST['newPassword']);
-    }
-    else {
-        $msg="Enter new password!";
+    } else {
+        $msg = "Enter new password!";
     }
     if (!empty($_POST['confirmPassword'])) {
         $confirmPassword = mysqli_real_escape_string($conn, $_POST['confirmPassword']);
+    } else {
+        $msg = "Re-enter new password!";
     }
-    else {
-        $msg="Re-enter new password!";    
-    }
-    if(isset($newPassword) && isset($confirmPassword)){
-        if($newPassword==$confirmPassword){
-            $newPassword = password_hash($newPassword,PASSWORD_DEFAULT);
-            $query="UPDATE customer set password='$newPassword' WHERE user_name='$userName' OR mail='$userName';";
-            $result=mysqli_query($conn,$query);
-            $query="UPDATE login set password='$newPassword', last_changed_date='$currentDateTime' WHERE user_name='$userName' OR mail='$userName';";
-            $result1=mysqli_query($conn,$query);
-            if($result && $result1){
+    if (isset($newPassword) && isset($confirmPassword)) {
+        if ($newPassword == $confirmPassword) {
+            $newPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+            $query = "UPDATE customer set password='$newPassword' WHERE user_name='$userName' OR mail='$userName';";
+            $result = mysqli_query($conn, $query);
+            $query = "UPDATE login set password='$newPassword', last_changed_date='$currentDateTime' WHERE user_name='$userName' OR mail='$userName';";
+            $result1 = mysqli_query($conn, $query);
+            if ($result && $result1) {
                 $msg = "Updated password!";
+            } else {
+                $msg = "Failed to update password!";
             }
-            else{
-                $msg="Failed to update password!";
-            }
+        } else {
+            $msg = "Passwords did not match!";
         }
-        else{
-            $msg="Passwords did not match!";
-        }
-    }
-    else{
-        $msg="Please enter passwords!";
+    } else {
+        $msg = "Please enter passwords!";
     }
 }
 
@@ -196,11 +181,11 @@ if(isset($_POST['updatePassBtn'])){
             hideMailDiv();
             hidePassDivs();
             showInfoDiv();
-            document.getElementById('updatePassBtn').style.display="none";
-            document.getElementById('updateMailBtn').style.display="none";
-            document.getElementById('updateInfoBtn').style.display="block";
-            document.getElementById('changePassBtn').style.display="block";
-            document.getElementById('changeMailBtn').style.display="block";
+            document.getElementById('updatePassBtn').style.display = "none";
+            document.getElementById('updateMailBtn').style.display = "none";
+            document.getElementById('updateInfoBtn').style.display = "block";
+            document.getElementById('changePassBtn').style.display = "block";
+            document.getElementById('changeMailBtn').style.display = "block";
         }
 
         function hideProfileSection() {
@@ -214,41 +199,47 @@ if(isset($_POST['updatePassBtn'])){
         function hidePurchaseSection() {
             document.getElementById('purchaseHistorySection').style.display = "none";
         }
+
         function showPassDivs() {
             document.getElementById('conPassDiv').style.display = "block";
             document.getElementById('newPassDiv').style.display = "block";
-            document.getElementById('updateInfoBtn').style.display="none";
-            document.getElementById('updateMailBtn').style.display="none";
-            document.getElementById('updatePassBtn').style.display="block";
+            document.getElementById('updateInfoBtn').style.display = "none";
+            document.getElementById('updateMailBtn').style.display = "none";
+            document.getElementById('updatePassBtn').style.display = "block";
         }
+
         function hidePassDivs() {
             document.getElementById('conPassDiv').style.display = "none";
             document.getElementById('newPassDiv').style.display = "none";
         }
-        function showMailDiv(){
-            document.getElementById('mailProfile').style.display="block";
-            document.getElementById('updatePassBtn').style.display="none";
-            document.getElementById('updateInfoBtn').style.display="none";
-            document.getElementById('updateMailBtn').style.display="block";
+
+        function showMailDiv() {
+            document.getElementById('mailProfile').style.display = "block";
+            document.getElementById('updatePassBtn').style.display = "none";
+            document.getElementById('updateInfoBtn').style.display = "none";
+            document.getElementById('updateMailBtn').style.display = "block";
         }
-        function hideMailDiv(){
-            document.getElementById('mailProfile').style.display="none";
+
+        function hideMailDiv() {
+            document.getElementById('mailProfile').style.display = "none";
         }
-        function hideInfoDiv(){
-            document.getElementById('genderDiv1').style.display="none";
-            document.getElementById('genderDiv2').style.display="none";
-            document.getElementById('lNameDiv').style.display="none";
-            document.getElementById('fNameDiv').style.display="none";
-            document.getElementById('phoneDiv').style.display="none";
-            document.getElementById('addressDiv').style.display="none";
+
+        function hideInfoDiv() {
+            document.getElementById('genderDiv1').style.display = "none";
+            document.getElementById('genderDiv2').style.display = "none";
+            document.getElementById('lNameDiv').style.display = "none";
+            document.getElementById('fNameDiv').style.display = "none";
+            document.getElementById('phoneDiv').style.display = "none";
+            document.getElementById('addressDiv').style.display = "none";
         }
-        function showInfoDiv(){
-            document.getElementById('genderDiv1').style.display="block";
-            document.getElementById('genderDiv2').style.display="block";
-            document.getElementById('lNameDiv').style.display="block";
-            document.getElementById('fNameDiv').style.display="block";
-            document.getElementById('phoneDiv').style.display="block";
-            document.getElementById('addressDiv').style.display="block";
+
+        function showInfoDiv() {
+            document.getElementById('genderDiv1').style.display = "block";
+            document.getElementById('genderDiv2').style.display = "block";
+            document.getElementById('lNameDiv').style.display = "block";
+            document.getElementById('fNameDiv').style.display = "block";
+            document.getElementById('phoneDiv').style.display = "block";
+            document.getElementById('addressDiv').style.display = "block";
         }
     </script>
 </head>
@@ -308,7 +299,9 @@ if(isset($_POST['updatePassBtn'])){
             <div class="row mt-4  text-light welcome-box">
                 <div class="col text-center">
                     <div class="welcome-to-profile">
-                        <label class="text-capitalize" for="" style="font-size: 40px;"><h4 class="display-6">Welcome, <?php echo "$firstName"." ".$lastName; ?>!</h4> </label>
+                        <label class="text-capitalize" for="" style="font-size: 40px;">
+                            <h4 class="display-4">Welcome, <?php echo  $lastName; ?>!</h4>
+                        </label>
                     </div>
                 </div>
             </div>
@@ -325,109 +318,109 @@ if(isset($_POST['updatePassBtn'])){
             <div class="row justify-content-center">
                 <div class="col-12">
                     <div class="row justify-content-center">
-                        <div class="col-12 col-md-8 col-lg-6">
-                        <div id="profileFormSection" style="display: block;">
-                        <form action="ProfilePage.php" method="POST">
-                            <table style="width:100%;">
-                                <tr>
-                                    <th colspan="2">
-                                        <div class="form-group text-center mt-5 mb-0">
-                                            <span class="font-weight-bold text-center h4"><i class="fas fa-user-alt"></i> Profile</span>
-                                        </div>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div>
-                                            <span style="color: red; font-size: 16px; font-weight: bolder;">*<?php echo "$msg"; ?></span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="custom-control custom-radio custom-control-inline mt-3" id="genderDiv1">
-                                            <input type="radio" class="custom-control-input" id="customRadio" name="gender" value="male" required <?php if (isset($gender) && $gender == "male") echo "checked"; ?>>
-                                            <label class="custom-control-label" for="customRadio">Mr.</label>
-                                        </div>
-                                        <div class="custom-control custom-radio custom-control-inline" id="genderDiv2">
-                                            <input type="radio" class="custom-control-input" id="customRadio2" name="gender" value="female" <?php if (isset($gender) && $gender == "female") echo "checked"; ?>>
-                                            <label class="custom-control-label" for="customRadio2">Ms./Mrs.</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-group inputWithIcon" id="fNameDiv">
-                                            <input class="form-control border text-capitalize border-primary" type="text" name="firstName" value="<?php echo "$firstName"; ?>" placeholder="First Name" required>
-                                            <i class="fas fa-user"></i>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group inputWithIcon" id="lNameDiv">
-                                            <input class="form-control border text-capitalize border-primary" type="text" name="lastName" value="<?php echo "$lastName"; ?>" placeholder="Last Name" required>
-                                            <i class="fas fa-user"></i>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="form-group inputWithIcon" id="mailProfile" style="display: none;">
-                                            <input class="form-control border border-primary" type="email"  name="mail" value="<?php echo "$mail"; ?> "  placeholder="Mail" required>
-                                            <i class="fas fa-envelope"></i>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="form-group inputWithIcon" id="phoneDiv">
-                                            <input class="form-control border border-primary" type="number" name="phone" value="<?php echo "$phone"; ?>" placeholder="Phone" required>
-                                            <i class="fas fa-mobile"></i>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="form-group inputWithIcon" id="addressDiv">
-                                            <textarea name="address" class="form-control text-capitalize border border-primary" cols="30" rows="3" placeholder="Address"><?php echo "$address"; ?></textarea>
-                                            <i class="fas fa-map-marker-alt"></i>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="form-group inputWithIcon" id="newPassDiv" style="display: none;">
-                                            <input class="form-control border border-primary" type="password" name="newPassword" value="" placeholder="New Password">
-                                            <i class="fas fa-lock"></i>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="form-group inputWithIcon" id="conPassDiv" style="display: none;">
-                                            <input class="form-control border border-primary" type="password" name="confirmPassword" value="" placeholder="Confirm Password">
-                                            <i class="fas fa-lock"></i>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="form-group"><input class="btn btn-outline-primary btn-block font-weight-bold" type="submit" name="updateInfoBtn" id="updateInfoBtn" value="Update" style="display: none;">
-                                        <div class="form-group"><input class="btn btn-outline-primary btn-block font-weight-bold" type="submit" name="updateMailBtn" id="updateMailBtn" value="Update" style="display: none;">
-                                        <div class="form-group"><input class="btn btn-outline-primary btn-block font-weight-bold" type="submit" name="updatePassBtn" id="updatePassBtn" value="Update" style="display: none;">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="form-group">
-                                            <button type="button" class="btn btn-link text-left" onclick="showPassDivs(); hideInfoDiv(); hideMailDiv();" id="changePassBtn" style="display: none;">Change password.</button>
-                                            <button type="button" class="btn btn-link text-right" onclick="showMailDiv(); hideInfoDiv(); hidePassDivs();" id="changeMailBtn" style="display: none;">Change Mail.</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
-                    </div>
+                        <div class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+                            <div id="profileFormSection" style="display: block;">
+                                <form action="ProfilePage.php" method="POST">
+                                    <table style="width:100%;">
+                                        <tr>
+                                            <th colspan="2">
+                                                <div class="form-group text-center mt-5 mb-0">
+                                                    <span class="font-weight-bold text-center h4"><i class="fas fa-user-alt"></i> Profile</span>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <span style="color: red; font-size: 16px; font-weight: bolder;">*<?php echo "$msg"; ?></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="custom-control custom-radio custom-control-inline mt-3" id="genderDiv1">
+                                                    <input type="radio" class="custom-control-input" id="customRadio" name="gender" value="male" required <?php if (isset($gender) && $gender == "male") echo "checked"; ?>>
+                                                    <label class="custom-control-label" for="customRadio">Mr.</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline" id="genderDiv2">
+                                                    <input type="radio" class="custom-control-input" id="customRadio2" name="gender" value="female" <?php if (isset($gender) && $gender == "female") echo "checked"; ?>>
+                                                    <label class="custom-control-label" for="customRadio2">Ms./Mrs.</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-group inputWithIcon" id="fNameDiv">
+                                                    <input class="form-control border text-capitalize border-primary" type="text" name="firstName" value="<?php echo "$firstName"; ?>" placeholder="First Name" required>
+                                                    <i class="fas fa-user"></i>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group inputWithIcon" id="lNameDiv">
+                                                    <input class="form-control border text-capitalize border-primary" type="text" name="lastName" value="<?php echo "$lastName"; ?>" placeholder="Last Name" required>
+                                                    <i class="fas fa-user"></i>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="form-group inputWithIcon" id="mailProfile" style="display: none;">
+                                                    <input class="form-control border border-primary" type="email" name="mail" value="<?php echo "$mail"; ?> " placeholder="Mail" required>
+                                                    <i class="fas fa-envelope"></i>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="form-group inputWithIcon" id="phoneDiv">
+                                                    <input class="form-control border border-primary" type="number" name="phone" value="<?php echo "$phone"; ?>" placeholder="Phone" required>
+                                                    <i class="fas fa-mobile"></i>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="form-group inputWithIcon" id="addressDiv">
+                                                    <textarea name="address" class="form-control text-capitalize border border-primary" cols="30" rows="3" placeholder="Address"><?php echo "$address"; ?></textarea>
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="form-group inputWithIcon" id="newPassDiv" style="display: none;">
+                                                    <input class="form-control border border-primary" type="password" name="newPassword" value="" placeholder="New Password">
+                                                    <i class="fas fa-lock"></i>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="form-group inputWithIcon" id="conPassDiv" style="display: none;">
+                                                    <input class="form-control border border-primary" type="password" name="confirmPassword" value="" placeholder="Confirm Password">
+                                                    <i class="fas fa-lock"></i>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="form-group"><input class="btn btn-outline-primary btn-block font-weight-bold" type="submit" name="updateInfoBtn" id="updateInfoBtn" value="Update" style="display: none;">
+                                                    <div class="form-group"><input class="btn btn-outline-primary btn-block font-weight-bold" type="submit" name="updateMailBtn" id="updateMailBtn" value="Update" style="display: none;">
+                                                        <div class="form-group"><input class="btn btn-outline-primary btn-block font-weight-bold" type="submit" name="updatePassBtn" id="updatePassBtn" value="Update" style="display: none;">
+                                                        </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-link text-left" onclick="showPassDivs(); hideInfoDiv(); hideMailDiv();" id="changePassBtn" style="display: none;">Change password.</button>
+                                                    <button type="button" class="btn btn-link text-right" onclick="showMailDiv(); hideInfoDiv(); hidePassDivs();" id="changeMailBtn" style="display: none;">Change Mail.</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <div id="purchaseHistorySection" style="display:none;">
@@ -451,9 +444,9 @@ if(isset($_POST['updatePassBtn'])){
                                 $x = 0;
                                 $query = "SELECT * FROM ticket WHERE c_id='$userID';";
                                 $result1 = mysqli_query($conn, $query);
-                                
+
                                 while ($row = mysqli_fetch_assoc($result1)) {
-                                    $showID=$row['show_id'];
+                                    $showID = $row['show_id'];
                                     $query = "SELECT m.name,t.theatre_name,s.show_date,s.show_time FROM shows as s left join movie as m on s.movie_id=m.mv_id left join theatre as t on s.theatre_id=t.theatre_id WHERE s.s_id='$showID';";
                                     $result2 = mysqli_query($conn, $query);
                                     while ($row2 = mysqli_fetch_assoc($result2)) {
@@ -463,10 +456,10 @@ if(isset($_POST['updatePassBtn'])){
                                             <th><?php echo $x; ?> </th>
                                             <td><?php echo $row2['name']; ?></td>
                                             <td><?php echo $row2['show_date']; ?></td>
-                                            <td><?php echo substr($row2['show_time'],0,5)  . " -" . $row2['theatre_name']; ?></td>
+                                            <td><?php echo substr($row2['show_time'], 0, 5)  . " -" . $row2['theatre_name']; ?></td>
                                             <td><?php echo rtrim($row['seat_number'], ','); ?></td>
-                                            <td><?php echo $row['discount']." BDT"; ?></td>
-                                            <td><?php echo $row['price']." BDT"; ?></td>
+                                            <td><?php echo $row['discount'] . " BDT"; ?></td>
+                                            <td><?php echo $row['price'] . " BDT"; ?></td>
                                             <td><?php echo $row['payment_method']; ?></td>
                                         </tr>
                                 <?php
@@ -483,7 +476,7 @@ if(isset($_POST['updatePassBtn'])){
 
     </div>
     </div>
-
+                            
 
     <!--Footer Section-->
     <div class="container-fluid">

@@ -74,7 +74,7 @@ include "DatabaseConnection.php";
             font-size: 18px;
             text-align: left;
             border-left-color: #008AFC;
-            border-left: 110px #008AFC solid;
+            border-left: 60px #008AFC solid;
             border-left-style:ridge;
             border-radius: 5px;
         }
@@ -139,7 +139,7 @@ include "DatabaseConnection.php";
             border-bottom-right-radius: 15px;
             margin-top: 10px;
             margin-bottom: 10px;
-
+            background-color: #2c3e50;
         }
         .card-img-top{
             width: auto;
@@ -216,8 +216,8 @@ include "DatabaseConnection.php";
         <!--Main Body Section-->
 
         <div class="container-fluid">
-            <div class="row mt-3  justify-content-between ">
-                <div class="col-12 col-sm-8 col-xl-3 col-lg-3 col-md-4 order-lg-1 order-xl-1 order-lg-1 order-md-2 order-2" >
+            <div class="row mt-3  justify-content-around ">
+                <div class="col-12 col-sm-8 col-xl-2 col-lg-3 col-md-4 order-lg-1 order-xl-1 order-lg-1 order-md-2 order-2" >
                     <div class="row">
                         <div class="col">
                             <div class="TrendingListContainer">

@@ -110,8 +110,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
             border-radius: 5px;
         }
         #starRatingDiv {
-            width: 50%;
-            height: 300px;
+            width: 100%;
+            height: 100px;
             margin-top: 0px;
         }
 
@@ -120,9 +120,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
         }
 
         .rating-wrapper {
-            width: auto;
+            width: 100%;
             height: 75px;
-
             direction: rtl;
             margin: 0;
             padding: 0;
@@ -258,7 +257,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
                             </div>
 
                             <div class="row mt-0 justify-content-between">
-                                <div class="col-5">
+                                <div class="col-12 col-xl-5 col-lg-6">
                                     <div class="row">
                                         <div class="col-12">
                                             <div style=" width:100%; margin-left:10px; padding:3px;">
@@ -275,10 +274,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="row" style="height: 120px;">
-                                        <div class="col-9 mt-2">
-                                            <div id="starRatingDiv">
+                                <div class="col-12 col-xl-6 col-lg-6">
+                                    <div class="row">
+                                        <div class="col-8">
+                                        <div id="starRatingDiv">
                                                 <span>Rate the movie :</span>
                                                 <div class="rating-wrapper">
                                                     <input type="radio" name="rating" id="star-1" onclick="contentSubmission('5');"><label for="star-1"></label>
@@ -289,14 +288,16 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-3 mt-4">
-                                            <div class="mt-4 mb-0 text-right" style="margin-right:15px;">
+                                        <div class="col-4 mt-4">
+                                        <div class="text-right">
                                                 <form action="BuyTickets.php" method="POST">
                                                     <button type="submit" name="buyTicketBtn" class="btn btn-outline-success font-weight-bold">Buy Ticket</button>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
+
+
                                     <div class="row">
                                         <div class="col">
                                             <div style="border: 1px grey solid; border-radius:5px; margin-right:10px;">

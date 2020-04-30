@@ -163,8 +163,8 @@ $result2 = mysqli_query($conn, $query2);
         <!--Main Body Section-->
 
         <div class="container-fluid m-0 p-0">
-            <div class="row m-0 p-0 mt-4  justify-content-between">
-                <div class="col-12 col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12  order-md-2 order-lg-2 order-xl-1  mb-2">
+            <div class="row m-0 p-0 mt-4  justify-content-around">
+                <div class="col-12 col-xl-3 col-lg-4 col-md-6 col-sm-10 col-xs-12  order-sm-2 order-md-2 order-lg-2 order-xl-1  mb-2">
                     <?php
                     $query = "SELECT DISTINCT title, message, links, pic, date_posted FROM notice WHERE date_posted= (SELECT MAX(date_posted) FROM notice)";
                     $result = mysqli_query($conn, $query);
@@ -199,7 +199,7 @@ $result2 = mysqli_query($conn, $query2);
                     }
                     ?>
                 </div>
-                <div class="col-12 col-xl-6 col-lg-12 col-md-12 col-sm-12 order-md-1 order-lg-1 order-xl-2 order-2 ">
+                <div class="col-12 col-xl-6 col-lg-10 col-md-12 col-sm-12 order-md-1 order-lg-1 order-xl-2 order-sm-1 order-2 ">
                     <div class="card text-white bg-dark mb-3" style="max-width: 100%; border-radius:7px;">
                         <div class="card-header text-center font-weight-bold h1"><i class="fas fa-vr-cardboard"></i> Showtime</div>
                         <div class="card-body">
@@ -284,10 +284,10 @@ $result2 = mysqli_query($conn, $query2);
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-xl-3 col-lg-6 col-md-6 col-sm-12 col-xs-12 order-md-3 order-lg-3 order-3 order-xl-3 m-0 p-0" style="margin-left: 10px;">
+                <div class="col-12 col-xl-3 col-lg-5 col-md-6 col-sm-12 col-xs-12 order-md-3 order-lg-3 order-sm-3 order-3 order-xl-3 m-0 p-0" style="margin-left: 10px;">
                     <div class="row justify-content-start m-0 p-0" id="showCategoriesBox">
                         <div class="row text-center ml-4 mt-3 m-0 p-0" style="width: 85%;">
-                            <div class="col text-center" style="border: 5px dodgerblue double; border-top-right-radius:15px; border-bottom-left-radius:15px;">
+                            <div class="col text-center" style="border: 3px dodgerblue ridge;border-radius:10px;">
                                 <h1>Theatre and Pricing</h1>
                             </div>
                         </div>
