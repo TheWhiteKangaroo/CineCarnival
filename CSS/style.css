@@ -38,7 +38,7 @@ body {
 
 .pollContainer {
     width: 100%;
-    height: auto;
+    height: auto;   
     border: 1px #2c3e50 solid;
     border-top-left-radius: 18px;
     border-bottom-right-radius: 15px;
@@ -176,7 +176,7 @@ body {
     padding-top: 15px;
     font-size: 18px;
     border-bottom: 20px black solid;
-    box-shadow: 5px 10px 10px black;
+    box-shadow: 5px 10px 10px grey;
 }
 
 .movies-nav span {
@@ -448,7 +448,7 @@ a:focus {
     background-color: black;
     padding-top: 20px;
     margin-bottom: 20px;
-    box-shadow: 5px 10px 10px black;
+    box-shadow: 5px 10px 10px grey;
     border: 1px black solid;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -462,7 +462,9 @@ a:focus {
     padding: 0;
     margin: 0;
 }
-
+.my-footer-ending li:hover{
+    transform: scale(1.1);
+}
 .my-footer-ending a {
     text-decoration: none;
     font-size: 22px;
@@ -564,7 +566,7 @@ a:focus {
     width: 100%;
     padding-left: 0px;
     padding-right: 0px;
-    border: 3px dodgerblue solid;
+    border: 2px dodgerblue solid;
     border-radius: 5px;
 }
 

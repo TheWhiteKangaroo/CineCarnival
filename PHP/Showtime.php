@@ -287,8 +287,8 @@ $result2 = mysqli_query($conn, $query2);
                 <div class="col-12 col-xl-3 col-lg-5 col-md-6 col-sm-12 col-xs-12 order-md-3 order-lg-3 order-sm-3 order-3 order-xl-3 m-0 p-0" style="margin-left: 10px;">
                     <div class="row justify-content-start m-0 p-0" id="showCategoriesBox">
                         <div class="row text-center ml-4 mt-3 m-0 p-0" style="width: 85%;">
-                            <div class="col text-center" style="border: 3px dodgerblue ridge;border-radius:10px;">
-                                <h1>Theatre and Pricing</h1>
+                            <div class="col text-center text-light pt-2" style="background-color:#68BB59; border-top-left-radius:15px; border-bottom-right-radius:15px; height:65px;">
+                                <h2>Theatre and Pricing</h2>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 mt-5">

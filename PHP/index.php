@@ -6,7 +6,30 @@ if (isset($_SESSION['user_name'])) {
 } else {
     $userName = "";
 }
+
 include "DatabaseConnection.php";
+$sql = "SELECT cover_pic FROM movie ORDER BY mv_id DESC LIMIT 6";
+$result = mysqli_query($conn, $sql);
+$picArray = array();
+while ($row = mysqli_fetch_assoc($result)) {
+    array_push($picArray, $row['cover_pic']);
+}
+
+$sql = "SELECT pic,title FROM notice ORDER BY n_id LIMIT 1";
+$result = mysqli_query($conn,$sql);
+$noticePicArray = array();
+$noticeArray = array();
+while ($row = mysqli_fetch_assoc($result)) {
+    array_push($noticePicArray, $row['pic']);
+    array_push($noticeArray,$row['title']);
+}
+
+$sql = "SELECT pic FROM offer ORDER BY o_id DESC LIMIT 3";
+$result = mysqli_query($conn,$sql);
+$offerPicArray = array();
+while ($row = mysqli_fetch_assoc($result)) {
+    array_push($offerPicArray, $row['pic']);
+}
 
 ?>
 
@@ -34,7 +57,6 @@ include "DatabaseConnection.php";
             var x = e;
             var y = document.getElementById('pollTitleText').innerText;
             var z = document.getElementById('pollIDText').innerText;
-
             $(document).ready(function() {
                 $(".pollContainer").load("PollSubmission.php", {
                     content: x,
@@ -63,21 +85,22 @@ include "DatabaseConnection.php";
 
 
     <style>
-        #buyTicketBtn{
+        #buyTicketBtn {
             width: 75%;
             height: 50px;
             margin-top: 20px;
             outline: none;
             border-style: none;
-            background-color:#005180;
-            color:white;
+            background-color: #005180;
+            color: white;
             font-size: 18px;
             text-align: left;
             border-left-color: #008AFC;
             border-left: 60px #008AFC solid;
-            border-left-style:ridge;
+            border-left-style: ridge;
             border-radius: 5px;
         }
+
         .trendingCard {
             width: 100%;
             height: auto;
@@ -141,7 +164,8 @@ include "DatabaseConnection.php";
             margin-bottom: 10px;
             background-color: #2c3e50;
         }
-        .card-img-top{
+
+        .card-img-top {
             width: auto;
             height: 18vw;
             object-fit: cover;
@@ -215,215 +239,305 @@ include "DatabaseConnection.php";
 
         <!--Main Body Section-->
 
-        <div class="container-fluid">
-            <div class="row mt-3  justify-content-around ">
-                <div class="col-12 col-sm-8 col-xl-2 col-lg-3 col-md-4 order-lg-1 order-xl-1 order-lg-1 order-md-2 order-2" >
-                    <div class="row">
-                        <div class="col">
-                            <div class="TrendingListContainer">
-                                <div class="TrendingListTitle">
-                                    <span style="font-size: 18px; color:white;"><i class="fas fa-chart-line"></i> Trending Movies</span>
+
+        <div class="row justify-content-center mt-4 mb-2">
+            <div class="col">
+
+
+
+
+                <div id="carouselExampleIndicators" class="carousel slide bg-dark" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                    </ol>
+                    <div class="carousel-inner" style=" box-shadow: 0 4px 8px 0  #4e5b61, 0 6px 15px 0  #4e5b61 ;">
+                    <div class="carousel-item active">
+                            <div class="row justify-content-center text-center">
+                                    <div class="col">
+                                        <img src="<?php if (isset($noticePicArray[0])) echo $noticePicArray[0]; ?>" class="w-50"  alt="..." style="height: 350px;">
+                                    </div>
+                            </div>
+                            <div class="carousel-caption d-none d-md-block text-warning">
+                                <h1><?php if(isset($noticeArray)) echo $noticeArray[0]; ?></h1>
+                            </div>
+                        </div>    
+                    <div class="carousel-item">
+                            <div class="row justify-content-center text-center">
+                                <div class="col-4">
+                                    <img src="<?php if (isset($picArray[0])) echo $picArray[0]; ?>"  class="w-100"   alt="..." style="height: 350px;">
                                 </div>
-                                <div class="TrendingBox">
-                                    <?php
-                                    $trendingList = array();
-                                    $sql  = "SELECT DISTINCT movie_id FROM rating ORDER BY rating DESC LIMIT 4";
-                                    $result = mysqli_query($conn, $sql);
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        array_push($trendingList, $row['movie_id']);
-                                    }
-                                    if($trendingList==null){
-                                        ?>
-                                        <div class="trendingCard bg-light text-center text-success mb-2 pt-2">
-                                            <h6><i class="fas fa-search"></i> No trending movies found!</h6>
-                                        </div>
-                                        <?php
-                                    }
-                                    else{
-                                        $query = "SELECT name,mv_id FROM movie WHERE mv_id='$trendingList[0]' ";
-                                        for ($i = 1; $i < count($trendingList); $i++) {
-                                            $val = $trendingList[$i];
-                                            $query .= " OR mv_id=$val";
-                                        }
-                                        $query .= " LIMIT 6;";
-                                        //echo $query;
-                                        $result = mysqli_query($conn, $query);   
-                                    }
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                    ?>
-
-                                        <div class="trendingCard bg-light mb-2">
-                                            <form action="Movies.php" method="GET">
-                                                <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="btn btn-link text-dark text-decoration-none font-weight-normal"><?php echo $row['name']; ?></button>
-                                            </form>
-                                        </div>
-
-                                    <?php
-                                    }
-                                    ?>
+                                <div class="col-4">
+                                    <img src="<?php if (isset($picArray[1])) echo $picArray[1]; ?>"  class="w-100"  alt="..." style="height: 350px;">
+                                </div>
+                                <div class="col-4">
+                                    <img src="<?php if (isset($picArray[2])) echo $picArray[2]; ?>" class="w-100"  alt="..." style="height: 350px;">
                                 </div>
                             </div>
-
                         </div>
-                    </div>
-
-
-
-
-
-
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="pollContainer">
-                                <?php
-                                $query = "SELECT * FROM poll WHERE p_id='1';";
-                                $result = mysqli_query($conn, $query);
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                ?>
-
-
-
-
-
-                                    <div class="pollTitle">
-                                        <label id="pollIDText" style="font-size: 18px; color:white; margin-top:15px; margin-bottom:5px; display:none;"><i class="fas fa-poll"></i> <?php echo $row['p_id']; ?> </label>
-                                        <label id="pollTitleText" style="font-size: 18px; color:white; margin-top:15px; margin-bottom:5px;"><i class="fas fa-poll"></i> <?php echo $row['poll_title']; ?> </label>
+                        <div class="carousel-item">
+                            <div class="row justify-content-center text-center">
+                                    <div class="col-4">
+                                        <img src="<?php if (isset($picArray[3])) echo $picArray[3]; ?>" class="w-100" alt="..." style="height: 350px;">
                                     </div>
-                                    <div class="pollContentArea">
-                                        <div class="custom-control custom-radio mb-2 ml-3  text-left h6">
-                                            <input type="radio" class="custom-control-input" id="customControlValidation1" name="radio-stacked" onclick="contentSubmission('1');">
-                                            <label class="custom-control-label text-dark" for="customControlValidation1"><?php echo $row['content1']; ?></label>
-                                        </div>
-                                        <div class="custom-control custom-radio mb-2  ml-3  text-left h6">
-                                            <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" onclick="contentSubmission('2');">
-                                            <label class="custom-control-label text-dark" for="customControlValidation2"><?php echo $row['content2']; ?></label>
-                                        </div>
-                                        <div class="custom-control custom-radio mb-2 ml-3 text-left h6">
-                                            <input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" onclick="contentSubmission('3');">
-                                            <label class="custom-control-label text-dark" for="customControlValidation3"><?php echo $row['content3']; ?></label>
-                                        </div>
-                                        <div class="custom-control custom-radio mb-2 ml-3  text-left h6">
-                                            <input type="radio" class="custom-control-input" id="customControlValidation4" name="radio-stacked" onclick="contentSubmission('4');">
-                                            <label class="custom-control-label text-dark" for="customControlValidation4"><?php echo $row['content4']; ?></label>
-                                        </div>
+                                    <div class="col-4">
+                                        <img src="<?php if (isset($picArray[4])) echo $picArray[4]; ?>"  class="w-100" alt="..." style="height: 350px;">
                                     </div>
-
-
-
-
-
-                                <?php
-
-                                }
-                                ?>
-
+                                    <div class="col-4">
+                                        <img src="<?php if (isset($picArray[5])) echo $picArray[5]; ?>" class="w-100"  alt="..." style="height: 350px;">
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row justify-content-center text-center">
+                                <div class="col-4">
+                                    <img src="<?php if (isset($offerPicArray[0])) echo $offerPicArray[0]; ?>"  class="w-100"   alt="..." style="height: 350px;">
+                                </div>
+                                <div class="col-4">
+                                    <img src="<?php if (isset($offerPicArray[1])) echo $offerPicArray[1]; ?>"  class="w-100"  alt="..." style="height: 350px;">
+                                </div>
+                                <div class="col-4">
+                                    <img src="<?php if (isset($offerPicArray[2])) echo $offerPicArray[2]; ?>" class="w-100"  alt="..." style="height: 350px;">
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="row text-center justify-content-center">
-                        <div class="col  text-center">
-                        <a href="BuyTickets.php"><button id="buyTicketBtn">Buy Tickets</button></a>
-                        </div>
-                    </div>
-
-
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
 
+            </div>
 
 
 
-                <div class="col-12 col-xl-6 col-lg-9 col-md-12 order-lg-2 order-xl-2 order-md-1 m-0 p-0  order-1">
+        </div>
+    
 
-                    <div>
-                        <div class="nowShowingTile pl-3">
-                            <a href="MoviesPage.php"><i class="fas fa-tape"></i> Now Showing</a>
+
+
+
+
+
+
+
+
+
+
+    <div class="row mt-3  justify-content-around ">
+        <div class="col-12 col-sm-8 col-xl-2 col-lg-3 col-md-4 order-lg-1 order-xl-1 order-lg-1 order-md-2 order-2">
+            <div class="row">
+                <div class="col">
+                    <div class="TrendingListContainer">
+                        <div class="TrendingListTitle">
+                            <span style="font-size: 18px; color:white;"><i class="fas fa-chart-line"></i> Trending Movies</span>
                         </div>
-                        <div class="row justify-content-between ">
+                        <div class="TrendingBox">
                             <?php
-                            $query = "SELECT name, cover_pic,mv_id FROM movie WHERE status='Now Showing' ORDER BY mv_id DESC LIMIT 4;";
-                            $result = mysqli_query($conn, $query);
-                            if (mysqli_num_rows($result) == 0) {
-                            } else {
-                                while ($row = mysqli_fetch_assoc($result)) {
-                            ?>
-
-                                    <div class="col-5 col-sm-3  movieReelPanel" style="margin-top: 2px;"> 
-                                            <form action="Movies.php" method="GET">
-                                                <img src="<?php echo $row['cover_pic'] ?>" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
-                                                <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
-                                            </form>
-
-                                        
-                                    </div>
-
-                            <?php
-                                }
+                            $trendingList = array();
+                            $sql  = "SELECT DISTINCT movie_id FROM rating ORDER BY rating DESC LIMIT 4";
+                            $result = mysqli_query($conn, $sql);
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                array_push($trendingList, $row['movie_id']);
                             }
+                            if ($trendingList == null) {
                             ?>
-                        </div>
-
-                        <div class="nowShowingTile mt-5 pl-3" style="background-color: #2c3e50;">
-                            <a href="MoviesPage.php"><i class="fas fa-tape"></i> Up Coming</a>
-                        </div>
-                        <div class="row justify-content-between">
+                                <div class="trendingCard bg-light text-center text-success mb-2 pt-2">
+                                    <h6><i class="fas fa-search"></i> No trending movies found!</h6>
+                                </div>
                             <?php
-                            $query = "SELECT name, cover_pic,mv_id FROM movie WHERE status='Coming Soon' ORDER BY mv_id DESC LIMIT 4;";
-                            $result = mysqli_query($conn, $query);
-                            if (mysqli_num_rows($result) == 0) {
                             } else {
-                                while ($row = mysqli_fetch_assoc($result)) {
+                                $query = "SELECT name,mv_id FROM movie WHERE mv_id='$trendingList[0]' AND status='Now Showing' ";
+                                for ($i = 1; $i < count($trendingList); $i++) {
+                                    $val = $trendingList[$i];
+                                    $query .= " OR mv_id=$val";
+                                }
+                                $query .= " LIMIT 6;";
+                                //echo $query;
+                                $result = mysqli_query($conn, $query);
+                            }
+                            while ($row = mysqli_fetch_assoc($result)) {
                             ?>
 
-                                    <div class="col-5 col-sm-3">
-                                        <div class="movieReelPanel" style="margin-top: 2px;">
-                                            <form action="Movies.php" method="GET">
-                                                <img src="<?php echo $row['cover_pic'] ?>" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
-                                                <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
-                                            </form>
-                                        </div>
-
-                                    </div>
+                                <div class="trendingCard bg-light mb-2">
+                                    <form action="Movies.php" method="GET">
+                                        <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="btn btn-link text-dark text-decoration-none font-weight-normal"><?php echo $row['name']; ?></button>
+                                    </form>
+                                </div>
 
                             <?php
-                                }
                             }
                             ?>
                         </div>
                     </div>
 
+                </div>
+            </div>
 
+
+
+
+
+
+
+            <div class="row">
+                <div class="col">
+                    <div class="pollContainer">
+                        <?php
+                        $query = "SELECT * FROM poll ORDER BY p_id DESC LIMIT 1;";
+                        $result = mysqli_query($conn, $query);
+                        while ($row = mysqli_fetch_assoc($result)) {
+                        ?>
+
+
+
+
+
+                            <div class="pollTitle">
+                                <label id="pollIDText" style="font-size: 18px; color:white; margin-top:15px; margin-bottom:5px; display:none;"><i class="fas fa-poll"></i> <?php echo $row['p_id']; ?> </label>
+                                <label id="pollTitleText" style="font-size: 18px; color:white; margin-top:15px; margin-bottom:5px;"><i class="fas fa-poll"></i> <?php echo $row['poll_title']; ?> </label>
+                            </div>
+                            <div class="pollContentArea">
+                                <div class="custom-control custom-radio mb-2 ml-3  text-left h6">
+                                    <input type="radio" class="custom-control-input" id="customControlValidation1" name="radio-stacked" onclick="contentSubmission('1');">
+                                    <label class="custom-control-label text-dark" for="customControlValidation1"><?php echo $row['content1']; ?></label>
+                                </div>
+                                <div class="custom-control custom-radio mb-2  ml-3  text-left h6">
+                                    <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" onclick="contentSubmission('2');">
+                                    <label class="custom-control-label text-dark" for="customControlValidation2"><?php echo $row['content2']; ?></label>
+                                </div>
+                                <div class="custom-control custom-radio mb-2 ml-3 text-left h6">
+                                    <input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" onclick="contentSubmission('3');">
+                                    <label class="custom-control-label text-dark" for="customControlValidation3"><?php echo $row['content3']; ?></label>
+                                </div>
+                                <div class="custom-control custom-radio mb-2 ml-3  text-left h6">
+                                    <input type="radio" class="custom-control-input" id="customControlValidation4" name="radio-stacked" onclick="contentSubmission('4');">
+                                    <label class="custom-control-label text-dark" for="customControlValidation4"><?php echo $row['content4']; ?></label>
+                                </div>
+                            </div>
+
+
+
+
+
+                        <?php
+
+                        }
+                        ?>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row text-center justify-content-center">
+                <div class="col  text-center">
+                    <a href="BuyTickets.php"><button id="buyTicketBtn">Buy Tickets</button></a>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+        <div class="col-12 col-xl-6 col-lg-9 col-md-12 order-lg-2 order-xl-2 order-md-1 m-0 p-0  order-1">
+
+            <div>
+                <div class="nowShowingTile pl-3">
+                    <a href="MoviesPage.php"><i class="fas fa-tape"></i> Now Showing</a>
+                </div>
+                <div class="row justify-content-between ">
+                    <?php
+                    $query = "SELECT name, cover_pic,mv_id FROM movie WHERE status='Now Showing' ORDER BY mv_id DESC LIMIT 4;";
+                    $result = mysqli_query($conn, $query);
+                    if (mysqli_num_rows($result) == 0) {
+                    } else {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                    ?>
+
+                            <div class="col-5 col-sm-3  movieReelPanel" style="margin-top: 2px;">
+                                <form action="Movies.php" method="GET">
+                                    <img src="<?php echo $row['cover_pic'] ?>" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
+                                    <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
+                                </form>
+
+
+                            </div>
+
+                    <?php
+                        }
+                    }
+                    ?>
                 </div>
 
-                <div class="col-12 col-sm-8 col-xl-3 col-lg-9 col-md-8 order-lg-3 order-xl-3 order-md-3  offset-md-0 offset-xl-0 offset-lg-3 order-3">
-                    <div class="row justify-content-between m-0 p-0" style="width: 100%;">
-                        <div class="col m-0 p-0">
-                            <div class="mt-2 text-justify m-0 p-0">
-                                <?php
-                                $query = "SELECT DISTINCT title, message, links, pic, date_posted FROM notice WHERE date_posted= (SELECT MAX(date_posted) FROM notice)";
-                                $result = mysqli_query($conn, $query);
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    echo "
+                <div class="nowShowingTile mt-5 pl-3" style="background-color: #2c3e50;">
+                    <a href="MoviesPage.php"><i class="fas fa-tape"></i> Up Coming</a>
+                </div>
+                <div class="row justify-content-between">
+                    <?php
+                    $query = "SELECT name, cover_pic,mv_id FROM movie WHERE status='Coming Soon' ORDER BY mv_id DESC LIMIT 4;";
+                    $result = mysqli_query($conn, $query);
+                    if (mysqli_num_rows($result) == 0) {
+                    } else {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                    ?>
+
+                            <div class="col-5 col-sm-3">
+                                <div class="movieReelPanel" style="margin-top: 2px;">
+                                    <form action="Movies.php" method="GET">
+                                        <img src="<?php echo $row['cover_pic'] ?>" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
+                                        <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                    <?php
+                        }
+                    }
+                    ?>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-12 col-sm-8 col-xl-3 col-lg-9 col-md-8 order-lg-3 order-xl-3 order-md-3  offset-md-0 offset-xl-0 offset-lg-3 order-3">
+            <div class="row justify-content-between m-0 p-0" style="width: 100%;">
+                <div class="col m-0 p-0">
+                    <div class="mt-2 text-justify m-0 p-0">
+                        <?php
+                        $query = "SELECT DISTINCT title, message, links, pic, date_posted FROM notice WHERE date_posted= (SELECT MAX(date_posted) FROM notice)";
+                        $result = mysqli_query($conn, $query);
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "
                                     <div class=" . "card text-justify m-0 p-0" . ">
                                         <div class=" . "card-header bg-dark text-center m-0 p-0" . ">
                                             Notice
                                             </div>
                                                 <div class=" . "card-body text-justify text-left" . ">
                                                     <h5 class=" . "card-title" . ">" . $row['title'] . "</h5>";
-                                    if ($row['pic'] != null || isset($row['pic']) || !empty($row['pic'])) {
-                                        echo "
+                            if ($row['pic'] != null || isset($row['pic']) || !empty($row['pic'])) {
+                                echo "
                                                             <img class=" . "card-img-top" . " src=" . $row['pic'] . " alt=" . "No Image..." . " style=" . "margin-bottom:10px; width:200px; height: 100px;" . ">
                                                         ";
-                                    }
-                                    echo "
+                            }
+                            echo "
                                                     <p class=" . "card-text text-justify" . ">" . $row['message'] . "</p>";
-                                    if ($row['links'] != null || isset($row['links']) || !empty($row['links'])) {
-                                        echo "
+                            if ($row['links'] != null || isset($row['links']) || !empty($row['links'])) {
+                                echo "
                                                             <a href=" . $row['links'] . " class=" . "badge badge-secondary" . ">Click here</a>
                                                         ";
-                                    }
-                                    echo "
+                            }
+                            echo "
                                                         
                                                 </div>
                                             <div class=" . "card-footer text-muted" . ">
@@ -431,16 +545,9 @@ include "DatabaseConnection.php";
                                         </div>
                                      </div>
                                 ";
-                                }
-                                ?>
-                            </div>
-                        </div>
-
+                        }
+                        ?>
                     </div>
-
-
-
-
                 </div>
 
             </div>
@@ -448,49 +555,54 @@ include "DatabaseConnection.php";
 
 
 
-            <!--Footer Section-->
-            <div class="container-fluid">
-                <footer>
-                    <div class="row my-footer">
-                        <div class="col">
-                            <ul>
-                                <li>Contact Us</li>
-                                <li><img src="..\Images/CineCarnival.png" alt=""></li>
-                                <li>info@cinecarnival.com</li>
-                                <li>+8801745-987565</li>
-                                <li>Dhanmondi, Dhaka</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row justify-content-between my-footer-ending">
-                        <div class="col-4">
-                            <ul>
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-3 developers-tag">
-                            <span>Developed by : Group-5</span>
-                        </div>
-                        <div class="col-3 stores">
-                            <ul>
-                                <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
-                                <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </footer>
-            </div>
         </div>
 
+    </div>
 
-        
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+
+
+
+    <!--Footer Section-->
+    <div class="container-fluid">
+        <footer>
+            <div class="row my-footer">
+                <div class="col">
+                    <ul>
+                        <li>Contact Us</li>
+                        <li><img src="..\Images/CineCarnival.png" alt=""></li>
+                        <li>info@cinecarnival.com</li>
+                        <li>+8801745-987565</li>
+                        <li>Dhanmondi, Dhaka</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row justify-content-between my-footer-ending">
+                <div class="col-4">
+                    <ul>
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+                <div class="col-3 developers-tag">
+                    <span>Developed by : Group-5</span>
+                </div>
+                <div class="col-3 stores">
+                    <ul>
+                        <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
+                        <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="..\css/bootstrap.min.js"></script>
 </body>
 

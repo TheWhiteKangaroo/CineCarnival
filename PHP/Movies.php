@@ -1,6 +1,6 @@
 <?php
 session_start();
-$userName = $movie_id=$trailer_link=$cover_pic=$movie_id=$movie_name="";
+$userName = $movie_id=$trailer_link=$cover_pic=$movie_id=$movie_name=$rating=$ratingCount="";
 if (isset($_SESSION['user_name'])) {
     $userName = $_SESSION['user_name'];
 } else {
@@ -20,6 +20,22 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
     $result = mysqli_query($conn, $query);
 }
 
+$sql = "SELECT DISTINCT rating FROM rating WHERE movie_id='$movie_id' ORDER BY r_id DESC LIMIT 1;";
+$ratingRow = mysqli_fetch_assoc(mysqli_query($conn,$sql));
+if($ratingRow!=null || isset($ratingRow)){
+    $rating = $ratingRow['rating'];
+}
+else{
+    $rating = "Not rated yet!";
+}
+$sql = "SELECT COUNT(*) AS ratingCount FROM rating WHERE movie_id='$movie_id';";
+$ratingCountRow = mysqli_fetch_assoc(mysqli_query($conn,$sql));
+if($ratingCountRow!==false){
+    $ratingCount = $ratingCountRow['ratingCount'];
+}
+else{
+    $ratingCount = 0;
+}
 ?>
 
 
@@ -252,7 +268,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
                                     <h2 class="card-title text-light"><?php echo $row['name']; ?></h2>
                                     <span class="card-text h5 text-light font-weight-normal"><i class="fas fa-users"></i> <?php echo $row['cast']; ?></span><br>
                                     <span class="card-text h5 text-light font-weight-normal"><i class="fas fa-tape"></i> <?php echo $row['genre']; ?></span><br>
-                                    <span class="card-text h5 text-light font-weight-normal"><i class="far fa-clock"></i> <?php echo substr($row['runtime'], 3, 5) . " hrs"; ?></span>
+                                    <span class="card-text h5 text-light font-weight-normal"><i class="far fa-clock"></i> <?php echo substr($row['runtime'], 3, 5) . " hrs"; ?></span><br>
+                                    <span class="card-text h5 text-light font-weight-normal"><i class="far fa-star"></i> <?php echo round($rating)." / 5 "; ?> (rating) </span><br>
+                                    <span class="card-text h6 text-light font-weight-bolder"><i class="fas fa-poll"></i><i><?php echo " Total: ".$ratingCount." Votes";?></i> </span><br>
                                 </div>
                             </div>
 
@@ -288,7 +306,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-4 mt-4">
+                                        <div class="col-4 mt-5">
                                         <div class="text-right">
                                                 <form action="BuyTickets.php" method="POST">
                                                     <button type="submit" name="buyTicketBtn" class="btn btn-outline-success font-weight-bold">Buy Ticket</button>
