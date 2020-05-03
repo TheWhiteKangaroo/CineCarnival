@@ -121,7 +121,7 @@ else{
             font-size: 20px;
             text-align: left;
             border-left-color: #008AFC;
-            border-left: 110px #008AFC solid;
+            border-left: 35px #008AFC solid;
             border-left-style:ridge;
             border-radius: 5px;
         }
@@ -137,7 +137,7 @@ else{
 
         .rating-wrapper {
             width: 100%;
-            height: 75px;
+            height: auto;
             direction: rtl;
             margin: 0;
             padding: 0;
@@ -196,31 +196,22 @@ else{
     <div class="container">
         <!--Header Section-->
         <header>
-            <div class="d-flex flex-row flex-nowrap sm-flex-wrap  header-section ">
-                <div class="p-2 mr-auto">
+            <div class="row header-section justify-content-between ml-1" style="width:99%;">
+                <div class="col-12 col-md-6 mt-2">
                     <a href="index.php"><img src="..\Images/CineCarnival.png" alt="No Image..."></a>
                 </div>
-
-                   
-                <div class="p-2 align-self-center header-anchor" id="ProfileDiv" style="display: none;">
-                    <a href="ProfilePage.php" style="text-decoration: none;"><i class="fas fa-user-alt"></i><?php echo $userName; ?></a>
-                </div>
-                <div class="p-2 align-self-center header-anchor" id="SignInDiv" style="display: none;">
+                <div class="col-12 col-md-6 text-right mt-1 mt-md-5">
                     <a href="SignInPage.php" style="text-decoration: none;"><i class="fas fa-user-alt"></i> Sign In</a>
-                </div>
-                <div class="p-2 align-self-center" id="SignUpDiv" style="display: none;">
                     <a href="RegistrationPage.php" style="text-decoration: none;"><i class="fas fa-user-plus"></i> Sign Up</a>
                 </div>
-                <div class="p-2 align-self-center" id="SignOutDiv" style="display: none;">
-                    <a href="SignInPage.php" style="text-decoration: none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
-                </div>
+            </div>
             </div>
         </header>
     </div>
 
     <!--Nav Bar Section-->
     <div class="container">
-        <nav class="navbar navbar-expand-sm text-uppercase nav-area">
+    <nav class="navbar navbar-expand-sm text-uppercase nav-area ml-1" style="width: 99%;">
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
                 <span class="navbar-toggler-icon"> <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i></span>
             </button>
@@ -278,11 +269,13 @@ else{
                                 <div class="col-12 col-xl-5 col-lg-6">
                                     <div class="row">
                                         <div class="col-12">
-                                            <div style=" width:100%; margin-left:10px; padding:3px;">
+                                            <div style=" width:98%; margin-left:10px; padding:3px;">
                                                 <div style=" margin-right:10px; margin-top:0px; padding:5px;">
                                                     <span style="font-size:22px; margin-bottom:20px;">Trailer   :</span>
                                                     <div class="mt-4">
-                                                        <iframe width="410" height="250" src="<?php echo $row['trailer_link'];?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:5px;"></iframe>
+                                                    <div class="embed-responsive embed-responsive-16by9">
+                                                        <iframe class="embed-responsive-item" src="<?php echo $row['trailer_link'];?>"></iframe>
+                                                    </div>
                                                     </div>
                                                     
                                                 </div>
@@ -294,7 +287,7 @@ else{
                                 </div>
                                 <div class="col-12 col-xl-6 col-lg-6">
                                     <div class="row">
-                                        <div class="col-8">
+                                        <div class="col-9 col-md-8 ml-2">
                                         <div id="starRatingDiv">
                                                 <span>Rate the movie :</span>
                                                 <div class="rating-wrapper">
@@ -306,7 +299,7 @@ else{
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-4 mt-5">
+                                        <div class="col-4 col-md-3 ml-1 ml-md-0 mt-2 mb-2">
                                         <div class="text-right">
                                                 <form action="BuyTickets.php" method="POST">
                                                     <button type="submit" name="buyTicketBtn" class="btn btn-outline-success font-weight-bold">Buy Ticket</button>
@@ -317,7 +310,7 @@ else{
 
 
                                     <div class="row">
-                                        <div class="col">
+                                        <div class="col ml-2">
                                             <div style="border: 1px grey solid; border-radius:5px; margin-right:10px;">
                                                 <table class="table table-striped">
                                                     <tbody>
@@ -371,44 +364,46 @@ else{
 
 
             <!--Footer Section-->
-            <div class="container">
-                <footer>
-                    <div class="row my-footer">
-                        <div class="col">
-                            <ul>
-                                <li>Contact Us</li>
-                                <li><img src="..\Images/CineCarnival.png" alt=""></li>
-                                <li>info@cinecarnival.com</li>
-                                <li>+8801745-987565</li>
-                                <li>Dhanmondi, Dhaka</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row justify-content-between my-footer-ending">
-                        <div class="col-4">
-                            <ul>
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-3 developers-tag">
-                            <span>Developed by : Group-5</span>
-                        </div>
-                        <div class="col-3 stores">
-                            <ul>
-                                <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
-                                <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </footer>
-            </div>
+           
         </div>
 
 
     </div>
+
+     <!--Footer Section-->
+     <div class="container">
+            <footer>
+                <div class="row my-footer">
+                    <div class="col">
+                        <ul>
+                            <li>Contact Us</li>
+                            <li><img src="..\Images/CineCarnival.png" alt=""></li>
+                            <li>info@cinecarnival.com</li>
+                            <li>+8801745-987565</li>
+                            <li>Dhanmondi, Dhaka</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row justify-content-around my-footer-ending">
+                    <div class="col-6 col-sm-6 m-0 p-0 text-left">
+                        <ul>
+                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        </ul>
+                    </div>
+                    
+                    
+                    <div class="col-6 col-sm-6 stores  text-right m-0 p-0">
+                        <ul style="padding-right:95px;">
+                            <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
+                            <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

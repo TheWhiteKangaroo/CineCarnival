@@ -457,7 +457,7 @@ a:focus {
 .my-footer-ending li {
     list-style-type: none;
     display: inline-flex;
-    align-items: flex-end;
+    
     opacity: 1;
     padding: 0;
     margin: 0;
@@ -470,14 +470,14 @@ a:focus {
     font-size: 22px;
     display: inline-flex;
     width: 40px;
-    height: 40px;
+    height: auto;
     background-attachment: #2c3e50;
     color: rgb(0, 125, 255);
-    transition: 0.2s;
+    transition: 0.4s;
 }
 
 .my-footer-ending a i {
-    transition: 0.2s all;
+    transition: 0.4s all;
 }
 
 .my-footer-ending a:hover {
@@ -490,13 +490,11 @@ a:focus {
 }
 
 .stores button {
-    width: 25%;
-    height: 30px;
-    padding-left: 3px;
-    padding-right: 90px;
+    width: auto;
+    height: auto;
     padding-top: 2px;
-    border-radius: 2px;
     transition: 0.3s;
+    border-radius: 15px;
 }
 
 .stores button:hover {
@@ -517,8 +515,6 @@ a:focus {
 }
 
 .developers-tag span {
-    margin: 0;
-    padding-top: 5px;
     font-size: 16px;
     font-weight: normal;
     font-family: Opificio;
@@ -532,7 +528,7 @@ a:focus {
     color: darkorange;
     opacity: 1;
     transition: 0.5s;
-    font-size: 18fpx;
+    font-size: 24fpx;
 }
 
 .developers-tag span:hover ::after {
