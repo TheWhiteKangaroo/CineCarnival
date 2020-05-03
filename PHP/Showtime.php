@@ -287,7 +287,7 @@ $result2 = mysqli_query($conn, $query2);
                 <div class="col-12 col-xl-3 col-lg-5 col-md-6 col-sm-12 col-xs-12 order-md-3 order-lg-3 order-sm-3 order-3 order-xl-3 m-0 p-0" style="margin-left: 10px;">
                     <div class="row justify-content-start m-0 p-0" id="showCategoriesBox">
                         <div class="row text-center ml-4 mt-3 m-0 p-0" style="width: 85%;">
-                            <div class="col text-center text-light pt-2" style="background-color:#68BB59; border-top-left-radius:15px; border-bottom-right-radius:15px; height:65px;">
+                            <div class="col text-center text-light pt-2" style="background-color:#68BB59; border-top-left-radius:15px; border-bottom-right-radius:15px; height:auto;">
                                 <h2>Theatre and Pricing</h2>
                             </div>
                         </div>
@@ -344,7 +344,7 @@ $result2 = mysqli_query($conn, $query2);
                     </div>
                 </div>
                 <div class="row justify-content-between my-footer-ending">
-                    <div class="col-4">
+                    <div class="col-12 col-md-4">
                         <ul>
                             <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -352,10 +352,10 @@ $result2 = mysqli_query($conn, $query2);
                             <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                         </ul>
                     </div>
-                    <div class="col-3 developers-tag">
+                    <div class="col-12 col-md-4 developers-tag">
                         <span>Developed by : Group-5</span>
                     </div>
-                    <div class="col-3 stores">
+                    <div class="col-12 col-md-4 stores">
                         <ul>
                             <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
                             <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>

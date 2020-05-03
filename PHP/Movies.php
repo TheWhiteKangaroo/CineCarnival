@@ -364,7 +364,44 @@ else{
 
 
             <!--Footer Section-->
+<<<<<<< HEAD
            
+=======
+            <div class="container">
+                <footer>
+                    <div class="row my-footer">
+                        <div class="col">
+                            <ul>
+                                <li>Contact Us</li>
+                                <li><img src="..\Images/CineCarnival.png" alt=""></li>
+                                <li>info@cinecarnival.com</li>
+                                <li>+8801745-987565</li>
+                                <li>Dhanmondi, Dhaka</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row justify-content-between my-footer-ending">
+                        <div class="col-12 col-md-4">
+                            <ul>
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="col-12 col-md-4 developers-tag">
+                            <span>Developed by : Group-5</span>
+                        </div>
+                        <div class="col-12 col-md-4 stores">
+                            <ul>
+                                <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
+                                <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+>>>>>>> 5cb8cbeee0573e2bcd359aad2e7c882b4b3fe436
         </div>
 
 

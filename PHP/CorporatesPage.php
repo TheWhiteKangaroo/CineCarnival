@@ -147,7 +147,7 @@ if (isset($_SESSION['user_name'])) {
 
 
 
-                        <div class="col-6 mt-5">
+                        <div class="col-6 mt-0">
                             <div class="card mb-3" style="max-width: 540px;">
                                 <div class="row no-gutters">
                                     <div class="col-md-4">
@@ -167,7 +167,7 @@ if (isset($_SESSION['user_name'])) {
 
 
 
-                        <div class="col-6 mt-5">
+                        <div class="col-6 mt-0">
                             <div class="card mb-3 myCorporateBox" style="max-width: 540px;">
                                 <div class="row no-gutters">
                                     <div class="col-md-4">
@@ -206,7 +206,7 @@ if (isset($_SESSION['user_name'])) {
                     </div>
                 </div>
                 <div class="row justify-content-between my-footer-ending">
-                    <div class="col-4">
+                    <div class="col-12 col-md-4">
                         <ul>
                             <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -214,10 +214,10 @@ if (isset($_SESSION['user_name'])) {
                             <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                         </ul>
                     </div>
-                    <div class="col-3 developers-tag">
+                    <div class="col-12 col-md-4 developers-tag">
                         <span>Developed by : Group-5</span>
                     </div>
-                    <div class="col-3 stores">
+                    <div class="col-12 col-md-4 stores">
                         <ul>
                             <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
                             <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
