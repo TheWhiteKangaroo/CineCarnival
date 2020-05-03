@@ -1,6 +1,6 @@
 <?php
 session_start();
-$userName = $movie_id=$trailer_link=$cover_pic=$movie_id=$movie_name=$rating=$ratingCount="";
+$userName = $movie_id = $trailer_link = $cover_pic = $movie_id = $movie_name = $rating = $ratingCount = "";
 if (isset($_SESSION['user_name'])) {
     $userName = $_SESSION['user_name'];
 } else {
@@ -13,27 +13,25 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['movieNumber'])) {
 
     $query = "SELECT * FROM movie WHERE mv_id='$movie_id';";
     $result = mysqli_query($conn, $query);
-    while($row=mysqli_fetch_assoc($result)){
+    while ($row = mysqli_fetch_assoc($result)) {
         $movie_id = $row['mv_id'];
-        $movie_name= $row['name'];
+        $movie_name = $row['name'];
     }
     $result = mysqli_query($conn, $query);
 }
 
 $sql = "SELECT DISTINCT rating FROM rating WHERE movie_id='$movie_id' ORDER BY r_id DESC LIMIT 1;";
-$ratingRow = mysqli_fetch_assoc(mysqli_query($conn,$sql));
-if($ratingRow!=null || isset($ratingRow)){
+$ratingRow = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+if ($ratingRow != null || isset($ratingRow)) {
     $rating = $ratingRow['rating'];
-}
-else{
+} else {
     $rating = "Not rated yet!";
 }
 $sql = "SELECT COUNT(*) AS ratingCount FROM rating WHERE movie_id='$movie_id';";
-$ratingCountRow = mysqli_fetch_assoc(mysqli_query($conn,$sql));
-if($ratingCountRow!==false){
+$ratingCountRow = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+if ($ratingCountRow !== false) {
     $ratingCount = $ratingCountRow['ratingCount'];
-}
-else{
+} else {
     $ratingCount = 0;
 }
 ?>
@@ -78,9 +76,9 @@ else{
         function contentSubmission(e) {
             var rating = e;
             var movieID = <?php echo json_encode($movie_id); ?>;
-            var userName=""; 
+            var userName = "";
             userName = <?php echo json_encode($userName); ?>;
-        
+
             $(document).ready(function() {
                 $(".rating-wrapper").load("PollSubmission.php", {
                     rating: rating,
@@ -90,41 +88,41 @@ else{
             });
         }
     </script>
-    
+
     <script>
-         function showProfileSection() {
+        function showProfileSection() {
             var userName = <?php echo json_encode($userName); ?>;
-            if(userName.length >=2) {
+            if (userName.length >= 2) {
                 document.getElementById("ProfileDiv").style.display = "block";
                 document.getElementById("SignOutDiv").style.display = "block";
                 document.getElementById("SignUpDiv").style.display = "none";
                 document.getElementById("SignInDiv").style.display = "none";
-            }
-            else {
+            } else {
                 document.getElementById("ProfileDiv").style.display = "none";
                 document.getElementById("SignOutDiv").style.display = "none";
                 document.getElementById("SignUpDiv").style.display = "block";
-                document.getElementById("SignInDiv").style.display = "block";                
+                document.getElementById("SignInDiv").style.display = "block";
             }
 
         }
     </script>
     <style>
-        .showtimeBtn{
+        .showtimeBtn {
             width: 60%;
             height: 50px;
             margin-bottom: 10px;
             outline: none;
             border-style: none;
-            background-color:#005180;
-            color:white;
+            background-color: #005180;
+            color: white;
             font-size: 20px;
             text-align: left;
             border-left-color: #008AFC;
             border-left: 35px #008AFC solid;
-            border-left-style:ridge;
+            border-left-style: ridge;
             border-radius: 5px;
         }
+
         #starRatingDiv {
             width: 100%;
             height: 100px;
@@ -205,13 +203,13 @@ else{
                     <a href="RegistrationPage.php" style="text-decoration: none;"><i class="fas fa-user-plus"></i> Sign Up</a>
                 </div>
             </div>
-            </div>
-        </header>
+    </div>
+    </header>
     </div>
 
     <!--Nav Bar Section-->
     <div class="container">
-    <nav class="navbar navbar-expand-sm text-uppercase nav-area ml-1" style="width: 99%;">
+        <nav class="navbar navbar-expand-sm text-uppercase nav-area ml-1" style="width: 99%;">
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
                 <span class="navbar-toggler-icon"> <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i></span>
             </button>
@@ -254,14 +252,14 @@ else{
 
                         <div class="card border-primary mb-1" style="max-width: 100%; min-height:1000px;">
                             <div class="card bg-dark text-white mb-3">
-                                <img class="card-img inner-image" src="<?php echo $row['cover_pic'];?>" alt="Card image" style="width: 100%; height:500px;filter: blur(30px);-webkit-filter: blur(8px);">
+                                <img class="card-img inner-image" src="<?php echo $row['cover_pic']; ?>" alt="Card image" style="width: 100%; height:500px;filter: blur(30px);-webkit-filter: blur(8px);">
                                 <div class="card-img-overlay">
                                     <h2 class="card-title text-light"><?php echo $row['name']; ?></h2>
                                     <span class="card-text h5 text-light font-weight-normal"><i class="fas fa-users"></i> <?php echo $row['cast']; ?></span><br>
                                     <span class="card-text h5 text-light font-weight-normal"><i class="fas fa-tape"></i> <?php echo $row['genre']; ?></span><br>
                                     <span class="card-text h5 text-light font-weight-normal"><i class="far fa-clock"></i> <?php echo substr($row['runtime'], 3, 5) . " hrs"; ?></span><br>
-                                    <span class="card-text h5 text-light font-weight-normal"><i class="far fa-star"></i> <?php echo round($rating)." / 5 "; ?> (rating) </span><br>
-                                    <span class="card-text h6 text-light font-weight-bolder"><i class="fas fa-poll"></i><i><?php echo " Total: ".$ratingCount." Votes";?></i> </span><br>
+                                    <span class="card-text h5 text-light font-weight-normal"><i class="far fa-star"></i> <?php echo round($rating) . " / 5 "; ?> (rating) </span><br>
+                                    <span class="card-text h6 text-light font-weight-bolder"><i class="fas fa-poll"></i><i><?php echo " Total: " . $ratingCount . " Votes"; ?></i> </span><br>
                                 </div>
                             </div>
 
@@ -271,13 +269,13 @@ else{
                                         <div class="col-12">
                                             <div style=" width:98%; margin-left:10px; padding:3px;">
                                                 <div style=" margin-right:10px; margin-top:0px; padding:5px;">
-                                                    <span style="font-size:22px; margin-bottom:20px;">Trailer   :</span>
+                                                    <span style="font-size:22px; margin-bottom:20px;">Trailer :</span>
                                                     <div class="mt-4">
-                                                    <div class="embed-responsive embed-responsive-16by9">
-                                                        <iframe class="embed-responsive-item" src="<?php echo $row['trailer_link'];?>"></iframe>
+                                                        <div class="embed-responsive embed-responsive-16by9">
+                                                            <iframe class="embed-responsive-item" src="<?php echo $row['trailer_link']; ?>"></iframe>
+                                                        </div>
                                                     </div>
-                                                    </div>
-                                                    
+
                                                 </div>
                                                 <h5 style="margin-top:20px;">Plot : </h5><br>
                                                 <p class="text-justify"><?php echo $row['plot']; ?></p>
@@ -288,19 +286,19 @@ else{
                                 <div class="col-12 col-xl-6 col-lg-6">
                                     <div class="row">
                                         <div class="col-9 col-md-8 ml-2">
-                                        <div id="starRatingDiv">
+                                            <div id="starRatingDiv">
                                                 <span>Rate the movie :</span>
                                                 <div class="rating-wrapper">
                                                     <input type="radio" name="rating" id="star-1" onclick="contentSubmission('5');"><label for="star-1"></label>
-                                                    <input type="radio" name="rating" id="star-2" onclick="contentSubmission('4');"><label for="star-2" ></label>
+                                                    <input type="radio" name="rating" id="star-2" onclick="contentSubmission('4');"><label for="star-2"></label>
                                                     <input type="radio" name="rating" id="star-3" onclick="contentSubmission('3');"><label for="star-3"></label>
-                                                    <input type="radio" name="rating" id="star-4" onclick="contentSubmission('2');"><label for="star-4" ></label>
-                                                    <input type="radio" name="rating" id="star-5" onclick="contentSubmission('1');"><label for="star-5" ></label>
+                                                    <input type="radio" name="rating" id="star-4" onclick="contentSubmission('2');"><label for="star-4"></label>
+                                                    <input type="radio" name="rating" id="star-5" onclick="contentSubmission('1');"><label for="star-5"></label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-4 col-md-3 ml-1 ml-md-0 mt-2 mb-2">
-                                        <div class="text-right">
+                                            <div class="text-right">
                                                 <form action="BuyTickets.php" method="POST">
                                                     <button type="submit" name="buyTicketBtn" class="btn btn-outline-success font-weight-bold">Buy Ticket</button>
                                                 </form>
@@ -363,52 +361,12 @@ else{
 
 
 
-            <!--Footer Section-->
-<<<<<<< HEAD
-           
-=======
-            <div class="container">
-                <footer>
-                    <div class="row my-footer">
-                        <div class="col">
-                            <ul>
-                                <li>Contact Us</li>
-                                <li><img src="..\Images/CineCarnival.png" alt=""></li>
-                                <li>info@cinecarnival.com</li>
-                                <li>+8801745-987565</li>
-                                <li>Dhanmondi, Dhaka</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row justify-content-between my-footer-ending">
-                        <div class="col-12 col-md-4">
-                            <ul>
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-12 col-md-4 developers-tag">
-                            <span>Developed by : Group-5</span>
-                        </div>
-                        <div class="col-12 col-md-4 stores">
-                            <ul>
-                                <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
-                                <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </footer>
-            </div>
->>>>>>> 5cb8cbeee0573e2bcd359aad2e7c882b4b3fe436
+
+
         </div>
 
-
-    </div>
-
-     <!--Footer Section-->
-     <div class="container">
+        <!--Footer Section-->
+        <div class="container">
             <footer>
                 <div class="row my-footer">
                     <div class="col">
@@ -422,7 +380,7 @@ else{
                     </div>
                 </div>
                 <div class="row justify-content-around my-footer-ending">
-                    <div class="col-6 col-sm-6 m-0 p-0 text-left">
+                    <div class="col-12 ml-5 pl-3 pl-sm-0 ml-sm-0 col-sm-6 m-0 p-0 text-left">
                         <ul>
                             <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -430,9 +388,9 @@ else{
                             <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                         </ul>
                     </div>
-                    
-                    
-                    <div class="col-6 col-sm-6 stores  text-right m-0 p-0">
+
+
+                    <div class="col-12 mr-5 pr-2 pr-sm-0 mr-sm-0 col-sm-6 stores  text-right m-0 p-0">
                         <ul style="padding-right:95px;">
                             <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
                             <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
@@ -443,11 +401,9 @@ else{
         </div>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script src="..\css/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="..\css/bootstrap.min.js"></script>
 </body>
 
 </html>

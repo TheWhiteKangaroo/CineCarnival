@@ -66,7 +66,8 @@ $np = ceil($tm / $perPage);
         }
 
         var status = "Now Showing";
-        function clearFilters(){
+
+        function clearFilters() {
             document.getElementById('actionCB').checked = false;
             document.getElementById('comedyCB').checked = false;
             document.getElementById('dramaCB').checked = false;
@@ -314,7 +315,7 @@ $np = ceil($tm / $perPage);
     </script>
 
     <style>
-        .card-img-top{
+        .card-img-top {
             width: 100%;
             height: 18vw;
             object-fit: cover;
@@ -330,7 +331,7 @@ $np = ceil($tm / $perPage);
                 <div class="p-2 mr-auto">
                     <a href="index.php"><img src="..\Images/CineCarnival.png" alt="No Image..."></a>
                 </div>
-               
+
                 <div class="p-2 align-self-center header-anchor" id="ProfileDiv" style="display: none;">
                     <a href="ProfilePage.php" style="text-decoration: none;"><i class="fas fa-user-alt"></i><?php echo $userName; ?></a>
                 </div>
@@ -466,7 +467,7 @@ $np = ceil($tm / $perPage);
                                         <div class=" . "col-4" . ">
                                         <div class=" . "card movieCard-box" . "style=" . "width: 18rem;" . ">
                                         <form action=" . "Movies.php" . " method=" . "GET" . ">
-                                            <img class=" . "card-img-top" . " src=".$row['cover_pic']." alt=" . "Card image cap" . " style="."max-width:18rem;".">
+                                            <img class=" . "card-img-top" . " src=" . $row['cover_pic'] . " alt=" . "Card image cap" . " style=" . "max-width:18rem;" . ">
                                             
                                             <div class=" . "card-body" . ">
                                                 <p class=" . "card-text" . ">
@@ -490,7 +491,7 @@ $np = ceil($tm / $perPage);
 
                 </div>
                 <div class="col-8">
-                    
+
                 </div>
             </div>
         </div>
@@ -515,8 +516,8 @@ $np = ceil($tm / $perPage);
                     </ul>
                 </div>
             </div>
-            <div class="row justify-content-between my-footer-ending" style="border-radius: 0px;">
-                <div class="col-12 col-md-4">
+            <div class="row justify-content-around my-footer-ending">
+                <div class="col-12 ml-5 pl-3 pl-sm-0 ml-sm-0 col-sm-6 m-0 p-0 text-left">
                     <ul>
                         <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                         <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -524,11 +525,10 @@ $np = ceil($tm / $perPage);
                         <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                     </ul>
                 </div>
-                <div class="col-12 col-md-4 developers-tag">
-                    <span>Developed by : Group-5</span>
-                </div>
-                <div class="col-12 col-md-4 stores">
-                    <ul>
+
+
+                <div class="col-12 mr-5 pr-2 pr-sm-0 mr-sm-0 col-sm-6 stores  text-right m-0 p-0">
+                    <ul style="padding-right:95px;">
                         <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
                         <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
                     </ul>
@@ -536,14 +536,9 @@ $np = ceil($tm / $perPage);
             </div>
         </footer>
     </div>
-    </div>
 
-
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="..\css/bootstrap.min.js"></script>
 
 </body>

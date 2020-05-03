@@ -330,7 +330,9 @@ $result2 = mysqli_query($conn, $query2);
 
 
         <!--Footer Section-->
-        <div class="container-fluid">
+
+     <!--Footer Section-->
+     <div class="container-fluid">
             <footer>
                 <div class="row my-footer">
                     <div class="col">
@@ -343,8 +345,8 @@ $result2 = mysqli_query($conn, $query2);
                         </ul>
                     </div>
                 </div>
-                <div class="row justify-content-between my-footer-ending">
-                    <div class="col-12 col-md-4">
+                <div class="row justify-content-around my-footer-ending">
+                    <div class="col-12 ml-5 pl-3 pl-sm-0 ml-sm-0 col-sm-6 m-0 p-0 text-left">
                         <ul>
                             <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -352,11 +354,10 @@ $result2 = mysqli_query($conn, $query2);
                             <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                         </ul>
                     </div>
-                    <div class="col-12 col-md-4 developers-tag">
-                        <span>Developed by : Group-5</span>
-                    </div>
-                    <div class="col-12 col-md-4 stores">
-                        <ul>
+                    
+                    
+                    <div class="col-12 mr-5 pr-2 pr-sm-0 mr-sm-0 col-sm-6 stores  text-right m-0 p-0">
+                        <ul style="padding-right:95px;">
                             <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
                             <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
                         </ul>
@@ -364,8 +365,6 @@ $result2 = mysqli_query($conn, $query2);
                 </div>
             </footer>
         </div>
-    </div>
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>

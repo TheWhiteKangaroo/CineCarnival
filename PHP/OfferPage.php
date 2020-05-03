@@ -124,8 +124,7 @@ if (isset($_SESSION['user_name'])) {
                     <h1 style="border-bottom: 2px Dodgerblue Solid;">Offers</h1>
                 </div>
             </div>
-            <div class="row mt-3 mb-3 justify-content-start">
-                
+            <div class="row mt-3 mb-3 justify-content-between">
                     <?php
                         while($row=mysqli_fetch_assoc($result)){
                             echo "
@@ -149,41 +148,41 @@ if (isset($_SESSION['user_name'])) {
         </div>
        
 <!--Footer Section-->
-        <div class="container">
+      
+     <!--Footer Section-->
+     <div class="container">
             <footer>
-               <div class="row my-footer">
-                   <div class="col">
-                       <ul>
-                           <li>Contact Us</li>
-                           <li><img src="..\Images/CineCarnival.png" alt=""></li>
-                           <li>info@cinecarnival.com</li>
-                           <li>+8801745-987565</li>
-                           <li>Dhanmondi, Dhaka</li>
-                       </ul>
-                   </div>
-               </div>
-               <div class="row justify-content-between my-footer-ending">
-                   <div class="col-12 col-md-4">
-                       <ul>
-                           <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                           <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                           <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                           <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                       </ul>
-                   </div>
-                   <div class="col-12 col-md-4 developers-tag">
-                    <span>Developed by : Group-5</span>
-                   </div>
-                   <div class="col-12 col-md-4 stores">
-                        <ul>    
-                            <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
-                           <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
+                <div class="row my-footer">
+                    <div class="col">
+                        <ul>
+                            <li>Contact Us</li>
+                            <li><img src="..\Images/CineCarnival.png" alt=""></li>
+                            <li>info@cinecarnival.com</li>
+                            <li>+8801745-987565</li>
+                            <li>Dhanmondi, Dhaka</li>
                         </ul>
-                   </div>
-               </div>
+                    </div>
+                </div>
+                <div class="row justify-content-around my-footer-ending">
+                    <div class="col-12 ml-5 pl-3 pl-sm-0 ml-sm-0 col-sm-6 m-0 p-0 text-left">
+                        <ul>
+                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        </ul>
+                    </div>
+                    
+                    
+                    <div class="col-12 mr-5 pr-2 pr-sm-0 mr-sm-0 col-sm-6 stores  text-right m-0 p-0">
+                        <ul style="padding-right:95px;">
+                            <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
+                            <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
+                        </ul>
+                    </div>
+                </div>
             </footer>
         </div>
-    </div>
 
     
     

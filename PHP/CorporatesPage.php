@@ -105,13 +105,13 @@ if (isset($_SESSION['user_name'])) {
 
         <!--Main Body Section-->
         <div class="container">
-            <div class="row corporateHeaderBox m-0 p-0 mt-3">
+            <div class="row no-gutters corporateHeaderBox m-0 p-0 mt-3">
                 <div class="col">
                     <h1 style="margin:0; padding:0;color: DarkOrange;"><i class="fas fa-handshake"></i> Our Partners</h1>
                     <div class="row" style="border: 2px lightgrey solid; border-radius:7px; margin-top:5px;">
-                        <div class="col-6 mt-5">
+                        <div class="col-sm-6 mt-5">
 
-                            <div class="card mb-3" style="max-width: 540px;">
+                            <div class="card mb-0" style="max-width: 540px;">
                                 <div class="row no-gutters">
                                     <div class="col-md-4">
                                         <img src="..\images/corporates/BestMagazine.jpeg" class="card-img" alt="No Image...">
@@ -128,8 +128,8 @@ if (isset($_SESSION['user_name'])) {
                         </div>
 
 
-                        <div class="col-6 mt-5">
-                            <div class="card mb-3 myCorporateBox" style="max-width: 540px;">
+                        <div class="col-sm-6 mt-5">
+                            <div class="card mb-0 myCorporateBox" style="max-width: 540px;">
                                 <div class="row no-gutters">
                                     <div class="col-md-4">
                                         <img src="..\images/corporates/Cocacola.png" class="card-img" alt="No Image...">
@@ -147,8 +147,8 @@ if (isset($_SESSION['user_name'])) {
 
 
 
-                        <div class="col-6 mt-0">
-                            <div class="card mb-3" style="max-width: 540px;">
+                        <div class="col-sm-6 mt-0">
+                            <div class="card mb-0" style="max-width: 540px;">
                                 <div class="row no-gutters">
                                     <div class="col-md-4">
                                         <img src="..\images/corporates/StandardCharteredBank.jpg" class="card-img" alt="No Image...">
@@ -167,8 +167,8 @@ if (isset($_SESSION['user_name'])) {
 
 
 
-                        <div class="col-6 mt-0">
-                            <div class="card mb-3 myCorporateBox" style="max-width: 540px;">
+                        <div class="col-sm-6 mt-0">
+                            <div class="card mb-5    myCorporateBox" style="max-width: 540px;">
                                 <div class="row no-gutters">
                                     <div class="col-md-4">
                                         <img src="..\images/corporates/Bkash.jpg" class="card-img" alt="No Image...">
@@ -191,8 +191,8 @@ if (isset($_SESSION['user_name'])) {
         </div>
 
 
-        <!--Footer Section-->
-        <div class="container">
+     <!--Footer Section-->
+     <div class="container">
             <footer>
                 <div class="row my-footer">
                     <div class="col">
@@ -205,8 +205,8 @@ if (isset($_SESSION['user_name'])) {
                         </ul>
                     </div>
                 </div>
-                <div class="row justify-content-between my-footer-ending">
-                    <div class="col-12 col-md-4">
+                <div class="row justify-content-around my-footer-ending">
+                    <div class="col-12 ml-5 pl-3 pl-sm-0 ml-sm-0 col-sm-6 m-0 p-0 text-left">
                         <ul>
                             <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -214,11 +214,10 @@ if (isset($_SESSION['user_name'])) {
                             <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                         </ul>
                     </div>
-                    <div class="col-12 col-md-4 developers-tag">
-                        <span>Developed by : Group-5</span>
-                    </div>
-                    <div class="col-12 col-md-4 stores">
-                        <ul>
+                    
+                    
+                    <div class="col-12 mr-5 pr-2 pr-sm-0 mr-sm-0 col-sm-6 stores  text-right m-0 p-0">
+                        <ul style="padding-right:95px;">
                             <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
                             <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
                         </ul>
@@ -226,8 +225,6 @@ if (isset($_SESSION['user_name'])) {
                 </div>
             </footer>
         </div>
-    </div>
-
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

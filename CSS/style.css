@@ -475,11 +475,11 @@ a:focus {
     height: auto;
     background-attachment: #2c3e50;
     color: rgb(0, 125, 255);
-    transition: 0.4s;
+    transition: 0.0s;
 }
 
 .my-footer-ending a i {
-    transition: 0.4s all;
+    transition: 0.0s all;
 }
 
 .my-footer-ending a:hover {
@@ -503,6 +503,9 @@ a:focus {
     background-color: darkorange;
     border-color: darkorange;
     transition: 0.3s;
+}
+.stores ul{
+    text-align: right;
 }
 
 .stores a {
