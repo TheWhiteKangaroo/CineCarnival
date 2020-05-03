@@ -4,7 +4,7 @@
 }
 
 @font-face {
-    src: url(..\Fonts/nikodecs/Nikodecs.otf);
+    src: url(..\fonts/nikodecs/Nikodecs.otf);
     font-family: Nikodecs;
 }
 
@@ -14,7 +14,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .myCorporateBox {
@@ -38,7 +38,7 @@ body {
 
 .pollContainer {
     width: 100%;
-    height: auto;   
+    height: auto;
     border: 1px #2c3e50 solid;
     border-top-left-radius: 18px;
     border-bottom-right-radius: 15px;
@@ -462,9 +462,11 @@ a:focus {
     padding: 0;
     margin: 0;
 }
-.my-footer-ending li:hover{
+
+.my-footer-ending li:hover {
     transform: scale(1.1);
 }
+
 .my-footer-ending a {
     text-decoration: none;
     font-size: 22px;

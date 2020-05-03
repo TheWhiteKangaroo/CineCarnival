@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2020 at 07:12 PM
+-- Generation Time: May 02, 2020 at 08:14 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -67,7 +67,7 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`c_id`, `gender`, `user_name`, `first_name`, `last_name`, `mail`, `phone`, `address`, `password`, `status`, `points`, `joining_date`, `user_type`) VALUES
-(1, 'male', '@shohag', 'koushikur islam', 'shohag', 'koushikur.aiub@gmail.com', 1798452091, 'E-295, Holy Lane, Shyamoli, Adabor, Dhaka', '$2y$10$jTLxsT1GtgTfMWa4I265yuTSNvcj.VVW.nh3QSyUbguDysa/Ui15e', 'Perl', 575, '2020-04-17', 3);
+(1, 'male', '@shohag', 'koushikur islam', 'shohag', 'koushikur.aiub@gmail.com', 1798452091, 'E-295, Holy Lane, Shyamoli, Adabor, Dhaka', '$2y$10$jTLxsT1GtgTfMWa4I265yuTSNvcj.VVW.nh3QSyUbguDysa/Ui15e', 'Perl', 525, '2020-04-17', 3);
 
 -- --------------------------------------------------------
 
@@ -145,9 +145,6 @@ INSERT INTO `movie` (`mv_id`, `name`, `cast`, `director`, `release_date`, `genre
 (6, 'Avengers: Endgame', 'Robert Downey Jr., Chris Evans, Mark Ruffalo', 'Anthony Russo, Joe Russo', '2019-04-26', 'Action, Adventure, Sci-Fi', 'https://www.youtube.com/embed/TcMBFSGVi1c', '..\\images/Poster/EndGame.jpg', '00:02:40', 'After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos actions and restore balance to the universe.', 'English', '3D', 'Now Showing'),
 (7, 'Avengers: Infinity War', 'Robert Downey Jr., Chris Hemsworth, Mark Ruffalo', 'Anthony Russo, Joe Russo', '2018-04-27', 'Action, Adventure, Sci-Fi', 'https://www.youtube.com/embed/6ZfuNTqbHE8', '..\\images/Poster/InfinityWar.jpg', '00:02:45', 'The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.', 'English', '3D', 'Now Showing'),
 (8, '\r\nNo Time to Die', ' Ana de Armas, Daniel Craig, Léa Seydoux', 'Cary Joji Fukunaga', '2020-11-25', 'Action, Adventure, Thriller', 'https://www.youtube.com/embed/BIhNsAtPbPI', '..\\images/Poster/NoTimeToDieCover.jpg', '00:02:35', 'James Bond has left active service. His peace is short-lived when Felix Leiter, an old friend from the CIA, turns up asking for help, leading Bond onto the trail of a mysterious villain armed with dangerous new technology.', 'English', '3D', 'Coming Soon'),
-(9, 'দিন-The Day', 'Ananta Jalil', 'Mustafa Ottash Zamzam', '2020-11-25', 'Action,Thriller', 'https://www.youtube.com/embed/-DX1T_sJ-bs', '..\\images/Poster/DinTheDay.jpg', '00:02:30', 'Din: The Day’ is an action-thriller film which is about the peaceful teachings of Islam. The film will be a protest against the negative propaganda demonizing Islam and inciting terrorism thats plaguing our world today.', 'Bangla', '3D', 'Coming Soon'),
-(10, 'Khoj, the Search', ' Ananta Jalil, Eamin Haque Bobby, Borsha', 'Iftakar Chowdhury', '2020-04-16', 'Action,Thriller', 'https://www.youtube.com/embed/2qapQ5Rrzrc', '..\\images/Poster/KhojTheSearch.jpg', '00:02:45', 'The film features Major Mahmud Starred by Ananta (M A Jalil. Major Mahmud is a secret service agent who works for Bangladesh Counter Intelligence (BCI). BCI is a fictional agency (from the Masud Rana series by Qazi Anwar Hussain). With the help of Captain Boby, Major Mahmud thwarts an international arms syndicate headed by the notorious Nino. And in this journey he falls in love with Elisa.', 'Bangla', '2D', 'Now Showing'),
-(11, 'কাল্লু মামা', 'Dipjol,Kobita,Amin Khan,Purnima', 'Iftakar Chowdhury', '2020-02-15', 'Action,Crime,Thriller', 'https://www.youtube.com/embed/oeCM3w6EKb8', '..\\images/Poster/KalluMama.jpg', '00:02:45', '', 'Bangla', '2D', 'Now Showing'),
 (12, 'No Dorai', 'Sayed Babu, Sunerah Binte Kamal, Josefine Lindegaard', 'Taneem Rahman Angshu', '2019-11-29', 'Drama', 'https://www.youtube.com/embed/EUnQZTofMo0', '..\\images/poster/NoDorai.jpg', '00:02:30', 'In a small beach town in Bangladesh, fearless Ayesha confronts social prohibition and violent opposition from her poverty-ridden family to surf. Like few other youngsters, she and her best friend Sohel are trained by self-made Bangladeshi surfer, Amir. As this unusual surfing enthusiasm gets international attention from surfing community and documentary film makers, fund money generates jealousy, squabbles, and power tussles. While surfing brings newfound fame and glory to Sohel, it is the prohibited love for surfing that brings forced marriage and a life of misery for Ayesha. After seeking an extravagant, reckless lifestyle in the capital city, derailed Sohel returns back to Coxs Bazar, where their passion for surfing reunites them and unleashes a new hope for surfing in the small beach town.', 'Bangla', '2D', 'Now Showing'),
 (13, 'Bloodshot', 'Vin Diesel, Eiza González, Sam Heughan', 'Dave Wilson', '2020-03-13', ' Action, Drama, Sci-Fi', 'https://www.youtube.com/embed/vOUVVDWdXbo', '..\\images/poster/Bloodshot.jpg', '00:01:50', 'Ray Garrison, a slain soldier, is re-animated with superpowers.', 'English', 'En', '3D');
 
@@ -171,7 +168,7 @@ CREATE TABLE `notice` (
 --
 
 INSERT INTO `notice` (`n_id`, `title`, `message`, `links`, `pic`, `date_posted`) VALUES
-(1, 'Stay Safe During COVID-19.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea earum, officiis culpa tenetur sequi beatae aliquam. Laboriosam, exercitationem maxime ea expedita molestias illum officiis aliquam quo recusandae iusto, esse sed.', 'https://www.who.int/bangladesh/emergencies/coronavirus-disease-(covid-19)-update', '..\\images/Covid19.jpg', '2030-05-02');
+(1, 'Stay Safe During COVID-19.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea earum, officiis culpa tenetur sequi beatae aliquam. Laboriosam, exercitationem maxime ea expedita molestias illum officiis aliquam quo recusandae iusto, esse sed.', 'https://www.who.int/bangladesh/emergencies/coronavirus-disease-(covid-19)-update', '..\\images/notice/COVID-19.png', '2030-05-02');
 
 -- --------------------------------------------------------
 
@@ -219,7 +216,8 @@ CREATE TABLE `poll` (
 --
 
 INSERT INTO `poll` (`p_id`, `poll_title`, `content1`, `content2`, `content3`, `content4`) VALUES
-(1, 'Which movie you want to see at CineCarnival?', 'Blood Shot', 'Thor', 'End Game', 'Iron Man');
+(1, 'Which movie you want to see at CineCarnival?', 'Blood Shot', 'Thor', 'End Game', 'Iron Man'),
+(2, 'How do you rate the movie No Time To Die', 'Excellent', 'Good', 'Average', 'Poor');
 
 -- --------------------------------------------------------
 
@@ -233,6 +231,21 @@ CREATE TABLE `rating` (
   `rating` double(3,2) NOT NULL,
   `customer` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `rating`
+--
+
+INSERT INTO `rating` (`r_id`, `movie_id`, `rating`, `customer`) VALUES
+(5, 6, 2.50, ''),
+(6, 7, 5.00, '@shohag'),
+(7, 8, 2.00, '@shohag'),
+(8, 12, 4.00, ''),
+(9, 5, 5.00, ''),
+(10, 5, 4.50, '@shohag'),
+(11, 5, 4.00, '@shohag'),
+(12, 8, 3.50, ''),
+(13, 12, 4.00, '@shohag');
 
 -- --------------------------------------------------------
 
@@ -284,7 +297,7 @@ CREATE TABLE `theatre` (
 --
 
 INSERT INTO `theatre` (`theatre_id`, `s_id`, `theatre_name`, `total_seat`, `available_seat`, `sold_seat`, `theatre_type`) VALUES
-(1, 1, 'Hall-5', 50, 28, 22, 'VIP'),
+(1, 1, 'Hall-5', 50, 26, 24, 'VIP'),
 (2, 2, 'Hall-3', 50, 45, 5, 'REGULAR'),
 (4, 3, 'Hall-3', 50, 47, 3, 'REGULAR'),
 (5, 4, 'Hall-1', 50, 50, 0, 'PREMIUM'),
@@ -329,7 +342,8 @@ INSERT INTO `ticket` (`ticket_id`, `c_id`, `show_id`, `price`, `discount`, `sold
 (12, 1, 1, 780.00, 420.00, '2020-04-29', 'HC-16, HC-17, ', 2, 'DBBL Payment '),
 (13, 1, 1, 1200.00, 0.00, '2020-04-29', 'HC-18, HC-19, ', 2, 'DBBL Payment '),
 (14, 1, 1, 600.00, 0.00, '2020-04-29', 'HC-20,', 1, 'DBBL Payment '),
-(15, 1, 1, 1200.00, 0.00, '2020-04-29', 'HC-21, HC-22,', 2, 'DBBL Payment ');
+(15, 1, 1, 1200.00, 0.00, '2020-04-29', 'HC-21, HC-22,', 2, 'DBBL Payment '),
+(16, 1, 1, 900.00, 300.00, '2020-04-30', 'HC-23, HC-24,', 2, 'SCB Payment ');
 
 -- --------------------------------------------------------
 
@@ -341,8 +355,46 @@ CREATE TABLE `vote` (
   `v_id` int(11) NOT NULL,
   `p_id` int(4) NOT NULL,
   `content` int(3) DEFAULT 0,
-  `c_id` int(3) NOT NULL
+  `customer` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `vote`
+--
+
+INSERT INTO `vote` (`v_id`, `p_id`, `content`, `customer`) VALUES
+(7, 1, 2, '0'),
+(8, 1, 4, '0'),
+(9, 1, 3, '0'),
+(10, 1, 4, '0'),
+(11, 1, 3, '0'),
+(12, 1, 1, '0'),
+(13, 1, 1, '0'),
+(14, 1, 1, '0'),
+(15, 1, 4, '0'),
+(16, 1, 1, '0'),
+(17, 1, 1, '0'),
+(18, 1, 1, '0'),
+(19, 1, 1, '0'),
+(20, 1, 1, '0'),
+(21, 1, 2, '0'),
+(22, 1, 3, '0'),
+(23, 1, 2, '0'),
+(24, 1, 1, '0'),
+(25, 1, 3, '0'),
+(26, 1, 1, '0'),
+(27, 1, 3, '@shohag'),
+(28, 1, 2, ''),
+(29, 1, 2, '@shohag'),
+(30, 1, 3, '@shohag'),
+(31, 1, 4, ''),
+(32, 1, 3, '@shohag'),
+(33, 1, 4, '@shohag'),
+(34, 1, 1, ''),
+(35, 1, 3, '@shohag'),
+(36, 1, 2, ''),
+(37, 2, 1, ''),
+(38, 2, 3, '');
 
 --
 -- Indexes for dumped tables
@@ -485,13 +537,13 @@ ALTER TABLE `offer`
 -- AUTO_INCREMENT for table `poll`
 --
 ALTER TABLE `poll`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `r_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `r_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `shows`
@@ -509,13 +561,13 @@ ALTER TABLE `theatre`
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `ticket_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ticket_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `vote`
 --
 ALTER TABLE `vote`
-  MODIFY `v_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `v_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
