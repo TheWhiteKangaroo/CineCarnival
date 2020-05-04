@@ -188,11 +188,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchAccountBtn'])) {
                 </div>
             </div>
 
-        </div>
-
-
-     <!--Footer Section-->
-     <div class="container">
+            <div class="container">
             <footer>
                 <div class="row my-footer">
                     <div class="col">
@@ -225,6 +221,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchAccountBtn'])) {
                 </div>
             </footer>
         </div>
+
+        </div>
+
+
+     <!--Footer Section-->
+     
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>

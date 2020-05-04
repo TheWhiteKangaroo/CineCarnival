@@ -164,7 +164,7 @@ $result2 = mysqli_query($conn, $query2);
 
         <div class="container-fluid m-0 p-0">
             <div class="row m-0 p-0 mt-4  justify-content-around">
-                <div class="col-12 col-xl-3 col-lg-4 col-md-6 col-sm-10 col-xs-12  order-sm-2 order-md-2 order-lg-2 order-xl-1  mb-2">
+                <div class="col-12 col-xl-3 col-lg-4 col-md-6 col-sm-10 col-xs-12 order-2  order-sm-2 order-md-2 order-lg-2 order-xl-1  mb-2">
                     <?php
                     $query = "SELECT DISTINCT title, message, links, pic, date_posted FROM notice WHERE date_posted= (SELECT MAX(date_posted) FROM notice)";
                     $result = mysqli_query($conn, $query);
@@ -199,17 +199,17 @@ $result2 = mysqli_query($conn, $query2);
                     }
                     ?>
                 </div>
-                <div class="col-12 col-xl-6 col-lg-10 col-md-12 col-sm-12 order-md-1 order-lg-1 order-xl-2 order-sm-1 order-2 ">
+                <div class="col-12 col-xl-6 col-lg-10 col-md-12 col-sm-12 order-md-1 order-lg-1 order-xl-2 order-sm-1 order-1 ">
                     <div class="card text-white bg-dark mb-3" style="max-width: 100%; border-radius:7px;">
                         <div class="card-header text-center font-weight-bold h1"><i class="fas fa-vr-cardboard"></i> Showtime</div>
                         <div class="card-body">
                             <div class="row justify-content-between">
-                                <div class="col-5 col-sm-6 col-md-4 col-lg-4 col-xl-5">
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-5 mt-1">
                                     <div class="inputWithIcon text-left">
                                         <input type="date" max="<?php echo date('Y-m-d', strtotime($currentDate . ' + 1 days')); ?>" min="<?php echo $currentDate; ?>" class="showtime-datepicker" id="showDatePicker" onchange="myFunction(this.id)"><i class="fas fa-calendar-alt"></i>
                                     </div>
                                 </div>
-                                <div class="col-7 col-sm-6 col-md-6 col-lg-6">
+                                <div class="col-12 col-sm-6 col-md-6 col-lg-6 mt-2">
                                     <div class="text-right font-weight-normal">
                                         <span style="color: #f0ad4e; font-size:16px; text-align:right;"><i class="fas fa-circle"></i> <span style="color: White;">Regular</span></span>
                                         <span style="color: #5cb85c; font-size:16px; text-align:right;"><i class="fas fa-circle"></i> <span style="color: White;">Premium</span></span>
@@ -217,7 +217,7 @@ $result2 = mysqli_query($conn, $query2);
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mt-3" id="showtimeSection" style="width: 100%; height:500px;">
+                            <div class="row mt-3" id="showtimeSection" style="width: 100%; height:450px;">
                                 <div class="col" style="width: 100%;">
                                     <table class="table table-striped table-dark" style="width: 100%;">
                                         <thead style="width: 100%">

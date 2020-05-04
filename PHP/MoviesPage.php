@@ -144,6 +144,7 @@ $np = ceil($tm / $perPage);
 
             $(document).on('change', '#actionCB', function() {
                 if (this.checked) {
+                    document.getElementById('ldMoreButton').style.display = "none";
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
                         genre: genre,
@@ -152,6 +153,7 @@ $np = ceil($tm / $perPage);
                         selectedStatus: getStatus()
                     });
                 } else {
+                    document.getElementById('ldMoreButton').style.display = "block";
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
                         genre: genre,
@@ -163,6 +165,7 @@ $np = ceil($tm / $perPage);
             });
             $(document).on('change', '#comedyCB', function() {
                 if (this.checked) {
+                    document.getElementById('ldMoreButton').style.display = "none";
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
                         genre: genre,
@@ -171,6 +174,7 @@ $np = ceil($tm / $perPage);
                         selectedStatus: getStatus()
                     });
                 } else {
+                    document.getElementById('ldMoreButton').style.display = "block";
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
                         genre: genre,
@@ -182,6 +186,7 @@ $np = ceil($tm / $perPage);
             });
             $(document).on('change', '#horrorCB', function() {
                 if (this.checked) {
+                    document.getElementById('ldMoreButton').style.display = "none";
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
                         genre: genre,
@@ -190,6 +195,7 @@ $np = ceil($tm / $perPage);
                         selectedStatus: getStatus()
                     });
                 } else {
+                    document.getElementById('ldMoreButton').style.display = "block";
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
                         genre: genre,
@@ -201,6 +207,7 @@ $np = ceil($tm / $perPage);
             });
             $(document).on('change', '#dramaCB', function() {
                 if (this.checked) {
+                    document.getElementById('ldMoreButton').style.display = "none";
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
                         genre: genre,
@@ -209,6 +216,7 @@ $np = ceil($tm / $perPage);
                         selectedStatus: getStatus()
                     });
                 } else {
+                    document.getElementById('ldMoreButton').style.display = "block";
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
                         genre: genre,
@@ -220,6 +228,7 @@ $np = ceil($tm / $perPage);
             });
             $(document).on('change', '#banglaCB', function() {
                 if (this.checked) {
+                    document.getElementById('ldMoreButton').style.display = "none";
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
                         genre: genre,
@@ -228,6 +237,7 @@ $np = ceil($tm / $perPage);
                         selectedStatus: getStatus()
                     });
                 } else {
+                    document.getElementById('ldMoreButton').style.display = "block";
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
                         genre: genre,
@@ -239,6 +249,7 @@ $np = ceil($tm / $perPage);
             });
             $(document).on('change', '#englishCB', function() {
                 if (this.checked) {
+                    document.getElementById('ldMoreButton').style.display = "none";
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
                         genre: genre,
@@ -247,6 +258,7 @@ $np = ceil($tm / $perPage);
                         selectedStatus: getStatus()
                     });
                 } else {
+                    document.getElementById('ldMoreButton').style.display = "block";
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
                         genre: genre,
@@ -258,6 +270,7 @@ $np = ceil($tm / $perPage);
             });
             $(document).on('change', '#2dCB', function() {
                 if (this.checked) {
+                    document.getElementById('ldMoreButton').style.display = "none";
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
                         genre: genre,
@@ -266,6 +279,7 @@ $np = ceil($tm / $perPage);
                         selectedStatus: getStatus()
                     });
                 } else {
+                    document.getElementById('ldMoreButton').style.display = "block";
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
                         genre: genre,
@@ -277,6 +291,7 @@ $np = ceil($tm / $perPage);
             });
             $(document).on('change', '#3dCB', function() {
                 if (this.checked) {
+                    document.getElementById('ldMoreButton').style.display = "none";
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
                         genre: genre,
@@ -285,6 +300,7 @@ $np = ceil($tm / $perPage);
                         selectedStatus: getStatus()
                     });
                 } else {
+                    document.getElementById('ldMoreButton').style.display = "block";
                     filterMovies();
                     $('#movieSection').load('NextMovies.php', {
                         genre: genre,
@@ -320,7 +336,41 @@ $np = ceil($tm / $perPage);
             height: 18vw;
             object-fit: cover;
         }
+
+
+        .moviesBtn{
+            background-color: black;
+            color: white;
+            outline: none;
+            height: auto;
+            margin: 0;
+            border-radius: 2px;
+            padding-bottom: 50px;
+            padding-top: 50px;
+        }
+
+        .moviesBtn :hover, .moviesBtn:active, .moviesBtn:focus{
+            background-color: darkviolet;
+            color: white;
+            outline: none;
+            transition: 0.4s;
+            transform-style: preserve-3d;
+        }
     </style>
+
+    <script>
+        function showFiltersDiv(){
+            document.getElementById('filtersDiv').style.display="block";
+            document.getElementById('showFilterBtn').style.display="none";
+            document.getElementById('hideFilterBtn').style.display="block";
+        }
+
+        function hideFiltersDiv(){
+            document.getElementById('filtersDiv').style.display="none";
+            document.getElementById('showFilterBtn').style.display="block";
+            document.getElementById('hideFilterBtn').style.display="none";
+        }
+    </script>
 </head>
 
 <body onload="showProfileSection();">
@@ -383,26 +433,28 @@ $np = ceil($tm / $perPage);
 
         <!--Main Body Section-->
         <div class="container-fluid">
-            <div class="row mt-4 mb-0">
-                <div class="col pb-2">
+            <div class="row mt-3 ml-1  movies-nav" style="height: auto;">
+                <div class="col-12 col-md-2">
+                    <span>Movies</span>
+                </div>
+                <div class="col-12 col-md-7">
                     <form action="MoviesPage.php" method="GET">
-                        <ul class="nav nav-tabs   movies-nav">
-                            <li class="nav-item"><span>Movies</span></li>
-                            <li class="nav-item">
-                                <button type="button" name="nowShowingBtn" id="nowShowingBtn" class="border-0 pt-3 pb-2 mr-2" onclick="changeNowShowingBtnColor()">Now Showing</button>
-                            </li>
-                            <li class="nav-item">
-                                <button type="button" name="upcomingBtn" id="upcomingBtn" class="border-0 pt-3 pb-2 mr-2 " onclick="changeUpComingBtnColor()">Coming Soon</button>
-                            </li>
-                        </ul>
+                        <button type="button" name="nowShowingBtn" id="nowShowingBtn" class="border-0 pt-3 pb-2 mr-2 text-light moviesBtn" onclick="changeNowShowingBtnColor()">Now Showing</button>
+                        <button type="button" name="upcomingBtn" id="upcomingBtn" class="border-0 pt-3 pb-2 mr-2 text-light moviesBtn" onclick="changeUpComingBtnColor()">Coming Soon</button>
                     </form>
+                </div>
+                <div class="col-12 mt-2 d-block d-md-none" >
+                        <button type="button" class="text-light h6 resetPass-buttons" id="showFilterBtn"  onclick="showFiltersDiv();" style="display: none;"><i class="fas fa-plus-circle"></i> Filters</button>
+                        <button type="button" class="text-light h6 resetPass-buttons" id="hideFilterBtn"  onclick="hideFiltersDiv();" style="display: block;"><i class="fas fa-minus-circle"></i> Filters</button>
                 </div>
             </div>
         </div>
 
+        
+
         <div class="container-fluid">
             <div class="row align-items-start justify-content-around ml-4" id="moviePageSection">
-                <div class="col-8 col-lg-3 col-xl-3 col-md-3 col-sm-6 pt-4">
+                <div class="col-11 col-lg-3 col-xl-2 col-md-3 col-sm-6 pt-4 pr-4 m-0 p-0 d-md-block" id="filtersDiv">
                     <div class="inputWithIcon mb-4 mt-1">
                         <input class="resetPass-inputs" id="searchText" type="text" placeholder="Search for movies..." maxlength="30" minlength="2" style="color: black; width:100%;">
                         <i class="fas fa-search"></i>
@@ -459,83 +511,82 @@ $np = ceil($tm / $perPage);
                     </div>
                 </div>
                 <div class="col-12 col-lg-9 col-xl-8 col-md-9 col-sm-12">
-                    <div class="row justify-content-start d-flex mt-4 mb-2" id="movieSection">
+                    <div class="row  justify-content-start d-flex mt-4 mb-2 pr-5" id="movieSection">
 
                         <?php
                         while ($row = mysqli_fetch_assoc($result)) {
-                            echo "
-                                        <div class=" . "col-4" . ">
-                                        <div class=" . "card movieCard-box" . "style=" . "width: 18rem;" . ">
-                                        <form action=" . "Movies.php" . " method=" . "GET" . ">
-                                            <img class=" . "card-img-top" . " src=" . $row['cover_pic'] . " alt=" . "Card image cap" . " style=" . "max-width:18rem;" . ">
-                                            
-                                            <div class=" . "card-body" . ">
-                                                <p class=" . "card-text" . ">
-                                                    <span><b>" . $row['name'] . "</b></span><br>
-                                                    <span>" . $row['genre'] . "</span><br>
-                                                    <button type=" . "submit" . " name=" . "movieNumber" . " value=" . $row['mv_id'] . " id = " . $row['mv_id'] . " class=" . "movieCard-buttons" . ">Details</button>
-                                                </p>
-                                            </div>
-                                            </form>
-                                            </div>
-                                            <br>
-                                      </div>
-                                        ";
+                        ?>
+
+                            <div class="col-12 col-sm-4 col-xl-3 mt-1">
+                                <div class="movieReelPanel" style="margin-top: 2px;">
+                                    <form action="Movies.php" method="GET">
+                                        <img src="<?php echo $row['cover_pic'] ?>" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
+                                        <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0;height:auto ;min-height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        <?php
                         }
                         ?>
 
                     </div>
-                    <div class=" text-center mt-2 mb-2  ldMoreBtn" id="btnLoadDiv">
-                        <button type="button" id="ldMoreButton" name="ldMoreButton">Show More</button>
+
+                    <div class="row justify-content-center text-center">
+                        <div class="col-12 text-center pr-5  ldMoreBtn" id="btnLoadDiv">
+                            <button type="button" id="ldMoreButton" name="ldMoreButton">Show More</button>
+                        </div>
                     </div>
-
                 </div>
-                <div class="col-8">
 
-                </div>
+
             </div>
+
+            
         </div>
 
 
+
+        <div class="container-fluid">
+            <footer>
+                <div class="row my-footer">
+                    <div class="col">
+                        <ul>
+                            <li>Contact Us</li>
+                            <li><img src="..\Images/CineCarnival.png" alt=""></li>
+                            <li>info@cinecarnival.com</li>
+                            <li>+8801745-987565</li>
+                            <li>Dhanmondi, Dhaka</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row justify-content-around my-footer-ending">
+                    <div class="col-12 ml-5 pl-3 pl-sm-0 ml-sm-0 col-sm-6 m-0 p-0 text-left">
+                        <ul>
+                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        </ul>
+                    </div>
+
+
+                    <div class="col-12 mr-5 pr-2 pr-sm-0 mr-sm-0 col-sm-6 stores  text-right m-0 p-0">
+                        <ul style="padding-right:95px;">
+                            <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
+                            <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </div>
 
     </div>
     </div>
     </div>
 
     <!--Footer Section-->
-    <div class="container-fluid">
-        <footer>
-            <div class="row my-footer">
-                <div class="col">
-                    <ul>
-                        <li>Contact Us</li>
-                        <li><img src="..\Images/CineCarnival.png" alt=""></li>
-                        <li>info@cinecarnival.com</li>
-                        <li>+8801745-987565</li>
-                        <li>Dhanmondi, Dhaka</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row justify-content-around my-footer-ending">
-                <div class="col-12 ml-5 pl-3 pl-sm-0 ml-sm-0 col-sm-6 m-0 p-0 text-left">
-                    <ul>
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                    </ul>
-                </div>
 
-
-                <div class="col-12 mr-5 pr-2 pr-sm-0 mr-sm-0 col-sm-6 stores  text-right m-0 p-0">
-                    <ul style="padding-right:95px;">
-                        <li><a href="#"><button type="button" class="btn btn-outline-primary" value="Play Store"><i class="fab fa-google-play"></i>Play Store</button></a></li>
-                        <li><a href="#"><button type="button" class="btn btn-outline-primary" value="App Store"><i class="fab fa-app-store"></i>App Store</button></a></li>
-                    </ul>
-                </div>
-            </div>
-        </footer>
-    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

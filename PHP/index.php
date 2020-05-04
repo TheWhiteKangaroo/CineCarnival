@@ -170,6 +170,9 @@ while ($row = mysqli_fetch_assoc($result)) {
             height: 18vw;
             object-fit: cover;
         }
+        .cardPic:hover{
+            cursor: pointer;
+        }
     </style>
 
 </head>
@@ -448,25 +451,25 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 
 
-        <div class="col-12 col-xl-6 col-lg-9 col-md-12 order-lg-2 order-xl-2 order-md-1 m-0 p-0  order-1">
+        <div class="col-12 col-xl-6 col-lg-9 col-md-12 order-lg-2 order-xl-2 order-md-1   order-1">
 
             <div>
                 <div class="nowShowingTile pl-3">
                     <a href="MoviesPage.php"><i class="fas fa-tape"></i> Now Showing</a>
                 </div>
-                <div class="row justify-content-between ">
+                <div class="row justify-content-start ">
                     <?php
-                    $query = "SELECT name, cover_pic,mv_id FROM movie WHERE status='Now Showing' ORDER BY mv_id DESC LIMIT 4;";
+                    $query = "SELECT name, cover_pic,mv_id FROM movie WHERE status='Now Showing' ORDER BY mv_id DESC LIMIT 6;";
                     $result = mysqli_query($conn, $query);
                     if (mysqli_num_rows($result) == 0) {
                     } else {
                         while ($row = mysqli_fetch_assoc($result)) {
                     ?>
 
-                            <div class="col-5 col-sm-3  movieReelPanel" style="margin-top: 2px;">
+                            <div class="col-6 col-sm-4 mt-1  movieReelPanel" style="margin-top: 0px;">
                                 <form action="Movies.php" method="GET">
-                                    <img src="<?php echo $row['cover_pic'] ?>" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
-                                    <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
+                                    <img src="<?php echo $row['cover_pic'] ?>" class="cardPic" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
+                                    <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:auto; min-height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
                                 </form>
 
 
@@ -481,20 +484,20 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <div class="nowShowingTile mt-5 pl-3" style="background-color: #2c3e50;">
                     <a href="MoviesPage.php"><i class="fas fa-tape"></i> Up Coming</a>
                 </div>
-                <div class="row justify-content-between">
+                <div class="row justify-content-start">
                     <?php
-                    $query = "SELECT name, cover_pic,mv_id FROM movie WHERE status='Coming Soon' ORDER BY mv_id DESC LIMIT 4;";
+                    $query = "SELECT name, cover_pic,mv_id FROM movie WHERE status='Coming Soon' ORDER BY mv_id DESC LIMIT 6;";
                     $result = mysqli_query($conn, $query);
                     if (mysqli_num_rows($result) == 0) {
                     } else {
                         while ($row = mysqli_fetch_assoc($result)) {
                     ?>
 
-                            <div class="col-5 col-sm-3">
-                                <div class="movieReelPanel" style="margin-top: 2px;">
+                            <div class="col-6 col-sm-4 mt-1">
+                                <div class="movieReelPanel" style="margin-top: 0px;">
                                     <form action="Movies.php" method="GET">
-                                        <img src="<?php echo $row['cover_pic'] ?>" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
-                                        <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
+                                        <img src="<?php echo $row['cover_pic'] ?>" class="cardPic" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
+                                        <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:auto;min-height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
                                     </form>
                                 </div>
 
