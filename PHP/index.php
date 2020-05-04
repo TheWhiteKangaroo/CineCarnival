@@ -170,15 +170,15 @@ while ($row = mysqli_fetch_assoc($result)) {
             height: 18vw;
             object-fit: cover;
         }
-        .cardPic:hover{
-            cursor: pointer;
-        }
     </style>
 
 </head>
 
-<body onload="showProfileSection();">
+<body onload="showProfileSection();">    
+
+<a href="#" class="goTopBtn"><i class="fas fa-arrow-alt-circle-up"></i> </a>
     <div class="container-fluid">
+    
         <!--Header Section-->
         <header>
             <div class="d-flex flex-row flex-nowrap sm-flex-wrap  header-section" style="height: 120px; padding-top:25px;">
@@ -466,9 +466,9 @@ while ($row = mysqli_fetch_assoc($result)) {
                         while ($row = mysqli_fetch_assoc($result)) {
                     ?>
 
-                            <div class="col-6 col-sm-4 mt-1  movieReelPanel" style="margin-top: 0px;">
+                            <div class="col-6 col-sm-4 col-lg-3 mt-1  movieReelPanel" style="margin-top: 0px;">
                                 <form action="Movies.php" method="GET">
-                                    <img src="<?php echo $row['cover_pic'] ?>" class="cardPic" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
+                                    <img src="<?php echo $row['cover_pic'] ?>" class="cardPic" alt="No Cover" style="width:100%; height:250px; margin:0; padding:0;"><br>
                                     <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:auto; min-height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
                                 </form>
 
@@ -493,10 +493,10 @@ while ($row = mysqli_fetch_assoc($result)) {
                         while ($row = mysqli_fetch_assoc($result)) {
                     ?>
 
-                            <div class="col-6 col-sm-4 mt-1">
+                            <div class="col-6 col-sm-4 col-lg-3 mt-1">
                                 <div class="movieReelPanel" style="margin-top: 0px;">
                                     <form action="Movies.php" method="GET">
-                                        <img src="<?php echo $row['cover_pic'] ?>" class="cardPic" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
+                                        <img src="<?php echo $row['cover_pic'] ?>" class="cardPic" alt="No Cover" style="width:100%; height:250px; margin:0; padding:0;"><br>
                                         <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:auto;min-height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
                                     </form>
                                 </div>
@@ -563,8 +563,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     </div>
 
 
-
-
+    
 
      <!--Footer Section-->
      <div class="container-fluid">
@@ -604,6 +603,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="..\css/bootstrap.min.js"></script>
+
 </body>
 
 </html>

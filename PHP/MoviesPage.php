@@ -433,7 +433,7 @@ $np = ceil($tm / $perPage);
 
         <!--Main Body Section-->
         <div class="container-fluid">
-            <div class="row mt-3 ml-1  movies-nav" style="height: auto;">
+            <div class="row mt-3 ml-1 movies-nav" style="height: auto;">
                 <div class="col-12 col-md-2">
                     <span>Movies</span>
                 </div>
@@ -454,7 +454,7 @@ $np = ceil($tm / $perPage);
 
         <div class="container-fluid">
             <div class="row align-items-start justify-content-around ml-4" id="moviePageSection">
-                <div class="col-11 col-lg-3 col-xl-2 col-md-3 col-sm-6 pt-4 pr-4 m-0 p-0 d-md-block" id="filtersDiv">
+                <div class="col-11 col-lg-3 col-xl-2 col-md-4 col-sm-6 pt-4 pr-4 m-0 p-0 d-md-block" id="filtersDiv">
                     <div class="inputWithIcon mb-4 mt-1">
                         <input class="resetPass-inputs" id="searchText" type="text" placeholder="Search for movies..." maxlength="30" minlength="2" style="color: black; width:100%;">
                         <i class="fas fa-search"></i>
@@ -510,17 +510,17 @@ $np = ceil($tm / $perPage);
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-9 col-xl-8 col-md-9 col-sm-12">
+                <div class="col-12 col-lg-9 col-xl-8 col-md-8 col-sm-12">
                     <div class="row  justify-content-start d-flex mt-4 mb-2 pr-5" id="movieSection">
 
                         <?php
                         while ($row = mysqli_fetch_assoc($result)) {
                         ?>
 
-                            <div class="col-12 col-sm-4 col-xl-3 mt-1">
+                            <div class="col-12 col-sm-5 col-md-5 col-xl-3 col-lg-3 mt-1">
                                 <div class="movieReelPanel" style="margin-top: 2px;">
                                     <form action="Movies.php" method="GET">
-                                        <img src="<?php echo $row['cover_pic'] ?>" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
+                                        <img src="<?php echo $row['cover_pic'] ?>" alt="No Cover" style="width:100%; height:250px; margin:0; padding:0;"><br>
                                         <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0;height:auto ;min-height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
                                     </form>
                                 </div>

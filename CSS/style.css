@@ -12,6 +12,28 @@
     src: url(..\Fonts/Opificio-FontZillion/Fonts/opificio.ttf);
     font-family: Opificio;
 }
+.goTopBtn{
+    right: 35px;
+    bottom: 100px;
+    position: fixed;
+    z-index: 10;
+    background-color: transparent;
+    color: darkviolet;
+    font-size: 50px;
+    width: 50px;
+    border-radius: 50%;
+    
+}
+
+.goTopBtn:hover{
+    outline: none;
+    text-decoration: none;
+    color:red;
+    transform: scale(1.1);
+}
+html{
+    scroll-behavior: smooth;
+}
 
 body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;

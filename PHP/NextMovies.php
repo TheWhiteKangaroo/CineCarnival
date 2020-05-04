@@ -125,7 +125,7 @@ if (isset($_POST['limitValue'])) {
           <div class="col-12 col-sm-4 col-xl-3 mt-1">
             <div class="movieReelPanel" style="margin-top: 2px;">
               <form action="Movies.php" method="GET">
-                <img src="<?php echo $row['cover_pic'] ?>" alt="No Cover" style="width:100%; height:210px; margin:0; padding:0;"><br>
+                <img src="<?php echo $row['cover_pic'] ?>" alt="No Cover" style="width:100%; height:250px; margin:0; padding:0;"><br>
                 <button type="submit" name="movieNumber" value="<?php echo $row['mv_id']; ?>" id="<?php echo $row['mv_id']; ?>" class="movieCard-buttons" style="margin:0; padding:0; border-top-left-radius:0;  border-top-right-radius:0; height:auto ;min-height:35px; border-bottom-left-radius:10px; border-bottom-right-radius:10px;"><?php echo $row['name']; ?></button>
               </form>
             </div>
