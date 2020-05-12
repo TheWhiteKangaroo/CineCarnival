@@ -43,6 +43,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $_SESSION['user_type'] = $row['user_type'];
                         header("Location: ProfilePage.php");
                     }
+                    else if($userType==2){
+                        $_SESSION['user_name'] = $row['user_name'];
+                        $_SESSION['user_type'] = $row['user_type'];
+                        header("Location: Dash/movie/index.php");
+                    }
                 } else {
                     $msg = "Invalid Password!";
                 }

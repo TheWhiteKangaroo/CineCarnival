@@ -81,13 +81,13 @@ mysqli_query($conn, $sql);
 $status="";
 $points = $points+$pointsInDB;
 
-if($points>=1000){
+if($points>=3500){
     $status = "Sapphire";
 }
-else if($points>=750 && $points<=999){
+else if($points>=750 && $points<=2500){
     $status = "Diamond";
 }
-else if($points>=500 && $points<=750){
+else if($points>=500 && $points<=1500){
     $status = "Perl";
 }
 else{
@@ -95,17 +95,16 @@ else{
 }
 
 if($discountPercentage == 50 ){
-    $points=$points-350;
+    $points=$points-450;
 }
 else if($discountPercentage == 35 ){
-    $points=$points-250;
+    $points=$points-350;
 }
 else if($discountPercentage == 25 ){
-    $points=$points-200;
+    $points=$points-250;
 }
 
 $sql = "UPDATE customer SET status='$status' , points='$points' WHERE c_id='$userID';";
-//echo $sql;
 mysqli_query($conn,$sql);
 
 ?>

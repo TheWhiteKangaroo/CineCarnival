@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $msg = "Please check agreement policy!";
     }
-
+    
     $gmailPattern = "/^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$/";
 
     if (!preg_match($alphanumericCheck, $userName) && preg_match($numericCheck, $userName)) {

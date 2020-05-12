@@ -1,0 +1,28 @@
+.taboptions {
+    padding: 10px; }
+    .sidebar {
+      background-color: #f1f1f1;
+
+    }
+    
+    .sidebar a {
+      display: block;
+      color: black;
+      padding: 26px;
+      text-decoration: none;
+      border-style: solid;
+      border-width: 3px;      
+      border-color: white;
+
+
+    }
+    .sidebar a.active {
+      background-color: black;
+      color: white;
+    }
+    
+    .sidebar a:hover:not(.active) {
+      background-color: #555;
+      color: white;
+    }
+    

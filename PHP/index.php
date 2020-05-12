@@ -259,7 +259,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <div class="carousel-inner" style=" box-shadow: 0 4px 8px 0  #4e5b61, 0 6px 15px 0  #4e5b61 ;">
                     <div class="carousel-item active">
                             <div class="row justify-content-center text-center">
-                                    <div class="col">
+                                    <div class="col-12 col-md-9">
                                         <img src="<?php if (isset($noticePicArray[0])) echo $noticePicArray[0]; ?>" class="w-50"  alt="..." style="height: 350px;">
                                     </div>
                             </div>
@@ -269,39 +269,39 @@ while ($row = mysqli_fetch_assoc($result)) {
                         </div>    
                     <div class="carousel-item">
                             <div class="row justify-content-center text-center">
-                                <div class="col-4">
+                                <div class="col-12 col-md-3 ">
                                     <img src="<?php if (isset($picArray[0])) echo $picArray[0]; ?>"  class="w-100"   alt="..." style="height: 350px;">
                                 </div>
-                                <div class="col-4">
+                                <div class="col-12 col-md-3 ">
                                     <img src="<?php if (isset($picArray[1])) echo $picArray[1]; ?>"  class="w-100"  alt="..." style="height: 350px;">
                                 </div>
-                                <div class="col-4">
+                                <div class="col-12 col-md-3 ">
                                     <img src="<?php if (isset($picArray[2])) echo $picArray[2]; ?>" class="w-100"  alt="..." style="height: 350px;">
                                 </div>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <div class="row justify-content-center text-center">
-                                    <div class="col-4">
+                                    <div class="col-12 col-md-3 ">
                                         <img src="<?php if (isset($picArray[3])) echo $picArray[3]; ?>" class="w-100" alt="..." style="height: 350px;">
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-12 col-md-3 ">
                                         <img src="<?php if (isset($picArray[4])) echo $picArray[4]; ?>"  class="w-100" alt="..." style="height: 350px;">
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-12 col-md-3 ">
                                         <img src="<?php if (isset($picArray[5])) echo $picArray[5]; ?>" class="w-100"  alt="..." style="height: 350px;">
                                     </div>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <div class="row justify-content-center text-center">
-                                <div class="col-4">
+                                <div class="col-12 col-md-3 ">
                                     <img src="<?php if (isset($offerPicArray[0])) echo $offerPicArray[0]; ?>"  class="w-100"   alt="..." style="height: 350px;">
                                 </div>
-                                <div class="col-4">
+                                <div class="col-12 col-md-3 ">
                                     <img src="<?php if (isset($offerPicArray[1])) echo $offerPicArray[1]; ?>"  class="w-100"  alt="..." style="height: 350px;">
                                 </div>
-                                <div class="col-4">
+                                <div class="col-12 col-md-3 ">
                                     <img src="<?php if (isset($offerPicArray[2])) echo $offerPicArray[2]; ?>" class="w-100"  alt="..." style="height: 350px;">
                                 </div>
                             </div>

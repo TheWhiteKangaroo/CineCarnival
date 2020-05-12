@@ -1,9 +1,26 @@
 <?php
+session_start();
+include "DatabaseConnection.php";
+
+$user=$c_id="";
+if(isset($_SESSION['user_name'])){
+    $user = $_SESSION['user_name'];
+}
+else{
+    $user="";
+}
+
+$myquery = "SELECT c_id FROM customer WHERE mail='$user' OR user_name='$user';";
+$result = mysqli_query($conn,$myquery);
+while($row = mysqli_fetch_assoc($result)){
+    $c_id=$row['c_id'];
+}
+
 date_default_timezone_set("Asia/Dhaka");
 $currentDate=$NextDay="";
 $currentDate =date("Y-m-d");
 $NextDay = date('Y-m-d', strtotime($currentDate . ' + 1 days'));
-include "DatabaseConnection.php";
+
 $perSeatPrice = $showType = $theatreType = $theatreID = $showTime = $showDate =$theatreName= $availableSeats =$soldSeats=$totalSeats= "";
 $selectedMovieName="";
 $selectedDate=$selectedShowID="";
@@ -30,7 +47,8 @@ if (isset($_POST['selectedShowID']) && isset($_POST['selectedMovie']) && isset($
         $theatreType = $row['theatre_type'];
         $theatreName = $row['theatre_name'];
     }
-    $query = "SELECT SUM(seat_count) AS purchaseCount FROM ticket WHERE c_id='20' AND sold_date_time='$currentDate' OR sold_date_time='$NextDay';";
+
+    $query = "SELECT SUM(seat_count) AS purchaseCount FROM ticket WHERE c_id='$c_id' AND sold_date_time='$currentDate' OR sold_date_time='$NextDay';";
     $result = mysqli_query($conn,$query);
     while($row=mysqli_fetch_assoc($result)){
         $purchaseCount = $row['purchaseCount'];
