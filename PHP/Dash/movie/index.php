@@ -1,3 +1,10 @@
+<?php
+  session_start();
+  if(!isset($_SESSION["userName"])){
+    header("Location: http://localhost/CineCarnival-master\PHP\Admin\login.php");
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -5,14 +12,57 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-		<title>Dashboard</title>
+
+		<style>
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+</style>
+
+
 	</head>
 <body>
 
 <header>
 	<div class="d-flex flex-row flex-nowrap sm-flex-wrap  header-section container">
 		<div class="p-2 mr-2">
-			<a href="#"><img src="CineCarnival.png" alt="No Image..."></a>
+			<a href="..\movie/index.php"><img src="CineCarnival.png" alt="No Image..."></a>
 		</div>
 		
 		<div class="p-2 align-self-center d-sm-none d-md-block d-none d-sm-block mr-0 pr-0">
@@ -22,11 +72,18 @@
 
 		</div>
 		<div class="p-2 align-self-center header-anchor">
-			
+		<div class="dropdown">
+				<button class="dropbtn">Manage</button>
+				<div class="dropdown-content">
+						<a href="..\offers/index.php">Manage Offers</a>
+						<a href="..\notice/index.php">Manage Notice</a>					
+						<a href="..\..\Admin/update.php">Manage Account</a>
+				</div>
+				</div>
 		</div>
 
 		<div class="p-2 align-self-center">
-			<a href="..\..\SignInPage.php" style="text-decoration: none;"><i class="fas fa-sign-out-alt"></i>  Sign Out</a>
+			<a href="../../Admin/logout.php" style="text-decoration: none;"><i class="fas fa-sign-out-alt"></i>  Sign Out</a>
 		</div>
 	</div>
 </header>
@@ -183,7 +240,7 @@
 				
 					<div style="clear:both;"></div>
 					<div class="modal-footer">
-						<button name="save" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Save</button>
+						<button name="save" class="btn btn-primary"> Save</button>
 						<button class="btn btn-danger" type="button" data-dismiss="modal"> Close</button>
 					</div>
 					</div>

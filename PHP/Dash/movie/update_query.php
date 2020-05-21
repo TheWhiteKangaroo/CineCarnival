@@ -14,8 +14,10 @@
 			}
 		  if(!empty($_POST['coverArt'])){
 			  $coverArt = mysqli_real_escape_string($conn, $_POST['coverArt']);
+			  $address = "../Images/Poster/";
+			  $pic = $address.$coverArt;
 			  mysqli_query($conn, "UPDATE `movie` SET
-			 `cover_pic`='$coverArt' WHERE `mv_id` = '$mv_id'") or die(mysqli_error());
+			 `cover_pic`='$pic' WHERE `mv_id` = '$mv_id'") or die(mysqli_error());
 			  } 
 		  if(!empty($_POST['cast'])){
 			  $cast = mysqli_real_escape_string($conn, $_POST['cast']);

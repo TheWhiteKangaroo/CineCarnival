@@ -2,6 +2,7 @@
 	require_once 'conn.php';
 	
 	if(ISSET($_POST['save'])){
+		$address = "../Images/Poster/";
 		if(!empty($_POST['movieName'])){
 			$movieName = mysqli_real_escape_string($conn, $_POST['movieName']);
 		  }
@@ -13,6 +14,7 @@
 			}
 		  if(!empty($_POST['coverArt'])){
 			  $coverArt = mysqli_real_escape_string($conn, $_POST['coverArt']);
+			  $pic = $address . $coverArt;
 			  } 
 		  if(!empty($_POST['cast'])){
 			  $cast = mysqli_real_escape_string($conn, $_POST['cast']);
@@ -64,7 +66,7 @@
 		  }
 		  else{
 			$sql = "INSERT INTO movie (name, director, cast, release_date, trailer_link, cover_pic, runtime, status, genre, plot, language, format)
-					VALUES ('$movieName', '$director' , '$cast', '$releaseDate' , '$trailerLink', '$coverArt', '$runTime', '$status', '$genre', '$plot', '$language', '$format');";
+					VALUES ('$movieName', '$director' , '$cast', '$releaseDate' , '$trailerLink', '$pic', '$runTime', '$status', '$genre', '$plot', '$language', '$format');";
 	  
 		
 			mysqli_query($conn, $sql);

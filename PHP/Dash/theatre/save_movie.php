@@ -1,6 +1,6 @@
 <?php
 	require_once 'conn.php';
-	
+	$soldSeat=0;
 	if(ISSET($_POST['save'])){
 			if(!empty($_POST['theatreName'])){
 				$theatreName = mysqli_real_escape_string($conn, $_POST['theatreName']);
@@ -31,19 +31,11 @@
 				$dbname = $row['theatre_name'];
 			}
 		
-			if($dbname == $theatreName){
-				$err = "Theatre already exists!";
-				echo $err;			
-				echo "<a href='index.php'>go back to home page</a>";
-			}
-			else{
+			
 				$sql = "INSERT INTO theatre VALUES ('0','$showID','$theatreName', '$totalSeat','$totalSeat' ,'0','$theatreType');";
 		
 			
 				mysqli_query($conn, $sql);
-			
-		header("location: index.php");
-	         }
-
+				header("Location: index.php");
 }
 ?>

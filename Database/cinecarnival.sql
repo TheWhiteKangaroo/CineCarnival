@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2020 at 03:41 PM
+-- Generation Time: May 21, 2020 at 09:47 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -21,6 +21,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `cinecarnival`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `user_name` varchar(80) NOT NULL,
+  `password` varchar(256) NOT NULL,
+  `id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -49,8 +61,8 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`c_id`, `gender`, `user_name`, `first_name`, `last_name`, `mail`, `phone`, `address`, `password`, `status`, `points`, `joining_date`, `user_type`) VALUES
-(1, 'male', '@shohag', 'koushikur islam', 'shohag', 'koushikur.aiub@gmail.com', 1798452091, 'E-295, Holy Lane, Shyamoli, Adabor, Dhaka', '$2y$10$id2LSChXnDC9IDZJdl1wkexFGg9k3DUyzZfDdMHeXqneWIKisuokO', 'Diamond', 775, '2020-04-17', 3),
-(2, 'male', '@koushik', 'koushikur islam', 'Shohag', 'koushik1@gmail.com', 1798452091, 'E-295, Holy Lane, Shyamoli, Adabor, Dhaka', '$2y$10$ipeaO6Bx4w9uKKwej7gdM.sdAzRohYv0X6Pt1yDF0V6fAvHB9hXme', 'Regular', 0, '2020-05-10', 2);
+(1, 'male', '@shohag', 'koushikur islam', 'shohag', 'koushikur.aiub@gmail.com', 1798452091, 'E-295, Holy Lane, Shyamoli, Adabor, Dhaka', '$2y$10$XGjgi4tH9JScF1tnT8QKiedjyABaQwFdvKydFgUGSY3zj6t80M48e', 'Diamond', 575, '2020-04-17', 3),
+(4, 'male', '@randy', 'Randy', 'Orton', 'randy.rko@gmail.com', 1798452091, 'California.', '$2y$10$lJSZpDeHn/jCsce0xnGkyeOiRMeWwhSlrc4.BhL9QBeXcAkx9KZTK', 'Regular', 0, '2020-05-19', 3);
 
 -- --------------------------------------------------------
 
@@ -72,8 +84,36 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`l_id`, `user_name`, `mail`, `password`, `last_changed_date`, `user_type`) VALUES
-(1, '@shohag', 'koushikur.aiub@gmail.com', '$2y$10$id2LSChXnDC9IDZJdl1wkexFGg9k3DUyzZfDdMHeXqneWIKisuokO', '2020-05-05', 3),
-(2, '@koushik', 'koushik1@gmail.com', '$2y$10$ipeaO6Bx4w9uKKwej7gdM.sdAzRohYv0X6Pt1yDF0V6fAvHB9hXme', NULL, 2);
+(1, '@shohag', 'koushikur.aiub@gmail.com', '$2y$10$XGjgi4tH9JScF1tnT8QKiedjyABaQwFdvKydFgUGSY3zj6t80M48e', '2020-05-18', 3),
+(2, '@koushik', 'koushik1@gmail.com', '$2y$10$ipeaO6Bx4w9uKKwej7gdM.sdAzRohYv0X6Pt1yDF0V6fAvHB9hXme', NULL, 2),
+(3, '@xyzv', 'sijan826@gmail.com', '$2y$10$GHmJcyqjso9VWeSo6KwyfuKRHPOpS5wRrvY0mXwD0CBE33PBCA5sC', NULL, 3),
+(4, '@randy', 'randy.rko@gmail.com', '$2y$10$lJSZpDeHn/jCsce0xnGkyeOiRMeWwhSlrc4.BhL9QBeXcAkx9KZTK', NULL, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `manager`
+--
+
+CREATE TABLE `manager` (
+  `first_name` varchar(256) NOT NULL,
+  `last_name` varchar(256) NOT NULL,
+  `user_name` varchar(256) NOT NULL,
+  `email` varchar(256) NOT NULL,
+  `password` varchar(256) NOT NULL,
+  `id` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `manager`
+--
+
+INSERT INTO `manager` (`first_name`, `last_name`, `user_name`, `email`, `password`, `id`) VALUES
+('Asif k', 'Sijan', 'yes', 'mahmud.nishan@gmail.com', '$2y$10$VddPTHByKjCleLxKEKXQjuRlkSMSql4gGfXefcJt.VlsamGpUFuWK', 1),
+('Asif', 'Sijan', 'no', '12345@e.com', '$2y$10$smgKDZbnlleyU4n.xJclDu0IlCyzsH/IS2wghiE.uUELH3jOU5mVi', 2),
+('Asif', 'Sijan', 'F', 'mahmud.nishan@gmail.com', '$2y$10$KyGHLcWCrKDPgOH7Y4lXgupmugfm1T2.9M3bQMrvQYn2XcQIpioRO', 3),
+('Asif', 'Sijan', 'sd', 'mahmud.nishan@gmail.com', '$2y$10$VIMhHOk.5Yjd27lSNzdX5.5c3YG4hdIRCrP7oxVDLJLsmGuxvowC6', 4),
+('Randy', 'Orton', '@randy45', 'randy.rko@gmail.com', '$2y$10$0RrClCVaRl8uvH5gXaq4F.H7AbSAfSMzMDYFsm6HTjXNcO/uHB5Yi', 5);
 
 -- --------------------------------------------------------
 
@@ -102,7 +142,7 @@ CREATE TABLE `movie` (
 --
 
 INSERT INTO `movie` (`mv_id`, `name`, `cast`, `director`, `release_date`, `genre`, `trailer_link`, `cover_pic`, `runtime`, `plot`, `language`, `format`, `status`) VALUES
-(1, 'Black Widow', 'Florence Pugh, Robert Downey Jr., Scarlett Johansson', 'Cate Shortland', '2020-11-06', 'Action, Sci-Fi', 'https://www.youtube.com/embed/ybji16u608U', '..\\images/poster/BlackWidow.jpg', '00:02:45', 'A film about Natasha Romanoff in her quests between the films Civil War and Infinity War.', 'English', '3D', 'Coming Soon'),
+(1, 'Black Widow', 'Florence Pugh, Robert Downey Jr., Scarlett Johansson', 'Cate Shortland', '2020-11-06', 'Action, Sci-Fi', 'https://www.youtube.com/embed/ybji16u608U', '..\\images/poster/BlackWidow.jpg', '00:02:45', ' A film about Natasha Romanoff in her quests between the films Civil War and Infinity War. ', 'English', '3D', 'Coming Soon'),
 (2, 'Thor-Love and Thunder', 'Chris Hemsworth, Taika Waititi, Tessa Thompson ', 'Taika Waititi', '2022-02-18', 'Action, Adventure, Fantasy', 'https://www.youtube.com/embed/mqKAhsp-QqQ', '..\\images/poster/ThorLoveAndThunder.jpg', '00:02:35', 'The sequel to Thor: Ragnarok and the fourth movie in the Thor saga.', 'English', '3D', 'Coming Soon'),
 (3, 'F9', ' Amber Sienna, Charlize Theron, Vin Diesel', ' Justin Lin', '2021-04-02', ' Action, Adventure, Crime', 'https://www.youtube.com/embed/aSiDu3Ywi8E', '..\\images/poster/F9.jpg', '00:02:15', 'Cypher enlists the help of Jakob, Doms younger brother to take revenge on Dom and his team.', 'English', '2D', 'Coming Soon'),
 (4, 'John Wick: Chapter 3', 'Keanu Reeves, Halle Berry, Ian McShane', ' Chad Stahelski', '2019-05-17', 'Action, Crime, Thriller', 'https://www.youtube.com/embed/pU8-7BX9uxs', '..\\images/poster/JohnWick3.jpg', '00:02:25', 'John Wick is on the run after killing a member of the international assassins guild, and with a $14 million price tag on his head, he is the target of hit men and women everywhere.', 'English', '2D', 'Now Showing'),
@@ -111,8 +151,7 @@ INSERT INTO `movie` (`mv_id`, `name`, `cast`, `director`, `release_date`, `genre
 (7, 'Avengers: Infinity War', 'Robert Downey Jr., Chris Hemsworth, Mark Ruffalo', 'Anthony Russo, Joe Russo', '2018-04-27', 'Action, Adventure, Sci-Fi', 'https://www.youtube.com/embed/6ZfuNTqbHE8', '..\\images/Poster/InfinityWar.jpg', '00:02:45', 'The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.', 'English', '3D', 'Now Showing'),
 (8, '\r\nNo Time to Die', ' Ana de Armas, Daniel Craig, Léa Seydoux', 'Cary Joji Fukunaga', '2020-11-25', 'Action, Adventure, Thriller', 'https://www.youtube.com/embed/BIhNsAtPbPI', '..\\images/Poster/NoTimeToDieCover.jpg', '00:02:35', 'James Bond has left active service. His peace is short-lived when Felix Leiter, an old friend from the CIA, turns up asking for help, leading Bond onto the trail of a mysterious villain armed with dangerous new technology.', 'English', '3D', 'Coming Soon'),
 (12, 'No Dorai', 'Sayed Babu, Sunerah Binte Kamal, Josefine Lindegaard', 'Taneem Rahman Angshu', '2019-11-29', 'Drama', 'https://www.youtube.com/embed/EUnQZTofMo0', '..\\images/poster/NoDorai.jpg', '00:02:30', 'In a small beach town in Bangladesh, fearless Ayesha confronts social prohibition and violent opposition from her poverty-ridden family to surf. Like few other youngsters, she and her best friend Sohel are trained by self-made Bangladeshi surfer, Amir. As this unusual surfing enthusiasm gets international attention from surfing community and documentary film makers, fund money generates jealousy, squabbles, and power tussles. While surfing brings newfound fame and glory to Sohel, it is the prohibited love for surfing that brings forced marriage and a life of misery for Ayesha. After seeking an extravagant, reckless lifestyle in the capital city, derailed Sohel returns back to Coxs Bazar, where their passion for surfing reunites them and unleashes a new hope for surfing in the small beach town.', 'Bangla', '2D', 'Now Showing'),
-(13, 'Bloodshot', 'Vin Diesel, Eiza González, Sam Heughan', 'Dave Wilson', '2020-03-13', ' Action, Drama, Sci-Fi', 'https://www.youtube.com/embed/vOUVVDWdXbo', '..\\images/poster/Bloodshot.jpg', '00:01:50', 'Ray Garrison, a slain soldier, is re-animated with superpowers.', 'English', 'En', 'Coming Soon'),
-(15, 'Skyfall', 'asdgadsg', 'adfghadsg', '2020-05-13', 'Action, Drama, Sci-Fi', 'adsfgsdfh', '29793377_362781090873353_8885188025659686912_o.jpg', '00:02:03', ' ajksdgansdgasdg ', 'English', '2D', 'Now Showing');
+(13, 'Bloodshot', 'Vin Diesel, Eiza González, Sam Heughan', 'Dave Wilson', '2020-03-13', ' Action, Drama, Sci-Fi', 'https://www.youtube.com/embed/vOUVVDWdXbo', '..\\images/poster/Bloodshot.jpg', '00:01:50', 'Ray Garrison, a slain soldier, is re-animated with superpowers.', 'English', 'En', 'Coming Soon');
 
 -- --------------------------------------------------------
 
@@ -145,7 +184,7 @@ INSERT INTO `notice` (`n_id`, `title`, `message`, `links`, `pic`, `date_posted`)
 CREATE TABLE `offer` (
   `o_id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
-  `pic` varchar(255) DEFAULT NULL,
+  `pic` varchar(255) NOT NULL,
   `date_valid` date NOT NULL,
   `date_inserted` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -229,7 +268,17 @@ CREATE TABLE `shows` (
 --
 
 INSERT INTO `shows` (`s_id`, `movie_id`, `theatre_id`, `show_date`, `show_time`, `show_status`, `show_type`) VALUES
-(11, 5, 13, '2020-05-12', '12:45:00', 'Coming Soon', '2D');
+(12, 6, 14, '2020-05-20', '12:30:00', 'Now Showing', '3D'),
+(13, 6, 15, '2020-05-20', '02:45:00', 'Now Showing', '2D'),
+(14, 6, 20, '2020-05-20', '13:15:00', 'Now Showing', '2D'),
+(15, 5, 16, '2020-05-20', '17:45:00', 'Now Showing', '3D'),
+(16, 4, 22, '2020-05-20', '18:30:00', 'Now Showing', '3D'),
+(17, 12, 23, '2020-05-20', '19:45:00', 'Now Showing', '3D'),
+(18, 12, 21, '2020-05-20', '12:30:00', 'Now Showing', '3D'),
+(19, 5, 24, '2020-05-20', '18:30:00', 'Now Showing', '2D'),
+(20, 4, 25, '2020-05-20', '17:45:00', 'Now Showing', '3D'),
+(21, 4, 26, '2020-05-20', '19:45:00', 'Now Showing', '3D'),
+(22, 6, 27, '2020-05-21', '13:15:00', 'Now Showing', '3D');
 
 -- --------------------------------------------------------
 
@@ -252,7 +301,17 @@ CREATE TABLE `theatre` (
 --
 
 INSERT INTO `theatre` (`theatre_id`, `s_id`, `theatre_name`, `total_seat`, `available_seat`, `sold_seat`, `theatre_type`) VALUES
-(13, 11, 'Hall-1', 50, 35, 15, 'VIP');
+(14, 12, 'Hall-5', 50, 48, 2, 'VIP'),
+(15, 13, 'Hall-3', 50, 50, 0, 'PREMIUM'),
+(16, 15, 'Hall-5', 50, 50, 0, 'PREMIUM'),
+(20, 14, 'Hall-3', 50, 50, 0, 'REGULAR'),
+(21, 18, 'Hall-5', 50, 50, 0, 'PREMIUM'),
+(22, 16, 'Hall-1', 50, 50, 0, 'PREMIUM'),
+(23, 17, 'Hall-5', 50, 50, 0, 'VIP'),
+(24, 19, 'Hall-3', 50, 50, 0, 'REGULAR'),
+(25, 20, 'Hall-1', 50, 50, 0, 'VIP'),
+(26, 21, 'Hall-3', 50, 50, 0, 'PREMIUM'),
+(27, 22, 'Hall-5', 50, 50, 0, 'VIP');
 
 -- --------------------------------------------------------
 
@@ -279,7 +338,8 @@ CREATE TABLE `ticket` (
 INSERT INTO `ticket` (`ticket_id`, `c_id`, `show_id`, `price`, `discount`, `sold_date_time`, `seat_number`, `seat_count`, `payment_method`) VALUES
 (21, 1, 11, 3000.00, 0.00, '2020-05-11', 'HC-1, HC-2, HC-3, HC-4, HC-5,', 5, 'DBBL Payment '),
 (22, 1, 11, 3000.00, 0.00, '2020-05-11', 'HC-6, HC-7, HC-8, HC-9, HC-10,', 5, 'DBBL Payment '),
-(23, 1, 11, 1950.00, 1050.00, '2020-05-12', 'HC-11, HC-12, HC-13, HC-14, HC-15,', 5, 'DBBL Payment ');
+(23, 1, 11, 1950.00, 1050.00, '2020-05-12', 'HC-11, HC-12, HC-13, HC-14, HC-15,', 5, 'DBBL Payment '),
+(24, 1, 12, 780.00, 420.00, '2020-05-20', 'HC-1, HC-2,', 2, 'DBBL Payment ');
 
 -- --------------------------------------------------------
 
@@ -302,11 +362,18 @@ INSERT INTO `vote` (`v_id`, `p_id`, `content`, `customer`) VALUES
 (48, 2, 2, ''),
 (49, 2, 4, ''),
 (50, 2, 2, ''),
-(51, 2, 1, '@shohag');
+(51, 2, 1, '@shohag'),
+(52, 2, 1, '');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `customer`
@@ -325,6 +392,12 @@ ALTER TABLE `login`
   ADD UNIQUE KEY `user_name` (`user_name`),
   ADD UNIQUE KEY `mail` (`mail`),
   ADD UNIQUE KEY `user_name_2` (`user_name`,`mail`);
+
+--
+-- Indexes for table `manager`
+--
+ALTER TABLE `manager`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `movie`
@@ -386,16 +459,28 @@ ALTER TABLE `vote`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `c_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `c_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `l_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `l_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `manager`
+--
+ALTER TABLE `manager`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `movie`
@@ -407,13 +492,13 @@ ALTER TABLE `movie`
 -- AUTO_INCREMENT for table `notice`
 --
 ALTER TABLE `notice`
-  MODIFY `n_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `n_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `offer`
 --
 ALTER TABLE `offer`
-  MODIFY `o_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `o_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `poll`
@@ -431,25 +516,25 @@ ALTER TABLE `rating`
 -- AUTO_INCREMENT for table `shows`
 --
 ALTER TABLE `shows`
-  MODIFY `s_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `s_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `theatre`
 --
 ALTER TABLE `theatre`
-  MODIFY `theatre_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `theatre_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `ticket_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `ticket_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `vote`
 --
 ALTER TABLE `vote`
-  MODIFY `v_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `v_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -91,25 +91,25 @@
 
 <!--########################################################### TAB OPTIONS ###################################-->
 
-	<div class="container">
+<!-- 	<div class="container">
 		<div class="row">
 			<div class="col-lg-4 sidebar p-0">
-			<a href="..\movie/index.php">Manage Movies</a>
-			</div>			
-			<div class="col-lg-4 sidebar p-0">
-			<a class="active" href="index.php">Manage Shows</a>	
+			<a href="http://localhost/dash/movie/index.php">Manage Movies</a>
 			</div>
 			<div class="col-lg-4 sidebar p-0">
-			<a href="..\theatre/index.php">Manage Theatres</a>	
+			<a href="http://localhost/dash/show/index.php">Manage Shows</a>	
+			</div>
+			<div class="col-lg-4 sidebar p-0">
+			<a class="active" href="index.php">Manage offers</a>	
 			</div>
 		</div>
 		
 	</div>
 
 
+ -->
 
 
- 
 
 
 <!--################################################## DASH START ##########################################################-->
@@ -117,44 +117,36 @@
 	<div class="container">
 		
 	
-		<button type="button" class="btn btn-success" style="float: right;" data-toggle="modal" data-target="#form_modal"> Add Shows</button>
+		<button type="button" class="btn btn-success" style="float: right;" data-toggle="modal" data-target="#form_modal"> Add offer</button>
 		<br /><br />
 		<table class="table table-bordered">
 			<thead class="thead-light">
 				<tr>
-					<th>Show ID</th>
-					<th>Theatre ID</th>
-					<th>Movie Name</th>
-					<th>Theatre</th>
-					<th>Date</th>
-					<th>Time</th>					
-					<th>Format</th>
+					<th>Title</th>
+					<th>Inserted On</th>
+					<th>Valid TIll</th>			
 					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody style="background-color:#fff;">
 				<?php
 					require 'conn.php';
-					$query = mysqli_query($conn, "SELECT s.s_id,s.show_status,s.show_date,s.show_time,s.show_type, t.theatre_name,t.theatre_id, t.theatre_type, m.name FROM shows AS s LEFT JOIN theatre AS t ON t.theatre_id=s.theatre_id LEFT join movie AS m on s.movie_id=m.mv_id") or die(mysqli_error());
+					$query = mysqli_query($conn, "SELECT * FROM `offer`") or die(mysqli_error());
 					while($fetch = mysqli_fetch_array($query)){
 				?>
 				<tr>
-					<td><?php echo "SID - ".$fetch['s_id']?></td>	
-					<td><?php echo "TID - ".$fetch['theatre_id']?></td>						
-					<td><?php echo $fetch['name']?></td>
-					<td><?php echo $fetch['theatre_name']." - ".$fetch['theatre_type']?></td>
-					<td><?php echo $fetch['show_date']?></td>					
-					<td><?php echo substr($fetch['show_time'],0,5)?></td>
-					<td><?php echo $fetch['show_type']?></td>
-					
-					<td><button class="btn btn-warning" data-toggle="modal" type="button" data-target="#update_modal<?php echo $fetch['s_id']?>"> Edit</button>
-					<a href="delete.php?delete=<?php echo $fetch['s_id']; ?>" class="btn btn-danger">
-                        Remove                     
-                    </a>
+					<td><?php echo $fetch['title']?></td>
+					<td><?php echo $fetch['date_inserted']?></td>
+					<td><?php echo $fetch['date_valid']?></td>
+
+					<td><button class="btn btn-warning" data-toggle="modal" type="button" data-target="#update_modal<?php echo $fetch['o_id']?>"> Edit</button>
+					<a href="delete.php?delete=<?php echo $fetch['o_id']; ?>" class="btn btn-danger">delete</a>
 					</td>
 				</tr>
 				<?php
+					
 					include 'update_movie.php';
+					
 					}
 				?>
 			</tbody>
@@ -165,7 +157,7 @@
 			<div class="modal-content">
 				<form method="POST" action="save_movie.php">
 					<div class="modal-header">
-						<h3 class="modal-title">Add Show</h3>
+						<h3 class="modal-title">Add offer</h3>
 					</div>
 					<div class="modal-body">
 						
@@ -173,70 +165,31 @@
 					<div class="row">
                           <div class="col-lg-6 pt-4">
                           
+                            <div class="taboptions">
+								<label>Offer Title</label>
+                                <input type="text" class="form-control form-control-sm" placeholder="offer title*" name="offerTitle" value="" required>
+							</div>
 
-						    <div class="taboptions">
-								<select name="movieName" required>
-										<option value="" disabled selected>Movie Name</option>
-										<?php
+							<div class="taboptions">
+								<label>Inserted On</label>
+                                <input type="date" class="form-control form-control-sm" name="dateInserted" value="" required> 
+                        	</div>	
 
-										$editSql = "SELECT name from movie";
-										$editResult = $conn-> query($editSql);
-										while ($fetch = $editResult-> fetch_assoc()) {
+                          </div>
+  
+  
+                          <div class="col-lg-6 pt-4">
 
-										?>
-
-										<option value="<?php echo $fetch["name"]?>"><?php echo $fetch["name"]?></option>
-
-										<?php
-										}
-										?>
-								</select>
-							</div>  
+						  	<div class="taboptions">
+								<label>Offer image</label>
+                                <input type="file" name="pic" value="" required>
+							</div>
 							
-											
-							<div class="taboptions">
-								
-                                 <select name="theatreID">
-									<option value="" disabled selected>Theatre ID</option>
-									<?php 
-										$myquery = "SELECT theatre_id FROM theatre;";
-										$result  = mysqli_query($conn, $myquery);
-										while($row = mysqli_fetch_assoc($result)){
-											?>
-												<option value="<?php echo $row['theatre_id'];?>"><?php echo "TID - ".$row['theatre_id'];?></option>
-											<?php
-										}
-									?>
-                                 </select><br><span>(if no theatres found then create add a theatre first.)</span>
-                                </div> 
-							<div class="taboptions">
-								<input type="text" name="showTime" maxlength="15" placeholder="Show Time*" required>
+						  	<div class="taboptions">
+								<label>Valid Till</label>
+                                <input type="date" class="form-control form-control-sm" name="dateValid" value="" required> 
                         	</div>
   
-
-<!===================end o f left ===============================>
-                          </div>
-
-                          <div class="col-lg-6 pt-4">
-							
-								<div class="taboptions">
-									<input type="date" class="form-control form-control-sm" placeholder="Date*" name="showDate" value="" required> 
-								</div>
-											
-                                <div class="taboptions">
-                                 <select name="showType" required>
-									<option value="" disabled selected>Show Type</option>
-									<option value="2D">2D</option>
-									<option value="3D">3D</option>
-                                 </select>
-                                </div>
-                             	
-                                <div class="taboptions">
-                                 <select name="showStatus" required>
-									<option value="" disabled selected>Show Status</option>
-									<option value="Now Showing">Now Showing</option>
-                                 </select>
-                                </div>
                           </div>
 
 					<!--###################-->

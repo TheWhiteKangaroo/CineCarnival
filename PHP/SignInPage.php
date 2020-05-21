@@ -127,8 +127,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <div class="container">
-        <div class="row">
-            <div class="col">
+        <div class="row mt-5 mb-5">
+            <div class="col mt-5 mb-4">
                 <form action="SignInPage.php" method="POST">
                     <div class="row mb-2">
                         <div class="col-12 sign-in-title">
@@ -160,13 +160,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     </div>
 
-                    <div class="row text-center mt-3">
+                    <div class="row text-center mt-3 justify-content-center">
                         <div class="col-12">
                             <div class="mb-1">
                                 <a class="text-decoration-none" href="RegistrationPage.php">Don't have an account? Sign Up.</a>
                             </div>
                         </div>
-                        <div class="col-12">
+
+                        <div class="col-12 col-lg-2">
+                            <div class="mb-1">
+                                <a class="text-decoration-none" href="Admin/login.php">Sign in as admin.</a>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-2">
                             <div class="mb-1">
                                 <a class="text-decoration-none" href="ForgotPasswordPage.php">Forgot Password?</a>
                             </div>
