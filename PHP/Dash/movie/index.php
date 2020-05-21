@@ -1,7 +1,7 @@
 <?php
   session_start();
   if(!isset($_SESSION["userName"])){
-    header("Location: http://localhost/CineCarnival-master\PHP\Admin\login.php");
+    header("Location: ..\..\Admin/login.php");
   }
 ?>
 
@@ -83,7 +83,7 @@
 		</div>
 
 		<div class="p-2 align-self-center">
-			<a href="../../Admin/logout.php" style="text-decoration: none;"><i class="fas fa-sign-out-alt"></i>  Sign Out</a>
+			<a href="..\..\Admin/login.php" style="text-decoration: none;"><i class="fas fa-sign-out-alt"></i>  Sign Out</a>
 		</div>
 	</div>
 </header>

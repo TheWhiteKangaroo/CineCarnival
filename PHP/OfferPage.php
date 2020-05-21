@@ -124,7 +124,7 @@ if (isset($_SESSION['user_name'])) {
                     <h1 style="border-bottom: 2px Dodgerblue Solid;">Offers</h1>
                 </div>
             </div>
-            <div class="row mt-3 mb-3 justify-content-between">
+            <div class="row mt-3 mb-3 justify-content-start">
                     <?php
                         while($row=mysqli_fetch_assoc($result)){
                             echo "

@@ -169,7 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         <div class="col-12 col-lg-2">
                             <div class="mb-1">
-                                <a class="text-decoration-none" href="Admin/login.php">Sign in as admin.</a>
+                                <a class="text-decoration-none" href="Admin/login.php">Sign in as Admin.</a>
                             </div>
                         </div>
 

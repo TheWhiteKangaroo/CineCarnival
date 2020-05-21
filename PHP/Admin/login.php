@@ -27,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 			if(password_verify($uPass, $uPassInDB)){
 				$_SESSION['userName'] = $uName;
-				header("Location: http://localhost/CineCarnival-master\PHP\Dash\movie");
+				header("Location: ..\Dash/movie/index.php");
 			}
 			else{
 				$message = "Wrong Password!";
